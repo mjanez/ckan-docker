@@ -1,11 +1,11 @@
-name: Build CKAN Docker
+name: Push CKAN Docker image 
 
 on:
   push:
-    branches: [ 'main' ]
+    branches: [ 'master' ]
     tags: [ 'ckan-*.*.*' ]
   pull_request:
-    branches: [ 'main' ]
+    branches: [ 'master' ]
 
 env:
   REGISTRY: ghcr.io
