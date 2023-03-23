@@ -1,19 +1,22 @@
-name: Build CKAN Docker 
+name: Build & Push CKAN Docker image 
 
 on:
   # Trigger the workflow on push or pull request,
-  # but only for the master branch
+  # only for the master branch (also pull_request) or ckan-*.*.* tags
   push:
-    branches:
-      - master
+    branches: [ 'master' ]
+    tags: [ 'ckan-*.*.*' ]
   pull_request:
-    branches:
-      - master
+    branches: [ 'master' ]
 
-jobs: 
-  build:  
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  docker:
     runs-on: ubuntu-latest
-    steps: 
+    steps:
     -  uses: actions/checkout@v2
 
     -  name: Set up Docker Buildx
@@ -46,11 +49,25 @@ jobs:
           push: false
           tags: kowhai/ckan-docker-solr:test-build-only
 
-    -  name: CKAN build
-       uses: docker/build-push-action@v2
-       with:
+      - name: Login to registry
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Extract Docker metadata
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+      
+      - name: CKAN Build and push
+        uses: docker/build-push-action@v3
+        with:
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           context: ./ckan
           file: ./ckan/Dockerfile
-          push: false
-          tags: kowhai/ckan-docker-ckan:test-build-only
-      

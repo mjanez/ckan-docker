@@ -14,6 +14,7 @@ services:
       dockerfile: Dockerfile.dev
       args:
         - TZ=${TZ}
+    image: ghcr.io/mjanez/ckan-docker:master
     env_file:
       - .env
     depends_on:
