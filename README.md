@@ -34,7 +34,7 @@ The non-CKAN images are as follows:
 
 | Repository | Type | Docker tag | Size | Notes |
 | --- | --- | --- | --- | --- |
-| PostgreSQL 12.14 | base image | [`postgres/postgres:12-alpine`](https://hub.docker.com/layers/library/postgres/12-alpine/images/sha256-e07198f71e85eccd6c351bb4eb0b2ff833bef2dd6ea314f6442c2dc47535fbb7?context=explore) | 87.09 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
+| PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
 | Solr 8.11.1 | base image | [`ckan/ckan-solr:2.9-solr8-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr8-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  - |
 | Redis 6.2.11 | base image | [`redis/redis:6`](https://hub.docker.com/layers/library/redis/6/images/sha256-e10c69dc5f9b27c47874060962fdaa26ec0df592205d6d21402945267081b434?context=explore) | 39.32 MB |  - |
 | NGINX 1.22.1 | base image | [`nginx:stable-alpine`](https://hub.docker.com/layers/library/nginx/stable-alpine/images/sha256-ff2a5d557ca22fa93669f5e70cfbeefda32b98f8fd3d33b38028c582d700f93a?context=explore) | 9.74 MB |  Custom Dockerfile: [`nginx/Dockerfile`](/nginx/Dockerfile) |
@@ -210,7 +210,13 @@ You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tuto
 
     docker compose -f docker compose.dev.yml exec ckan-dev /bin/sh -c "ckan generate extension --output-dir /srv/app/src_extensions"
     
-![Screenshot 2023-02-22 at 1 45 55 pm](https://user-images.githubusercontent.com/54408245/220623568-b4e074c7-6d07-4d27-ae29-35ce70961463.png)
+|CONTAINER   ID                                |IMAGE               |COMMAND|CREATED|STATUS|PORTS|NAMES|
+|------------|----------------------------------|--------------------|-------|-------|------|-----|
+|0217537f717e|ckan-docker-nginx                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|81/tcp,0.0.0.0:81->80/tcp, 0.0.0.0:8443->443/tcp|nginx  |
+|7b06ab2e060a|ghcr.io/mjanez/ckan-spatial:master|/srv/app/start_ckan…|6      minutes ago   |Up   5    minutes (healthy)|0.0.0.0:5000->5000/tcp|ckan                 |       |
+|1b8d9789c29a|redis:6                           |docker-entrypoint.s…|6      minutes ago   |Up   5    minutes (healthy)|6379/tcp              |redis                |       |
+|7f162741254d|ckan/ckan-solr:2.9-solr8-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   5    minutes (healthy)|8983/tcp              |solr                 |       |
+|2cdd25cea0de|ckan-docker-db                    |docker-entrypoint.s…|6      minutes ago   |Up   5    minutes (healthy)|5432/tcp              |db                   |       |
 
 
 The new extension files and directories are created in the `/srv/app/src_extensions/` folder in the running container. They will also exist in the local src/ directory as local `/src` directory is mounted as `/srv/app/src_extensions/` on the ckan container. You might need to change the owner of its folder to have the appropiate permissions.
