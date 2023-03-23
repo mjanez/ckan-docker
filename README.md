@@ -34,7 +34,7 @@ The non-CKAN images are as follows:
 
 | Repository | Type | Docker tag | Size | Notes |
 | --- | --- | --- | --- | --- |
-| PostgreSQL 12.14 | base image | [`postgres/postgres:12-alpine`](https://hub.docker.com/layers/library/postgres/12-alpine/images/sha256-e07198f71e85eccd6c351bb4eb0b2ff833bef2dd6ea314f6442c2dc47535fbb7?context=explore) | 87.09 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
+| PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](hhttps://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
 | Solr 8.11.1 | base image | [`ckan/ckan-solr:2.9-solr8-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr8-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  - |
 | Redis 6.2.11 | base image | [`redis/redis:6`](https://hub.docker.com/layers/library/redis/6/images/sha256-e10c69dc5f9b27c47874060962fdaa26ec0df592205d6d21402945267081b434?context=explore) | 39.32 MB |  - |
 | NGINX 1.22.1 | base image | [`nginx:stable-alpine`](https://hub.docker.com/layers/library/nginx/stable-alpine/images/sha256-ff2a5d557ca22fa93669f5e70cfbeefda32b98f8fd3d33b38028c582d700f93a?context=explore) | 9.74 MB |  Custom Dockerfile: [`nginx/Dockerfile`](/nginx/Dockerfile) |
