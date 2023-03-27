@@ -1,18 +1,13 @@
-# syntax = edrevo/dockerfile-plus
-INCLUDE+ Dockerfile.spatial-vanilla
+FROM ghcr.io/mjanez/ckan-base-spatial:master
 
 # Set up environment variables
 ENV APP_DIR=/srv/app
 ENV TZ=UTC
 RUN echo ${TZ} > /etc/timezone
 
-# Set up PROJ
-# PROJ4 for ckanext-spatial: https://github.com/pyproj4/pyproj/issues/582  // https://github.com/nickumia-reisys/ckanext-geodatagov/commit/ed61ffdd118e21e7a1db482c75738c3f261aa180
-RUN apk add geos-dev proj proj-util proj-dev
-
 # Make sure both files are not exactly the same
 RUN if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then \
-    cp /usr/share/zoneinfo/${TZ} /etc/localtime ;\
+        cp /usr/share/zoneinfo/${TZ} /etc/localtime ;\
     fi ;
 
 # Install any extensions needed by your CKAN instance
