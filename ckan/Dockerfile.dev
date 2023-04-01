@@ -1,5 +1,4 @@
-FROM ckan/ckan-base:ckan-2.10.0-dev
-
+FROM ghcr.io/mjanez/ckan-base-spatial:master
 
 # Set up environment variables
 ENV APP_DIR=/srv/app
@@ -21,38 +20,43 @@ RUN if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then \
 #
 # For instance:
 #
-### XLoader ###
-#RUN pip3 install -e 'git+https://github.com/ckan/ckanext-xloader.git@master#egg=ckanext-xloader' && \ 
-#    pip3 install -r ${APP_DIR}/src/ckanext-xloader/requirements.txt && \
-#    pip3 install -U requests[security]
+###TODO: XLoader ###
+# RUN pip3 install -e 'git+https://github.com/ckan/ckanext-xloader.git@master#egg=ckanext-xloader' && \ 
+#     pip3 install -r ${APP_DIR}/src/ckanext-xloader/requirements.txt && \
+#     pip3 install -U requests[security]
 
-### Harvester ###
-#RUN pip3 install -e 'git+https://github.com/ckan/ckanext-harvest.git@master#egg=ckanext-harvest' && \
-#    pip3 install -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt
-# will also require gather_consumer and fetch_consumer processes running (please see https://github.com/ckan/ckanext-harvest)
+###TODO: ckanext-visualize
+#https://github.com/keitaroinc/ckanext-visualize
 
-### Scheming ###
-#RUN  pip3 install -e 'git+https://github.com/ckan/ckanext-scheming.git@master#egg=ckanext-scheming'
+###TODO datapreview error
+# 2023-03-19 12:54:42,311 WARNI [ckan.lib.datapreview] Plugin for view t could not be found
+# 2023-03-19 12:54:42,313 WARNI [ckan.lib.datapreview] Plugin for view e could not be found
+# 2023-03-19 12:54:42,314 WARNI [ckan.lib.datapreview] Plugin for view x could not be found
+# 2023-03-19 12:54:42,315 WARNI [ckan.lib.datapreview] Plugin for view t could not be found
+# https://github.com/ckan/ckan/search?q=datapreview&type=issues
 
-### Pages ###
-#RUN  pip3 install -e git+https://github.com/ckan/ckanext-pages.git#egg=ckanext-pages
-
-### DCAT ###
-#RUN  pip3 install -e git+https://github.com/ckan/ckanext-dcat.git@v0.0.6#egg=ckanext-dcat && \
-#     pip3 install -r https://raw.githubusercontent.com/ckan/ckanext-dcat/v0.0.6/requirements.txt
+# ###TODO: SPARQL Interface - Adapt to Py3###
+# RUN echo "mjanez/sparql (Fixed version)" && \
+#     pip3 install -e git+https://github.com/mjanez/ckanext-sparql.git#egg=ckanext-sparql  && \
+#     pip3 install -r ${APP_DIR}/src/ckanext-sparql/requirements.txt && \
+#         # update CKAN config with ckanext-sparql parameters
+#         ckan config-tool ${CKAN_INI} "ckanext.sparql.endpoint_url=''" && \
+#         ckan config-tool ${CKAN_INI} "ckanext.sparql.hide_endpoint_url=''"
 
 # Clone the extension(s) your are writing for your own project in the `src` folder
 # to get them mounted in this image at runtime
 
+# Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
+
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)
-
 COPY patches ${APP_DIR}/patches
 
 RUN for d in $APP_DIR/patches/*; do \
-        if [ -d $d ]; then \
-            for f in `ls $d/*.patch | sort -g`; do \
-                cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; patch -p1 < "$f" ; \
-            done ; \
-        fi ; \
+    if [ -d $d ]; then \
+    for f in `ls $d/*.patch | sort -g`; do \
+    cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; patch -p1 < "$f" ; \
+    done ; \
+    fi ; \
     done

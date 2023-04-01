@@ -26,6 +26,7 @@ services:
       dockerfile: Dockerfile
       args:
         - TZ=${TZ}
+    image: ghcr.io/mjanez/ckan-spatial:master
     env_file:
       - .env
     depends_on:
@@ -43,13 +44,6 @@ services:
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
     
-  datapusher:
-    container_name: ${DATAPUSHER_CONTAINER_NAME}
-    image: ckan/ckan-base-datapusher:${DATAPUSHER_VERSION}
-    restart: unless-stopped
-    healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8800"]
-
   db:
     container_name: ${POSTGRESQL_CONTAINER_NAME}
     build:
