@@ -157,16 +157,16 @@ docker compose [-p <my_project>] down
 
 ## Install (build and run) CKAN plus dependencies
 ### Base mode
-Use this if you are a maintainer and will not be making code changes to CKAN or to CKAN extensions, modify `.env` depending on your own needs.
+Use this if you are a maintainer and will not be making code changes to CKAN or to CKAN extensions, modify `.env` depending on your own needs, especially the variables about the site URL or locations (`CKAN_SITE_URL` `CKAN_URL`, `PYCSW_URL`, `APACHE_SERVER_NAME`, `APACHE_CKAN_LOCATION`, `APACHE_PYCSW_LOCATION`, etc.).
 
 >**Note**<br>
-> Or copy the included `samples/.env.example` and replace the `.env`.
+> Default environment config file: `samples/.env.example`.
 
 >**Note**:<br>
-> Please note that when accessing CKAN directly (via a browser) ie: not going through NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
+> Please note that when accessing CKAN directly (via a browser) ie: not going through Apache you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
 
 >**Warning**:<br>
-> Using the default values on the `.env.example` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). This should be obviously changed before running this setup as a public CKAN instance.
+> Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). **This should be obviously changed before running this setup as a public CKAN instance.**
 
 Clone project
 ```shell
@@ -219,7 +219,7 @@ You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tuto
     
 |CONTAINER   ID                                |IMAGE               |COMMAND|CREATED|STATUS|PORTS|NAMES|
 |------------|----------------------------------|--------------------|-------|-------|------|-----|
-|0217537f717e|ckan-docker-nginx                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|81/tcp,0.0.0.0:81->80/tcp, 0.0.0.0:8443->443/tcp|nginx  |
+|0217537f717e|ckan-docker-apache                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|80/tcp,0.0.0.0:80->80/tcp | apache  |
 |7b06ab2e060a|ghcr.io/opendatagis/ckan-iepnb:master|/srv/app/start_ckan…|6      minutes ago   |Up   5    minutes (healthy)|0.0.0.0:5000->5000/tcp|ckan                 |       |
 |1b8d9789c29a|redis:6                           |docker-entrypoint.s…|6      minutes ago   |Up   5    minutes (healthy)|6379/tcp              |redis                |       |
 |7f162741254d|ckan/ckan-solr:2.9-solr8-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   5    minutes (healthy)|8983/tcp              |solr                 |       |
@@ -347,13 +347,15 @@ command: `python -m pdb /usr/lib/ckan/venv/bin/ckan --config /srv/app/ckan.ini r
 The Datastore database and user is created as part of the entrypoint scripts for the db container. There is also a Datapusher container running the latest version of Datapusher.
 
 
-### NGINX
-The base Docker Compose configuration uses an NGINX image as the front-end (ie: reverse proxy). It includes HTTPS running on port number 8443 and an HTTP port (81). A "self-signed" SSL certificate is generated beforehand and the server certificate and key files are included. The NGINX `server_name` directive and the `CN` field in the SSL certificate have been both set to 'localhost'. This should obviously not be used for production.
+### Apache HTTP Server
+The [base Docker Compose configuration](https://github.com/mjanez/ckan-docker#nginx) uses an NGINX image as the front-end (ie: reverse proxy). This repository contains a [custom Apache image](/apache/) for managing routes (`locations`) in the combined deployment of CKAN and ckan-pycsw on the same host.
 
-Creating the SSL cert and key files as follows:
-`openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=DE/ST=Berlin/L=Berlin/O=None/CN=localhost" -keyout ckan-local.key -out ckan-local.crt`
-The `ckan-local.*` files will then need to be moved into the nginx/setup/ directory
+In Apache HTTP Server, a "location" is a configuration directive used to specify how a specific URL should be handled within a VirtualHost.
 
+A "location" is defined within a "VirtualHost" block and is used to map a URL path to a particular filesystem location or to configure various settings such as access control, caching behavior, or content negotiation.
+
+>**Note**<br>
+> The virtualhosts are configured in the [Apache custom image configuration file](/apache/setup/httpd.conf).
 
 ### envvars
 The ckanext-envvars extension is used in the CKAN Docker base repo to build the base images.

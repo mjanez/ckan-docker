@@ -28,7 +28,7 @@ jobs:
           context: ./apache
           file: ./apache/Dockerfile
           push: false
-          tags: kowhai/ckan-docker-nginx:test-build-only
+          tags: opendatagis/ckan-docker-apache:test-build-only
 
     -  name: PostgreSQL build
        uses: docker/build-push-action@v2
@@ -36,7 +36,7 @@ jobs:
           context: ./postgresql
           file: ./postgresql/Dockerfile
           push: false
-          tags: kowhai/ckan-docker-postgresql:test-build-only
+          tags: opendatagis/ckan-docker-postgresql:test-build-only
 
     -  name: Solr build
        uses: docker/build-push-action@v2
@@ -44,7 +44,7 @@ jobs:
           context: ./solr
           file: ./solr/Dockerfile
           push: false
-          tags: kowhai/ckan-docker-solr:test-build-only
+          tags: opendatagis/ckan-docker-solr:test-build-only
 
     -  name: ckan-pycsw build
        uses: docker/build-push-action@v2
@@ -52,4 +52,4 @@ jobs:
           context: ./ckan-pycsw
           file: ./solr/Dockerfile
           push: false
-          tags: kowhai/ckan-docker-solr:test-build-only
+          tags: opendatagis/ckan-docker-solr:test-build-only
