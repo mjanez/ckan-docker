@@ -1,0 +1,57 @@
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota
+   label: biota
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/boundaries
+   label: boundaries
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/climatologyMeteorologyAtmosphere
+   label: climatologyMeteorologyAtmosphere
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/economy
+   label: economy
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/elevation
+   label: elevation
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment
+   label: environment
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/farming
+   label: farming
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/geoscientificInformation
+   label: geoscientificInformation
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/health
+   label: health
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover
+   label: imageryBaseMapsEarthCover
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/inlandWaters
+   label: inlandWaters
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/intelligenceMilitary
+   label: intelligenceMilitary
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/location
+   label: location
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/oceans
+   label: oceans
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre
+   label: planningCadastre
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/society
+   label: society
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/structure
+   label: structure
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/transportation
+   label: transportation
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/utilitiesCommunication
+   label: utilitiesCommunication

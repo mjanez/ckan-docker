@@ -1,0 +1,100 @@
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/eng
+   label: English
+   value: eng
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/fra
+   label: French
+   value: fra
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/deu
+   label: German
+   value: deu
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/ita
+   label: Italian
+   value: ita
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/spa
+   label: Spanish
+   value: spa
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/por
+   label: Portuguese
+   value: por
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/nld
+   label: Dutch
+   value: nld
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/swe
+   label: Swedish
+   value: swe
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/dan
+   label: Danish
+   value: dan
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/nor
+   label: Norwegian
+   value: nor
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/fin
+   label: Finnish
+   value: fin
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/ell
+   label: Greek
+   value: ell
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/rus
+   label: Russian
+   value: rus
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/pol
+   label: Polish
+   value: pol
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/hun
+   label: Hungarian
+   value: hun
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/ces
+   label: Czech
+   value: ces
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/tur
+   label: Turkish
+   value: tur
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/ara
+   label: Arabic
+   value: ara
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/heb
+   label: Hebrew
+   value: heb
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/zho
+   label: Chinese
+   value: zho
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/jpn
+   label: Japanese
+   value: jpn
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/kor
+   label: Korean
+   value: kor
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/hin
+   label: Hindi
+   value: hin
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/ben
+   label: Bengali
+   value: ben
+-
+   uri: http://id.loc.gov/vocabulary/iso639-2/urd
+   label: Urdu
+   value: urd

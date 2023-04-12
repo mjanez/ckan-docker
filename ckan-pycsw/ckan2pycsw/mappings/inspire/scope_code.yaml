@@ -1,0 +1,48 @@
+-
+   description: information applies to the attribute class
+   value: attribute
+-
+   description: information applies to the characteristic of a feature
+   value: attributeType
+-
+   description: information applies to the collection hardware class
+   value: collectionHardware
+-
+   description: information applies to the collection session
+   value: collectionSession
+-
+   description: information applies to the dataset
+   value: dataset
+-
+   description: information applies to the series
+   value: series
+-
+   description: information applies to non-geographic data
+   value: nonGeographicDataset
+-
+   description: information applies to a dimension group
+   value: dimensionGroup
+-
+   description: information applies to a feature
+   value: feature
+-
+   description: information applies to a feature type
+   value: featureType
+-
+   description: information applies to a property type
+   value: propertyType
+-
+   description: information applies to a field session
+   value: fieldSession
+-
+   description: information applies to a computer program or routine
+   value: software
+-
+   description: information applies to a capability which a service provider entity makes available to a service user entity through a set of interfaces that define a behaviour, such as a use case
+   value: service
+-
+   description: information applies to a copy or imitation of an existing or hypothetical object
+   value: model
+-
+   description: information applies to a tile, a spatial subset of geographic data
+   value: tile

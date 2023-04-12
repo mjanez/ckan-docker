@@ -6,7 +6,22 @@ volumes:
   solr_data:
 
 services:
-
+   
+  apache:
+    container_name: ${APACHE_CONTAINER_NAME}
+    build:
+      context: apache/
+      dockerfile: Dockerfile
+    #image: httpd:${APACHE_VERSION}
+    env_file:
+      - .env
+    depends_on:
+      ckan:
+        condition: service_healthy
+    ports:
+      - "0.0.0.0:${APACHE_PORT_HOST}:${APACHE_PORT}"
+    restart: on-failure:3
+  
   ckan-dev:
     container_name: ${CKAN_CONTAINER_NAME}
     build:
@@ -30,7 +45,27 @@ services:
       - ./src:/srv/app/src_extensions
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
+
+  pycsw:
+    container_name: ${PYCSW_CONTAINER_NAME}
+    build:
+      context: ckan-pycsw/
+      dockerfile: Dockerfile
+    #image: ghcr.io/mjanez/ckan-pycsw:main
+    env_file:
+      - .env
+    depends_on:
+      ckan:
+        condition: service_healthy
+    ports:
+      - "0.0.0.0:${PYCSW_PORT_HOST}:${PYCSW_PORT}"
+    volumes:
+        - ./log:${APP_DIR}/log
+        - ./metadata:${APP_DIR}/metadata
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${PYCSW_PORT}"]
     
   db:
     container_name: ${POSTGRESQL_CONTAINER_NAME}
@@ -51,15 +86,23 @@ services:
      
   solr:
     container_name: ${SOLR_CONTAINER_NAME}
-    image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
+    build:
+      context: solr/
+      dockerfile: Dockerfile.spatial
+    #image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
+    env_file:
+      - .env
     volumes:
       - solr_data:/var/solr
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${SOLR_PORT}/solr/"]
 
   redis:
     container_name: ${REDIS_CONTAINER_NAME}
+    # build:
+    #   context: redis/
+    #   dockerfile: Dockerfile
     image: redis:${REDIS_VERSION}
     restart: unless-stopped
     healthcheck:

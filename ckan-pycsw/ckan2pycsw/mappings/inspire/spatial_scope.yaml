@@ -1,0 +1,15 @@
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national
+   label: National
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/regional
+   label: Regional
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/local
+   label: Local
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/global
+   label: Global
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/european
+   label: European

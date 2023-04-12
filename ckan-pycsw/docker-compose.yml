@@ -1,0 +1,26 @@
+name: ckan2pycsw
+services:
+  pycsw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/mjanez/ckan-pycsw:main
+    env_file:
+      - .env
+    healthcheck:
+      test:
+      - CMD
+      - wget
+      - -qO
+      - /dev/null
+      - ${PYCSW_URL}
+    networks:
+      default: null
+    ports:
+      - "0.0.0.0:${PYCSW_PORT}:${PYCSW_PORT}"
+    volumes:
+        - ./log:${APP_DIR}/log
+        - ./metadata:${APP_DIR}/metadata
+networks:
+  default:
+    name: ckan2pycsw_default

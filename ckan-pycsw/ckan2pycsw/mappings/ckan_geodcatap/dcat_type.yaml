@@ -1,0 +1,15 @@
+-
+   value: dataset
+   uri: http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset
+   label: Spatial data set
+   language: en
+-
+   value: series
+   uri: http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series
+   label: Spatial data set series
+   language: en
+-
+   value: service
+   uri: http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service
+   label: Spatial data service
+   language: en

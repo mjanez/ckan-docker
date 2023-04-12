@@ -1,0 +1,60 @@
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota
+   theme:  http://inspire.ec.europa.eu/theme/br
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota
+   theme:  http://inspire.ec.europa.eu/theme/hb
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota
+   theme:  http://inspire.ec.europa.eu/theme/sd
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/boundaries
+   theme:  http://inspire.ec.europa.eu/theme/au
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/boundaries
+   theme:  http://inspire.ec.europa.eu/theme/su
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/climatologyMeteorologyAtmosphere
+   theme:  http://inspire.ec.europa.eu/theme/ac
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/climatologyMeteorologyAtmosphere
+   theme:  http://inspire.ec.europa.eu/theme/mf
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/economy
+   theme:  http://inspire.ec.europa.eu/theme/er
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/economy
+   theme:  http://inspire.ec.europa.eu/theme/fu
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/elevation
+   theme:  http://inspire.ec.europa.eu/theme/el
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environmentalMonitoring
+   theme:  http://inspire.ec.europa.eu/theme/em
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/foreignAffairs
+   theme:  http://inspire.ec.europa.eu/theme/ia
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/geoscientificInformation
+   theme:  http://inspire.ec.europa.eu/theme/gi
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/health
+   theme:  http://inspire.ec.europa.eu/theme/hl
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover
+   theme:  http://inspire.ec.europa.eu/theme/eb
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover
+   theme:  http://inspire.ec.europa.eu/theme/ge
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/landUse
+   theme:  http://inspire.ec.europa.eu/theme/lu
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/marine
+   theme:  http://inspire.ec.europa.eu/theme/mr
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/metadata
+   theme:  http://inspire.ec.europa.eu/theme/md
+-
+   topic: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/military
+   theme:  http://inspire.ec.europa.eu/theme/de

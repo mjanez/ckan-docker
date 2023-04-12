@@ -1,0 +1,11 @@
+{
+    {# ISO19139 Metadata Schema #}
+    "mcf": {"version": 1.0},
+    "metadata": {
+        "identifier": "{{ record['id'] }}",
+        "language": "es",
+        "charset": "utf8",
+        "datestamp": "{{ record['metadata_modified']|normalize_datetime }}",
+        "dataseturi": "{{ record['representation_type']|get_raw_value_from_ckan_schema(ckan_schema, 'representation_type', 'dataset') }}"
+    }
+}

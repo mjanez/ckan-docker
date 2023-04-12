@@ -195,6 +195,31 @@ def create_sysadmin():
         print("[prerun] Made user {0} a sysadmin".format(name))
 
 
+def update_who_ini():
+
+    apache_ckan_location = os.environ.get("APACHE_CKAN_LOCATION", '').strip()
+    app_dir = os.environ.get('APP_DIR')
+    who_ini_path = os.path.join(app_dir, 'who.ini')
+
+    if apache_ckan_location and apache_ckan_location != "/":
+        with open(who_ini_path, 'r') as f:
+            who_ini = f.read()
+        updated_who_ini = who_ini.replace('${WHO_LOCATION}', apache_ckan_location)
+        with open(who_ini_path, 'w') as f:
+            f.write(updated_who_ini)
+        
+        print("[prerun] Update Apache location in who.ini with: {0}".format(apache_ckan_location))
+
+    else:
+        with open(who_ini_path, 'r') as f:
+            who_ini = f.read()
+        updated_who_ini = who_ini.replace('${WHO_LOCATION}', '')
+        with open(who_ini_path, 'w') as f:
+            f.write(updated_who_ini)
+
+        print("[prerun] No Apache location, default who.ini.")
+
+
 if __name__ == "__main__":
 
     maintenance = os.environ.get("MAINTENANCE_MODE", "").lower() == "true"
@@ -205,6 +230,7 @@ if __name__ == "__main__":
         check_main_db_connection()
         init_db()
         update_plugins()
+        update_who_ini()
         check_datastore_db_connection()
         init_datastore_db()
         check_solr_connection()

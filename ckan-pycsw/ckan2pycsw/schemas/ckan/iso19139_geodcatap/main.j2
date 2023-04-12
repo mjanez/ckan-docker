@@ -1,0 +1,377 @@
+{
+    {# INSPIRE ISO19139 Metadata Schema #}
+    {% set language = record['language']|get_raw_value_from_ckan_schema(ckan_schema, 'language')%}
+    {% set dcat_type = record['dcat_type'].rsplit('/', 1)[-1] %}
+    "mcf": {"version": 1.0},
+    "metadata": {
+        "identifier": "{{ record['id'] }}",
+        "language": "{{ language }}",
+        "charset": "UTF-8",
+        {% if record['source'] %}
+            "parentidentifier": "{{ record['source'].rsplit('/', 1)[-1] }}",
+        {% endif %}
+        "datestamp": "{{ record['metadata_modified']|normalize_datetime }}",
+        "dataseturi": "{{ url }}",
+        {% if dcat_type == 'service' %}
+            {% if "catalog" in record['title'].lower() or "csw" in record['title'].lower() %}
+            "servicetype": "discovery",
+            {% elif "wfs" in record['title'].lower() or "descarg" in record['title'].lower() %}
+            "servicetype": "download",
+            {% elif "wms" in record['title'].lower() or "wmts" in record['title'].lower() or "wcs" in record['title'].lower() or "map" in record['title'].lower() %}
+            "servicetype": "view",
+            {% else %}
+            "servicetype": "other",
+            {% endif %}
+        {% endif %}
+        "hierarchylevel": {
+            "value": "{{ dcat_type }}",
+            "uri": "{{ record['dcat_type'] }}"
+        }
+    },
+    "spatial": {
+         {% if record['reference_system'] is defined %}
+            "crs": {
+                "value": "{{ record['reference_system'].rsplit('/', 1)[-1] }}",
+                "uri": "{{ record['reference_system'] }}"
+            },
+        {% elif record['conforms_to'] %}
+            {% for conform in record['conforms_to'] %}
+                {% if "epsg" in conform.lower() %}
+                    "crs": {
+                        "value": "{{ conform.rsplit('/', 1)[-1] }}",
+                        "uri": "{{ conform }}"
+                    },
+                {% else %}
+                    "crs": {
+                        "value": "4326",
+                        "uri": "http://www.opengis.net/def/crs/EPSG/0/4326"
+                    },
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            "crs": {
+                "value": "4326",
+                "uri": "http://www.opengis.net/def/crs/EPSG/0/4326"
+            },
+        {% endif %}
+        {# MD_GeometricObjectTypeCode: Not in INSPIRE #}
+        {% if record['spatial_resolution_in_meters'] %}
+            "spatialresolution": "{{ record['spatial_resolution_in_meters'] }}",
+        {% endif %}
+        {% if record['representation_type'] %}
+            "datatype": "{{ record['representation_type']|get_raw_value_from_ckan_schema(ckan_schema, 'representation_type') }}"
+        {% else %}
+            "datatype": "vector"
+        {% endif %}
+    },
+    "identification": {
+        "language": "{{ language }}",
+        "languagelabel": "{{ language|get_mapping_value_from_yaml_list(input_field="value", output_field='label', codelist="language",mappings_folder=mappings_folder + "/ckan_geodcatap")}}",
+        "charset": "utf8",
+        "title": "{{ record['title'] }}",
+        "abstract": "{{ record['notes'] }}",
+        {% if record['version'] %}
+            "edition": "{{ record['version'] }}",
+        {% endif %}
+        "dates": {
+            {% if record['created'] %}
+                "creation": "{{ record['created']|normalize_datetime }}",
+            {% else %}
+                "creation": "{{ '1900-01-01T00:00:00Z'|normalize_datetime }}",
+            {% endif %}
+            {% if record['issued'] or record['metadata_created'] %}
+                {% if record['issued'] %}
+                    "publication": "{{ record['issued']|normalize_datetime }}",
+                {% else %}
+                    "publication": "{{ record['metadata_created']|normalize_datetime }}",
+                {% endif %}
+            {% endif %}
+            {% if record['modified'] or record['metadata_created'] %}
+                {% if record['modified'] %}
+                    "revision": "{{ record['modified']|normalize_datetime }}"
+                {% else %}
+                    "revision": "{{ record['metadata_modified']|normalize_datetime }}"
+                {% endif %}
+            {% endif %}
+        },
+        {# INSPIRE Themes #}
+        "keywords": {
+            {% if record['theme'] %}
+            "inspire": {
+                "keywords": [
+                    {% for theme in record['theme'] %}
+                    {
+                    "label": "{{ theme|get_mapping_value_from_yaml_list(input_field="theme", output_field='label', codelist="theme-dcat_ap",mappings_folder=mappings_folder + "/ckan_geodcatap") }}",
+                    "uri": "{{ theme }}"
+                    }{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                            
+                ],
+                "vocabulary": {
+                    "name": "GEMET - INSPIRE themes, version 1.0",
+                    "url" : "http://www.eionet.europa.eu/gemet/inspire_themes",
+                    "date": "2008-06-01"
+                }
+            },
+            {% endif %}
+            {#TODO: Add INSPIRE Priority dataset URI to CKAN #}
+            {% if record['priority_dataset'] %}
+            "prioritydataset": {
+                "keywords": [{ 
+                    "label": "{{ record['priority_dataset'].rsplit('/', 1)[-1] }}",
+                    "value": "{{ record['priority_dataset'].rsplit('/', 1)[-1] }}",
+                    "uri": "{{ record['priority_dataset'] }}"  
+                    }],
+                "vocabulary": {
+                    "name": "INSPIRE priority data set",
+                    "url" : "http://inspire.ec.europa.eu/metadata-codelist/PriorityDataset",
+                    "date": "2018-04-04"
+                }
+            },
+            {% endif %}
+            {#TODO: Improve tag/tag_uri info to provide a label #}
+            {% set keywords_gemet = [] %}
+            {% set keywords_spatialscope = [] %}
+            {% set keywords_spatialdataservice = [] %}
+
+            {% for keyword in record['tag_uri'] %}
+                {% if 'gemet' in keyword.lower()  %}
+                    {% set gemet_keyword = {
+                        "value": keyword.rsplit('/', 1)[-1],
+                        "uri": keyword
+                    } %}
+                    {% set _ = keywords_gemet.append(gemet_keyword) %}
+                {% elif 'spatialscope' in keyword.lower() %}
+                    {% set spatial_keyword = {
+                        "label": keyword|get_mapping_value_from_yaml_list(input_field="uri", output_field='label', codelist="spatial_scope",mappings_folder=mappings_folder + "/ckan_geodcatap"),
+                        "value": keyword.rsplit('/', 1)[-1],
+                        "uri": keyword
+                    } %}
+                    {% set _ = keywords_spatialscope.append(spatial_keyword) %}
+                {% elif 'spatialdataservice ' in keyword.lower() %}
+                    {% set spatialdataservice_keyword = {
+                        "label": keyword|get_mapping_value_from_yaml_list(input_field="uri", output_field='label', codelist="spatial_data_service_category",mappings_folder=mappings_folder + "/ckan_geodcatap"),
+                        "value": keyword.rsplit('/', 1)[-1],
+                        "uri": keyword
+                    } %}
+                    {% set _ = keywords_spatialdataservice.append(spatialdataservice_keyword) %}
+                {% endif %}
+            {% endfor %}
+            {# GEMET Keywords #}
+            "gemet": {
+                {% if keywords_gemet %}
+                        "keywords": {{ keywords_gemet|tojson }},
+                    {% else %}
+                        "keywords": [{
+                            "label": "Spatial distribution",
+                            "value": "11118",
+                            "uri": "https://www.eionet.europa.eu/gemet/en/concept/11118"
+                            }],
+                    {% endif %}
+                "vocabulary": {
+                    "name": "GEMET - Concepts, version 4.2.3",
+                    "url" : "http://www.eionet.europa.eu/gemet",
+                    "date": "2021-12-06"
+                }
+            },
+            {# Classification of spatial data services #}
+            {% if dcat_type == 'service' %}
+                "spatialdataservice": {
+                    {% if keywords_spatialdataservice %}
+                        "keywords": {{ keywords_spatialdataservice|tojson }},
+                    {% else %}
+                        "keywords": [{
+                            "label": "Geographic model/information management service",
+                            "value": "infoManagementService",
+                            "uri": "http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceCategory/infoManagementService"
+                    }],
+                    {% endif %}
+                    "vocabulary": {
+                        "name": "Commission Regulation (EC) No 1205/2008 of 3 December 2008 implementing Directive 2007/2/EC of the European Parliament and of the Council as regards metadata",
+                        "url" : "http://data.europa.eu/eli/reg/2008/1205",
+                        "date": "2008-12-03"
+                    }
+                },
+            {% endif %}
+            {# Spatial Scope #}
+            "spatialscope": {
+                {% if keywords_spatialscope %}
+                        "keywords": {{ keywords_spatialscope|tojson }},
+                    {% else %}
+                        "keywords": [{
+                            "label": "National",
+                            "value": "national",
+                            "uri": "http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national"
+                            }],
+                    {% endif %}
+                "vocabulary": {
+                    "name": "Spatial scope",
+                    "url" : "http://inspire.ec.europa.eu/metadata-codelist/SpatialScope",
+                    "date": "2019-05-22"
+                }
+            }
+        },
+        "topiccategory": [
+            {% if record['topic'] %}
+                "{{ record['topic'].rsplit('/', 1)[-1] }}"
+            {% else %}
+                "biota"
+            {% endif %}
+        ],
+        "extents": {
+            {% if record['spatial'] %}
+                {% set spatial_data = record['spatial'] %}
+            {% elif record['extras'] and record['extras']["key"] == "spatial"%}
+                {% set spatial_data = record['extras']["value"]%}
+            {% endif %}
+            "spatial": [
+                {
+                {% if spatial_data %}
+                    "bbox": "{{ spatial_data|get_bbox }}",
+                {% else %}
+                {# Spain BBox #}
+                    "bbox": "[-19.00, 27.60, 4.30, 44.60]",
+                {% endif %}
+                "crs": 4326
+                }
+            ]
+            {% if record['temporal_start'] and record['temporal_end'] %}
+                ,
+                "temporal": [
+                    {
+                        "begin": "{{ record['temporal_start'] }}",
+                        "end": "{{ record['temporal_end'] }}"
+                    }
+                ]
+            {% endif %}
+        },
+        "fees": "None",
+        {% if record['license_title'] and record['license_url'] %}
+        "uselimitation": {
+                        "label": "{{record['license_title'] }}",
+                        "url" : "{{ record['license_url'] }}"
+                    },
+        {% else %}
+        "otherconstraints": "noConditionsApply",
+        {% endif %}
+        {% if record['access_rights']%}
+            {% if dcat_type == "service" %}
+            "accessconstraints": {
+                        "label": "Public access to spatial data sets and services would adversely affect the confidentiality of commercial or industrial information, where such confidentiality is provided for by national or Community law to protect a legitimate economic interest, including the public interest in maintaining statistical confidentiality and tax secrecy.",
+                        "uri": "http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d"
+                        },
+            {% else %}
+            "accessconstraints": {
+                        "label": "{{ record['access_rights']|get_mapping_value_from_yaml_list(input_field="uri", output_field='definition', codelist="rights",mappings_folder=mappings_folder + "/ckan_geodcatap") }}",
+                        "uri": "{{ record['access_rights'] }}"
+                        },
+            {% endif %}
+        {% endif %}
+        "url": "{{ url }}",
+        "status": "UnderDevelopment",
+        {#TODO: https://inspire.ec.europa.eu/metadata-codelist/MaintenanceFrequency #}
+        "maintenancefrequency": "continual"
+    },
+    "contact": {
+        {% if record['publisher_name'] is defined %}
+            "publisher": {
+                {% if record['publisher_name'] %}
+                "organization": "{{ record['publisher_name'] }}",
+                {% endif %}
+                {% if record['publisher_email'] %}
+                "email": "{{ record['publisher_email'] }}",
+                {% endif %}
+                {% if record['publisher_url'] %}
+                "url": "{{ record['publisher_url'] }}"
+                {% endif %}
+            },
+        {% endif %}
+        {% if record['author_name'] is defined %}
+            "author": {
+                {% if record['author_name'] %}
+                "individualname": "{{ record['author_name'] }}",
+                {% endif %}
+                {% if record['author_email'] %}
+                "email": "{{ record['author_email'] }}",
+                {% endif %}
+                {% if record['author_url'] %}
+                "url": "{{ record['author_url'] }}"
+                {% endif %}
+            },
+        {% endif %}
+        "pointOfContact": {
+            "organization": "{{ record['contact_name'] }}",
+            "email": "{{ record['contact_email'] }}",
+            "url": "{{ record['contact_url'] }}"
+        }
+    },
+    "distribution": {
+            {% for resource in record['resources'] %}
+            {% if resource.format is not none and resource.format != "" %}
+                {% set distribution_type = resource.format.rsplit('/', 1)[-1]|get_mapping_values_dict_from_yaml_list(input_field='format', output_field='identifier', codelist='distribution_type', mappings_folder=mappings_folder + '/inspire') %}
+                    "{{ resource.format.lower() }}": {
+                        "name": "{{ resource['name'] }}",
+                        {% if resource_type == "service" and 'wms' in resource['format'] or 'wfs' in resource['format'] or 'wmts' in resource['format'] or 'wcs' in resource['format'] or 'ogc' in resource['format'] %}
+                            "description": "{{ resource['description'] }}",
+                        {% elif resource['description'] is not none and resource['description'] != "" %}
+                            "description": "{{ resource['description'] }}",
+                        {% endif %}
+                        "format": "{{ resource['format'] }}",
+                        {% if distribution_type is mapping %}
+                            "format_uri": "{{ distribution_type['uri'] }}",
+                        {% elif resource['mimetype'] is not none and resource['mimetype'] != "" %}
+                            "format_uri": "{{ resource['mimetype'] }}",
+                        {% endif %}
+                        {% if resource['format_version'] %}
+                            "format_version": "{{ resource['format_version'] }}",
+                        {% else %}
+                            "format_version": "{{ resource['format_version'] }}",
+                        {% endif %}
+                        {% if distribution_type is mapping and distribution_type['identifier'] %}
+                            "type": "{{ distribution_type['identifier'] }}",
+                        {% else %}
+                            "type": "{{ resource['format'] }}",
+                        {% endif %}
+                        "url": "{{ resource['url'] }}",
+                        {% if 'wfs' in resource['format'] %}
+                            "function": "download"
+                        {% else %}
+                        "function": "information"
+                        {% endif %}
+                    }
+                    {% if not loop.last %},{% endif %}
+            {% endif %}
+        {% endfor %}
+    },
+
+    "dataquality": {
+        "scope": {
+            "level": "{{ record['dcat_type'].rsplit('/', 1)[-1] }}"
+        },
+        "lineage": {
+            {% if record['lineage_process_steps'] %}
+                "processstep": [
+                    {% for step in record['lineage_process_steps'] %}
+                        {
+                            "description": "{{ step }}"
+                        }{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+            {% endif %}
+            {% if record['lineage_source'] %}
+                "source": [
+                    {% for source in record['lineage_source'] %}
+                        {
+                            "description": "{{ source }}"
+                        }{% if not loop.last %},{% endif %}
+                    {% endfor %}
+                    ],
+            {% endif %}
+            {% if record['lineage_statement'] %}
+                "statement": "{{ record['provenance'] }}"
+            {% else %}
+                "statement": "No lineage statement provided"
+            {% endif %}
+        }
+    }
+}

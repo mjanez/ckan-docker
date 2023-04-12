@@ -1,0 +1,65 @@
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/AGRI
+   value: AGRI
+   label: Agriculture, fisheries, forestry and food
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/ECON
+   value: ECON
+   label: Economy and finance
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/EDUC
+   value: EDUC
+   label: Education, culture and sport
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/ENER
+   value: ENER
+   label: Energy
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   value: ENVI
+   label: Environment
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/GOVE
+   value: GOVE
+   label: Government and public sector
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/HEAL
+   value: HEAL
+   label: Health
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/INTR
+   value: INTR
+   label: International issues
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/JUST
+   value: JUST
+   label: Justice, legal system and public safety
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/REGI
+   value: REGI
+   label: Regions and cities
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/SOCI
+   value: SOCI
+   label: Population and society
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/TECH
+   value: TECH
+   label: Science and technology
+   language: en
+-
+   uri: http://publications.europa.eu/resource/authority/data-theme/TRAN
+   value: TRAN
+   label: Transport
+   language: en

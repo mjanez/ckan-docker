@@ -47,7 +47,16 @@ ENV SOLR_BBOX_FIELDS '<field name="bbox_area" type="float" indexed="true" stored
     <field name="maxx" type="float" indexed="true" stored="true" /> \
     <field name="maxy" type="float" indexed="true" stored="true" /> \
     <field name="minx" type="float" indexed="true" stored="true" /> \
-    <field name="miny" type="float" indexed="true" stored="true" />'
+    <field name="miny" type="float" indexed="true" stored="true" /> \
+    <field name="tag_uri" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="conforms_to" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="lineage_source" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="lineage_process_step" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="reference" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="theme" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="resource_relation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="metadata_profile" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>'
+	
 
 RUN sed -i "/<fields>/a $SOLR_BBOX_FIELDS" $SOLR_SCHEMA_FILE
 

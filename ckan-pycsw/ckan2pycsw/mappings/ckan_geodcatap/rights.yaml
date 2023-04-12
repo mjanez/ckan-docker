@@ -1,0 +1,54 @@
+-
+   value: INSPIRE_Directive_Article13_1a
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a
+   language: en
+   label: public access limited according to Article 13(1)(a) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect the confidentiality of the proceedings of public authorities, where such confidentiality is provided for by law."
+-
+   value: INSPIRE_Directive_Article13_1b
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1b
+   language: en
+   label: public access limited according to Article 13(1)(b) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect international relations, public security or national defence."
+-
+   value: INSPIRE_Directive_Article13_1c
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1c
+   language: en
+   label: public access limited according to Article 13(1)(c) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect the course of justice, the ability of any person to receive a fair trial or the ability of a public authority to conduct an enquiry of a criminal or disciplinary nature."
+-
+   value: INSPIRE_Directive_Article13_1d
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d
+   language: en
+   label: public access limited according to Article 13(1)(d) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect the confidentiality of commercial or industrial information, where such confidentiality is provided for by national or Community law to protect a legitimate economic interest, including the public interest in maintaining statistical confidentiality and tax secrecy."
+-
+   value: INSPIRE_Directive_Article13_1e
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1e
+   language: en
+   label: public access limited according to Article 13(1)(e) of the INSPIRE Directive
+   definition: Public access to spatial data sets and services would adversely affect intellectual property rights.
+-
+   value: INSPIRE_Directive_Article13_1f
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1f
+   language: en
+   label: public access limited according to Article 13(1)(f) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect the confidentiality of personal data and/or files relating to a natural person where that person has not consented to the disclosure of the information to the public, where such confidentiality is provided for by national or Community law."
+-
+   value: INSPIRE_Directive_Article13_1g
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1g
+   language: en
+   label: public access limited according to Article 13(1)(g) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect the interests or protection of any person who supplied the information requested on a voluntary basis without being under, or capable of being put under, a legal obligation to do so, unless that person has consented to the release of the information concerned."
+-
+   value: INSPIRE_Directive_Article13_1h
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1h
+   language: en
+   label: public access limited according to Article 13(1)(h) of the INSPIRE Directive
+   definition: "Public access to spatial data sets and services would adversely affect the protection of the environment to which such information relates, such as the location of rare species."
+-
+   value: noLimitations
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations
+   language: en
+   label: no limitations to public access
+   definition: There are no limitations on public access to spatial data sets and services.

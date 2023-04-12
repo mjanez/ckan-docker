@@ -1,0 +1,36 @@
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/discovery
+   format: CSW
+   language: en
+   label: Discovery Service
+   definition: Services making it possible to search for spatial data sets and services on the basis of the content of the corresponding metadata and to display the content of the metadata.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/view
+   format: WMS,WMTS,WCS,WMS-C
+   language: en
+   label: View Service
+   definition: Service that makes it possible, as a minimum, to display, navigate, zoom in and out, pan or overlay viewable spatial data sets and to display legend information and any relevant content of metadata.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/download
+   format: WFS
+   language: en
+   label: Download Service
+   definition: Service that enables copies of spatial data sets, or parts of such sets, to be downloaded and, where practicable, accessed directly.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/transformation
+   format: WPS
+   language: en
+   label: Transformation Service
+   definition: Service that enables spatial data sets to be transformed with a view to achieving interoperability.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/invoke
+   format: ATOM
+   language: en
+   label: Invoke Spatial Data Service
+   definition: Service that allows defining both the data inputs and data outputs expected by the spatial service and a workflow or service chain combining multiple services. It also allows defining the external web service interface of the workflow or service chain.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialDataServiceType/other
+   format: 
+   language: en
+   label: Other Service
+   definition: |

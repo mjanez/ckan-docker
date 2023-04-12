@@ -1,0 +1,25 @@
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/national
+   language: en
+   label: National
+   definition: The scope of the data set intends to cover the national territory.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/regional
+   language: en
+   label: Regional
+   definition: The scope of the data set intends to cover the territory of one or several sub-national level administrative units.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/local
+   language: en
+   label: Local
+   definition: The scope of the data set intends to cover the territory of one or several local administrative units.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/global
+   language: en
+   label: Global
+   definition: The scope of the data set intends to cover the whole Earth.
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/SpatialScope/european
+   language: en
+   label: European
+   definition: The scope of the data set intends to cover Europe.

@@ -1,0 +1,27 @@
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a
+   label: public access limited according to Article 13(1)(a) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1b
+   label: public access limited according to Article 13(1)(b) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1c
+   label: public access limited according to Article 13(1)(c) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d
+   label: public access limited according to Article 13(1)(d) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1e
+   label: public access limited according to Article 13(1)(e) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1f
+   label: public access limited according to Article 13(1)(f) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1g
+   label: public access limited according to Article 13(1)(g) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1h
+   label: public access limited according to Article 13(1)(h) of the INSPIRE Directive
+-
+   uri: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations
+   label: no limitations to public access

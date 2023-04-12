@@ -1,0 +1,210 @@
+-
+   theme: http://inspire.ec.europa.eu/theme/ac
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Atmospheric Conditions
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/ad
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Addresses
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/af
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/AGRI
+   label: Agricultural and Aquaculture Facilities
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/am
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Area Management/Restriction/Regulation Zones and Reporting Units
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/au
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/GOVE
+   label: Administrative units
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/br
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Bio-geographical regions
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/bu
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Buildings
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/cp
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Cadastral parcels
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/cp
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+   label: Cadastral parcels
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/ef
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Environmental Monitoring Facilities
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/el
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Elevations
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/er
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENER
+   label: Natural resources
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/ge
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Geology
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/ge
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TECH
+   label: Geology
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/gg
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Geographical Grid Systems
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/gn
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Geographical names
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/hb
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Habitats and Biotopes
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/hh
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/HEAL
+   label: Human health and safety
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/hy
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Hydrography
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/hy
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TECH
+   label: Hydrography
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/lc
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Land Cover
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/lu
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+   label: Land use
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/lu
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Land use
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/mf
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Meteorological Geographical Features
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/mf
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TECH
+   label: Meteorological Geographical Features
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/mr
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+   label: Mineral resources
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/mr
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Mineral resources
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/mr
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENER
+   label: Mineral resources
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/nz
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Natural risk zones
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/of
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Oceanographic Geographical Features
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/oi
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Orthoimagery
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/oi
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TECH
+   label: Orthoimagery
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/pd
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/SOCI
+   label: Population distribution — demography
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/pf
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+   label: Production and Industrial Facilities
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/ps
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Protected sites
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/rs
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+   label: Coordinate Reference Systems
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/sd
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Species distribution
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/so
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Soil
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/sr
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+   label: Sea regions
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/su
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/SOCI
+   label: Statistical units
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/tn
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TRAN
+   label: Transport networks
+   language: en
+-
+   theme: http://inspire.ec.europa.eu/theme/us
+   dcat_ap: http://publications.europa.eu/resource/authority/data-theme/GOVE
+   label: Utility and governmental services
+   language: en

@@ -1,0 +1,2278 @@
+scheming_version: 1
+dataset_type: dataset
+about: "Datasets/Distributions: Adaptation for CKAN of the GeoDCAT-AP metadata schema extended (2.0.0) with ISO-19115 (INSPIRE) mandatory elements."
+about_url: https://github.com/OpenDataGIS/ckanext-scheming
+
+### Codes in Schema
+# (M): Mandatory
+# (R): Recommended
+# (C): Conditional
+# (O): Optional
+
+#--Dataset (dcat:Dataset) fields--#
+dataset_fields:
+
+#--Basic info--#
+- start_form_page:
+    title: 
+      en: Basic Info
+      es: Identificación
+    description: 
+      en: Basic metadata identification and reference information.
+      es: Información básica de identificación y referencia de los metadatos.
+
+# Dataset title (M)
+  field_name: title
+  label: 
+    en: Dataset title
+    es: Título del conjunto de datos
+  preset: title
+  validators: not_empty scheming_required
+  required: true
+  display_property: dct:title
+  form_placeholder:
+    en: eg. A descriptive title.
+    es: ej. Un título descriptivo.
+
+# Dataset locator (O)
+## For all resources that is equivalent to this element, such as a URI (of dcat:Dataset) 
+- field_name: name
+  label: 
+    en: URL
+    es: URL
+  preset: dataset_slug
+  display_property: dcat:landingPage
+  form_placeholder:
+    en: URL title Dataset
+    es: Título de la URL del Dataset
+
+# CKAN Organization (M) // Dataset privacy (M)
+- field_name: owner_org
+  label:
+    en: Organization
+    es: Organización
+  required: true
+  help_text:
+    en: Entity (organisation) responsible for making the Dataset available.
+    es: Entidad (organización) responsable de publicar el conjunto de datos.
+  preset: dataset_organization
+
+# Dataset abstract (M)
+- field_name: notes
+  label: 
+    en: Abstract 
+    es: Resumen
+  form_snippet: markdown.html
+  display_property: dct:description
+  validators: not_empty scheming_required
+  required: true
+  form_placeholder:
+    en: eg. Some useful description about the dataset.
+    es: ej. Una descripción útil sobre el conjunto de datos.
+
+# Dataset type (M)
+- field_name: dcat_type
+  label: 
+    en: Resource type
+    es: Tipo de recurso
+  preset: select
+  form_include_blank_choice: False
+  validators: not_empty scheming_required
+  required: true
+  display_property: dct:type
+  display_snippet: link_schema.html
+  choices:
+  - label:
+      en: Spatial data set
+      es: Conjunto de datos espacial
+    value: http://inspire.ec.europa.eu/metadata-codelist/ResourceType/dataset
+  - label:
+      en: Collection
+      es: Colección
+    value: http://purl.org/dc/dcmitype/Collection
+  - label:
+      en: Event
+      es: Evento
+    value: http://purl.org/dc/dcmitype/Event
+  - label:
+      en: Image
+      es: Imagen
+    value: http://purl.org/dc/dcmitype/Image
+  - label:
+      en: Still Image
+      es: Imagen fija
+    value: http://purl.org/dc/dcmitype/StillImage
+  - label:
+      en: Moving Image
+      es: Imagen en movimiento
+    value: http://purl.org/dc/dcmitype/MovingImage
+  - label:
+      en: Physical Object
+      es: Objeto físico
+    value: http://purl.org/dc/dcmitype/PhysicalObject
+  - label:
+      en: Interactive Resource
+      es: Recurso interactivo
+    value: http://purl.org/dc/dcmitype/InteractiveResource
+  - label:
+      en: Spatial data set series
+      es: Series de datos espaciales
+    value: http://inspire.ec.europa.eu/metadata-codelist/ResourceType/series
+  - label:
+      en: Service
+      es: Servicio
+    value: http://purl.org/dc/dcmitype/Service
+  - label:
+      en: Spatial data service
+      es: Servicio de datos espaciales
+    value: http://inspire.ec.europa.eu/metadata-codelist/ResourceType/service
+  - label:
+      en: Sound
+      es: Sonido
+    value: http://purl.org/dc/dcmitype/Sound
+  - label:
+      en: Software
+      es: Software
+    value: http://purl.org/dc/dcmitype/Software
+  - label:
+      en: Text
+      es: Texto
+    value: http://purl.org/dc/dcmitype/Text
+
+# NTI-RISP Theme (M)
+## Taxonomy [NTI-RISP Annex IV](http://www.boe.es/eli/es/res/2013/02/19/(4)/con#aniv)
+- field_name: theme_es
+  label:
+    en: Themes (NTI-RISP)
+    es: Temáticas (NTI-RISP)
+  validators: ignore_missing scheming_multiple_choice
+  form_snippet: multiple_select.html
+  display_property: dcat:theme
+  display_snippet: themes_es.html
+  select_size: 10
+  required: True
+  help_text:
+    en: '<a href="http://www.boe.es/eli/es/res/2013/02/19/(4)/con#aniv" target="_blank" rel="noopener">Themes</a> (NTI-RISP Annex IV)'
+    es: '<a href="http://www.boe.es/eli/es/res/2013/02/19/(4)/con#aniv" target="_blank" rel="noopener">Temáticas</a> (Anexo IV NTI-RISP)'
+  help_allow_html: True
+  sorted_choices: true
+  choices:
+  - value: http://datos.gob.es/kos/sector-publico/sector/ciencia-tecnologia
+    notation: ciencia-tecnologia
+    label:
+      en: Science and technology
+      es: Ciencia y tecnología
+      ca: Ciència i tecnologia
+      gl: Ciencia e tecnoloxía
+      eu: Zientzia eta teknologia
+    description:
+      en: ''
+      es: 'Incluye: Innovación, Investigación, I/u002BD/u002BI, Telecomunicaciones,
+        Inernet y Sociedad de la Información.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TECH
+  - value: http://datos.gob.es/kos/sector-publico/sector/comercio
+    notation: comercio
+    label:
+      en: Commerce
+      es: Comercio
+      ca: Comerç
+      gl: Comercio
+      eu: Merkataritza
+    description:
+      en: ''
+      es: 'Incluye: Consumo.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+  - value: http://datos.gob.es/kos/sector-publico/sector/cultura-ocio
+    notation: cultura-ocio
+    label:
+      en: Culture and leisure
+      es: Cultura y ocio
+      ca: Cultura i lleure
+      gl: Cultura e lecer
+      eu: Kultura eta aisia
+    description:
+      en: ''
+      es: 'Incluye: Tiempo libre.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/EDUC
+  - value: http://datos.gob.es/kos/sector-publico/sector/demografia
+    notation: demografia
+    label:
+      en: Demography
+      es: Demografía
+      ca: Demografia
+      gl: Demografía
+      eu: Demografia
+    description:
+      en: ''
+      es: 'Incluye: Inmigración y Emigración, Familia, Mujeres, Infancia, Mayores,
+        Padrón.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/SOCI
+  - value: http://datos.gob.es/kos/sector-publico/sector/deporte
+    notation: deporte
+    label:
+      en: Sport
+      es: Deporte
+      ca: Esport
+      gl: Deporte
+      eu: Kirola
+    description:
+      en: ''
+      es: 'Incluye: Instalaciones deportivas, Federaciones, Competiciones.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/EDUC
+  - value: http://datos.gob.es/kos/sector-publico/sector/economia
+    notation: economia
+    label:
+      en: Economy
+      es: Economía
+      ca: Economia
+      gl: Economía
+      eu: Ekonomia
+    description:
+      en: ''
+      es: 'Incluye: Deuda, Moneda y Banca y finanzas.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+  - value: http://datos.gob.es/kos/sector-publico/sector/educacion
+    notation: educacion
+    label:
+      en: Education
+      es: Educación
+      ca: Educació
+      gl: Educación
+      eu: Hezkuntza
+    description:
+      en: ''
+      es: 'Incluye: Formación.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/EDUC
+  - value: http://datos.gob.es/kos/sector-publico/sector/empleo
+    notation: empleo
+    label:
+      en: Employment
+      es: Empleo
+      ca: Ocupació
+      gl: Emprego
+      eu: Enplegua
+    description:
+      en: ''
+      es: 'Incluye: Trabajo, Mercado laboral.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+  - value: http://datos.gob.es/kos/sector-publico/sector/energia
+    notation: energia
+    label:
+      en: Energy
+      es: Energía
+      ca: Energia
+      gl: Enerxía
+      eu: Energia
+    description:
+      en: ''
+      es: 'Incluye: Fuentes renovables.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENER
+  - value: http://datos.gob.es/kos/sector-publico/sector/hacienda
+    notation: hacienda
+    label:
+      en: Treasury
+      es: Hacienda
+      ca: Hisenda
+      gl: Facenda
+      eu: Ogasuna
+    description:
+      en: ''
+      es: 'Incluye: Impuestos.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/GOVE
+  - value: http://datos.gob.es/kos/sector-publico/sector/industria
+    notation: industria
+    label:
+      en: Industry
+      es: Industria
+      ca: Indústria
+      gl: Industria
+      eu: Industria
+    description:
+      en: ''
+      es: 'Incluye: Minería.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+  - value: http://datos.gob.es/kos/sector-publico/sector/legislacion-justicia
+    notation: legislacion-justicia
+    label:
+      en: Legislation and justice
+      es: Legislación y justicia
+      ca: Legislació i justícia
+      gl: Lexislación e xustiza
+      eu: Legegintza eta justizia
+    description:
+      en: ''
+      es: 'Incluye: Registros.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/JUST
+  - value: http://datos.gob.es/kos/sector-publico/sector/medio-ambiente
+    notation: medio-ambiente
+    label:
+      en: Environment
+      es: Medio ambiente
+      ca: Medi ambient
+      gl: Medio ambiente
+      eu: Ingurumena
+    description:
+      en: ''
+      es: 'Incluye: Meteorología, Geografía, Conservación fauna y flora.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ENVI
+  - value: http://datos.gob.es/kos/sector-publico/sector/medio-rural-pesca
+    notation: medio-rural-pesca
+    label:
+      en: Rural environment
+      es: Medio Rural
+      ca: Medi rural
+      gl: Medio rural
+      eu: Nekazaritza
+    description:
+      en: ''
+      es: 'Incluye: Agricultura, Ganadería, Pesca y Silvicultura.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/AGRI
+  - value: http://datos.gob.es/kos/sector-publico/sector/salud
+    notation: salud
+    label:
+      en: Healthcare
+      es: Salud
+      ca: Salut
+      gl: Saúde
+      eu: Osasuna
+    description:
+      en: ''
+      es: 'Incluye: Sanidad.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/HEAL
+  - value: http://datos.gob.es/kos/sector-publico/sector/sector-publico
+    notation: sector-publico
+    label:
+      en: Public sector
+      es: Sector público
+      ca: Sector públic
+      gl: Sector público
+      eu: Sektore publikoa
+    description:
+      en: ''
+      es: 'Incluye: Presupuestos, Organigrama institucional, Legislación interna,
+        Función pública.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/GOVE
+  - value: http://datos.gob.es/kos/sector-publico/sector/seguridad
+    notation: seguridad
+    label:
+      en: Security
+      es: Seguridad
+      ca: Seguretat
+      gl: Seguridade
+      eu: Segurtasuna
+    description:
+      en: ''
+      es: 'Incluye: Protección civil, Defensa.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/JUST
+  - value: http://datos.gob.es/kos/sector-publico/sector/sociedad-bienestar
+    notation: sociedad-bienestar
+    label:
+      en: Society and welfare
+      es: Sociedad y bienestar
+      ca: Societat i benestar
+      gl: Sociedade e benestar
+      eu: Gizartea eta ongizatea
+    description:
+      en: ''
+      es: 'Incluye: Participación ciudadana, Marginación, Envejecimiento Activo, Autonomía
+        personal y Dependencia, Invalidez, Jubilación, Seguros y Pensiones, Prestaciones
+        y Subvenciones.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/SOCI
+  - value: http://datos.gob.es/kos/sector-publico/sector/transporte
+    notation: transporte
+    label:
+      en: Transport
+      es: Transporte
+      ca: Transport
+      gl: Transporte
+      eu: Garraioa
+    description:
+      en: ''
+      es: 'Incluye: Comunicaciones y Tr/u00E1fico.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/TRAN
+  - value: http://datos.gob.es/kos/sector-publico/sector/turismo
+    notation: turismo
+    label:
+      en: Tourism
+      es: Turismo
+      ca: Turisme
+      gl: Turismo
+      eu: Turismoa
+    description:
+      en: ''
+      es: 'Incluye: Alojamientos, Hostelería, Gastronomía.'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/ECON
+  - value: http://datos.gob.es/kos/sector-publico/sector/urbanismo-infraestructuras
+    notation: urbanismo-infraestructuras
+    label:
+      en: Town planning and infrastructures
+      es: Urbanismo e infraestructuras
+      ca: Urbanisme i infraestructures
+      gl: Urbanismo e infraestruturas
+      eu: Hirigintza eta azpiegiturak
+    description:
+      en: ''
+      es: 'Incluye: Saneamiento público, Construcción (infraestructuras, equipamientos
+        públicos).'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+  - value: http://datos.gob.es/kos/sector-publico/sector/vivienda
+    notation: vivienda
+    label:
+      en: Housing
+      es: Vivienda
+      ca: Habitatge
+      gl: Vivenda
+      eu: Etxebizitza
+    description:
+      en: ''
+      es: 'Incluye: Mercado inmobiliario, Construcción (viviendas).'
+      ca: ''
+      gl: ''
+      eu: ''
+    dcat_ap: http://publications.europa.eu/resource/authority/data-theme/REGI
+
+# Metadata file identifier (M)
+## Unique resource identifier (UUID)  (Mandatory). If it does not exist, CKAN creates a UUID (Metadata file identifier 'package_id')
+- field_name: identifier
+  label: 
+    en: Metadata identifier
+    es: Identificador de los metadatos
+  validators: not_empty scheming_required
+  required: true
+  display_property: dct:identifier
+  form_placeholder: 123e4567-e89b-12d3-a456-426614174000
+  help_text:
+    en: Eg. Unique resource identifier (UUID).
+    es: Ej. Identificador único de recurso (UUID).
+  help_allow_html: True
+
+# Metadata file language (M)
+- field_name: language
+  label:
+    en: Metadata language
+    es: Idioma de los metadatos
+  preset: select
+  display_property: dct:language
+  display_snippet: link_schema.html
+  form_include_blank_choice: False
+  validators: not_empty scheming_required
+  required: true
+  sorted_choices: true
+  choices:
+  - label:
+      en: Spanish
+      es: Español
+    value: http://publications.europa.eu/resource/authority/language/SPA
+  - label:
+      en: English
+      es: Inglés
+    value: http://publications.europa.eu/resource/authority/language/ENG
+
+# Date of creation (O)
+- field_name: created
+  label: 
+    en: Date of creation
+    es: Fecha de creación
+  validators: not_empty scheming_required
+  display_property: dct:created
+  required: true
+  preset: date
+
+# Date of last revision (O)
+- field_name: modified
+  label: 
+    en: Date of last revision
+    es: Fecha de última modificación
+    validators: not_empty scheming_required
+  display_property: dct:modified
+  required: true
+  preset: date
+
+# ISO 19115 topic category (M)
+## Recommended  (GeoDCAT-AP)  / INSPIRE Mandatory as topic
+- field_name: topic
+  label: 
+    en: ISO 19115 topic category
+    es: Categoría temática ISO 19115
+  preset: select
+  display_property: dcat:keyword
+  display_snippet: link_schema.html
+  form_include_blank_choice: False
+  validators: not_empty scheming_required
+  required: true
+  sorted_choices: true
+  choices:
+  - label: biota
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/biota
+  - label: boundaries
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/boundaries
+  - label: climatologyMeteorologyAtmosphere
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/climatologyMeteorologyAtmosphere
+  - label: economy
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/economy
+  - label: elevation
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/elevation
+  - label: environment
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/environment
+  - label: farming
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/farming
+  - label: geoscientificInformation
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/geoscientificInformation
+  - label: health
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/health
+  - label: imageryBaseMapsEarthCover
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/imageryBaseMapsEarthCover
+  - label: inlandWaters
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/inlandWaters
+  - label: intelligenceMilitary
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/intelligenceMilitary
+  - label: location
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/location
+  - label: oceans
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/oceans
+  - label: planningCadastre
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/planningCadastre
+  - label: society
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/society
+  - label: structure
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/structure
+  - label: transportation
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/transportation
+  - label: utilitiesCommunication
+    value: http://inspire.ec.europa.eu/metadata-codelist/TopicCategory/utilitiesCommunication
+
+  help_text:
+    en: 'eg.: Labels from <a href="http://inspire.ec.europa.eu/metadata-codelist" target="_blank" rel="noopener">Metadata code list register</a> (INSPIRE)'
+    es: 'ej: Etiquetas del <a href="http://inspire.ec.europa.eu/metadata-codelist/TopicCategory" target="_blank" rel="noopener">Registro de listas controladas de metadatos</a> (INSPIRE)'
+  help_allow_html: True
+
+# Keyword value (M)
+## Recommended  (GeoDCAT-AP)  / INSPIRE Mandatory as keywords
+- field_name: tag_string
+  label: 
+    en: Keywords
+    es: Palabras clave
+  preset: tag_string_autocomplete
+  display_property: dct:subject
+  form_placeholder: 'gsaa'
+  help_text:
+    en: 'eg.: Labels from <a href="http://inspire.ec.europa.eu/metadata-codelist" target="_blank" rel="noopener">Metadata code list register</a> (INSPIRE)'
+    es: 'ej: Etiquetas del <a href="http://inspire.ec.europa.eu/metadata-codelist" target="_blank" rel="noopener">Registro de listas controladas de metadatos</a> (INSPIRE)'
+  help_allow_html: True
+
+# Keyword URI (M)
+## TODO: Improve form_snippet to generate tag_uri auto from tag_string
+## TODO: Add as scheming_datastore_choices (helpers.py/#102) http://github.com/ckan/ckanext-scheming/issues/270
+## Only for ckanext-dcat profiles.py
+- field_name: tag_uri
+  label: 
+    en: Keyword URIs in accordance with INSPIRE MD Register
+    es: URI de palabras clave conforme al Registro INSPIRE
+  validators: ignore_missing scheming_multiple_text
+  form_snippet: multiple_text.html
+  display_snippet: list_keywords.html
+  form_placeholder: 'http://inspire.ec.europa.eu/metadata-codelist/IACSData/gsaa'
+  help_text:
+    en: 'eg.: Metadata code list register (INSPIRE): http://inspire.ec.europa.eu/metadata-codelist'
+    es: 'ej: Registro de listas controladas de metadatos (INSPIRE): http://inspire.ec.europa.eu/metadata-codelist'
+
+# TODO: Probably better include contact_role and contact_organization (boolean) to distinguish between vcard:Individual and vcard:Organizationto use in ckanext-dcat/profiles.py
+# Metadata point of contact URI (M)
+- field_name: contact_uri
+  label:
+    en: URI of the Metadata contact point
+    es: URI del punto de contacto de los metadatos
+  display_snippet: link_name.html
+  form_placeholder: http://orgs.vocab.org/some-org
+
+# Metadata point of contact name (M)
+- field_name: contact_name
+  label:
+    en: Metadata contact point name
+    es: Nombre del punto de contacto de los metadatos
+  display_property: dcat:contactPoint
+  form_placeholder: José Blanco
+
+# Metadata point of contact email (M)
+- field_name: contact_email
+  label:
+    en: Metadata contact point email
+    es: Email del punto de contacto de los Metadatos
+  validators: not_empty scheming_required
+  required: true
+  display_property: vcard:hasEmail
+  display_snippet: email.html
+  form_placeholder: joseblanco@example.com
+
+# Metadata point of contact Web (R)
+- field_name: contact_url
+  label:
+    en: Website of the Metadata contact point
+    es: Web del punto de contacto de los metadatos
+  display_snippet: link.html
+  display_property: vcard:hasURL
+  form_placeholder: http://www.example.com
+
+#--Responsible party--#
+- start_form_page:
+    title: 
+      en: Responsible party
+      es: Responsable
+    description: 
+      en: Organization(s) responsible for the creation, management, maintenance and distribution of datasets.
+      es: Organización(es) responsable(s) de la creación, gestión, mantenimiento y distribución de los conjuntos de datos.
+
+# Publisher name (M)
+  field_name: publisher_name
+  label:
+    en: Name of the publisher
+    es: Nombre del publicador
+  display_property: foaf:name
+  form_placeholder: José Blanco
+  help_text:
+    en: "A party that makes a dataset available to others."
+    es: "Persona u organización que pone a disposición de otros el conjunto de datos."
+
+# Publisher identifier (M)
+- field_name: publisher_identifier
+  label:
+    en: Identifier of the publisher
+    es: Identificador del publicador
+  display_property: dct:identifier
+  form_placeholder: http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001
+  help_text:
+    en: "Unique identifier of the publisher. Spain: Unique identifier (DIR3) of the public organization (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)."
+    es: "Identificador único del publicador. España: Identificador único (DIR3) del organismo público. (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)"
+  help_allow_html: True
+
+# Publisher URI (M)
+- field_name: publisher_uri
+  label:
+    en: URI of the publisher
+    es: URI del publicador
+  display_snippet: link_name.html
+  form_snippet: publisher_uri.html
+  form_placeholder: http://orgs.vocab.org/some-org
+  help_text:
+    en: This property refers to an Agent (organisation) responsible for making the Catalogue Record available. URI
+    es: Esta propiedad se refiere a un agente (organización) responsable de poner a disposición el recurso del catálogo. URI
+
+# Publisher email (M)
+- field_name: publisher_email
+  label:
+    en: Email of the publisher
+    es: Email del publicador
+  display_property: foaf:mbox
+  display_snippet: email.html
+  form_placeholder: joseblanco@example.com
+
+# Publisher URL (O)
+- field_name: publisher_url
+  label:
+    en: Website of the publisher
+    es: Web del publicador
+  display_property: foaf:homepage
+  display_snippet: link.html
+  form_placeholder: http://www.example.com
+  help_text:
+    en: Esta propiedad se refiere a una página web que actúa como página principal del publicador. URL
+    es: Esta propiedad se refiere a una página web que actúa como página principal del publicador. URL
+
+# Publisher type (M)
+- field_name: publisher_type
+  label:
+    en: Type of the publisher
+    es: Tipo de publicador
+  preset: select
+  display_property: dct:type
+  display_snippet: link_schema.html
+  choices:
+  - label:
+      en: National authority
+      es: Autoridad nacional
+    value: http://purl.org/adms/publishertype/NationalAuthority
+  - label:
+      en: Regional authority
+      es: Autoridad regional
+    value: http://purl.org/adms/publishertype/RegionalAuthority
+  - label:
+      en: Supranational authority
+      es: Autoridad supranacional
+    value: http://purl.org/adms/publishertype/SupraNationalAuthority
+  - label:
+      en: Local authority
+      es: Autoridad local
+    value: http://purl.org/adms/publishertype/LocalAuthority
+  - label:
+      en: Non profit organisation
+      es: Organización sin animo de lucro
+    value: http://purl.org/adms/publishertype/NonProfitOrganisation
+
+
+# Maintainer name (O)
+- field_name: maintainer
+  label:
+    en: Name of the dataset maintainer
+    es: Nombre del mantenedor
+  display_property: dcat:contactPoint
+  form_placeholder: José Blanco
+  help_text:
+    en: "Person or organization responsible for maintaining or updating a dataset."
+    es: "Persona u organización responsable de mantener o actualizar un conjunto de datos."
+
+# Maintainer Identifier (O)
+- field_name: maintainer_uri
+  label:
+    en: Identifier of the dataset maintainer
+    es: Identificador del mantenedor
+  display_snippet: link_name.html
+  form_placeholder: http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001
+  help_text:
+    en: "Unique identifier of the publisher. Spain: Unique identifier (DIR3) of the public organization (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)."
+    es: "Identificador único del publicador. España: Identificador único (DIR3) del organismo público. (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)"
+  help_allow_html: True
+
+# Maintainer email (O)
+- field_name: maintainer_email
+  label:
+    en: Email of the dataset maintainer
+    es: Email del mantenedor
+  display_property: vcard:hasEmail
+  display_snippet: email.html
+  form_placeholder: joseblanco@example.com
+
+# Maintainer web (O)
+- field_name: maintainer_url
+  label:
+    en: Website of the dataset maintainer
+    es: Web del mantenedor
+  display_property: foaf:homepage
+  display_snippet: link.html
+  form_placeholder: http://www.example.com
+  help_text:
+    en: This property refers to a web page that acts as the maintainer's homepage. URL
+    es: Esta propiedad se refiere a una página web que actúa como página principal del mantenedor. URL
+
+# Author name (O)
+- field_name: author
+  label:
+    en: Name of the dataset creator
+    es: Nombre del autor
+  display_property: dct:creator
+  form_placeholder: José Blanco
+  help_text:
+    en: "A party that creates or produces a particular dataset."
+    es: "Persona u organización creadora o productora de un conjunto de datos"
+
+# Author Identifier (O)
+- field_name: author_uri
+  label:
+    en: Identifier of the dataset creator
+    es: Identificador del autor
+  display_snippet: link_name.html
+  form_placeholder: http://datos.gob.es/recurso/sector-publico/org/Organismo/E05068001
+  help_text:
+    en: "Unique identifier of the publisher. Spain: Unique identifier (DIR3) of the public organization (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)."
+    es: "Identificador único del publicador. España: Identificador único (DIR3) del organismo público. (<a href='http://datos.gob.es/es/recurso/sector-publico/org/Organismo' target='_blank'>datos.gob.es</a>)"
+  help_allow_html: True
+
+# Author email (O)
+- field_name: author_email
+  label:
+    en: Email of the dataset creator
+    es: Email del autor
+  display_property: vcard:hasEmail
+  display_snippet: email.html
+  form_placeholder: joseblanco@example.com
+
+# Author web (O)
+- field_name: author_url
+  label:
+    en: Website of the dataset creator
+    es: Web del autor
+  display_property: foaf:homepage
+  display_snippet: link.html
+  form_placeholder: http://www.example.com
+  help_text:
+    en: This property refers to a web page that acts as the author's homepage. URL
+    es: Esta propiedad se refiere a una página web que actúa como página principal del publicador. URL
+
+#--Quality--#
+- start_form_page:
+    title: 
+      en: Quality
+      es: Calidad
+    description: 
+      en: Data quality information.
+      es: Información sobre calidad de los datos.
+
+# Other identifier (O))
+  field_name: alternate_identifier
+  label: 
+    en: Other identifier
+    es: Identificador alternativo
+  display_property: adms:identifier
+  form_placeholder: doi:10.1234/example-dataset
+  help_text:
+    en: 'An alternate identifier in a particular context, can express other locally minted identifiers or external identifiers, like DOI, ELI, arΧiv for creative works and ORCID, VIAF, ISNI for actors such as authors and publishers, as long as the identifiers are globally unique and stable.'
+    es: 'Un identificador alternativo en un contexto particular, puede expresar otros identificadores acuñados localmente o identificadores externos, como DOI, ELI, arΧiv para obras creativas y ORCID, VIAF, ISNI para actores como autores y editores, siempre que los identificadores sean globalmente únicos y estables.'
+  help_allow_html: True
+
+# Lineage statement (M)
+- field_name: provenance
+  label: 
+    en: Lineage statement
+    es: Declaración de linaje
+  form_snippet: markdown.html
+  display_property: dct:provenance
+  form_placeholder:
+    en: Means the history of a data set, and the life cycle from collection and acquisition through compilation and derivation to its current form, in accordance with EN ISO-19101.
+    es: Historia de un conjunto de datos y su ciclo de vida desde su recogida y adquisición hasta su compilación y derivación hasta su forma actual, con arreglo a la norma EN ISO-19101.
+# Conformity (M)
+##TODO: Separar Conformity en (conforms_to, reference_system y metadata_profile) añadirlo también al serializador RDF
+- field_name: conforms_to
+  label: 
+    en: Conformity 
+    es: Conformidad
+  validators: ignore_missing scheming_multiple_text
+  required: False
+  form_snippet: multiple_text.html
+  display_property: dct:conformsTo
+  display_snippet: list_links.html
+  form_placeholder: 'http://inspire.ec.europa.eu/documents/commission-regulation-eu-no-13122014-10-december-2014-amending-regulation-eu-no-10892010-0'
+  help_text:
+    en: 'Implementing rule (eg. INSPIRE) or other specification.URLs eg.: http://inspire.ec.europa.eu/documents/commission-regulation-eu-no-13122014-10-december-2014-amending-regulation-eu-no-10892010-0'
+    es: 'Conformidad con normativas (Reglamento INSPIRE) o especificaciones. URLs e.j:http://inspire.ec.europa.eu/documents/commission-regulation-eu-no-13122014-10-december-2014-amending-regulation-eu-no-10892010-0'
+
+# Metadata standard (M)
+##TODO: metadata_profile
+
+# Temporal start (O)
+- field_name: temporal_start
+  label: 
+    en: Temporal extent (Start)
+    es: Cobertura temporal (Inicio)
+  display_property: dct:temporal
+  preset: date
+
+# Temporal end (O)
+- field_name: temporal_end
+  label: 
+    en: Temporal extent (End)
+    es: Cobertura temporal (Fin)
+  display_property: dct:temporal
+  preset: date
+
+# Update frequency (O)
+- field_name: frequency
+  label:
+    en: Update frequency
+    es: Frecuencia de actualización
+  preset: select
+  display_property: dct:accrualPeriodicity
+  display_snippet: link_schema.html
+  sorted_choices: true
+  choices:
+  - label:
+      en: Annual
+      es: Anual
+    value: http://publications.europa.eu/resource/authority/frequency/ANNUAL
+  - label:
+      en: Semiannual
+      es: Semestral
+    value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_2
+  - label:
+      en: Three times a year
+      es: Cuatrimestral
+    value: http://publications.europa.eu/resource/authority/frequency/ANNUAL_3
+  - label:
+      en: Biennial
+      es: Bienal
+    value: http://publications.europa.eu/resource/authority/frequency/BIENNIAL
+  - label:
+      en: Bimonthly
+      es: Bimestral
+    value: http://publications.europa.eu/resource/authority/frequency/BIMONTHLY
+  - label:
+      en: Biweekly
+      es: Quincenal
+    value: http://publications.europa.eu/resource/authority/frequency/BIWEEKLY
+  - label:
+      en: Continuous
+      es: Continuo
+    value: http://publications.europa.eu/resource/authority/frequency/CONT
+  - label:
+      en: Daily
+      es: Diario
+    value: http://publications.europa.eu/resource/authority/frequency/DAILY
+  - label:
+      en: Twice a day
+      es: Dos veces al día
+    value: http://publications.europa.eu/resource/authority/frequency/DAILY_2
+  - label:
+      en: Irregular
+      es: Irregular
+    value: http://publications.europa.eu/resource/authority/frequency/IRREG
+  - label:
+      en: Monthly
+      es: Mensual
+    value: http://publications.europa.eu/resource/authority/frequency/MONTHLY
+  - label:
+      en: Semimonthly
+      es: Bimensual
+    value: http://publications.europa.eu/resource/authority/frequency/MONTHLY_2
+  - label:
+      en: Three times a month
+      es: Tres veces por mes
+    value: http://publications.europa.eu/resource/authority/frequency/MONTHLY_3
+  - label:
+      en: Never
+      es: Nunca
+    value: http://publications.europa.eu/resource/authority/frequency/NEVER
+  - label:
+      en: Provisional data
+      es: Datos provisionales
+    value: http://publications.europa.eu/resource/authority/frequency/OP_DATPRO
+  - label:
+      en: Quarterly
+      es: Trimestral
+    value: http://publications.europa.eu/resource/authority/frequency/QUARTERLY
+  - label:
+      en: Triennial
+      es: Trienal
+    value: http://publications.europa.eu/resource/authority/frequency/TRIENNIAL
+  - label:
+      en: Unknown
+      es: Desconocida
+    value: http://publications.europa.eu/resource/authority/frequency/UNKNOWN
+  - label:
+      en: Continuously updated
+      es: Continuamente actualizado
+    value: http://publications.europa.eu/resource/authority/frequency/UPDATE_CONT
+  - label:
+      en: Semiweekly
+      es: Bisemanal
+    value: http://publications.europa.eu/resource/authority/frequency/WEEKLY_2
+  - label:
+      en: Three times a week
+      es: Tres veces por semana
+    value: http://publications.europa.eu/resource/authority/frequency/WEEKLY_3
+  - label:
+      en: Quinquennial
+      es: Cada cinco años
+    value: http://publications.europa.eu/resource/authority/frequency/QUINQUENNIAL
+  - label:
+      en: Decennial
+      es: Cada diez años
+    value: http://publications.europa.eu/resource/authority/frequency/DECENNIAL
+  - label:
+      en: Hourly
+      es: Cada hora
+    value: http://publications.europa.eu/resource/authority/frequency/HOURLY
+  - label:
+      en: Quadrennial
+      es: Cada cuatro años
+    value: http://publications.europa.eu/resource/authority/frequency/QUADRENNIAL
+  - label:
+      en: Bihourly
+      es: Cada dos horas
+    value: http://publications.europa.eu/resource/authority/frequency/BIHOURLY
+  - label:
+      en: Trihourly
+      es: Cada tres horas
+    value: http://publications.europa.eu/resource/authority/frequency/TRIHOURLY
+  - label:
+      en: Bidecennial
+      es: Cada veinte años
+    value: http://publications.europa.eu/resource/authority/frequency/BIDECENNIAL
+  - label:
+      en: Tridecennial
+      es: Cada treinta años
+    value: http://publications.europa.eu/resource/authority/frequency/TRIDECENNIAL
+
+# Source dataset (C)
+- field_name: source
+  label: 
+    en: Source dataset
+    es: Conjunto de datos de origen
+  display_property: dct:source
+  display_snippet: link_name.html
+  form_placeholder: http://iepnb.es/catalogo/en/dataset/fc21c1a5-4c02-4157-9d2f-9a2cd200f908
+  help_text:
+    en: This property refers to a related Dataset from which the described Dataset is derived. URI
+    es: Esta propiedad hace referencia a un conjunto de datos relacionado del que deriva el conjunto de datos descrito. URI
+
+# Lineage sources (O)
+- field_name: lineage_source
+  label: 
+    en: Sources
+    es: Fuentes
+  form_snippet: multiple_text.html
+  validators: ignore_missing scheming_multiple_text
+  display_property: dct:source
+  display_snippet: list_raws_ordered.html
+  form_placeholder: Términos Municipales según el Registro Central de Cartografía. Diciembre de 2013
+  help_text:
+    en: Information about the data source used in the creation of the data specified in the scope. Best practice is to identify the related resource by means of a URI or a string conforming to a formal identification system. 
+    es: Información sobre la fuente de datos usada en la creación de los datos especificados en el ámbito. La mejor práctica es identificar el recurso relacionado por medio de un URI o una cadena conforme a un sistema de identificación formal. 
+
+# Lineage process steps (M)
+- field_name: lineage_process_steps
+  label: 
+    en: Process steps
+    es: Pasos del proceso
+  form_snippet: multiple_text.html
+  validators: ignore_missing scheming_multiple_text
+  display_snippet: list_raws_ordered.html
+  form_placeholder: 'Selección de geometría que representa entes del mundo real.'
+  help_text:
+    en: General description of how the resource was developed or an event associated with the resource. 
+    es: Descripción general de cómo se desarrolló el recurso o de un acontecimiento asociado al mismo. 
+
+# Related resources (O)
+- field_name: reference
+  label: 
+    en: Related sources
+    es: Recurso(s) relacionado(s)
+  validators: ignore_missing scheming_multiple_text
+  form_snippet: multiple_text.html
+  display_snippet: list_links.html
+  display_property: dcat:relation
+  form_placeholder: 'http://iepnb.es/catalogo/dataset/ejemplo'
+  help_text:
+    en: 'URI identifying the related resource. You can include as many properties as you know of references.'
+    es: 'URI que identifica al recurso relacionado. Se pueden incluir tantas propiedades como referencias se conozcan.'
+
+# Character encoding (C)
+##TODO: encoding
+## default: UTF-8
+
+##TODO: temporal_resolution
+## ISO 8601: http://www.google.com/url?q=http://www.w3.org/TR/xmlschema11-2/%23duration&sa=D&source=editors&ust=1677159514756434&usg=AOvVaw3Xyh6wn0UVcwFCy3-_9P8i
+
+
+#--Spatial--#
+- start_form_page:
+    title: 
+      en: Spatial info
+      es: Espacial
+    description: 
+      en: Spatial capabilities information.
+      es: Información sobre las capacidades espaciales.
+
+# INSPIRE Themes (M)
+  field_name: theme
+  label:
+    en: INSPIRE Themes
+    es: Temas INSPIRE
+  validators: ignore_missing scheming_multiple_choice
+  form_snippet: multiple_select.html
+  display_property: dcat:theme
+  display_snippet: themes.html
+  select_size: 10
+  help_text:
+    en: '<a href="http://inspire.ec.europa.eu/theme" target="_blank" rel="noopener">Themes</a> (INSPIRE)'
+    es: '<a href="http://inspire.ec.europa.eu/theme" target="_blank" rel="noopener">Temas</a> (INSPIRE)'
+  help_allow_html: True
+  sorted_choices: true
+  choices:
+  - label:
+      en: Meteorological Geographical Features (MF)
+      es: Aspectos geográficos de carácter meteorológico (MF)
+    value: http://inspire.ec.europa.eu/theme/mf
+  - label:
+      en: Atmospheric Conditions (AC)
+      es: Condiciones atmosféricas (AC)
+    value: http://inspire.ec.europa.eu/theme/ac
+  - label:
+      en: Land Cover (LC)
+      es: Cubierta terrestre (LC)
+    value: http://inspire.ec.europa.eu/theme/lc
+  - label:
+      en: Addresses (AD)
+      es: Direcciones (AD)
+    value: http://inspire.ec.europa.eu/theme/ad
+  - label:
+      en: Population distribution — demography (PD)
+      es: Distribución de la población - demografía (PD)
+    value: http://inspire.ec.europa.eu/theme/pd
+  - label:
+      en: Species distribution (SD)
+      es: Distribución de las especies (SD)
+    value: http://inspire.ec.europa.eu/theme/sd
+  - label:
+      en: Buildings (BU)
+      es: Edificios (BU)
+    value: http://inspire.ec.europa.eu/theme/bu
+  - label:
+      en: Elevations (EL)
+      es: Elevaciones (EL)
+    value: http://inspire.ec.europa.eu/theme/el
+  - label:
+      en: Geology (GE)
+      es: Geología (GE)
+    value: http://inspire.ec.europa.eu/theme/ge
+  - label:
+      en: Hydrography (HY)
+      es: Hidrografía (HY)
+    value: http://inspire.ec.europa.eu/theme/hy
+  - label:
+      en: Habitats and Biotopes (HB)
+      es: Hábitats y biotopos (HB)
+    value: http://inspire.ec.europa.eu/theme/hb
+  - label:
+      en: Agricultural and Aquaculture Facilities (AF)
+      es: Instalaciones agrícolas y de acuicultura (AF)
+    value: http://inspire.ec.europa.eu/theme/af
+  - label:
+      en: Environmental Monitoring Facilities (EF)
+      es: Instalaciones de observación del medio ambiente (EF)
+    value: http://inspire.ec.europa.eu/theme/ef
+  - label:
+      en: Production and Industrial Facilities (PF)
+      es: Instalaciones de producción e industriales (PF)
+    value: http://inspire.ec.europa.eu/theme/pf
+  - label:
+      en: Protected sites (PS)
+      es: Lugares protegidos (PS)
+    value: http://inspire.ec.europa.eu/theme/ps
+  - label:
+      en: Geographical names (GN)
+      es: Nombres geográficos (GN)
+    value: http://inspire.ec.europa.eu/theme/gn
+  - label:
+      en: Orthoimagery (OI)
+      es: Ortoimágenes (OI)
+    value: http://inspire.ec.europa.eu/theme/oi
+  - label:
+      en: Cadastral parcels (CP)
+      es: Parcelas catastrales (CP)
+    value: http://inspire.ec.europa.eu/theme/cp
+  - label:
+      en: Oceanographic Geographical Features (OF)
+      es: Rasgos geográficos oceanográficos (OF)
+    value: http://inspire.ec.europa.eu/theme/of
+  - label:
+      en: Natural resources (ER)
+      es: Recursos energéticos (ER)
+    value: http://inspire.ec.europa.eu/theme/er
+  - label:
+      en: Mineral resources (MR)
+      es: Recursos minerales (MR)
+    value: http://inspire.ec.europa.eu/theme/mr
+  - label:
+      en: Transport networks (TN)
+      es: Redes de transporte (TN)
+    value: http://inspire.ec.europa.eu/theme/tn
+  - label:
+      en: Bio-geographical regions (BR)
+      es: Regiones biogeográficas (BR)
+    value: http://inspire.ec.europa.eu/theme/br
+  - label:
+      en: Sea regions (BR)
+      es: Regiones marinas (SR)
+    value: http://inspire.ec.europa.eu/theme/sr
+  - label:
+      en: Human health and safety (HH)
+      es: Salud y seguridad humanas (HH)
+    value: http://inspire.ec.europa.eu/theme/hh
+  - label:
+      en: Utility and governmental services (US)
+      es: Servicios de utilidad pública y estatales (US)
+    value: http://inspire.ec.europa.eu/theme/us
+  - label:
+      en: Geographical Grid Systems (GG)
+      es: Sistema de cuadrículas geográficas (GG)
+    value: http://inspire.ec.europa.eu/theme/gg
+  - label:
+      en: Coordinate Reference Systems (RS)
+      es: Sistemas de coordenadas de referencia (RS)
+    value: http://inspire.ec.europa.eu/theme/rs
+  - label:
+      en: Soil (SO)
+      es: Suelo (SO)
+    value: http://inspire.ec.europa.eu/theme/so
+  - label:
+      en: Administrative units (SO)
+      es: Unidades administrativas (SO)
+    value: http://inspire.ec.europa.eu/theme/au
+  - label:
+      en: Statistical units (SU)
+      es: Unidades estadísticas (SU)
+    value: http://inspire.ec.europa.eu/theme/su
+  - label:
+      en: Land use (LU)
+      es: Uso del suelo (LU)
+    value: http://inspire.ec.europa.eu/theme/lu
+  - label:
+      en: Natural risk zones (NZ)
+      es: Zonas de riesgos naturales (NZ)
+    value: http://inspire.ec.europa.eu/theme/nz
+  - label:
+      en: Area Management/Restriction/Regulation Zones and Reporting Units (AM)
+      es: Zonas sujetas a ordenación, a restricciones o reglamentaciones y unidades de notificación (AM)
+    value: http://inspire.ec.europa.eu/theme/am
+
+# INSPIRE identifier (M)
+- field_name: inspire_id
+  label: 
+    en: INSPIRE identifier
+    es: Identificador INSPIRE
+  display_property: adms:identifier
+  form_placeholder: ES.LU.IEPNB.IEPZ.2022
+  help_text:
+    en: 'eg. inspireId = namespace (ES.LU.IEPNB) + localId (IEPZ) + versionId (2022) (INSPIRE) | <a href="http://eur-lex.europa.eu/eli-register/about.html" target="_blank" rel="noopener">ELI (UE)</a>'
+    es: 'ej. inspireId = namespace (ES.LU.IEPNB) + localId (IEPZ) + versionId (2022) (INSPIRE) | <a href="http://eur-lex.europa.eu/eli-register/about.html" target="_blank" rel="noopener">ELI (UE)</a>'
+  help_allow_html: True
+
+# Coordinate Reference System (M)
+- field_name: reference_system
+  label:
+    en: URI of the Coordinate Reference System
+    es: URI del Sistema de Referencia de Coordenadas
+  validators: ignore_missing scheming_valid_url
+  display_snippet: link_epsg.html
+  form_placeholder: http://www.opengis.net/def/crs/EPSG/0/4326
+  help_text:
+    en: 'EPSG URI system for identifying position in the real world [ISO 19112]. The URI prefix for coordinate reference systems is the following one: http://www.opengis.net/def/crs/EPSG/0/{EPSG Code}'
+    es: 'URI EPSG del sistema para identificar la posición en el mundo real [ISO 19112]. El prefijo URI para los sistemas de referencia de coordenadas es el siguiente: http://www.opengis.net/def/crs/EPSG/0/{Código EPSG}'
+  help_allow_html: True
+
+# Geographic bounding box (M)
+- field_name: spatial
+  label: 
+    en: Bounding Box
+    es: Extensión espacial
+  form_snippet: json.html
+  validators: ignore_missing scheming_valid_json_object
+  display_property: dct:spatial
+  form_placeholder: '{"type": "Polygon", "coordinates": [[[-18.273563, 27.549025], [4.440455, 27.549025], [4.440455, 43.855133], [-18.273563, 43.855133], [-18.273563, 27.549025]]]}'
+  help_text:
+    en: '<a href="http://geojson.io" target="_blank" rel="noopener">Draw and edit BBox:</a> Only "geometry" dict with "type" and "coordinates" elements. More information at <a href="http://geojson.org/geojson-spec.html#bounding-boxes" target="_blank" rel="noopener">GeoJSON bounding boxes</a>.'
+    es: '<a href="http://geojson.io" target="_blank" rel="noopener">Dibuja y edita el BBox:</a> Solo es necesario el diccionario "geometry" con los elementos "type" y "coordinates". Más información en <a href="http://geojson.org/geojson-spec.html#bounding-boxes" target="_blank" rel="noopener">GeoJSON bounding boxes</a>.'
+  help_allow_html: True
+
+# Geographic identifier (O)
+- field_name: spatial_uri
+  label: 
+    en: Geographic identifier
+    es: Identificador geográfico
+  validators: ignore_missing
+  form_snippet: select.html
+  display_property: dcat:theme
+  display_snippet: spatial_uris.html
+  select_size: 10
+  sorted_choices: true
+  choices:
+  - label:
+      es: España
+      en: Spain
+      ca: España
+      gl: España
+      eu: España
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Pais/España
+  - label:
+      es: Andalucía
+      en: Andalucía
+      ca: Andalucía
+      gl: Andalucía
+      eu: Andalucía
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Andalucia
+  - label:
+      es: Almería
+      en: Almería
+      ca: Almería
+      gl: Almería
+      eu: Almería
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Almeria
+  - label:
+      es: Cádiz
+      en: Cádiz
+      ca: Cádiz
+      gl: Cádiz
+      eu: Cádiz
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Cadiz
+  - label:
+      es: Córdoba
+      en: Córdoba
+      ca: Córdoba
+      gl: Córdoba
+      eu: Córdoba
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Cordoba
+  - label:
+      es: Granada
+      en: Granada
+      ca: Granada
+      gl: Granada
+      eu: Granada
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Granada
+  - label:
+      es: Huelva
+      en: Huelva
+      ca: Huelva
+      gl: Huelva
+      eu: Huelva
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Huelva
+  - label:
+      es: Jaén
+      en: Jaén
+      ca: Jaén
+      gl: Jaén
+      eu: Jaén
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Jaen
+  - label:
+      es: Málaga
+      en: Málaga
+      ca: Málaga
+      gl: Málaga
+      eu: Málaga
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Malaga
+  - label:
+      es: Sevilla
+      en: Sevilla
+      ca: Sevilla
+      gl: Sevilla
+      eu: Sevilla
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Sevilla
+  - label:
+      es: Aragón
+      en: Aragón
+      ca: Aragón
+      gl: Aragón
+      eu: Aragón
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Aragon
+  - label:
+      es: Huesca
+      en: Huesca
+      ca: Huesca
+      gl: Huesca
+      eu: Huesca
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Huesca
+  - label:
+      es: Teruel
+      en: Teruel
+      ca: Teruel
+      gl: Teruel
+      eu: Teruel
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Teruel
+  - label:
+      es: Zaragoza
+      en: Zaragoza
+      ca: Zaragoza
+      gl: Zaragoza
+      eu: Zaragoza
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Zaragoza
+  - label:
+      es: Principado de Asturias
+      en: Principado de Asturias
+      ca: Principado de Asturias
+      gl: Principado de Asturias
+      eu: Principado de Asturias
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Principado-Asturias
+  - label:
+      es: Asturias
+      en: Asturias
+      ca: Asturias
+      gl: Asturias
+      eu: Asturias
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Asturias
+  - label:
+      es: Illes Balears
+      en: Illes Balears
+      ca: Illes Balears
+      gl: Illes Balears
+      eu: Illes Balears
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Illes-Balears
+  - label:
+      es: Provincia de Illes Balears
+      en: Provincia de Illes Balears
+      ca: Provincia de Illes Balears
+      gl: Provincia de Illes Balears
+      eu: Provincia de Illes Balears
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Illes-Balears
+  - label:
+      es: Canarias
+      en: Canarias
+      ca: Canarias
+      gl: Canarias
+      eu: Canarias
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Canarias
+  - label:
+      es: Las Palmas
+      en: Las Palmas
+      ca: Las Palmas
+      gl: Las Palmas
+      eu: Las Palmas
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Las-Palmas
+  - label:
+      es: Santa Cruz de Tenerife
+      en: Santa Cruz de Tenerife
+      ca: Santa Cruz de Tenerife
+      gl: Santa Cruz de Tenerife
+      eu: Santa Cruz de Tenerife
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Santa-Cruz-Tenerife
+  - label:
+      es: Cantabria
+      en: Cantabria
+      ca: Cantabria
+      gl: Cantabria
+      eu: Cantabria
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Cantabria
+  - label:
+      es: Provincia de Cantabria
+      en: Provincia de Cantabria
+      ca: Provincia de Cantabria
+      gl: Provincia de Cantabria
+      eu: Provincia de Cantabria
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Cantabria
+  - label:
+      es: Castilla y León
+      en: Castilla y León
+      ca: Castilla y León
+      gl: Castilla y León
+      eu: Castilla y León
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Castilla-Leon
+  - label:
+      es: Ávila
+      en: Ávila
+      ca: Ávila
+      gl: Ávila
+      eu: Ávila
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Avila
+  - label:
+      es: Burgos
+      en: Burgos
+      ca: Burgos
+      gl: Burgos
+      eu: Burgos
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Burgos
+  - label:
+      es: León
+      en: León
+      ca: León
+      gl: León
+      eu: León
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Leon
+  - label:
+      es: Palencia
+      en: Palencia
+      ca: Palencia
+      gl: Palencia
+      eu: Palencia
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Palencia
+  - label:
+      es: Salamanca
+      en: Salamanca
+      ca: Salamanca
+      gl: Salamanca
+      eu: Salamanca
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Salamanca
+  - label:
+      es: Segovia
+      en: Segovia
+      ca: Segovia
+      gl: Segovia
+      eu: Segovia
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Segovia
+  - label:
+      es: Soria
+      en: Soria
+      ca: Soria
+      gl: Soria
+      eu: Soria
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Soria
+  - label:
+      es: Valladolid
+      en: Valladolid
+      ca: Valladolid
+      gl: Valladolid
+      eu: Valladolid
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Valladolid
+  - label:
+      es: Zamora
+      en: Zamora
+      ca: Zamora
+      gl: Zamora
+      eu: Zamora
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Zamora
+  - label:
+      es: Castilla-La Mancha
+      en: Castilla-La Mancha
+      ca: Castilla-La Mancha
+      gl: Castilla-La Mancha
+      eu: Castilla-La Mancha
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Castilla-La-Mancha
+  - label:
+      es: Albacete
+      en: Albacete
+      ca: Albacete
+      gl: Albacete
+      eu: Albacete
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Albacete
+  - label:
+      es: Ciudad Real
+      en: Ciudad Real
+      ca: Ciudad Real
+      gl: Ciudad Real
+      eu: Ciudad Real
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Ciudad-Real
+  - label:
+      es: Cuenca
+      en: Cuenca
+      ca: Cuenca
+      gl: Cuenca
+      eu: Cuenca
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Cuenca
+  - label:
+      es: Guadalajara
+      en: Guadalajara
+      ca: Guadalajara
+      gl: Guadalajara
+      eu: Guadalajara
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Guadalajara
+  - label:
+      es: Toledo
+      en: Toledo
+      ca: Toledo
+      gl: Toledo
+      eu: Toledo
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Toledo
+  - label:
+      es: Cataluña
+      en: Cataluña
+      ca: Cataluña
+      gl: Cataluña
+      eu: Cataluña
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Cataluna
+  - label:
+      es: Barcelona
+      en: Barcelona
+      ca: Barcelona
+      gl: Barcelona
+      eu: Barcelona
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Barcelona
+  - label:
+      es: Girona
+      en: Girona
+      ca: Girona
+      gl: Girona
+      eu: Girona
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Girona
+  - label:
+      es: Lleida
+      en: Lleida
+      ca: Lleida
+      gl: Lleida
+      eu: Lleida
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Lleida
+  - label:
+      es: Tarragona
+      en: Tarragona
+      ca: Tarragona
+      gl: Tarragona
+      eu: Tarragona
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Tarragona
+  - label:
+      es: Comunitat Valenciana
+      en: Comunitat Valenciana
+      ca: Comunitat Valenciana
+      gl: Comunitat Valenciana
+      eu: Comunitat Valenciana
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunitat-Valenciana
+  - label:
+      es: Alicante
+      en: Alicante
+      ca: Alicante
+      gl: Alicante
+      eu: Alicante
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Alicante
+  - label:
+      es: Castellón
+      en: Castellón
+      ca: Castellón
+      gl: Castellón
+      eu: Castellón
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Castellon
+  - label:
+      es: Valencia
+      en: Valencia
+      ca: Valencia
+      gl: Valencia
+      eu: Valencia
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Valencia
+  - label:
+      es: Extremadura
+      en: Extremadura
+      ca: Extremadura
+      gl: Extremadura
+      eu: Extremadura
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Extremadura
+  - label:
+      es: Badajoz
+      en: Badajoz
+      ca: Badajoz
+      gl: Badajoz
+      eu: Badajoz
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Badajoz
+  - label:
+      es: Cáceres
+      en: Cáceres
+      ca: Cáceres
+      gl: Cáceres
+      eu: Cáceres
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Caceres
+  - label:
+      es: Galicia
+      en: Galicia
+      ca: Galicia
+      gl: Galicia
+      eu: Galicia
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Galicia
+  - label:
+      es: A Coruña
+      en: A Coruña
+      ca: A Coruña
+      gl: A Coruña
+      eu: A Coruña
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/A-Coruna
+  - label:
+      es: Lugo
+      en: Lugo
+      ca: Lugo
+      gl: Lugo
+      eu: Lugo
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Lugo
+  - label:
+      es: Ourense
+      en: Ourense
+      ca: Ourense
+      gl: Ourense
+      eu: Ourense
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Ourense
+  - label:
+      es: Pontevedra
+      en: Pontevedra
+      ca: Pontevedra
+      gl: Pontevedra
+      eu: Pontevedra
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Pontevedra
+  - label:
+      es: Comunidad de Madrid
+      en: Comunidad de Madrid
+      ca: Comunidad de Madrid
+      gl: Comunidad de Madrid
+      eu: Comunidad de Madrid
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunidad-Madrid
+  - label:
+      es: Madrid
+      en: Madrid
+      ca: Madrid
+      gl: Madrid
+      eu: Madrid
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Madrid
+  - label:
+      es: Región de Murcia
+      en: Región de Murcia
+      ca: Región de Murcia
+      gl: Región de Murcia
+      eu: Región de Murcia
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Region-Murcia
+  - label:
+      es: Murcia
+      en: Murcia
+      ca: Murcia
+      gl: Murcia
+      eu: Murcia
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Murcia
+  - label:
+      es: C. Foral de Navarra
+      en: C. Foral de Navarra
+      ca: C. Foral de Navarra
+      gl: C. Foral de Navarra
+      eu: C. Foral de Navarra
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Comunidad-Foral-Navarra
+  - label:
+      es: Navarra
+      en: Navarra
+      ca: Navarra
+      gl: Navarra
+      eu: Navarra
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Navarra
+  - label:
+      es: País Vasco
+      en: País Vasco
+      ca: País Vasco
+      gl: País Vasco
+      eu: País Vasco
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Pais-Vasco
+  - label:
+      es: Álava
+      en: Álava
+      ca: Álava
+      gl: Álava
+      eu: Álava
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Alava
+  - label:
+      es: Guipúzcoa
+      en: Guipúzcoa
+      ca: Guipúzcoa
+      gl: Guipúzcoa
+      eu: Guipúzcoa
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Guipuzcoa
+  - label:
+      es: Vizcaya
+      en: Vizcaya
+      ca: Vizcaya
+      gl: Vizcaya
+      eu: Vizcaya
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Vizcaya
+  - label:
+      es: La Rioja
+      en: La Rioja
+      ca: La Rioja
+      gl: La Rioja
+      eu: La Rioja
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/La-Rioja
+  - label:
+      es: Provincia de La Rioja
+      en: Provincia de La Rioja
+      ca: Provincia de La Rioja
+      gl: Provincia de La Rioja
+      eu: Provincia de La Rioja
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/La-Rioja
+  - label:
+      es: Ceuta
+      en: Ceuta
+      ca: Ceuta
+      gl: Ceuta
+      eu: Ceuta
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Ceuta
+  - label:
+      es: Provincia de Ceuta
+      en: Provincia de Ceuta
+      ca: Provincia de Ceuta
+      gl: Provincia de Ceuta
+      eu: Provincia de Ceuta
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Ceuta
+  - label:
+      es: Melilla
+      en: Melilla
+      ca: Melilla
+      gl: Melilla
+      eu: Melilla
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Autonomia/Melilla
+  - label:
+      es: Provincia de Melilla
+      en: Provincia de Melilla
+      ca: Provincia de Melilla
+      gl: Provincia de Melilla
+      eu: Provincia de Melilla
+    value: http://datos.gob.es/recurso/sector-publico/territorio/Provincia/Melilla
+  help_text:
+    en: 'Geographic coverage of the dataset. More information in <a href="http://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380" target="_blank" rel="noopener">NTI-RISP Annex V</a>.'
+    es: 'Ámbito geográfico cubierto por el conjunto de datos. Más información en el <a href="http://www.boe.es/diario_boe/txt.php?id=BOE-A-2013-2380" target="_blank" rel="noopener">Anexo V de NTI-RISP</a>.'
+  help_allow_html: True
+
+# Spatial representation type (O)
+- field_name: representation_type
+  label: 
+    en: Spatial representation Type
+    es: Tipo de representación espacial
+  preset: select
+  display_property: adms:representationTechnique
+  display_snippet: link_schema.html
+  help_text:
+    en: '<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType" target="_blank" rel="noopener">Spatial representation type</a> (INSPIRE)'
+    es: '<a href="http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType" target="_blank" rel="noopener">Tipos de representación espacial</a> (INSPIRE)'
+  help_allow_html: True
+  sorted_choices: true
+  choices:
+  - label:
+      en: Grid
+      es: Rejilla
+    value: http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/grid
+  - label:
+      en: Stereo model
+      es: Modelo estéreo
+    value: http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/stereoModel
+  - label:
+      en: Text table
+      es: Tabla de texto
+    value: http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/textTable
+  - label:
+      en: TIN
+      es: TIN
+    value: http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/tin
+  - label:
+      en: Vector
+      es: Vector
+    value: http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/vector
+  - label:
+      en: Video
+      es: Vídeo
+    value: http://inspire.ec.europa.eu/metadata-codelist/SpatialRepresentationType/video
+
+# Spatial resolution (C)
+- field_name: spatial_resolution_in_meters
+  label: 
+    en: Spatial resolution of the dataset (m) 
+    es: Resolución espacial del dataset (m)
+  display_property: dcat:spatialResolutionInMeters
+  form_placeholder: '5000'
+  help_text:
+    en: Specify spatial resolution as distance in metres.
+    es: Especifique la resolución espacial como distancia en metros
+
+#--License--#
+- start_form_page:
+    title: 
+      en: License info
+      es: Licencia
+    description: 
+      en: Information on licenses and restrictions on use and access.
+      es: Información sobre licencias y restricciones de uso y acceso.
+
+# License URI (M)
+  field_name: license_id
+  label: 
+    en: License
+    es: Licencia
+  form_snippet: license.html
+  display_property: dct:license
+  help_text:
+    en: 'License definitions and additional information can be found at: <a href="http://opendefinition.org/" target="_blank" rel="noopener">Open Definition</a>'
+    es: 'Las definiciones de las licencias y la información adicional pueden encontrarse en: <a href="http://opendefinition.org/" target="_blank" rel="noopener">Open Definition</a>'
+  help_allow_html: True
+
+# Conditions for access and use and limitations on public access (M)
+- field_name: access_rights
+  label:
+    en: Access Rights
+    es: Derechos de acceso
+  preset: select
+  display_snippet: link_schema.html
+  display_property: dct:accessRights
+  form_include_blank_choice: False
+  choices:
+  - label:
+      en: No limitations to public access
+      es: No hay limitaciones al acceso del público
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations
+  - label:
+      en: Public access limited according to Article 13(1)(a) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(a) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a
+  - label:
+      en: Public access limited according to Article 13(1)(b) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(b) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1b
+  - label:
+      en: Public access limited according to Article 13(1)(c) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(c) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1c
+  - label:
+      en: Public access limited according to Article 13(1)(d) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(d) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d
+  - label:
+      en: Public access limited according to Article 13(1)(e) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(e) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1e
+  - label:
+      en: Public access limited according to Article 13(1)(f) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(f) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1f
+  - label:
+      en: Public access limited according to Article 13(1)(g) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(g) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1g
+  - label:
+      en: Public access limited according to Article 13(1)(h) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(h) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1h
+  help_text:
+    en: 'Conditions for access and use and <a href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess" target="_blank" rel="noopener">limitations on public access</a> (INSPIRE)'
+    es: 'Condiciones de acceso y utilización y <a href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess" target="_blank" rel="noopener">limitaciones de acceso público</a> (INSPIRE)'
+  help_allow_html: True
+
+# Version number (O)
+- field_name: version
+  label:
+    en: Version
+    es: Versión
+  help_text:
+    en: Version number or other version designation of the Dataset.
+    es: Número de versión u otra designación de versión del conjunto de datos.
+  display_property: owl:versionInfo
+  validators: ignore_missing unicode_safe package_version_validator
+  form_placeholder: '1.0'
+
+# Version information (O)
+- field_name: version_notes
+  label:
+    en: Version notes
+    es: Notas sobre la versión
+  help_text:
+    en: A description of the differences between this version and a previous version of the Dataset.
+    es: Una descripción de las diferencias entre esta versión y una versión anterior del Dataset.
+  display_property: adms:versionNotes
+  form_snippet: markdown.html
+  form_placeholder:
+    en: eg. Some useful version notes about the dataset.
+    es: ej. Una descripción útil sobre las diferencias de esta versión del conjunto de datos.
+
+# Dataset validity (O)
+##TODO: To profiles.py
+- field_name: valid
+  label: 
+    en: Dataset validity
+    es: Vigencia del conjunto de datos
+  display_property: dct:valid
+  preset: date
+
+
+#--Resource/Distribution (dcat:Distribution) fields--#
+resource_fields:
+
+# Access URL (M)
+- field_name: url
+  label:
+    en: Access URL
+    es: URL de acceso
+  preset: resource_url_upload
+  display_property: dcat:accessURL
+  display_snippet: link.html
+
+# Resource title (M)
+- field_name: name
+  label:
+    en: Distribution title
+    es: Título de la distribución
+  form_placeholder:
+    en: eg. Web Map Service
+    es: ej. Web Map Service
+  display_property: dct:title
+
+# Resource abstract (M)
+- field_name: description
+  label:
+    en: Distribution abstract
+    es: Descripción de la distribución
+  form_snippet: markdown.html
+  form_placeholder:
+    en: Some useful notes about the data.
+    es: Algunas notas útiles sobre los datos.
+  display_property: dct:description
+
+# Date of creation (M)
+- field_name: created
+  label: 
+    en: Date of creation
+    es: Fecha de creación
+  display_property: dct:created
+  preset: date
+
+# Date of last revision (M)
+- field_name: modified
+  label: 
+    en: Date of last revision
+    es: Fecha de última modificación
+  display_property: dct:modified
+  preset: date
+
+# Resource status (O)
+- field_name: availability
+  label:
+    en: Resource availability
+    es: Disponibilidad de la distribución
+  preset: select
+  display_snippet: link_schema.html
+  display_property: dcatap:availability
+  form_include_blank_choice: False
+  choices:
+  - label:
+      en: Available
+      es: Disponible
+    value: http://publications.europa.eu/resource/authority/planned-availability/AVAILABLE
+  - label:
+      en: Stable
+      es: Estable
+    value: http://publications.europa.eu/resource/authority/planned-availability/STABLE
+  - label:
+      en: Experimental
+      es: Experimental
+    value: http://publications.europa.eu/resource/authority/planned-availability/EXPERIMENTAL
+  - label:
+      en: Experimental
+      es: Experimental
+    value: http://publications.europa.eu/resource/authority/planned-availability/EXPERIMENTAL
+  - label:
+      en: Provisional data
+      es: Datos provisionales
+    value: http://publications.europa.eu/resource/authority/planned-availability/OP_DATPRO
+  help_text:
+    en: 'This property indicates how long it is planned to keep the Distribution of the Dataset available acording to <a href="http://publications.europa.eu/resource/authority/planned-availability" target="_blank" rel="noopener">Distribution availability vocabulary</a>.'
+    es: 'Esta propiedad indica durante cuánto tiempo se prevé mantener disponible la distribución del conjunto de datos de acuerdo con el <a href="http://publications.europa.eu/resource/authority/planned-availability" target="_blank" rel="noopener">Vocabulario de disponibilidad de la distribución</a>.'
+  help_allow_html: True
+
+# Resource format (O)
+- field_name: format
+  label:
+    en: Format
+    es: Formato
+  preset: resource_format_autocomplete
+  display_property: dct:format
+
+# Media type (O)
+- field_name: mimetype
+  label:
+    en: Media type
+    es: Tipo de medio 
+  display_snippet: link.html
+  display_property: dct:MediaType
+  form_placeholder: http://www.iana.org/assignments/media-types/application/vnd.shp
+  help_text:
+    en: 'This property refers to the media type of the Distribution as defined in the official <a href="http://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" rel="noopener">register of media types</a> (IANA)'
+    es: 'Esta propiedad se refiere al tipo de medio de la Distribución tal y como se define en el <a href="http://www.iana.org/assignments/media-types/media-types.xhtml" target="_blank" rel="noopener">registro oficial de tipos de medios</a> (IANA)'
+  help_allow_html: True
+  
+# Resource status (O)
+- field_name: status
+  label:
+    en: Resource status
+    es: Estado de la distribución
+  preset: select
+  display_snippet: link_schema.html
+  display_property: adms:status
+  form_include_blank_choice: False
+  choices:
+  - label:
+      en: Completed
+      es: Completado
+    value: http://purl.org/adms/status/Completed
+  - label:
+      en: Under development
+      es: En desarrollo
+    value: http://purl.org/adms/status/UnderDevelopment
+  - label:
+      en: Deprecated
+      es: Obsoleto
+    value: http://purl.org/adms/status/Deprecated
+  - label:
+      en: Withdrawn
+      es: Retirado
+    value: http://purl.org/adms/status/Withdrawn
+  help_text:
+    en: 'This property refers to the maturity of the Distribution. It MUST take one of the values from the <a href="http://purl.org/adms/status/" target="_blank" rel="noopener">ADMS status</a> list.'
+    es: 'Esta propiedad hace referencia a la madurez de la distribución y debe tomar uno de los valores de la lista <a href="http://purl.org/adms/status/" target="_blank" rel="noopener">ADMS status</a>.'
+  help_allow_html: True
+
+# Resource character encoding (C)
+##TODO: encoding
+## default: UTF-8
+
+# Resource language (M)
+- field_name: language
+  label:
+    en: Resource language
+    es: Idioma de la distribución
+  preset: select
+  display_property: dct:language
+  display_snippet: link_schema.html
+  choices:
+  - label:
+      en: Spanish
+      es: Español
+    value: http://publications.europa.eu/resource/authority/language/SPA
+  - label:
+      en: English
+      es: Inglés
+    value: http://publications.europa.eu/resource/authority/language/ENG
+
+# Byte size (O)
+##TODO: validator integer and default value=Null
+# - field_name: size
+#   label:
+#     en: Byte size
+#     es: Tamaño en bytes
+#   form_placeholder: 305000
+#   required: True
+#   display_property: dcat:byteSize
+#   help_text:
+#     en: 'Integer value.'
+#     es: 'Valor entero.'
+
+# Additional format information (O)
+##TODO: To profiles.py
+- field_name: resource_relation
+  label: 
+    en: Additional format information
+    es: Información adicional sobre el formato
+  form_snippet: multiple_text.html
+  validators: ignore_missing scheming_multiple_text
+  display_snippet: list_raws_ordered.html
+  form_placeholder: 'http://www.catastro.minhap.es/ayuda/lang/castellano/ayuda_descarga_shape.htm'
+  help_text:
+    en: 'Link(s) related to the format, where the format, the scheme used for its representation or other technical information on how to access the documents or information resources is indicated.'
+    es: 'Enlace(s) relacionado(s) con el formato, en dónde se indica el formato, el esquema utilizado para su representación u otra información técnica sobre cómo acceder a los documentos o recursos de información.'
+
+# Resource License (R)
+- field_name: license
+  label: 
+    en: Distribution license
+    es: Licencia de la distribución
+  display_property: dct:license
+  form_placeholder:
+    en: eg. http://creativecommons.org/licenses/by/4.0/
+    es: ej. http://creativecommons.org/licenses/by/4.0/
+  help_text:
+    en: 'License definitions and additional information can be found at: <a href="http://opendefinition.org/" target="_blank" rel="noopener">Open Definition</a>'
+    es: 'Las definiciones de las licencias y la información adicional pueden encontrarse en: <a href="http://opendefinition.org/" target="_blank" rel="noopener">Open Definition</a>'
+  help_allow_html: True
+
+# Resource limitations on public access (M)
+- field_name: rights
+  label:
+    en: Resource access Rights
+    es: Derechos de acceso del recurso
+  preset: select
+  display_snippet: link_schema.html
+  display_property: dct:accessRights
+  form_include_blank_choice: False
+  choices:
+  - label:
+      en: No limitations to public access
+      es: No hay limitaciones al acceso del público
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/noLimitations
+  - label:
+      en: Public access limited according to Article 13(1)(a) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(a) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1a
+  - label:
+      en: Public access limited according to Article 13(1)(b) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(b) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1b
+  - label:
+      en: Public access limited according to Article 13(1)(c) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(c) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1c
+  - label:
+      en: Public access limited according to Article 13(1)(d) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(d) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1d
+  - label:
+      en: Public access limited according to Article 13(1)(e) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(e) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1e
+  - label:
+      en: Public access limited according to Article 13(1)(f) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(f) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1f
+  - label:
+      en: Public access limited according to Article 13(1)(g) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(g) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1g
+  - label:
+      en: Public access limited according to Article 13(1)(h) of the INSPIRE Directive
+      es: Acceso público limitado según el artículo 13(1)(h) de la Directiva INSPIRE
+    value: http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess/INSPIRE_Directive_Article13_1h
+  help_text:
+    en: 'Conditions for access and use and <a href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess" target="_blank" rel="noopener">limitations on public access</a> (INSPIRE)'
+    es: 'Condiciones de acceso y utilización y <a href="http://inspire.ec.europa.eu/metadata-codelist/LimitationsOnPublicAccess" target="_blank" rel="noopener">limitaciones de acceso público</a> (INSPIRE)'
+  help_allow_html: True
+
+# Conformity (M)
+- field_name: conforms_to
+  label: 
+    en: Conformity 
+    es: Conformidad
+  validators: ignore_missing scheming_multiple_text
+  form_snippet: multiple_text.html
+  display_property: dct:conformsTo
+  display_snippet: list_links.html
+  form_placeholder: 'http://www.opengeospatial.org/standards/wms'
+  help_text:
+    en: 'Specification (eg. OGC). URLs'
+    es: 'Especificaciones (eg. OGC). URLs'
+
+# Coordinate Reference System (C)
+- field_name: reference_system
+  label:
+    en: URI of the Coordinate Reference System
+    es: URI del Sistema de Referencia de Coordenadas
+  validators: ignore_missing scheming_valid_url
+  display_snippet: link_epsg.html
+  form_placeholder: http://www.opengis.net/def/crs/EPSG/0/4326
+  help_text:
+    en: 'EPSG URI system for identifying position in the real world [ISO 19112]. The URI prefix for coordinate reference systems is the following one: http://www.opengis.net/def/crs/EPSG/0/{EPSG Code}'
+    es: 'URI EPSG del sistema para identificar la posición en el mundo real [ISO 19112]. El prefijo URI para los sistemas de referencia de coordenadas es el siguiente: http://www.opengis.net/def/crs/EPSG/0/{Código EPSG}'
+  help_allow_html: True
+
+# Lineage statement (O)
+##TODO: provenance
+
+# Lineage process steps (O)
+##TODO: lineage_process_steps

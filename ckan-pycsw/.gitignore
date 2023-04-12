@@ -1,0 +1,9 @@
+.pdm.toml
+*.db
+pycsw.conf
+.venv
+.vscode
+__pycache__
+log
+metadata
+samples

@@ -1,0 +1,1242 @@
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/7Z
+   format: 7Z
+   media_type: undefined
+   label: 7Z
+   file_extension: .7z
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/AAB
+   format: AAB
+   media_type: undefined
+   label: AAB
+   file_extension: .aab
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/AAC
+   format: AAC
+   media_type: undefined
+   label: AAC
+   file_extension: .adts
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/AKN4EU
+   format: AKN4EU
+   media_type: undefined
+   label: AKN4EU
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/AKN4EU_ZIP
+   format: AKN4EU_ZIP
+   media_type: undefined
+   label: AKN4EU_ZIP
+   file_extension: .leg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/APK
+   format: APK
+   media_type: undefined
+   label: APK
+   file_extension: .apk
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/APPX
+   format: APPX
+   media_type: undefined
+   label: APPX
+   file_extension: .appx
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ARC
+   format: ARC
+   media_type: undefined
+   label: ARC
+   file_extension: .arc
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ARC_GZ
+   format: ARC_GZ
+   media_type: undefined
+   label: ARC_GZ
+   file_extension: .arc.gz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ARCINFO_COV
+   format: ARCINFO_COV
+   media_type: undefined
+   label: ARCINFO_COV
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ARJ
+   format: ARJ
+   media_type: undefined
+   label: ARJ
+   file_extension: .arj
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ATOM
+   format: ATOM
+   media_type: https://www.iana.org/assignments/mediatypes/application/atom+xml
+   label: ATOM
+   file_extension: .atom
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/AZW
+   format: AZW
+   media_type: undefined
+   label: AZW
+   file_extension: .azw
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/BIN
+   format: BIN
+   media_type: https://www.iana.org/assignments/mediatypes/application/octetstream
+   label: BIN
+   file_extension: .bin
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/BITS
+   format: BITS
+   media_type: undefined
+   label: BITS
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/BMP
+   format: BMP
+   media_type: undefined
+   label: BMP
+   file_extension: .bm
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/BWF
+   format: BWF
+   media_type: undefined
+   label: BWF
+   file_extension: .bwf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/BZIP2
+   format: BZIP2
+   media_type: undefined
+   label: BZIP2
+   file_extension: .bz2
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/CSS
+   format: CSS
+   media_type: https://www.iana.org/assignments/mediatypes/text/css
+   label: CSS
+   file_extension: .css
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/CSV
+   format: CSV
+   media_type: https://www.iana.org/assignments/mediatypes/text/csv
+   label: CSV
+   file_extension: .csv
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DAPK
+   format: DAPK
+   media_type: undefined
+   label: DAPK
+   file_extension: .apk
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DBF
+   format: DBF
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.dbf
+   label: DBF
+   file_extension: .dbf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DCR
+   format: DCR
+   media_type: undefined
+   label: DCR
+   file_extension: .dcr
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DEB
+   format: DEB
+   media_type: undefined
+   label: DEB
+   file_extension: .deb
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DGN
+   format: DGN
+   media_type: undefined
+   label: DGN
+   file_extension: .dgn
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DMG
+   format: DMG
+   media_type: undefined
+   label: DMG
+   file_extension: .dmg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DMP
+   format: DMP
+   media_type: undefined
+   label: DMP
+   file_extension: .dmp
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DOC
+   format: DOC
+   media_type: https://www.iana.org/assignments/mediatypes/application/msword
+   label: DOC
+   file_extension: .doc
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DOCX
+   format: DOCX
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.openxmlformatsofficedocument.wordprocessingml.document
+   label: DOCX
+   file_extension: .docx
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DTD_SGML
+   format: DTD_SGML
+   media_type: undefined
+   label: DTD_SGML
+   file_extension: .dtd
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DTD_XML
+   format: DTD_XML
+   media_type: https://www.iana.org/assignments/mediatypes/application/xmldtd
+   label: DTD_XML
+   file_extension: .dtd
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DWG
+   format: DWG
+   media_type: https://www.iana.org/assignments/mediatypes/image/vnd.dwg
+   label: DWG
+   file_extension: .dwg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/DXF
+   format: DXF
+   media_type: https://www.iana.org/assignments/mediatypes/image/vnd.dxf
+   label: DXF
+   file_extension: .dxf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/E00
+   format: E00
+   media_type: undefined
+   label: E00
+   file_extension: .e00
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/EAR
+   format: EAR
+   media_type: undefined
+   label: EAR
+   file_extension: .ear
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ECW
+   format: ECW
+   media_type: undefined
+   label: ECW
+   file_extension: .ecw
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/EFORMS_XML
+   format: EFORMS_XML
+   media_type: undefined
+   label: EFORMS_XML
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/EPS
+   format: EPS
+   media_type: undefined
+   label: EPS
+   file_extension: .eps
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/EPUB
+   format: EPUB
+   media_type: https://www.iana.org/assignments/mediatypes/application/epub+zip
+   label: EPUB
+   file_extension: .epub
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ETSI_XML
+   format: ETSI_XML
+   media_type: undefined
+   label: ETSI_XML
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/EXE
+   format: EXE
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.microsoft.portableexecutable
+   label: EXE
+   file_extension: .exe
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/FMX2
+   format: FMX2
+   media_type: undefined
+   label: FMX2
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/FMX3
+   format: FMX3
+   media_type: undefined
+   label: FMX3
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/FMX4
+   format: FMX4
+   media_type: undefined
+   label: FMX4
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/FMX4_ZIP
+   format: FMX4_ZIP
+   media_type: undefined
+   label: FMX4_ZIP
+   file_extension: .zip
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GDB
+   format: GDB
+   media_type: undefined
+   label: GDB
+   file_extension: .gdb
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GEOJSON
+   format: GEOJSON
+   media_type: https://www.iana.org/assignments/mediatypes/application/geo+json
+   label: GEOJSON
+   file_extension: .json
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GEOTIFF
+   format: GEOTIFF
+   media_type: undefined
+   label: GEOTIFF
+   file_extension: .tiff
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GIF
+   format: GIF
+   media_type: undefined
+   label: GIF
+   file_extension: .gif
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GML
+   format: GML
+   media_type: https://www.iana.org/assignments/mediatypes/application/gml+xml
+   label: GML
+   file_extension: .gml .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GMZ
+   format: GMZ
+   media_type: undefined
+   label: GMZ
+   file_extension: .gmz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GPKG
+   format: GPKG
+   media_type: https://www.iana.org/assignments/mediatypes/application/geopackage+sqlite3
+   label: GPKG
+   file_extension: .gpkg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GRID
+   format: GRID
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.gridmp
+   label: GRID
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GRID_ASCII
+   format: GRID_ASCII
+   media_type: undefined
+   label: GRID_ASCII
+   file_extension: .asc
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GTFS
+   format: GTFS
+   media_type: undefined
+   label: GTFS
+   file_extension: .zip
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/GZIP
+   format: GZIP
+   media_type: https://www.iana.org/assignments/mediatypes/application/gzip
+   label: GZIP
+   file_extension: .gz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/HDF
+   format: HDF
+   media_type: undefined
+   label: HDF
+   file_extension: .hdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/HDT
+   format: HDT
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.hdt
+   label: HDT
+   file_extension: .hdt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/HTML
+   format: HTML
+   media_type: https://www.iana.org/assignments/mediatypes/text/html
+   label: HTML
+   file_extension: .html
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/HTML_SIMPL
+   format: HTML_SIMPL
+   media_type: undefined
+   label: HTML_SIMPL
+   file_extension: .html
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/HTML5
+   format: HTML5
+   media_type: undefined
+   label: HTML5
+   file_extension: .html
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ICS
+   format: ICS
+   media_type: undefined
+   label: ICS
+   file_extension: .ical
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/IMMC_XML
+   format: IMMC_XML
+   media_type: undefined
+   label: IMMC_XML
+   file_extension: _immc.xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/INDD
+   format: INDD
+   media_type: undefined
+   label: INDD
+   file_extension: .indd
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/IPA
+   format: IPA
+   media_type: undefined
+   label: IPA
+   file_extension: .ipa
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ISO
+   format: ISO
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.efi.iso
+   label: ISO
+   file_extension: .iso
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ISO_ZIP
+   format: ISO_ZIP
+   media_type: undefined
+   label: ISO_ZIP
+   file_extension: .zip
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JAR
+   format: JAR
+   media_type: undefined
+   label: JAR
+   file_extension: .jar
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JATS
+   format: JATS
+   media_type: undefined
+   label: JATS
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JPEG
+   format: JPEG
+   media_type: undefined
+   label: JPEG
+   file_extension: .jpeg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JPEG2000
+   format: JPEG2000
+   media_type: undefined
+   label: JPEG2000
+   file_extension: .jp2
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JS
+   format: JS
+   media_type: https://www.iana.org/assignments/mediatypes/application/javascript
+   label: JS
+   file_extension: .js
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JSON
+   format: JSON
+   media_type: https://www.iana.org/assignments/mediatypes/application/json
+   label: JSON
+   file_extension: .json
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/JSON_LD
+   format: JSON_LD
+   media_type: https://www.iana.org/assignments/mediatypes/application/ld+json
+   label: JSON_LD
+   file_extension: .jsonld
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/KML
+   format: KML
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.googleearth.kml+xml
+   label: KML
+   file_extension: .kml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/KMZ
+   format: KMZ
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.googleearth.kmz
+   label: KMZ
+   file_extension: .kmz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LAS
+   format: LAS
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.las
+   label: LAS
+   file_extension: .las
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LAZ
+   format: LAZ
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.laszip
+   label: LAZ
+   file_extension: .laz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LEG
+   format: LEG
+   media_type: undefined
+   label: LEG
+   file_extension: .leg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LHA
+   format: LHA
+   media_type: undefined
+   label: LHA
+   file_extension: .lzh
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LPK
+   format: LPK
+   media_type: undefined
+   label: LPK
+   file_extension: .lpk
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LZIP
+   format: LZIP
+   media_type: undefined
+   label: LZIP
+   file_extension: .lz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LZMA
+   format: LZMA
+   media_type: undefined
+   label: LZMA
+   file_extension: .lzma
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/LZO
+   format: LZO
+   media_type: undefined
+   label: LZO
+   file_extension: .lzo
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MAP_PRVW
+   format: MAP_PRVW
+   media_type: undefined
+   label: MAP_PRVW
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MAP_SRVC
+   format: MAP
+   media_type: undefined
+   label: MAP_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MAP_SRVC
+   format: MAP_SRVC
+   media_type: undefined
+   label: MAP_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MBOX
+   format: MBOX
+   media_type: https://www.iana.org/assignments/mediatypes/application/mbox
+   label: MBOX
+   file_extension: .mbox
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MDB
+   format: MDB
+   media_type: undefined
+   label: MDB
+   file_extension: .mdb
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/METS
+   format: METS
+   media_type: https://www.iana.org/assignments/mediatypes/application/mets+xml
+   label: METS
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/METS_ZIP
+   format: METS_ZIP
+   media_type: undefined
+   label: METS_ZIP
+   file_extension: .zip
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MHTML
+   format: MHTML
+   media_type: undefined
+   label: MHTML
+   file_extension: .mhtml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MIF_MID
+   format: MIF_MID
+   media_type: undefined
+   label: MIF_MID
+   file_extension: .mif
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MOBI
+   format: MOBI
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.amazon.mobi8ebook
+   label: MOBI
+   file_extension: .mobi
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MOP
+   format: MOP
+   media_type: undefined
+   label: MOP
+   file_extension: .mop
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MP3
+   format: MP3
+   media_type: undefined
+   label: MP3
+   file_extension: .mp3
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MPEG2
+   format: MPEG2
+   media_type: https://www.iana.org/assignments/mediatypes/application/mp4
+   label: MPEG2
+   file_extension: .mpeg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MPEG4
+   format: MPEG4
+   media_type: https://www.iana.org/assignments/mediatypes/application/mp4
+   label: MPEG4
+   file_extension: .mpeg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MPEG4_AVC
+   format: MPEG4_AVC
+   media_type: https://www.iana.org/assignments/mediatypes/application/mp4
+   label: MPEG4_AVC
+   file_extension: .mpeg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MRSID
+   format: MRSID
+   media_type: undefined
+   label: MRSID
+   file_extension: .sid
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MSG_HTTP
+   format: MSG_HTTP
+   media_type: undefined
+   label: MSG_HTTP
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MSI
+   format: MSI
+   media_type: undefined
+   label: MSI
+   file_extension: .msi
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/MXD
+   format: MXD
+   media_type: undefined
+   label: MXD
+   file_extension: .mxd
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/N3
+   format: N3
+   media_type: https://www.iana.org/assignments/mediatypes/application/ntriples
+   label: N3
+   file_extension: .n3
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/NETCDF
+   format: NETCDF
+   media_type: undefined
+   label: NETCDF
+   file_extension: .cdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/OAPK
+   format: OAPK
+   media_type: undefined
+   label: OAPK
+   file_extension: .apk
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/OCTET
+   format: OCTET
+   media_type: https://www.iana.org/assignments/mediatypes/application/octetstream
+   label: OCTET
+   file_extension: .zoo
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODB
+   format: ODB
+   media_type: undefined
+   label: ODB
+   file_extension: .odb
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODC
+   format: ODC
+   media_type: undefined
+   label: ODC
+   file_extension: .odc
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODF
+   format: ODF
+   media_type: undefined
+   label: ODF
+   file_extension: .odf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODG
+   format: ODG
+   media_type: undefined
+   label: ODG
+   file_extension: .odg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODP
+   format: ODP
+   media_type: undefined
+   label: ODP
+   file_extension: .odp
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODS
+   format: ODS
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.oasis.opendocument.spreadsheet
+   label: ODS
+   file_extension: .ods
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ODT
+   format: ODT
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.oasis.opendocument.text
+   label: ODT
+   file_extension: .odt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/OVF
+   format: OVF
+   media_type: undefined
+   label: OVF
+   file_extension: .ovf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/OWL
+   format: OWL
+   media_type: https://www.iana.org/assignments/mediatypes/application/rdf+xml
+   label: OWL
+   file_extension: .owl
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDF
+   format: PDF
+   media_type: https://www.iana.org/assignments/mediatypes/application/pdf
+   label: PDF
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDF1X
+   format: PDF1X
+   media_type: undefined
+   label: PDF1X
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFA1A
+   format: PDFA1A
+   media_type: undefined
+   label: PDFA1A
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFA1B
+   format: PDFA1B
+   media_type: undefined
+   label: PDFA1B
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFA2A
+   format: PDFA2A
+   media_type: undefined
+   label: PDFA2A
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFA2B
+   format: PDFA2B
+   media_type: undefined
+   label: PDFA2B
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFA3
+   format: PDFA3
+   media_type: undefined
+   label: PDFA3
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFUA
+   format: PDFUA
+   media_type: undefined
+   label: PDFUA
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFX
+   format: PDFX
+   media_type: undefined
+   label: PDFX
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFX1A
+   format: PDFX1A
+   media_type: undefined
+   label: PDFX1A
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFX2A
+   format: PDFX2A
+   media_type: undefined
+   label: PDFX2A
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PDFX4
+   format: PDFX4
+   media_type: undefined
+   label: PDFX4
+   file_extension: .pdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PL
+   format: PL
+   media_type: undefined
+   label: PL
+   file_extension: .pl
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PNG
+   format: PNG
+   media_type: https://www.iana.org/assignments/mediatypes/image/png
+   label: PNG
+   file_extension: .png
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PPS
+   format: PPS
+   media_type: undefined
+   label: PPS
+   file_extension: .pps
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PPSX
+   format: PPSX
+   media_type: undefined
+   label: PPSX
+   file_extension: .ppsx
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PPT
+   format: PPT
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.mspowerpoint
+   label: PPT
+   file_extension: .ppt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PPTX
+   format: PPTX
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.openxmlformatsofficedocument.presentationml.presentation
+   label: PPTX
+   file_extension: .pptx
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PS
+   format: PS
+   media_type: undefined
+   label: PS
+   file_extension: .ps
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PSD
+   format: PSD
+   media_type: undefined
+   label: PSD
+   file_extension: .psd
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/PWP
+   format: PWP
+   media_type: undefined
+   label: PWP
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/QGS
+   format: QGS
+   media_type: undefined
+   label: QGS
+   file_extension: .qgs
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RAR
+   format: RAR
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.rar
+   label: RAR
+   file_extension: .rar
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF
+   format: RDF
+   media_type: https://www.iana.org/assignments/mediatypes/application/rdf+xml
+   label: RDF
+   file_extension: .rdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_N_QUADS
+   format: RDF_N_QUADS
+   media_type: undefined
+   label: RDF_N_QUADS
+   file_extension: .nq
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_N_TRIPLES
+   format: RDF_N_TRIPLES
+   media_type: https://www.iana.org/assignments/mediatypes/application/ntriples
+   label: RDF_N_TRIPLES
+   file_extension: .nt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_THRIFT
+   format: RDF_THRIFT
+   media_type: undefined
+   label: RDF_THRIFT
+   file_extension: .rt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_TRIG
+   format: RDF_TRIG
+   media_type: undefined
+   label: RDF_TRIG
+   file_extension: .trig
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_TRIX
+   format: RDF_TRIX
+   media_type: undefined
+   label: RDF_TRIX
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_TURTLE
+   format: RDF_TURTLE
+   media_type: https://www.iana.org/assignments/mediatypes/text/turtle
+   label: RDF_TURTLE
+   file_extension: .ttl
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_XML
+   format: RDF_XML
+   media_type: https://www.iana.org/assignments/mediatypes/application/rdf+xml
+   label: RDF_XML
+   file_extension: .rdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDFA
+   format: RDFA
+   media_type: https://www.iana.org/assignments/mediatypes/application/xhtml+xml
+   label: RDFA
+   file_extension: .rdfa
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/REST
+   format: REST
+   media_type: undefined
+   label: REST
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RPM
+   format: RPM
+   media_type: undefined
+   label: RPM
+   file_extension: .rpm
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RSS
+   format: RSS
+   media_type: undefined
+   label: RSS
+   file_extension: .rss
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RTF
+   format: RTF
+   media_type: https://www.iana.org/assignments/mediatypes/application/rtf
+   label: RTF
+   file_extension: .rtf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SB3
+   format: SB3
+   media_type: https://www.iana.org/assignments/mediatypes/application/sarif+json
+   label: SB3
+   file_extension: .sb3
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SCHEMA_XML
+   format: SCHEMA_XML
+   media_type: undefined
+   label: SCHEMA_XML
+   file_extension: .xsd
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SDMX
+   format: SDMX
+   media_type: undefined
+   label: SDMX
+   file_extension: .edi
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SGML
+   format: SGML
+   media_type: https://www.iana.org/assignments/mediatypes/application/SGML
+   label: SGML
+   file_extension: .sgml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SHP
+   format: SHP
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.shp
+   label: SHP
+   file_extension: .shp
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SKOS_XML
+   format: SKOS_XML
+   media_type: undefined
+   label: SKOS_XML
+   file_extension: .rdf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SPARQLQ
+   format: SPARQLQ
+   media_type: https://www.iana.org/assignments/mediatypes/application/sparqlquery
+   label: SPARQLQ
+   file_extension: .sparqlq
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SPARQLQRES
+   format: SPARQLQRES
+   media_type: https://www.iana.org/assignments/mediatypes/application/sparqlresults+xml
+   label: SPARQLQRES
+   file_extension: .sparqlqr
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SQL
+   format: SQL
+   media_type: https://www.iana.org/assignments/mediatypes/application/sql
+   label: SQL
+   file_extension: .sql
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/STL
+   format: STL
+   media_type: undefined
+   label: STL
+   file_extension: .stl
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SVG
+   format: SVG
+   media_type: https://www.iana.org/assignments/mediatypes/application/stix+json
+   label: SVG
+   file_extension: .svg
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/SWM
+   format: SWM
+   media_type: https://www.iana.org/assignments/mediatypes/application/swid+xml
+   label: SWM
+   file_extension: .swm
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TAB
+   format: TAB
+   media_type: undefined
+   label: TAB
+   file_extension: .tab
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TAB_RSTR
+   format: TAB_RSTR
+   media_type: undefined
+   label: TAB_RSTR
+   file_extension: .tab
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TAR
+   format: TAR
+   media_type: undefined
+   label: TAR
+   file_extension: .tar
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TAR_GZ
+   format: TAR_GZ
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.cncf.helm.chart.content.v1.tar+gzip
+   label: TAR_GZ
+   file_extension: .tar.gz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TAR_XZ
+   format: TAR_XZ
+   media_type: undefined
+   label: TAR_XZ
+   file_extension: .tar.xz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TIFF
+   format: TIFF
+   media_type: https://www.iana.org/assignments/mediatypes/image/tiff
+   label: TIFF
+   file_extension: .tiff
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TIFF_FX
+   format: TIFF_FX
+   media_type: undefined
+   label: TIFF_FX
+   file_extension: .tiff
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TMX
+   format: TMX
+   media_type: undefined
+   label: TMX
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/RDF_TURTLE
+   format: TTL
+   media_type: https://www.iana.org/assignments/mediatypes/text/turtle
+   label: RDF_TURTLE
+   file_extension: .ttl
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TSV
+   format: TSV
+   media_type: https://www.iana.org/assignments/mediatypes/text/tabseparatedvalues
+   label: TSV
+   file_extension: .tsv
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/TXT
+   format: TXT
+   media_type: undefined
+   label: TXT
+   file_extension: .txt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/UNGEN
+   format: UNGEN
+   media_type: undefined
+   label: UNGEN
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WAR
+   format: WAR
+   media_type: undefined
+   label: WAR
+   file_extension: .war
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WARC
+   format: WARC
+   media_type: undefined
+   label: WARC
+   file_extension: .warc
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WARC_GZ
+   format: WARC_GZ
+   media_type: undefined
+   label: WARC_GZ
+   file_extension: .warc.gz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WAV
+   format: WAV
+   media_type: undefined
+   label: WAV
+   file_extension: .wav
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WCS_SRVC
+   format: WCS
+   media_type: undefined
+   label: WCS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WCS_SRVC
+   format: WCS_SRVC
+   media_type: undefined
+   label: WCS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WEBP
+   format: WEBP
+   media_type: undefined
+   label: WEBP
+   file_extension: .webp
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WFS_SRVC
+   format: WFS
+   media_type: undefined
+   label: WFS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WFS_SRVC
+   format: WFS_SRVC
+   media_type: undefined
+   label: WFS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WIM
+   format: WIM
+   media_type: undefined
+   label: WIM
+   file_extension: .swm
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WMS_SRVC
+   format: WMS
+   media_type: undefined
+   label: WMS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WMS_SRVC
+   format: WMS_SRVC
+   media_type: undefined
+   label: WMS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WMTS_SRVC
+   format: WMTS
+   media_type: undefined
+   label: WMTS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WMTS_SRVC
+   format: WMTS_SRVC
+   media_type: undefined
+   label: WMTS_SRVC
+   file_extension: 
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/WORLD
+   format: WORLD
+   media_type: undefined
+   label: WORLD
+   file_extension: .jgw
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XHTML
+   format: XHTML
+   media_type: undefined
+   label: XHTML
+   file_extension: .html
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XHTML_SIMPL
+   format: XHTML_SIMPL
+   media_type: undefined
+   label: XHTML_SIMPL
+   file_extension: .html
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XHTML5
+   format: XHTML5
+   media_type: undefined
+   label: XHTML5
+   file_extension: .html
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XLIFF
+   format: XLIFF
+   media_type: undefined
+   label: XLIFF
+   file_extension: .xlf
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XLS
+   format: XLS
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.msexcel
+   label: XLS
+   file_extension: .xls
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XLSB
+   format: XLSB
+   media_type: undefined
+   label: XLSB
+   file_extension: .xlsb
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XLSM
+   format: XLSM
+   media_type: undefined
+   label: XLSM
+   file_extension: .xlsm
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XLSX
+   format: XLSX
+   media_type: https://www.iana.org/assignments/mediatypes/application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet
+   label: XLSX
+   file_extension: .xlsx
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XML
+   format: XML
+   media_type: https://www.iana.org/assignments/mediatypes/text/xml
+   label: XML
+   file_extension: .xml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XSLFO
+   format: XSLFO
+   media_type: undefined
+   label: XSLFO
+   file_extension: .fo
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XSLT
+   format: XSLT
+   media_type: https://www.iana.org/assignments/mediatypes/application/xslt+xml
+   label: XSLT
+   file_extension: .xslt
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XYZ
+   format: XYZ
+   media_type: undefined
+   label: XYZ
+   file_extension: .xyz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/XZ
+   format: XZ
+   media_type: undefined
+   label: XZ
+   file_extension: .xz
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/YAML
+   format: YAML
+   media_type: undefined
+   label: YAML
+   file_extension: .yaml
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/Z
+   format: Z
+   media_type: undefined
+   label: Z
+   file_extension: .Z
+-
+   uri: http://publications.europa.eu/resource/authority/filetype/ZIP
+   format: ZIP
+   media_type: https://www.iana.org/assignments/mediatypes/application/zip
+   label: ZIP
+   file_extension: .zip

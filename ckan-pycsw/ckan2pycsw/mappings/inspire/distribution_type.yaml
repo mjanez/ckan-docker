@@ -1,0 +1,552 @@
+-
+   format: CSW
+   identifier: OGC:CSW
+   uri: http://www.opengis.net/def/serviceType/ogc/csw
+   label: OGC Catalogue Service for the Web
+   url: http://www.opengeospatial.org/standards/cat
+-
+   format: SOS
+   identifier: OGC:SOS
+   uri: http://www.opengis.net/def/serviceType/ogc/sos
+   label: OGC Sensor Observation Service
+   url: http://www.opengeospatial.org/standards/sos
+-
+   format: SPS
+   identifier: OGC:SPS
+   uri: http://www.opengeospatial.org/standards/sps
+   label: OGC Sensor Planning Service
+   url: http://www.opengeospatial.org/standards/sps
+-
+   format: SAS
+   identifier: OGC:SAS
+   uri: http://www.ogcnetwork.net/SAS
+   label: OGC Sensor Alert Service
+   url: http://www.ogcnetwork.net/SAS
+-
+   format: WNS
+   identifier: OGC:WNS
+   uri: http://www.ogcnetwork.net/WNS
+   label: OGC Web Notification Service
+   url: http://portal.opengeospatial.org/files/?artifact_id=1367
+-
+   format: WCS
+   identifier: OGC:WCS
+   uri: http://www.opengis.net/def/serviceType/ogc/wcs
+   label: OGC Web Coverage Service
+   url: http://www.opengeospatial.org/standards/wcs
+-
+   format: WFS
+   identifier: OGC:WFS
+   uri: http://www.opengis.net/def/serviceType/ogc/wfs
+   label: OGC Web Feature Service
+   url: http://www.opengeospatial.org/standards/wfs
+-
+   format: WMS
+   identifier: OGC:WMS
+   uri: http://www.opengis.net/def/serviceType/ogc/wms
+   label: OGC Web Map Service
+   url: http://www.opengeospatial.org/standards/wms
+-
+   format: WMS-C
+   identifier: OGC:WMS-C
+   uri: http://www.opengis.net/def/serviceType/ogc/wms
+   label: OGC Web Map Service - Cached
+   url: https://wiki.osgeo.org/wiki/WMS_Tile_Caching
+-
+   format: WMTS
+   identifier: OGC:WMTS
+   uri: http://www.opengeospatial.org/standards/wmts
+   label: OGC Web Map Tile Service
+   url: http://www.opengeospatial.org/standards/wmts
+-
+   format: WPS
+   identifier: OGC:WPS
+   uri: http://www.opengis.net/def/serviceType/ogc/wps
+   label: OGC Web Processing Service
+   url: http://www.opengeospatial.org/standards/wps
+-
+   format: ODS
+   identifier: OGC:ODS
+   uri: http://www.opengeospatial.org/standards/ols#ods
+   label: OGC OpenLS Directory Service
+   url: http://www.opengeospatial.org/standards/ols
+-
+   format: OGS
+   identifier: OGC:OGS
+   uri: http://www.opengeospatial.org/standards/ols#ogs
+   label: OGC OpenLS Gateway Service
+   url: http://www.opengeospatial.org/standards/ols
+-
+   format: OUS
+   identifier: OGC:OUS
+   uri: http://www.opengeospatial.org/standards/ols#ous
+   label: OGC OpenLS Utility Service
+   url: http://www.opengeospatial.org/standards/ols
+-
+   format: OPS
+   identifier: OGC:OPS
+   uri: http://www.opengeospatial.org/standards/ols#ops
+   label: OGC OpenLS Presentation Service
+   url: http://www.opengeospatial.org/standards/ols
+-
+   format: ORS
+   identifier: OGC:ORS
+   uri: http://www.opengeospatial.org/standards/ols#ors
+   label: OGC OpenLS Route Service
+   url: http://www.opengeospatial.org/standards/ols
+-
+   format: CT
+   identifier: OGC:CT
+   uri: http://www.opengeospatial.org/standards/ct
+   label: OGC Coordinate Transformation Service
+   url: http://www.opengeospatial.org/standards/ct
+-
+   format: WFS-G
+   identifier: OGC:WFS-G
+   uri: http://www.opengeospatial.org/standards/wfs-g
+   label: Gazetteer Service Profile of the Web Feature Service Implementation Specification
+   url: http://portal.opengeospatial.org/files/?artifact_id=7175
+-
+   format: OWC
+   identifier: OGC:OWC
+   uri: http://www.opengeospatial.org/standards/owc
+   label: OGC OWS Context
+   url: http://www.opengeospatial.org/standards/owc
+-
+   format: GPKG
+   identifier: OGC:GPKG
+   uri: http://www.opengeospatial.org/standards/geopackage
+   label: OGC Geopackage
+   url: http://www.opengeospatial.org/standards/geopackage
+-
+   format: IOT
+   identifier: OGC:IoT
+   uri: http://www.ogcnetwork.net/IoT
+   label: OGC SensorThings API
+   url: http://ogc-iot.github.io/ogc-iot-api
+-
+   format: OGCFeat
+   identifier: OGCFeat
+   uri: http://www.opengis.net/def/interface/ogcapi-features
+   label: OGC API - Features
+   url: https://ogcapi.ogc.org/features
+-
+   format: OGCMaps
+   identifier: OGCMaps
+   uri: http://www.opengis.net/def/interface/ogcapi-maps
+   label: OGC API - Maps
+   url: https://ogcapi.ogc.org/maps
+-
+   format: OGCTile
+   identifier: OGCTile
+   uri: http://www.opengis.net/def/interface/ogcapi-tiles
+   label: OGC API - Tiles
+   url: https://ogcapi.ogc.org/tiles
+-
+   format: OGCCov
+   identifier: OGCCov
+   uri: http://www.opengis.net/def/interface/ogcapi-coverages
+   label: OGC API - Coverages
+   url: https://ogcapi.ogc.org/coverages
+-
+   format: OGCRec
+   identifier: OGCRec
+   uri: http://www.opengis.net/def/interface/ogcapi-records
+   label: OGC API - Records
+   url: https://ogcapi.ogc.org/records
+-
+   format: OGCProc
+   identifier: OGCProc
+   uri: http://www.opengis.net/def/interface/ogcapi-processes
+   label: OGC API - Processes
+   url: https://ogcapi.ogc.org/processes
+-
+   format: OGCStyl
+   identifier: OGCStyl
+   uri: http://www.opengis.net/def/interface/ogcapi-styles
+   label: OGC API - Styles
+   url: https://ogcapi.ogc.org/styles
+-
+   format: OGCEDR
+   identifier: OGCEDR
+   uri: http://www.opengis.net/def/interface/ogcapi-edr
+   label: OGC API - EDR
+   url: https://ogcapi.ogc.org/edr
+-
+   format: OGCDGGS
+   identifier: OGCDGGS
+   uri: http://www.opengis.net/def/interface/ogcapi-dggs
+   label: OGC API - DGGS
+   url: https://ogcapi.ogc.org/dggs
+-
+   format: OGCRout
+   identifier: OGCRout
+   uri: http://www.opengis.net/def/interface/ogcapi-routes
+   label: OGC API - Routes
+   url: https://ogcapi.ogc.org/routes
+-
+   format: JOINS
+   identifier: OGCAPI:Joins
+   uri: http://www.opengis.net/def/interface/ogcapi-joins
+   label: OGC API - Joins
+   url: https://ogcapi.ogc.org/joins
+-
+   format: MOVINGFEATURES
+   identifier: OGCAPI:MovingFeatures
+   uri: http://www.opengis.net/def/interface/ogcapi-moving-features
+   label: OGC API - Moving Features
+   url: https://ogcapi.ogc.org/movingfeatures
+-
+   format: 3DGEOVOLUMES
+   identifier: OGCAPI:3DGeoVolumes
+   uri: http://www.opengis.net/def/interface/ogcapi-3d-geo-volumes
+   label: OGC API - 3D GeoVolumes
+   url: https://ogcapi.ogc.org/geovolumes
+-
+   format: TMS
+   identifier: OSGEO:TMS
+   uri: https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
+   label: OSGeo Tile Map Service Specification
+   url: https://wiki.osgeo.org/wiki/Tile_Map_Service_Specification
+-
+   format: XYZ
+   identifier: OSM:XYZ
+   uri: https://wiki.openstreetmap.org/wiki/Slippy_map_tilenames
+   label: XYZ
+   url: https://en.wikipedia.org/wiki/Tiled_web_map
+-
+   format: STAC
+   identifier: radiantearth:stac
+   uri: https://stacspec.org
+   label: SpatioTemporal Asset Catalog
+   url: https://stacspec.org
+-
+   format: ARCIMS
+   identifier: ESRI:ArcIMS
+   uri: urn:x-esri:serviceType:ArcIMS
+   label: ESRI ArcIMS Service
+   url: 
+-
+   format: ARCGIS
+   identifier: ESRI:ArcGIS
+   uri: urn:x-esri:serviceType:ArcGIS
+   label: ESRI ArcGIS Service
+   url: 
+-
+   format: MPK
+   identifier: ESRI:MPK
+   uri: http://esriurl.com/mpk.xml
+   label: ArcGIS Map Package
+   url: http://esriurl.com/mpk.xml
+-
+   format: OPENDAD
+   identifier: OPeNDAP:OPeNDAP
+   uri: 
+   label: OPeNDAP root URL
+   url: http://docs.opendap.org/index.php/UserGuideOPeNDAPMessages
+-
+   format: HYRAX
+   identifier: OPeNDAP:Hyrax
+   uri: 
+   label: OPeNDAP Hyrax server
+   url: http://docs.opendap.org/index.php/Hyrax
+-
+   format: NCSS
+   identifier: UNIDATA:NCSS
+   uri: 
+   label: NetCDF Subset Service
+   url: https://www.unidata.ucar.edu/software/thredds/current/tds/interfaceSpec/NetcdfSubsetService.html
+-
+   format: CDM
+   identifier: UNIDATA:CDM
+   uri: 
+   label: Common Data Model Remote Web Service
+   url: https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/stream/CdmRemote.html
+-
+   format: CDMREMOTE
+   identifier: UNIDATA:CdmRemote
+   uri: 
+   label: Common Data Model index subsetting
+   url: https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/stream/CdmRemote.html
+-
+   format: CDMRFEATURE
+   identifier: UNIDATA:CdmrFeature
+   uri: 
+   label: Common Data Model coordinate subsetting
+   url: https://www.unidata.ucar.edu/software/thredds/current/netcdf-java/stream/CdmRemote.html
+-
+   format: THREDDS
+   identifier: UNIDATA:THREDDS
+   uri: http://www.unidata.ucar.edu/namespaces/thredds/InvCatalog/v1.0
+   label: THREDDS Catalog
+   url: http://www.unidata.ucar.edu/software/thredds/current/tds/catalog/InvCatalogSpec.html
+-
+   format: GML
+   identifier: OGC:GML
+   uri: http://www.opengis.net/gml
+   label: OGC Geography Markup Language
+   url: 
+-
+   format: LINK
+   identifier: WWW:LINK
+   uri: http://www.w3.org/TR/xlink/
+   label: Web Address (URL)
+   url: 
+-
+   format: WSDL
+   identifier: WWW:WSDL
+   uri: http://www.w3.org/TR/wsdl
+   label: Web Service Description Language XML document describing service operation
+   url: http://www.w3.org/TR/wsdl
+-
+   format: SPARQLQ
+   identifier: WWW:SPARQL:1.1
+   uri: http://www.w3.org/TR/sparql11-protocol
+   label: SPARQL protocol for HTTP
+   url: http://www.w3.org/TR/rdf-sparql-query
+-
+   format: OPENSEARCH1.1
+   identifier: OpenSearch1.1
+   uri: http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_URL_template_syntax
+   label: OpenSearch template
+   url: http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_URL_template_syntax
+-
+   format: OPENSEARCH1.1:DESCRIPTION
+   identifier: OpenSearch1.1:Description
+   uri: http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document
+   label: OpenSearch description document
+   url: http://www.opensearch.org/Specifications/OpenSearch/1.1#OpenSearch_description_document
+-
+   format: INFORMATION
+   identifier: information
+   uri: 
+   label: link provides information about resource
+   url: 
+-
+   format: TEMPLATE
+   identifier: template
+   uri: http://tools.ietf.org/html/rfc6570
+   label: link provides template to access resource
+   url: http://tools.ietf.org/html/rfc6570
+-
+   format: DOWNLOAD
+   identifier: download
+   uri: 
+   label: link will get resource
+   url: 
+-
+   format: SERVICE
+   identifier: service
+   uri: 
+   label: link is service endpoint
+   url: 
+-
+   format: ORDER
+   identifier: order
+   uri: 
+   label: link provides form to obtain resource
+   url: 
+-
+   format: SEARCH
+   identifier: search
+   uri: 
+   label: link provides form for searching resource
+   url: 
+-
+   format: COLLECTIONCAST
+   identifier: esip:CollectionCast
+   uri: http://commons.esipfed.org/ns/discovery/1.2/collectionCast#
+   label: ESIP collection cast
+   url: 
+-
+   format: TILEJSON
+   identifier: tilejson:2.0.0
+   uri: 
+   label: tile mill map service description
+   url: https://github.com/mapbox/tilejson-spec
+-
+   format: FDSNWS-EVENT
+   identifier: iris:fdsnws-event
+   uri: http://service.iris.edu/fdsnws/event/1/
+   label: IRIS Seismic event service
+   url: http://service.iris.edu/fdsnws/event/1
+-
+   format: QUAKEML1.2
+   identifier: QuakeML1.2
+   uri: http://quakeml.org /xmlns /quakeml/1.2
+   label: Earthquake markup language
+   url: https://quake.ethz.ch/quakeml
+-
+   format: FILE
+   identifier: file
+   uri: 
+   label: a file
+   url: http://docs.ckan.org/en/ckan-1.8/domain-model-resource.html
+-
+   format: ISO19115
+   identifier: ISO 19115:2003/19139
+   uri: 
+   label: ISO 19115 metadata in ISO19139 encoding
+   url: 
+-
+   format: ISO-USGIN
+   identifier: ISO-USGIN
+   uri: 
+   label: USGIN-profile ISO 19115 metadata
+   url: http://repository.usgin.org/uri_gin/usgin/dlio/337
+-
+   format: ISO-USGIN-1.3
+   identifier: ISO-USGIN-1.3
+   uri: 
+   label: USGIN-profile v.1.3 ISO 19115 metadata
+   url: http://repository.usgin.org/uri_gin/usgin/dlio/337
+-
+   format: HTTPS
+   identifier: http
+   uri: https://www.ietf.org/rfc/rfc2616
+   label: Hypertext transfer Protocol, v1.1
+   url: https://www.ietf.org/rfc/rfc2616.txt
+-
+   format: HTTPS
+   identifier: https
+   uri: https://tools.ietf.org/html/rfc2818
+   label: HTTP over TLS
+   url: https://www.ietf.org/rfc/rfc2818.txt
+-
+   format: FTP
+   identifier: ftp
+   uri: https://tools.ietf.org/html/rfc959
+   label: FILE TRANSFER PROTOCOL (FTP)
+   url: https://www.ietf.org/rfc/rfc959.txt
+-
+   format: GEOJSON
+   identifier: IETF:GeoJSON
+   uri: http://geojson.org
+   label: GeoJSON
+   url: https://datatracker.ietf.org/doc/draft-butler-geojson
+-
+   format: GIT
+   identifier: GIT
+   uri: http://git-scm.com/
+   label: GIT
+   url: http://git-scm.com/book/commands
+-
+   format: DATAPACKAGE
+   identifier: OKFN:datapackage
+   uri: http://data.okfn.org/doc/data-package
+   label: OKFN Data Package
+   url: http://dataprotocols.org/data-packages
+-
+   format: GEOGIGG
+   identifier: boundless:geogig
+   uri: http://geogig.org
+   label: Boundless GeoGig
+   url: http://geogig.org/docs/interaction/web-api.html
+-
+   format: ODATA
+   identifier: OASIS:OData:4.0
+   uri: http://docs.oasis-open.org/odata/odata/v4.0
+   label: OData v4.0
+   url: http://docs.oasis-open.org/odata/odata/v4.0/odata-v4.0-part1-protocol.html
+-
+   format: DAT
+   identifier: maxogden:dat
+   uri: http://dat-data.com
+   label: dat REST API
+   url: https://github.com/maxogden/dat/blob/master/docs/rest-api.md
+-
+   format: REST
+   identifier: geoserver:rest
+   uri: http://docs.geoserver.org/latest/en/user/rest
+   label: GeoServer REST configuration API
+   url: http://docs.geoserver.org/latest/en/user/rest
+-
+   format: PROTOCOL-BUFFERS
+   identifier: google:protocol-buffers
+   uri: https://developers.google.com/protocol-buffers
+   label: Google Protocol Buffers
+   url: https://developers.google.com/protocol-buffers
+-
+   format: FUSION-TABLES
+   identifier: google:fusion-tables
+   uri: http://google.com/fusiontables
+   label: Google Fusion Tables
+   url: https://developers.google.com/fusiontables
+-
+   format: LAS
+   identifier: NOAA:LAS
+   uri: http://ferret.pmel.noaa.gov/LAS
+   label: Live Access Server
+   url: http://ferret.pmel.noaa.gov/LAS/documentation/developer-documentation/the-xml-messages-used-by-las
+-
+   format: OSM
+   identifier: OSM
+   uri: http://wiki.openstreetmap.org/wiki/API
+   label: Open Street Map API
+   url: http://wiki.openstreetmap.org/wiki/API
+-
+   format: GRIDDAP
+   identifier: ERDDAP:griddap
+   uri: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+   label: ERDDAP Data Service for Gridded Datasets
+   url: http://coastwatch.pfeg.noaa.gov/erddap/griddap/documentation.html
+-
+   format: TABLEDAP
+   identifier: ERDDAP:tabledap
+   uri: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+   label: ERDDAP Data Service for Tabular Datasets
+   url: http://coastwatch.pfeg.noaa.gov/erddap/tabledap/documentation.html
+-
+   format: AMQP
+   identifier: OASIS:AMQP
+   uri: https://amqp.org
+   label: Advanced Message Queuing Protocol
+   url: https://amqp.org
+-
+   format: S3
+   identifier: Amazon:AWS:S3
+   uri: https://aws.amazon.com/documentation/s3/
+   label: Amazon Simple Storage Solution
+   url: https://aws.amazon.com/documentation/s3/
+-
+   format: BIGQUERY
+   identifier: Google:GCP:BigQuery
+   uri: https://cloud.google.com/bigquery/
+   label: Google Big Query
+   url: https://cloud.google.com/bigquery/
+-
+   format: GCS
+   identifier: Google:GCP:GCS
+   uri: https://cloud.google.com/storage/
+   label: Google Cloud Storage
+   url: https://cloud.google.com/storage/
+-
+   format: IMAGE
+   identifier: IIIF:Image
+   uri: http://iiif.io/api/image
+   label: IIIF Image API
+   url: http://iiif.io/api/image/2.1/
+-
+   format: GEO
+   identifier: FILE:GEO
+   uri: 
+   label: Vector file on the network
+   url: 
+-
+   format: RASTER
+   identifier: FILE:RASTER
+   uri: 
+   label: Raster file on the network
+   url: 
+-
+   format: POSTGIS
+   identifier: DB:POSTGIS
+   uri: 
+   label: PostGIS table
+   url: https://postgis.net
+-
+   format: MQTT
+   identifier: OASIS:MQTT
+   uri: https://mqtt.org
+   label: MQTT
+   url: https://mqtt.org
