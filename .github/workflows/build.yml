@@ -22,11 +22,11 @@ jobs:
     -  name: Set up QEMU
        uses: docker/setup-qemu-action@v1
 
-    -  name: NGINX build
+    -  name: Apache build
        uses: docker/build-push-action@v2
        with:
-          context: ./nginx
-          file: ./nginx/Dockerfile
+          context: ./apache
+          file: ./apache/Dockerfile
           push: false
           tags: kowhai/ckan-docker-nginx:test-build-only
 
@@ -42,6 +42,14 @@ jobs:
        uses: docker/build-push-action@v2
        with:
           context: ./solr
+          file: ./solr/Dockerfile
+          push: false
+          tags: kowhai/ckan-docker-solr:test-build-only
+
+    -  name: ckan-pycsw build
+       uses: docker/build-push-action@v2
+       with:
+          context: ./ckan-pycsw
           file: ./solr/Dockerfile
           push: false
           tags: kowhai/ckan-docker-solr:test-build-only
