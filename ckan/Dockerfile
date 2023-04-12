@@ -20,6 +20,7 @@ RUN if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then \
 ### Resource dictionary (Fix version) - main ###
 ### Pages - v0.5.1 ###
 ### PDFView - v0.0.8 ###
+### IEPNB Theme - v0.0.5 ###
 RUN echo "ckan/ckanext-xloader" && \
     pip3 install -e 'git+https://github.com/ckan/ckanext-xloader.git@0.12.2#egg=ckanext-xloader' && \ 
     pip3 install -r ${APP_DIR}/src/ckanext-xloader/requirements.txt && \
