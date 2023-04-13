@@ -8,3 +8,6 @@ _solr/schema.xml
 _src/*
 local/*
 .vscode
+__pycache__
+log
+metadata
