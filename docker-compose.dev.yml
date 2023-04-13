@@ -56,7 +56,7 @@ services:
       - solr_data:/var/solr
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${SOLR_PORT}/solr/"]
 
   redis:
     container_name: ${REDIS_CONTAINER_NAME}
