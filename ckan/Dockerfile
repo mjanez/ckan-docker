@@ -51,8 +51,8 @@ RUN echo "ckan/ckanext-xloader" && \
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
-# Update who.ini (APACHE_CKAN_LOCATION)
-COPY setup/who.ini setup/prerun.py ${APP_DIR}/
+# Update who.ini with APACHE_CKAN_LOCATION
+COPY setup/who.ini ${APP_DIR}/
 
 # Apply any patches needed to CKAN core
 COPY patches ${APP_DIR}/patches
