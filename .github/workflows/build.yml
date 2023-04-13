@@ -53,3 +53,11 @@ jobs:
           file: ./solr/Dockerfile
           push: false
           tags: mjanez/ckan-docker-solr:test-build-only
+
+    -  name: ckan-pycsw build
+       uses: docker/build-push-action@v4
+       with:
+          context: ./ckan-pycsw
+          file: ./ckan-pycsw/Dockerfile
+          push: false
+          tags: mjanez/ckan-docker-pycsw:test-build-only
