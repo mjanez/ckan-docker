@@ -4,8 +4,7 @@ on:
   # Trigger the workflow on push or pull request,
   # but only for the master branch
   push:
-    branches:
-      - master
+    branches: ['master', 'ckan-*.*.*']
   pull_request:
     branches:
       - master
