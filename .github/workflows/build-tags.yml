@@ -3,7 +3,8 @@ name: Build CKAN Docker auxiliary images - ckan-*.*.*
 on:
   # Trigger the workflow on push or pull request
   push:
-    branches: ['ckan-*.*.*']
+    branches:
+      - 'ckan-*.*.*'
   pull_request:
     branches:
       - ckan-*.*.*
