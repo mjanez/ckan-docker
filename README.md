@@ -27,7 +27,12 @@ Contains Docker images for the different components of CKAN Cloud and a Docker c
 
 
 Available components:
-* CKAN custom image based on the official CKAN repo [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1]
+* CKAN custom image based on the official CKAN repo [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1]. The following CKAN versions are available:
+
+| CKAN Version | Type | Docker tag | Notes |
+| --- | --- | --- | --- |
+| 2.9.8 | custom image | [`ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial/85369559?tag=ckan-2.9.8) | Stable version with CKAN 2.9.8 |
+| master | custom image | [`ghcr.io/mjanez/ckan-spatial:master`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial/85369559?tag=master) | Latest version. |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
