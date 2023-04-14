@@ -10,6 +10,7 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: mjanez/ckan-spatial
 
+
 jobs: 
   build:
     runs-on: ubuntu-latest
