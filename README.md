@@ -27,7 +27,7 @@ Contains Docker images for the different components of CKAN Cloud and a Docker c
 
 
 Available components:
-* CKAN custom image based on the official CKAN repo [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1] The following CKAN versions are available:
+* CKAN custom image based on the official CKAN repo [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1]. The following CKAN versions are available:
 
 | CKAN Version | Type | Docker tag | Notes |
 | --- | --- | --- | --- |
@@ -48,7 +48,7 @@ Optional HTTP Endpoint ([`docker-compose.nginx.yml`](/docker-compose.nginx.yml))
 
 | Compose files | Repository | Type | Docker tag | Size | Notes |
 | --- | --- | --- | --- | --- | --- |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-cospatianginx.yml) | CKAN 2.9.8 | custom image | [`mjanez/ckan-spatial:master`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial/85369559?tag=master) | 900 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-cospatianginx.yml) | CKAN 2.9.8 | custom image | [`mjanez/ckan-spatial:ckan-2.9.8`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial/85153963?tag=ckan-2.9.8) | 900 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr8-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr8-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | Redis 7.0.10 | base image | [`redis/redis:7-alpine`](https://hub.docker.com/layers/library/redis/7-alpine/images/sha256-98f4ea44e912d0941d29015a4e2448151b94411109c896b5627d94d79306eea7?context=explore) | 11.82 MB |  - |
