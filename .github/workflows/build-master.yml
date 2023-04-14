@@ -1,11 +1,9 @@
-name: Build CKAN Docker auxiliary images 
+name: Build CKAN Docker auxiliary images - master
 
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch
+  # Trigger the workflow on push or pull request
   push:
-    branches:
-      - master
+    branches: ['master']
   pull_request:
     branches:
       - master
