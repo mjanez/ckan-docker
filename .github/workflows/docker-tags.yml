@@ -3,7 +3,7 @@ name: Build & Push CKAN-Spatial Docker ckan-*.*.* image
 on:
   # Trigger the workflow after build.yml
   workflow_run:
-    workflows: ["Build CKAN Docker auxiliary images"]
+    workflows: ["Build CKAN Docker auxiliary images - ckan-*.*.*"]
     branches: ['ckan-*.*.*']
     pull_request:
       branches: ['ckan-*.*.*']
