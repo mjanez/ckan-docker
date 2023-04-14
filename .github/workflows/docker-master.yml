@@ -15,7 +15,7 @@ env:
   IMAGE_NAME: mjanez/ckan-spatial
 
 jobs: 
-  build:  
+  build:
     runs-on: ubuntu-latest
     steps:
       -

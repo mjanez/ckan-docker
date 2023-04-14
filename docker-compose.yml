@@ -26,9 +26,7 @@ services:
     build:
       context: ckan/
       dockerfile: Dockerfile
-      args:
-        - TZ=${TZ}
-    image: ghcr.io/mjanez/ckan-spatial:master
+    image: ghcr.io/mjanez/ckan-spatial:ckan-ckan-${CKAN_VERSION}
     env_file:
       - .env
     depends_on:
