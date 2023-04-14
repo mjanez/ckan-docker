@@ -1,0 +1,61 @@
+name: Build CKAN Docker auxiliary images - ckan-*.*.*
+
+on:
+  # Trigger the workflow on push or pull request
+  push:
+    branches: ['ckan-*.*.*']
+  pull_request:
+    branches:
+      - ckan-*.*.*
+
+jobs: 
+  build:  
+    runs-on: ubuntu-latest
+    steps: 
+    -  uses: actions/checkout@v3
+
+    -  name: Set up Docker Buildx
+       uses: docker/setup-buildx-action@v2
+      
+    -  name: Set up QEMU
+       uses: docker/setup-qemu-action@v2
+
+    -  name: NGINX build
+       uses: docker/build-push-action@v4
+       with:
+          context: ./nginx
+          file: ./nginx/Dockerfile
+          push: false
+          tags: mjanez/ckan-docker-nginx:test-build-only
+
+    -  name: Apache HTTP Server build
+       uses: docker/build-push-action@v4
+       with:
+          context: ./apache
+          file: ./apache/Dockerfile
+          push: false
+          tags: mjanez/ckan-docker-apache:test-build-only
+
+    -  name: PostgreSQL build
+       uses: docker/build-push-action@v4
+       with:
+          context: ./postgresql
+          file: ./postgresql/Dockerfile
+          push: false
+          tags: mjanez/ckan-docker-postgresql:test-build-only
+
+    -  name: Solr build
+       uses: docker/build-push-action@v4
+       with:
+          context: ./solr
+          file: ./solr/Dockerfile
+          push: false
+          tags: mjanez/ckan-docker-solr:test-build-only
+
+    -  name: ckan-pycsw build
+       uses: docker/build-push-action@v4
+       with:
+          context: ./ckan-pycsw
+          file: ./ckan-pycsw/Dockerfile
+          push: false
+          tags: mjanez/ckan-docker-pycsw:test-build-only
