@@ -1,6 +1,6 @@
 name: Build & Push ckan-spatial Tag image
 
-om:
+on:
   push:
     branches:
       - 'ckan-*.*.*'
