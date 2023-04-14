@@ -421,8 +421,8 @@ Debug with pdb (example) - Interact with `docker attach $(docker container ls -q
 command: `python -m pdb /usr/lib/ckan/venv/bin/ckan --config /srv/app/ckan.ini run --host 0.0.0.0 --passthrough-errors`
 
 
-### Datastore and datapusher
-The Datastore database and user is created as part of the entrypoint scripts for the db container. There is also a Datapusher container running the latest version of Datapusher.
+### Datastore
+The Datastore database and user is created as part of the entrypoint scripts for the db container.
 
 
 ### Apache HTTP Server
