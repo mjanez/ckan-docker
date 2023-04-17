@@ -245,6 +245,8 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
   After=docker.service
 
   [Service]
+  User=docker
+  Group=docker
   Type=oneshot
   RemainAfterExit=yes
   WorkingDirectory=/path/to/project/ckan-docker/
@@ -256,7 +258,7 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
   WantedBy=multi-user.target
   ```
 
-2. Replace `/path/to/project/ckan-docker/` with the path where your project's `docker-compose.yml` file is located and and check the path to the docker compose binary on execution and stop: `/bin/docker`.
+2. Replace `/path/to/project/ckan-docker/` with the path where your project's `docker-compose.yml` file is located and and check the path to the docker compose binary on execution and stop: `/bin/docker`. Also change the `User` / `Group` to execute the service.
 3. Load the systemd service file with the following command:
 
   ```bash
