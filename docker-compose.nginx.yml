@@ -32,7 +32,7 @@ services:
     build:
       context: ckan/
       dockerfile: Dockerfile
-    image: ghcr.io/mjanez/ckan-spatial:master
+    image: ghcr.io/mjanez/ckan-spatial:ckan-2.9.8
     env_file:
       - .env
     logging:
