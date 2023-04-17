@@ -15,6 +15,11 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
     depends_on:
       ckan:
         condition: service_healthy
@@ -27,9 +32,14 @@ services:
     build:
       context: ckan/
       dockerfile: Dockerfile
-    image: ghcr.io/mjanez/ckan-spatial:master
+    image: ghcr.io/mjanez/ckan-spatial:ckan-2.9.8
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
     depends_on:
       db:
         condition: service_healthy
@@ -56,6 +66,11 @@ services:
       - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/var/lib/postgresql/data/db
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
     volumes:
       - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
@@ -70,6 +85,11 @@ services:
     image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
     volumes:
       - solr_data:/var/solr
     restart: unless-stopped
@@ -79,6 +99,11 @@ services:
   redis:
     container_name: ${REDIS_CONTAINER_NAME}
     image: redis:${REDIS_VERSION}
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
