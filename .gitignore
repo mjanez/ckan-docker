@@ -11,3 +11,6 @@ local/*
 __pycache__
 log
 metadata
+
+# environment
+.env

@@ -57,7 +57,7 @@ Optional HTTP Endpoint ([`docker-compose.nginx.yml`](/docker-compose.nginx.yml))
 | [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | NGINX 1.22.1 | base image | [`nginx:stable-alpine`](https://hub.docker.com/layers/library/nginx/stable-alpine/images/sha256-ff2a5d557ca22fa93669f5e70cfbeefda32b98f8fd3d33b38028c582d700f93a?context=explore) | 9.74 MB | No routing, only CKAN. Custom Dockerfile: [`nginx/Dockerfile`](/nginx/Dockerfile) |
 
 
-The site is configured using environment variables that you can set in the `.env` file for an Apache HTTP Server and ckan-pycsw deployment, or replace it with the [`.env.nginx.example`](/samples/.env.nginx.example) for a NGINX and CKAN-only deployment using the Docker Compose file: [`docker-compose.nginx.yml`](/docker-compose.nginx.yml).
+The site is configured using environment variables that you can set in the `.env` file for an Apache HTTP Server and ckan-pycsw deployment (default `.env.example`), or replace it with the [`.env.nginx.example`](/samples/.env.nginx.example) for a NGINX and CKAN-only deployment using the Docker Compose file: [`docker-compose.nginx.yml`](/docker-compose.nginx.yml).
 
 
 ### ckan-docker roadmap
@@ -170,45 +170,49 @@ docker compose [-p <my_project>] down
 ### Base mode
 Use this if you are a maintainer and will not be making code changes to CKAN or to CKAN extensions.
 
-Clone project
-  ```shell
-  cd /path/to/my/project
-  git clone https://github.com/mjanez/ckan-docker.git
-  ```
+1. Clone project
+    ```shell
+    cd /path/to/my/project
+    git clone https://github.com/mjanez/ckan-docker.git
+    ```
 
-Modify [`.env`](/.env) depending on your own needs.
+2. Copy the `.env.example` template (or use another from [`/samples/`](/samples/)) and modify the resulting `.env` to suit your needs.
 
-- **Apache HTTP Server & CKAN/ckan-pycsw endpoints**: Modifiy the variables about the site URL or locations (`CKAN_SITE_URL` `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `APACHE_SERVER_NAME`, `APACHE_CKAN_LOCATION`, `APACHE_PYCSW_LOCATION`, etc.).
+    ```shell
+    cp .env.example .env
+    ```
 
-- **NGINX only CKAN**: Replace the [`.env`](/.env) with the [`.env.nginx.example`](/samples/.env.nginx.example) and modify the variables as needed.
+    - **Apache HTTP Server & CKAN/ckan-pycsw endpoints**: Modifiy the variables about the site URL or locations (`CKAN_SITE_URL` `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `APACHE_SERVER_NAME`, `APACHE_CKAN_LOCATION`, `APACHE_PYCSW_LOCATION`, etc.).
 
->**Note**:<br>
-> Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
+    - **NGINX only CKAN**: Replace the [`.env`](/.env) with the [`/samples/.env.nginx.example`](/samples/.env.nginx.example) and modify the variables as needed.
 
->**Warning**:<br>
-> Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). **This should be obviously changed before running this setup as a public CKAN instance.**
+    >**Note**:<br>
+    > Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
 
-To build the images:
-  ```bash
-  docker compose build 
-  ```
-  >**Note**<br>
-  > NGINX CKAN without ckan-pycsw and Apache:
-  >```bash
-  >docker compose -f docker-compose.nginx.yml build
-  >```
+    >**Warning**:<br>
+    > Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD`(`ckan_admin` and `test1234` by default). **This should be obviously changed before running this setup as a public CKAN instance.**
+
+3. Build the images:
+    ```bash
+    docker compose build 
+    ```
+    >**Note**<br>
+    > NGINX CKAN without ckan-pycsw and Apache:
+    >```bash
+    >docker compose -f docker-compose.nginx.yml build
+    >```
   
 
-To start the containers:
-  ```bash
-  docker compose up
-  ```
+4. Start the containers:
+    ```bash
+    docker compose up
+    ```
 
-  >**Note**<br>
-  > NGINX CKAN without ckan-pycsw and Apache:
-  >```bash
-  >docker compose -f docker-compose.nginx.yml up
-  >```
+    >**Note**<br>
+    > NGINX CKAN without ckan-pycsw and Apache:
+    >```bash
+    >docker compose -f docker-compose.nginx.yml up
+    >```
 
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. You could also use the -d "detach mode" option ie: `docker compose up -d` if you wished to use the current 
