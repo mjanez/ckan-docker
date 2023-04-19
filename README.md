@@ -319,12 +319,12 @@ The new extension files and directories are created in the `/srv/app/src_extensi
 
 
 ## CKAN images
-![ckan images](https://user-images.githubusercontent.com/54408245/207079416-a01235af-2dea-4425-b6fd-f8c3687dd993.png)
+![CKAN Docker Platform](/doc/img/ckan-docker-images.png)
 
 The Docker image config files used to build your CKAN project are located in the `ckan/` folder. There are two Docker files:
 
-* `Dockerfile`: this is based on `ckan/ckan-base:<version>`, a base image located in the DockerHub repository, that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
-* `Dockerfile.dev`:  this is based on `ckan/ckan-base:<version>-dev` also located located in the DockerHub repository, and extends `ckan/ckan-base:<version>` to include:
+* `Dockerfile`: this is based on `ckan/ckan-spatial:<version>`, a base image located in the [Github Package Registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial), that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
+* `Dockerfile.dev`:  this is based on `ckan/ckan-spatial:<version>-dev` also located located in the Github Package Registry, and extends `ckan/ckan-spatial:<version>` to include:
 
   * Any extension cloned on the `src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
   * CKAN is started running this: `/usr/bin/ckan -c /srv/app/ckan.ini run -H 0.0.0.0`.
