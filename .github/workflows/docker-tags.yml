@@ -1,4 +1,4 @@
-name: Build & Push ckan-spatial Tag image
+name: Build & Push ckan-spatial - ckan-*.*.*
 
 on:
   push:

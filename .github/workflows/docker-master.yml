@@ -1,4 +1,4 @@
-name: Build & Push CKAN-Spatial Docker master image 
+name: Build & Push ckan-spatial - master
 
 on:
   # Trigger the workflow after build.yml
