@@ -198,30 +198,22 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
     ```bash
     docker compose build 
     ```
+
     >**Note**<br>
-    > NGINX CKAN without ckan-pycsw and Apache:
-    >```bash
-    >docker compose -f docker-compose.nginx.yml build
-    >```
-  
+    > You can use a [deploy in 5 minutes](#quick-mode) if you just want to test the package. 
 
 4. Start the containers:
     ```bash
     docker compose up
     ```
 
-    >**Note**<br>
-    > NGINX CKAN without ckan-pycsw and Apache:
-    >```bash
-    >docker compose -f docker-compose.nginx.yml up
-    >```
-
 This will start up the containers in the current window. By default the containers will log direct to this window with each container
 using a different colour. You could also use the -d "detach mode" option ie: `docker compose up -d` if you wished to use the current 
 window for something else.
 
 >**Note**<br>
-> Or `docker compose up --build` to build & up the containers.
+> * Or `docker compose up --build` to build & up the containers.
+> * Or `docker compose -f docker-compose.nginx.yml up -d --build` to use the NGINX version.
 
 At the end of the container start sequence there should be 6 containers running (or 5 if use NGINX Docker Compose file)
 
@@ -234,7 +226,7 @@ After this step, CKAN should be running at {`APACHE_SERVER_NAME`}{`APACHE_CKAN_L
 |1b8d9789c29a|redis:7-alpine                           |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|6379/tcp              |redis                |       |
 |7f162741254d|ckan/ckan-solr:2.9-solr8-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8983/tcp              |solr                 |       |
 |2cdd25cea0de|ckan-docker-db                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|5432/tcp              |db                   |       |
-|9cdj25dae6gr|ckan-docker-pycsw                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8000/tcp              |db                   |       |
+|9cdj25dae6gr|ckan-docker-pycsw                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8000/tcp              |pycsw                   |       |
 
 
 #### Configure a docker compose service to start on boot
@@ -292,6 +284,17 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
   # Check the status
   sudo systemctl status ckan-docker-compose
   ```
+
+### Quick mode
+If you just want to test the package and see the general functionality of the platform, you can use the `ckan-spatial` image from the [Github container registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial):
+    
+  ```bash
+  cp .env.example .env
+  # Edit the envvars in the .env as you like and start the containers.
+  docker compose -f docker-compose.ghcr.yml up -d --build 
+  ```
+
+It will download the pre-built image and deploy all the containers. Remember to use your own domain by changing `localhost` in the `.env` file.
 
 ### Development mode
 Use this mode if you are making code changes to CKAN and either creating new extensions or making code changes to existing extensions. This mode also uses the `.env` file for config options.

@@ -1,0 +1,37 @@
+FROM ghcr.io/mjanez/ckan-spatial:ckan-2.9.8
+
+# Set up environment variables
+ENV APP_DIR=/srv/app
+ENV TZ=UTC
+RUN echo ${TZ} > /etc/timezone
+
+# Make sure both files are not exactly the same
+RUN if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then \
+    cp /usr/share/zoneinfo/${TZ} /etc/localtime ;\
+    fi ;
+
+# Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
+
+# Update who.ini with APACHE_CKAN_LOCATION
+COPY setup/who.ini ${APP_DIR}/
+
+# Apply any patches needed to CKAN core
+COPY patches ${APP_DIR}/patches
+
+#  Updated version of the Dockerfile RUN command that skips applying a patch if a reversed or previously applied patch is detected
+RUN for d in $APP_DIR/patches/*; do \
+    if [ -d $d ]; then \
+        for f in `ls $d/*.patch | sort -g`; do \
+            cd $SRC_DIR/`basename "$d"` && \
+            if patch -R --dry-run -p1 < "$f"; then \
+                echo "$0: Patch $f has already been applied or reversed, skipping..."; \
+            else \
+                echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; \
+                patch -p1 < "$f" ; \
+            fi \
+        done ; \
+    fi ; \
+done
+
+CMD $APP_DIR/start_ckan.sh
