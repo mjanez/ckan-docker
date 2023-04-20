@@ -1,4 +1,4 @@
-FROM ghcr.io/mjanez/ckan-pycsw:main
+FROM ghcr.io/mjanez/ckan-pycsw:latest
 
 # Set up environment variables
 ENV APP_DIR=/app
