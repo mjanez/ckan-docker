@@ -331,9 +331,29 @@ The Docker image config files used to build your CKAN project are located in the
 * `Dockerfile`: this is based on `ckan/ckan-base-spatial:<version>`, a base image located in the [Github Package Registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-base-spatial), that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
 * `Dockerfile.dev`:  this is based on `ckan/ckan-base-spatial:<version>-dev` also located located in the Github Package Registry, and extends `ckan/ckan-base-spatial:<version>` to include:
 
-  * Any extension cloned on the `src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
+  * Any extension cloned on the `./src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
   * CKAN is started running this: `/usr/bin/ckan -c /srv/app/ckan.ini run -H 0.0.0.0`.
   * Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
+
+* Any custom changes to the scripts run during container start up can be made to scripts in the `setup/` directory. For instance if you wanted to change the port on which CKAN runs you would need to make changes to the Docker Compose yaml file, and the `start_ckan.sh.override` file. Then you would need to add the following line to the Dockerfile ie: `COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh`. The `start_ckan.sh` file in the locally built image would override the `start_ckan.sh` file included in the base image
+
+>**Note**<br>
+> If you get an error like ` doesn't have execute permissions`: 
+>
+>```log
+>Daemon error response: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/srv/app/start_ckan.sh": permission denied: unknown
+>```
+>
+>It may be necessary to give execute permissions to the file in the `Dockerfile`:
+>
+>```dockerfile
+>...
+># Override start_ckan.sh
+>COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh
+>RUN chmod +x ${APP_DIR}/start_ckan.sh
+>...
+>```
+
 
 
 ## CKAN images enhancement

@@ -1,14 +1,8 @@
 FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.8
 
 # Set up environment variables
-ENV APP_DIR=/srv/app
-ENV TZ=UTC
-RUN echo ${TZ} > /etc/timezone
-
-# Make sure both files are not exactly the same
-RUN if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then \
-    cp /usr/share/zoneinfo/${TZ} /etc/localtime ;\
-    fi ;
+ENV APP_DIR=/srv/app \
+    TZ=UTC
 
 # Extensions
 ### XLoader - v0.12.2 ###
@@ -20,7 +14,10 @@ RUN if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then \
 ### Resource dictionary - 1.0.1 ###
 ### Pages - v0.5.1 ###
 ### PDFView - v0.0.8 ###
-RUN echo "ckan/ckanext-xloader" && \
+RUN echo ${TZ} > /etc/timezone && \
+    if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime ; fi && \
+    # Install CKAN extensions
+    echo "ckan/ckanext-xloader" && \
     pip3 install -e 'git+https://github.com/ckan/ckanext-xloader.git@0.12.2#egg=ckanext-xloader' && \ 
     pip3 install -r ${APP_DIR}/src/ckanext-xloader/requirements.txt && \
     pip3 install -U requests[security] && \
