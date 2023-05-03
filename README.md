@@ -337,6 +337,24 @@ The Docker image config files used to build your CKAN project are located in the
 
 * Any custom changes to the scripts run during container start up can be made to scripts in the `setup/` directory. For instance if you wanted to change the port on which CKAN runs you would need to make changes to the Docker Compose yaml file, and the `start_ckan.sh.override` file. Then you would need to add the following line to the Dockerfile ie: `COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh`. The `start_ckan.sh` file in the locally built image would override the `start_ckan.sh` file included in the base image
 
+>**Note**<br>
+> If you get an error like ` doesn't have execute permissions`: 
+>
+>```log
+>Daemon error response: failed to create shim task: OCI runtime create failed: runc create failed: unable to start container process: exec: "/srv/app/start_ckan.sh": permission denied: unknown
+>```
+>
+>It may be necessary to give execute permissions to the file in the `Dockerfile`:
+>
+>```dockerfile
+>...
+># Override start_ckan.sh
+>COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh
+>RUN chmod +x ${APP_DIR}/start_ckan.sh
+>...
+>```
+
+
 
 ## CKAN images enhancement
 ### Extending the base images
