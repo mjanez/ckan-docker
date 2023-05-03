@@ -13,6 +13,8 @@ log/*
 !log/README.md
 metadata/*
 !metadata/README.md
+src/*
+!src/README.md
 
 # environment
 .env
