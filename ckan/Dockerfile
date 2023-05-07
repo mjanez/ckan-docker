@@ -14,6 +14,7 @@ ENV APP_DIR=/srv/app \
 ### Resource dictionary - 1.0.1 ###
 ### Pages - v0.5.1 ###
 ### PDFView - v0.0.8 ###
+### Facet Scheming - 1.0.0 ###
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime ; fi && \
     # Install CKAN extensions
@@ -39,7 +40,10 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "ckan/ckanext-pages" && \
     pip3 install -e git+https://github.com/ckan/ckanext-pages.git@v0.5.1#egg=ckanext-pages && \
     echo "ckan/ckanext-pdfview" && \
-    pip3 install -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview
+    pip3 install -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
+    echo "OpenDataGIS/ckanext-facet_scheming" && \
+    pip3 install -e git+https://github.com/OpenDataGIS/ckanext-facet_scheming.git@1.0.0#egg=ckanext_facet_scheming && \
+    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-facet_scheming/1.0.0/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
