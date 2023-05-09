@@ -153,7 +153,7 @@ window for something else.
 >**Note**<br>
 > Learn more about configuring this ckan docker: 
 > - [Backup the CKAN Database](#ckan-backups)
-> - [Configuring a docker compose service to start on boot](#configure-docker-to-start-on-boot)
+> - [Configuring a docker compose service to start on boot](#docker-compose-configure-a-docker-compose-service-to-start-on-boot)
 
 At the end of the container start sequence there should be 6 containers running (or 5 if use NGINX Docker Compose file)
 
@@ -549,9 +549,6 @@ docker compose [-p <my_project>] down
 ```
 
 ### Docker Compose. Configure a docker compose service to start on boot
->**Note**<br>
-> Test on Debian.
-
 To have Docker Compose run automatically when you reboot a machine, you can follow the steps below:
 1. Create a systemd service file for Docker Compose. You can create a file named `ckan-docker-compose.service` in the `/etc/systemd/system/` folder with the following content:
 
