@@ -1,6 +1,6 @@
 <h1 align="center">CKAN Docker Compose - Open Data & GIS</h1>
 <p align="center">
-<a href="https://github.com/mjanez/ckan-docker"><img src="https://img.shields.io/badge/Docker%20CKAN-2.9.8-brightgreen" alt="CKAN Versions"></a>
+<a href="https://github.com/mjanez/ckan-docker"><img src="https://img.shields.io/badge/Docker%20CKAN--brightgreen" alt="CKAN Versions"></a>
 
 
 <p align="center">
@@ -33,7 +33,8 @@ Available components:
 | CKAN Version | Type | Docker tag | Notes |
 | --- | --- | --- | --- |
 | 2.9.8 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.8 |
-| 2.9.8 | custom image | `ghcr.io/mjanez/ckan-spatial:master` | Latest version. Master branch. |
+| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.9 |
+| 2.9.9 | latest custom image | `ghcr.io/mjanez/ckan-spatial:master` | Latest `ckan-spatial` image. |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
