@@ -10,11 +10,12 @@ ENV APP_DIR=/srv/app \
 ### Geoview - v0.0.20 ###
 ### Spatial - v2.0.0 ###
 ### DCAT - 1.0.0-geodcatap (GeoDCAT-AP extended version) ###
-### Scheming - 1.0.0-geodcatap (GeoDCAT-AP extended version) ###
+### Scheming - 1.1.0-geodcatap (GeoDCAT-AP extended version) ###
 ### Resource dictionary - 1.0.1 ###
 ### Pages - v0.5.1 ###
 ### PDFView - v0.0.8 ###
-### Facet Scheming - 1.0.0 ###
+### Facet Scheming - 1.0.1 ###
+### SPARQL Interface - 2.0.1 ###
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime ; fi && \
     # Install CKAN extensions
@@ -34,7 +35,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install -e git+https://github.com/mjanez/ckanext-dcat.git@1.0.0-geodcatap#egg=ckanext-dcat && \
     pip3 install -r https://raw.githubusercontent.com/mjanez/ckanext-dcat/master/requirements.txt && \
     echo "mjanez/ckanext-scheming (GeoDCAT-AP extended version)" && \
-    pip3 install -e git+https://github.com/mjanez/ckanext-scheming.git@1.0.0-geodcatap#egg=ckanext-scheming && \
+    pip3 install -e git+https://github.com/mjanez/ckanext-scheming.git@1.1.0-geodcatap#egg=ckanext-scheming && \
     echo "mjanez/ckanext-resourcedictionary" && \
     pip3 install -e 'git+https://github.com/mjanez/ckanext-resourcedictionary.git@1.0.1#egg=ckanext-resourcedictionary' && \
     echo "ckan/ckanext-pages" && \
@@ -42,8 +43,11 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "ckan/ckanext-pdfview" && \
     pip3 install -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
     echo "OpenDataGIS/ckanext-facet_scheming" && \
-    pip3 install -e git+https://github.com/OpenDataGIS/ckanext-facet_scheming.git@1.0.0#egg=ckanext_facet_scheming && \
-    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-facet_scheming/1.0.0/requirements.txt
+    pip3 install -e git+https://github.com/OpenDataGIS/ckanext-facet_scheming.git@1.0.1#egg=ckanext_facet_scheming && \
+    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-facet_scheming/1.0.1/requirements.txt && \
+    echo "OpenDataGIS/ckanext-sparql_interface" && \
+    pip3 install -e git+https://github.com/OpenDataGIS/ckanext-sparql_interface.git@2.0.1#egg=ckanext-sparql_interface && \
+    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-sparql_interface/2.0.1/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
