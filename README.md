@@ -3,21 +3,28 @@
 <a href="https://github.com/mjanez/ckan-docker"><img src="https://img.shields.io/badge/Docker%20CKAN-2.9.9-brightgreen" alt="ckan-spatial"></a>
 
 
-* [Overview](#overview)
-* [Installing Docker](#installing-docker)
-* [docker compose vs docker-compose](#docker-compose-vs-docker-compose)
-* [Install CKAN plus dependencies](#install-ckan-plus-dependencies)
-* [Development mode](#development-mode)
-   * [Create an extension](#create-an-extension)
-* [CKAN images](#ckan-images)
-   * [Extending the base images](#extending-the-base-images)
-   * [Applying patches](#applying-patches)
-* [Debugging with pdb](#pdb)
-* [Datastore and Datapusher](#Datastore-and-datapusher)
-* [NGINX](#nginx)
-* [The ckanext-envvars extension](#envvars)
-* [The CKAN_SITE_URL parameter](#CKAN_SITE_URL)
-* [Changing the base image](#Changing-the-base-image)
+<p align="center">
+    <a href="#overview">Overview</a> •
+    <a href="#ckan-docker-roadmap">Branch roadmap</a> •
+    <a href="#environment-docker">Environment: docker</a> •
+    <a href="#install-build-and-run-ckan-plus-dependencies">Install CKAN</a> •
+    <a href="#ckan-images">CKAN images</a> •   
+    <a href="#extending-the-base-images">Extending guide</a> •
+    <a href="#applying-patches">Applying patches</a> •
+    <a href="#ckan-docker-addons">Addons</a> •
+    <a href="#ckan-docker-tips">Info & Backups</a> •
+</p>
+
+**Requirements**:
+* [Docker](https://docs.docker.com/get-docker/)
+
+## Overview
+Contains Docker images for the different components of CKAN Cloud and a Docker compose environment (based on [ckan](https://github.com/ckan/ckan)) for development and testing Open Data portals.
+
+>**Warning**:<br>
+>This is a **custom installation of Docker Compose** with specific extensions for spatial data and [GeoDCAT-AP](https://github.com/SEMICeu/GeoDCAT-AP)/[INSPIRE](https://github.com/INSPIRE-MIF/technical-guidelines) metadata [profiles](https://en.wikipedia.org/wiki/Geospatial_metadata). For official installations, please have a look: [CKAN documentation: Installation](https://docs.ckan.org/en/latest/maintaining/installing/index.html).
+
+![CKAN Docker Platform](/doc/img/ckan-docker-services.png)
 
 
 Available components:
@@ -389,7 +396,6 @@ These parameters can be added to the `.env` file
 For more information please see [ckanext-envvars](https://github.com/okfn/ckanext-envvars)
 
 ## xloader
-
 To replacing DataPusher with XLoader check out the wiki page for this: https://github.com/ckan/ckan-docker/wiki/Replacing-DataPusher-with-XLoader
 
 ### ckan-pycsw
@@ -600,5 +606,9 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
     ```
 
 
-The base image used in the CKAN Dockerfile and Dockerfile.dev can be changed so a different DockerHub image is used eg: ckan/ckan-base:2.9.9
-could be used instead of ckan/ckan-base:2.10.1
+[^1]: Official CKAN repo: https://github.com/ckan/ckan-docker-base
+[^2]: Contains fields needed for the [ckanext-spatial geo search](https://docs.ckan.org/projects/ckanext-spatial/en/latest/spatial-search.html)
+[^3]: Development environment.
+[^4]: Production environment.
+[^5]: [ckan_geodcatap](https://github.com/mjanez/ckanext-scheming/blob/036b8c6503059e0d42b0eba180d5bd39205c64a3/ckanext/scheming/ckan_geodcatap.yaml), more info: https://github.com/mjanez/ckanext-scheming/pull/1
+[^6]: A fork of [COATNor/coat2pycsw](https://github.com/COATnor/coat2pycsw) that has been extended to meet the needs of harvesting GeoDCAT-AP metadata according to INSPIRE ISO19139.
