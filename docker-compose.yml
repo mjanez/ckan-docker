@@ -6,11 +6,10 @@ volumes:
   solr_data:
 
 services:
-   
-  apache:
-    container_name: ${APACHE_CONTAINER_NAME}
+  nginx:
+    container_name: ${NGINX_CONTAINER_NAME}
     build:
-      context: apache/
+      context: nginx/
       dockerfile: Dockerfile
     env_file:
       - .env
@@ -23,9 +22,9 @@ services:
       ckan:
         condition: service_healthy
     ports:
-      - "0.0.0.0:${APACHE_PORT_HOST}:${APACHE_PORT}"
-    restart: on-failure:3
-
+      - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
+      - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
+    
   ckan:
     container_name: ${CKAN_CONTAINER_NAME}
     build:
@@ -76,7 +75,7 @@ services:
     restart: on-failure:3
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${PYCSW_PORT}"]
-
+    
   db:
     container_name: ${POSTGRESQL_CONTAINER_NAME}
     build:
