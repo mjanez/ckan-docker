@@ -1,4 +1,3 @@
-# With NGINX and without ckan-pycsw
 version: "3"
 
 volumes:
@@ -7,11 +6,11 @@ volumes:
   solr_data:
 
 services:
-
-  nginx:
-    container_name: ${NGINX_CONTAINER_NAME}
+   
+  apache:
+    container_name: ${APACHE_CONTAINER_NAME}
     build:
-      context: nginx/
+      context: apache/
       dockerfile: Dockerfile
     env_file:
       - .env
@@ -24,9 +23,9 @@ services:
       ckan:
         condition: service_healthy
     ports:
-      - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
-      - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
-    
+      - "0.0.0.0:${APACHE_PORT_HOST}:${APACHE_PORT}"
+    restart: on-failure:3
+
   ckan:
     container_name: ${CKAN_CONTAINER_NAME}
     build:
@@ -52,8 +51,32 @@ services:
       - ckan_storage:/var/lib/ckan
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
-    
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
+
+  pycsw:
+    container_name: ${PYCSW_CONTAINER_NAME}
+    build:
+      context: ckan-pycsw/
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
+    depends_on:
+      ckan:
+        condition: service_healthy
+    ports:
+      - "0.0.0.0:${PYCSW_PORT_HOST}:${PYCSW_PORT}"
+    volumes:
+        - ./log:${APP_DIR}/log
+        - ./metadata:${APP_DIR}/metadata
+    restart: on-failure:3
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${PYCSW_PORT}"]
+
   db:
     container_name: ${POSTGRESQL_CONTAINER_NAME}
     build:
@@ -65,13 +88,13 @@ services:
       - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - PGDATA=/var/lib/postgresql/data/db
+    volumes:
+      - pg_data:/var/lib/postgresql/data
     logging:
       driver: "json-file"
       options:
           max-size: "100m"
           max-file: "10"
-    volumes:
-      - pg_data:/var/lib/postgresql/data
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "ckan"]
