@@ -437,7 +437,7 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     POSTGRES_USER="ckan"
     POSTGRES_PASSWORD="your_postgres_password"
     BACKUP_DIRECTORY="/path/to/your/backup/directory"
-    DATE=`date +%Y%m%d%H%M%S`
+    DATE=$(date +%Y%m%d%H%M%S)
 
     # Run the backup command
     docker exec -e PGPASSWORD=$POSTGRES_PASSWORD $POSTGRESQL_CONTAINER_NAME pg_dump -U $POSTGRES_USER -Fc $DATABASE_NAME > $BACKUP_DIRECTORY/ckan_backup_$DATE.dump
@@ -476,6 +476,9 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
 8. Save and close the file.
 
 The cronjob is now set up and will backup your CKAN PostgreSQL database daily at midnight using the custom format. The backups will be stored in the specified directory with the timestamp in the filename.
+
+>**Info**<br>
+> Sample scripts for backing up CKAN: [`doc/scripts`](doc/scripts)
 
 ### Restore a backup
 If need to use a backup, restore it:
