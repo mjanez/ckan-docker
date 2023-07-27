@@ -40,26 +40,25 @@ The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
 * Solr: CKAN's [pre-configured Solr image](https://github.com/ckan/ckan-solr). The index data is stored in a named volume and has a spatial schema. [^2]
 * Redis: standard Redis image
-* Apache HTTP Server: [Custom image](/apache/Dockerfile) based on official latest stable httpd image. Configured to serve multiple routes for the [ckan-pycsw](#ckan-pycsw) CSW endpoint (`{CKAN_SITE_URL}/csw`) and CKAN (`{CKAN_SITE_URL}/catalog`).
+* NGINX: latest stable nginx image that includes SSL and Non-SSL endpoints.
 * ckan-pycsw: [Custom image](/ckan-pycsw/Dockerfile) based on [pycsw CKAN harvester ISO19139](https://github.com/mjanez/ckan-pycsw) for INSPIRE Metadata CSW Endpoint.
 
-Optional HTTP Endpoint ([`docker-compose.nginx.yml`](/docker-compose.nginx.yml)):
-* `docker-compose.nginx.yml`:
-  * NGINX: latest stable nginx image that includes SSL and Non-SSL endpoints instead of Apache HTTP Server. No locations, no ckan-pycsw, only CKAN.
-
+Optional HTTP Endpoint ([`docker-compose.apache.yml`](/docker-compose.apache.yml)):
+* `docker-compose.apache.yml`:
+  * Apache HTTP Server: [Custom image](/apache/Dockerfile) based on official latest stable httpd image. Configured to serve multiple routes for the [ckan-pycsw](#ckan-pycsw) CSW endpoint (`{CKAN_SITE_URL}/csw`) and CKAN (`{CKAN_SITE_URL}/catalog`). Only HTTP.
 
 | Compose files | Repository | Type | Docker tag | Size | Notes |
 | --- | --- | --- | --- | --- | --- |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-cospatianginx.yml) | CKAN 2.9.8 | custom image | [`mjanez/ckan-spatial:ckan-2.9.8`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr8-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr8-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | Redis 7.0.10 | base image | [`redis/redis:7-alpine`](https://hub.docker.com/layers/library/redis/7-alpine/images/sha256-98f4ea44e912d0941d29015a4e2448151b94411109c896b5627d94d79306eea7?context=explore) | 11.82 MB |  - |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | CKAN 2.9.8 | custom image | [`mjanez/ckan-spatial:ckan-2.9.8`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr8-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr8-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Redis 7.0.10 | base image | [`redis/redis:7-alpine`](https://hub.docker.com/layers/library/redis/7-alpine/images/sha256-98f4ea44e912d0941d29015a4e2448151b94411109c896b5627d94d79306eea7?context=explore) | 11.82 MB |  - |
 | [`docker-compose.yml`](/docker-compose.yml) | Apache HTTP Server 2.4 | custom image | [`httpd/httpd:2.4`](https://hub.docker.com/layers/library/httpd/2.4/images/sha256-f34e8e25ee18da020633ef0b2bf7516d8cfdad5c5c4b0595d36e5cd78a098101?context=explore) | 54.47 MB |  Custom Dockerfile: [`apache/Dockerfile`](/apache/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml)| pycsw CKAN harvester ISO19139 | custom image | [`mjanez/ckan-pycsw:latest`](https://github.com/mjanez/ckan-pycsw/pkgs/container/ckan-pycsw) | 175 MB |  Custom Dockerfile: [`ckan-pycsw/Dockerfile`](/ckan-pycsw/Dockerfile) |
-| [`docker-compose.nginx.yml`](/docker-compose.nginx.yml) | NGINX 1.22.1 | base image | [`nginx:stable-alpine`](https://hub.docker.com/layers/library/nginx/stable-alpine/images/sha256-ff2a5d557ca22fa93669f5e70cfbeefda32b98f8fd3d33b38028c582d700f93a?context=explore) | 9.74 MB | No routing, only CKAN. Custom Dockerfile: [`nginx/Dockerfile`](/nginx/Dockerfile) |
+| [`docker-compose.apache.yml`](/docker-compose.apache.yml) | NGINX 1.22.1 | base image | [`nginx:stable-alpine`](https://hub.docker.com/layers/library/nginx/stable-alpine/images/sha256-ff2a5d557ca22fa93669f5e70cfbeefda32b98f8fd3d33b38028c582d700f93a?context=explore) | 9.74 MB | No routing, only CKAN. Custom Dockerfile: [`nginx/Dockerfile`](/nginx/Dockerfile) |
 
 
-The site is configured using environment variables that you can set in the `.env` file for an Apache HTTP Server and ckan-pycsw deployment (default `.env.example`), or replace it with the [`.env.nginx.example`](/samples/.env.nginx.example) for a NGINX and CKAN-only deployment using the Docker Compose file: [`docker-compose.nginx.yml`](/docker-compose.nginx.yml).
+The site is configured using environment variables that you can set in the `.env` file for an NGINX and ckan-pycsw deployment (default `.env.example`), or replace it with the [`.env.apache.example`](/samples/.env.apache.example) for a Apache HTTP Server deployment using the Docker Compose file: [`docker-compose.apache.yml`](/docker-compose.apache.yml).
 
 
 ### ckan-docker roadmap
@@ -118,9 +117,9 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
     cp .env.example .env
     ```
 
-    - **Apache HTTP Server & CKAN/ckan-pycsw endpoints**: Modifiy the variables about the site URL or locations (`CKAN_SITE_URL` `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `APACHE_SERVER_NAME`, `APACHE_CKAN_LOCATION`, `APACHE_PYCSW_LOCATION`, etc.).
+    - **NGINX & CKAN/ckan-pycsw endpoints**: Modifiy the variables about the site URL or locations (`CKAN_SITE_URL` `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `PROXY_SERVER_NAME`, `PROXY_CKAN_LOCATION`, `PROXY_PYCSW_LOCATION`, etc.).
 
-    - **NGINX only CKAN**: Replace the [`.env`](/.env) with the [`/samples/.env.nginx.example`](/samples/.env.nginx.example) and modify the variables as needed.
+    - **Apache HTTP Server**: Replace the [`.env`](/.env) with the [`/samples/.env.apache.example`](/samples/.env.apache.example) and modify the variables as needed.
 
     >**Note**:<br>
     > Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
@@ -149,7 +148,7 @@ window for something else.
 
 >**Note**<br>
 > * Or `docker compose up --build` to build & up the containers.
-> * Or `docker compose -f docker-compose.nginx.yml up -d --build` to use the NGINX version.
+> * Or `docker compose -f docker-compose.apache.yml up -d --build` to use the Apache HTTP Server version.
 
 >**Note**<br>
 > Learn more about configuring this ckan docker: 
@@ -158,11 +157,11 @@ window for something else.
 
 At the end of the container start sequence there should be 6 containers running (or 5 if use NGINX Docker Compose file)
 
-After this step, CKAN should be running at {`APACHE_SERVER_NAME`}{`APACHE_CKAN_LOCATION`} and ckan-pycsw at {`APACHE_SERVER_NAME`}{`APACHE_PYCSW_LOCATION`}, i.e: http://localhost/catalog or http://localhost/csw
+After this step, CKAN should be running at {`PROXY_SERVER_NAME`}{`PROXY_CKAN_LOCATION`} and ckan-pycsw at {`PROXY_SERVER_NAME`}{`PROXY_PYCSW_LOCATION`}, i.e: http://localhost/catalog or http://localhost/csw
 
 |CONTAINER   ID                                |IMAGE               |COMMAND|CREATED|STATUS|PORTS|NAMES|
 |------------|----------------------------------|--------------------|-------|-------|------|-----|
-|0217537f717e|ckan-docker-apache                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|80/tcp,0.0.0.0:80->80/tcp | apache  |
+|0217537f717e|ckan-docker-nginx                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|80/tcp,0.0.0.0:80->80/tcp,0.0.0.0:8443->443/tcp | nginx  |
 |7b06ab2e060a|ckan-docker-ckan|/srv/app/start_ckan…|6      minutes ago   |Up   5    minutes (healthy)|0.0.0.0:5000->5000/tcp|ckan                 |       |
 |1b8d9789c29a|redis:7-alpine                           |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|6379/tcp              |redis                |       |
 |7f162741254d|ckan/ckan-solr:2.9-solr8-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8983/tcp              |solr                 |       |
@@ -345,34 +344,49 @@ command: `python -m pdb /usr/lib/ckan/venv/bin/ckan --config /srv/app/ckan.ini r
 The Datastore database and user is created as part of the entrypoint scripts for the db container.
 
 
-### Apache HTTP Server
-The default Docker Compose configuration ([`docker-compose.yml`](/docker-compose.yml)) uses an httpd image as the front-end. It has two routes for the ckan (default location: `/catalog`) and ckan-pycsw (default location: `/csw`) services. 
-
-Both web locations can be modified in the `.env` file:
-```ini
-...
-
-# Apache HTTP Server
-APACHE_VERSION=2.4
-APACHE_PORT=80
-APACHE_LOG_DIR=/var/log/apache
-APACHE_SERVER_NAME=mjanez-cautious-lamp-4pjq9vpg967hq447-80.preview.app.github.dev
-# Check CKAN__ROOT_PATH and CKANEXT__DCAT__BASE_URI. If you don't need to use domain locations, it is better to use the nginx configuration. Leave blank or use the root `/`.
-APACHE_CKAN_LOCATION=/catalog
-APACHE_PYCSW_LOCATION=/csw
-
-...
-```
-
 ### NGINX
->**Warning**<br>
-> The [nginx docker compose file](/docker-compose.nginx.yml) only deploys the CKAN service, not ckan-pycsw.
+The default Docker Compose configuration ([`docker-compose.yml`](/docker-compose.yml)) uses an NGINX image as the front-end (ie: reverse proxy). It includes HTTPS running on port number 8443 and an HTTP port (81). A "self-signed" SSL certificate is generated beforehand and the server certificate and key files are included. The NGINX `server_name` (ENV: `PROXY_SERVER_NAME`) directive and the `CN` field in the SSL certificate have been both set to 'localhost'. This should obviously not be used for production.
 
-The nginx Docker Compose configuration ([`docker-compose.nginx.yml`](/docker-compose.nginx.yml)) uses an NGINX image as the front-end (ie: reverse proxy). It includes HTTPS running on port number 8443 and an HTTP port (81). A "self-signed" SSL certificate is generated beforehand and the server certificate and key files are included. The NGINX `server_name` directive and the `CN` field in the SSL certificate have been both set to 'localhost'. This should obviously not be used for production.
+The proxy locations, ports and other NGINX options can be modified in the `.env` file:
+```ini
+# Host Ports
+NGINX_PORT_HOST=81
+NGINX_SSLPORT_HOST=8443
+
+# NGINX
+NGINX_PORT=80
+NGINX_SSLPORT=443
+NGINX_LOG_DIR=/var/log/nginx
+
+# Check CKAN__ROOT_PATH and CKANEXT__DCAT__BASE_URI. If you don't need to use domain locations, it is better to use the nginx configuration. Leave blank or use the root `/`.
+PROXY_SERVER_NAME=192.168.68.106
+PROXY_CKAN_LOCATION=/catalog
+PROXY_PYCSW_LOCATION=/csw
+```
 
 Creating the SSL cert and key files as follows:
 `openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=DE/ST=Berlin/L=Berlin/O=None/CN=localhost" -keyout ckan-local.key -out ckan-local.crt`
 The `ckan-local.*` files will then need to be moved into the nginx/setup/ directory
+
+
+### Apache HTTP Server
+The Docker Compose configuration ([`docker-compose.apache.yml`](/docker-compose.apache.yml)) uses an httpd image as the front-end. It has two routes for the ckan (default location: `/catalog`) and ckan-pycsw (default location: `/csw`) services. 
+
+The proxy locations, ports and other Apache Web Server options can be modified in the `.env` file:
+```ini
+# Host Ports
+APACHE_PORT_HOST=81
+
+# Apache HTTP Server
+APACHE_VERSION=2.4-alpine
+APACHE_PORT=80
+APACHE_LOG_DIR=/var/log/apache
+
+# Check CKAN__ROOT_PATH and CKANEXT__DCAT__BASE_URI. If you don't need to use domain locations, it is better to use the nginx configuration. Leave blank or use the root `/`.
+PROXY_SERVER_NAME=192.168.68.106
+PROXY_CKAN_LOCATION=/catalog
+PROXY_PYCSW_LOCATION=/csw
+```
 
 
 ### envvars

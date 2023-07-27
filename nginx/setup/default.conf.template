@@ -1,19 +1,28 @@
 server {
-    listen       80;
-    listen  [::]:80;
-    listen       443 ssl;
-    listen  [::]:443 ssl;
-    server_name  localhost;
+    listen       ${NGINX_PORT};
+    listen  [::]:${NGINX_PORT};
+    listen       ${NGINX_SSLPORT} ssl;
+    listen  [::]:${NGINX_SSLPORT} ssl;
+    server_name  ${PROXY_SERVER_NAME};
     ssl_certificate /etc/nginx/certs/ckan-local.crt;
     ssl_certificate_key /etc/nginx/certs/ckan-local.key;
 
     #access_log  /var/log/nginx/host.access.log  main;
 
-    location / {
-        proxy_pass http://ckan:5000/;
+    location ${PROXY_CKAN_LOCATION} {
+        proxy_pass ${PROXY_CKAN_PROXY_PASS}/;
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host $host;
-        #proxy_cache cache;
+        proxy_cache_bypass $cookie_auth_tkt;
+        proxy_no_cache $cookie_auth_tkt;
+        proxy_cache_valid 30m;
+        proxy_cache_key $host$scheme$proxy_host$request_uri;
+    }
+
+    location ${PROXY_PYCSW_LOCATION} {
+        proxy_pass ${PROXY_PYCSW_PROXY_PASS}/;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
         proxy_cache_bypass $cookie_auth_tkt;
         proxy_no_cache $cookie_auth_tkt;
         proxy_cache_valid 30m;
