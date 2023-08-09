@@ -101,6 +101,7 @@ versions for client and server.
 > Learn more about [Docker](#docker-basic-commands)/[Docker Compose](#docker-compose-basic-commands) basic commands.
 > 
 
+
 ## Install (build and run) CKAN plus dependencies
 ### Base mode
 Use this if you are a maintainer and will not be making code changes to CKAN or to CKAN extensions.
@@ -168,6 +169,7 @@ After this step, CKAN should be running at {`PROXY_SERVER_NAME`}{`PROXY_CKAN_LOC
 |2cdd25cea0de|ckan-docker-db                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|5432/tcp              |db                   |       |
 |9cdj25dae6gr|ckan-docker-pycsw                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8000/tcp              |pycsw                   |       |
 
+
 ### Quick mode
 If you just want to test the package and see the general functionality of the platform, you can use the `ckan-spatial` image from the [Github container registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial):
     
@@ -178,6 +180,7 @@ If you just want to test the package and see the general functionality of the pl
   ```
 
 It will download the pre-built image and deploy all the containers. Remember to use your own domain by changing `localhost` in the `.env` file.
+
 
 ### Development mode
 Use this mode if you are making code changes to CKAN and either creating new extensions or making code changes to existing extensions. This mode also uses the `.env` file for config options.
@@ -236,7 +239,6 @@ The Docker image config files used to build your CKAN project are located in the
 >RUN chmod +x ${APP_DIR}/start_ckan.sh
 >...
 >```
-
 
 
 ## CKAN images enhancement
@@ -310,7 +312,8 @@ ckan
 
 
 ## ckan-docker addons
-### VSCode dev containers
+### Debugging
+#### VSCode dev containers
 The [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) extension is a powerful tool that enables developers to use a container as a complete development environment. With this extension, developers can open any folder inside a container and take advantage of the full range of features provided by Visual Studio Code. To do this, developers create a `devcontainer.json `file in their project that specifies how to access or create a development container with a predefined tool and runtime stack. This allows developers to work in an isolated environment, ensuring that the development environment is consistent across team members and that project dependencies are easy to manage.
 
 ![Developing inside a Container](https://code.visualstudio.com/assets/docs/devcontainers/containers/architecture-containers.png)
@@ -330,7 +333,7 @@ The [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devco
 7. VSCode will start a new container based on the configuration settings in your `devcontainer.json` file. Once the container is started, you can work on your project just like you would on your local machine.
 
 
-### pdb
+#### pdb
 Add these lines to the `ckan-dev` service in the docker compose.dev.yml file
 
 ![pdb](https://user-images.githubusercontent.com/54408245/179964232-9e98a451-5fe9-4842-ba9b-751bcc627730.png)
@@ -340,11 +343,8 @@ Debug with pdb (example) - Interact with `docker attach $(docker container ls -q
 command: `python -m pdb /usr/lib/ckan/venv/bin/ckan --config /srv/app/ckan.ini run --host 0.0.0.0 --passthrough-errors`
 
 
-### Datastore
-The Datastore database and user is created as part of the entrypoint scripts for the db container.
-
-
-### NGINX
+### Reverse proxy
+#### NGINX
 The default Docker Compose configuration ([`docker-compose.yml`](/docker-compose.yml)) uses an NGINX image as the front-end (ie: reverse proxy). It includes HTTPS running on port number 8443 and an HTTP port (81). A "self-signed" SSL certificate is generated beforehand and the server certificate and key files are included. The NGINX `server_name` (ENV: `PROXY_SERVER_NAME`) directive and the `CN` field in the SSL certificate have been both set to 'localhost'. This should obviously not be used for production.
 
 The proxy locations, ports and other NGINX options can be modified in the `.env` file:
@@ -359,17 +359,18 @@ NGINX_SSLPORT=443
 NGINX_LOG_DIR=/var/log/nginx
 
 # Check CKAN__ROOT_PATH and CKANEXT__DCAT__BASE_URI. If you don't need to use domain locations, it is better to use the nginx configuration. Leave blank or use the root `/`.
-PROXY_SERVER_NAME=192.168.68.106
+PROXY_SERVER_NAME=localhost
 PROXY_CKAN_LOCATION=/catalog
 PROXY_PYCSW_LOCATION=/csw
 ```
+The base Docker Compose configuration uses an NGINX image as the front-end (ie: reverse proxy). It includes HTTPS running on port number 8443. A "self-signed" SSL certificate is generated as part of the ENTRYPOINT. The ENV `PROXY_SERVER_NAME`, NGINX `server_name` directive and the `CN` field in the SSL certificate have been both set to 'localhost'. This should obviously not be used for production.
 
 Creating the SSL cert and key files as follows:
 `openssl req -new -newkey rsa:4096 -days 365 -nodes -x509 -subj "/C=DE/ST=Berlin/L=Berlin/O=None/CN=localhost" -keyout ckan-local.key -out ckan-local.crt`
 The `ckan-local.*` files will then need to be moved into the nginx/setup/ directory
 
 
-### Apache HTTP Server
+#### Apache HTTP Server
 The Docker Compose configuration ([`docker-compose.apache.yml`](/docker-compose.apache.yml)) uses an httpd image as the front-end. It has two routes for the ckan (default location: `/catalog`) and ckan-pycsw (default location: `/csw`) services. 
 
 The proxy locations, ports and other Apache Web Server options can be modified in the `.env` file:
@@ -383,7 +384,7 @@ APACHE_PORT=80
 APACHE_LOG_DIR=/var/log/apache
 
 # Check CKAN__ROOT_PATH and CKANEXT__DCAT__BASE_URI. If you don't need to use domain locations, it is better to use the nginx configuration. Leave blank or use the root `/`.
-PROXY_SERVER_NAME=192.168.68.106
+PROXY_SERVER_NAME=localhost
 PROXY_CKAN_LOCATION=/catalog
 PROXY_PYCSW_LOCATION=/csw
 ```
@@ -409,8 +410,14 @@ These parameters can be added to the `.env` file
 
 For more information please see [ckanext-envvars](https://github.com/okfn/ckanext-envvars)
 
-## xloader
+
+### Datastore
+The Datastore database and user is created as part of the entrypoint scripts for the db container.
+
+
+### xloader
 To replacing DataPusher with XLoader check out the wiki page for this: https://github.com/ckan/ckan-docker/wiki/Replacing-DataPusher-with-XLoader
+
 
 ### ckan-pycsw
 [ckan-pycsw](https://github.com/mjanez/ckan-pycsw) is a docker compose environment (based on [pycsw](https://github.com/geopython/pycsw)) for development and testing with CKAN Open Data portals.[^5]
@@ -419,11 +426,13 @@ Available components:
 * **pycsw**: The pycsw app. An [OARec](https://ogcapi.ogc.org/records) and [OGC CSW](https://opengeospatial.org/standards/cat) server implementation written in Python.
 * **ckan2pycsw**: Software to achieve interoperability with the open data portals based on CKAN. To do this, ckan2pycsw reads data from an instance using the CKAN API, generates ISO-19115/ISO-19139 metadata using [pygeometa](https://geopython.github.io/pygeometa/), or a custom schema that is based on a customized CKAN schema, and populates a [pycsw](https://pycsw.org/) instance that exposes the metadata using CSW and OAI-PMH.
 
+
 ## ckan-docker tips
 ### CKAN. Backups
 PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/docs/current/static/app-pgdump.html) and [`pg_restore`](https://www.postgresql.org/docs/current/static/app-pgrestore.html) for dumping and restoring a database and its content to/from a file.
 
-### Backup service for db container
+
+#### Backup service for db container
 1. Create a new file called `ckan_backup_custom.sh` and open it in your preferred text editor.
 
 2. Add the following code to the script, replacing the placeholders with your actual values:
@@ -480,7 +489,8 @@ The cronjob is now set up and will backup your CKAN PostgreSQL database daily at
 >**Info**<br>
 > Sample scripts for backing up CKAN: [`doc/scripts`](doc/scripts)
 
-### Restore a backup
+
+#### Restore a backup
 If need to use a backup, restore it:
 
 1. First clean the database. **Caution, this will delete all data from your CKAN database!**
@@ -498,6 +508,33 @@ If need to use a backup, restore it:
     docker exec -e PGPASSWORD=$POSTGRES_PASSWORD $POSTGRESQL_CONTAINER_NAME pg_restore -U $POSTGRES_USER --clean --if-exists -d $DATABASE_NAME < /path/to/your/backup/directory/ckan.dump
     ```
 
+
+### CKAN. Manage new users
+
+1. Create a new user from the Docker host, for example to create a new user called 'admin'
+
+   ```bash
+   docker exec -it <container-id> ckan -c ckan.ini user add admin email=admin@localhost
+    ```
+
+   To delete the 'admin' user
+
+   ```bash
+   docker exec -it <container-id> ckan -c ckan.ini user remove admin`
+    ```
+
+1. Create a new user from within the ckan container. You will need to get a session on the running container
+
+   ```bash
+   ckan -c ckan.ini user add admin email=admin@localhost`
+    ```
+
+   To delete the 'admin' user
+   ```bash
+   ckan -c ckan.ini user remove admin`
+    ```
+
+    
 ### Docker. Basic commands
 #### Linux post-install steps
 [These optional post-installation procedures](https://docs.docker.com/engine/install/linux-postinstall/) shows you how to configure your Linux host machine to work better with Docker. For example, managing docker with [a non-root user](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user).
@@ -510,6 +547,7 @@ sudo systemctl enable docker
 sudo systemctl disable docker
 ```
 
+
 #### Clear all Docker unused objects (images, containers, networks, local volumes)
 ```bash
 docker system prune # Clear all
@@ -519,6 +557,7 @@ docker container prune # Clear unused containers
 docker volume prune # Clear unused volumes
 docker network prune # Clear unused networks
 ```
+
 
 ### Docker Compose. Basic commands
 More info about Docker Compose commands at [docker compose reference](https://docs.docker.com/compose/reference/).
@@ -568,6 +607,7 @@ docker compose [-f <docker compose-file>] -p <my_project> up -d --build
 # Stops containers and removes containers, networks, volumes, and images created by up.
 docker compose [-p <my_project>] down
 ```
+
 
 ### Docker Compose. Configure a docker compose service to start on boot
 To have Docker Compose run automatically when you reboot a machine, you can follow the steps below:
