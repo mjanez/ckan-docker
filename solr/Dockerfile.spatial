@@ -1,4 +1,4 @@
-FROM solr:8
+FROM solr:9
 
 ENV SOLR_PORT=8983
 
