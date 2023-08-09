@@ -82,7 +82,7 @@ Information about extensions installed in the `main` image. More info described 
 | Extension   | [ckanext-resourcedictionary](https://github.com/OpenDataGIS/ckanext-resourcedictionary) | main        | Completed                    | ✔️      | ✔️      | Stable installation. This extension extends the default CKAN Data Dictionary functionality by adding possibility to create data dictionary before actual data is uploaded to datastore.                                                                                                                                                                                 |
 | Extension   | [ckanext-pages](https://github.com/ckan/ckanext-pages)                                  | 0.5.1       | Completed                    | ✔️      | ✔️      | Stable installation. This extension gives you an easy way to add simple pages to CKAN.                                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-pdfview](https://github.com/ckan/ckanext-pdfview)                              | 0.0.8       | Completed                    | ✔️      | ✔️      | Stable installation. This extension provides a view plugin for PDF files using an html object tag.                                                                                                                                                                                                                                                                      |
-| Extension    | [ckanext-facet_scheming](https://github.com/OpenDataGIS/ckanext-facet_scheming)                                    | 1.0.0        | Completed | ✔️      | ✔️       | Stable installation for 1.0.0 version, facet and filter for custom [ckanext-scheming](https://github.com/mjanez/ckanext-scheming)                                                                                                                                                                         |
+| Extension    | [ckanext-scheming_dcat](https://github.com/OpenDataGIS/ckanext-scheming_dcat)                                    | 1.0.0        | Completed | ✔️      | ✔️       | Stable installation for 1.0.0 version, DCAT improved, facet and filter for custom [ckanext-scheming](https://github.com/mjanez/ckanext-scheming)                                                                                                                                                                         |
 | Software    | [ckan-pycsw](https://github.com/mjanez/ckan-pycsw)                                    | latest        | Completed | ✔️      | ✔️       | Stable installation. PyCSW Endpoint of Open Data Portal with docker compose config. Harvest the CKAN catalogue in a CSW endpoint based on existing spatial datasets in the open data portal.                                                                                                                                                                            |
 
 
@@ -437,7 +437,7 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     POSTGRES_USER="ckan"
     POSTGRES_PASSWORD="your_postgres_password"
     BACKUP_DIRECTORY="/path/to/your/backup/directory"
-    DATE=`date +%Y%m%d%H%M%S`
+    DATE=$(date +%Y%m%d%H%M%S)
 
     # Run the backup command
     docker exec -e PGPASSWORD=$POSTGRES_PASSWORD $POSTGRESQL_CONTAINER_NAME pg_dump -U $POSTGRES_USER -Fc $DATABASE_NAME > $BACKUP_DIRECTORY/ckan_backup_$DATE.dump
@@ -476,6 +476,9 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
 8. Save and close the file.
 
 The cronjob is now set up and will backup your CKAN PostgreSQL database daily at midnight using the custom format. The backups will be stored in the specified directory with the timestamp in the filename.
+
+>**Info**<br>
+> Sample scripts for backing up CKAN: [`doc/scripts`](doc/scripts)
 
 ### Restore a backup
 If need to use a backup, restore it:
