@@ -47,10 +47,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
     echo "OpenDataGIS/ckanext-scheming_dcat" && \
     pip3 install -e git+https://github.com/OpenDataGIS/ckanext-scheming_dcat.git@1.0.0#egg=ckanext_scheming_dcat && \
-    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-scheming_dcat/1.0.0/requirements.txt && \
-    echo "OpenDataGIS/ckanext-sparql_interface" && \
-    pip3 install -e git+https://github.com/OpenDataGIS/ckanext-sparql_interface.git@2.0.2-iepnb#egg=ckanext-sparql_interface && \
-    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-sparql_interface/2.0.2-iepnb/requirements.txt
+    pip3 install -r https://raw.githubusercontent.com/OpenDataGIS/ckanext-scheming_dcat/1.0.0/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
