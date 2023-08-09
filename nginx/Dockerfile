@@ -18,7 +18,7 @@ RUN mkdir -p ${NGINX_LOG_DIR}
 
 COPY setup/nginx.conf ${NGINX_DIR}/nginx.conf
 COPY setup/index.html /usr/share/nginx/html/index.html
-COPY setup/default.conf.template ${NGINX_DIR}/templates/default.conf.templateç
+COPY setup/default.conf.template ${NGINX_DIR}/templates/default.conf.template
 
 RUN mkdir -p ${NGINX_DIR}/certs
 COPY setup/ckan-local.* ${NGINX_DIR}/certs/
