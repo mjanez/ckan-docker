@@ -6,7 +6,7 @@ server {
     server_name  ${PROXY_SERVER_NAME};
     ssl_certificate /etc/nginx/certs/ckan-local.crt;
     ssl_certificate_key /etc/nginx/certs/ckan-local.key;
-    
+
     # TLS 1.2 & 1.3 only
     ssl_protocols TLSv1.2 TLSv1.3;
 
@@ -21,20 +21,46 @@ server {
 
     #access_log  /var/log/nginx/host.access.log  main;
 
-    location ${PROXY_CKAN_LOCATION} {
+    # CKAN location with and without the slash appended (https://nginx.org/en/docs/http/ngx_http_core_module.html#location)
+    location ${PROXY_CKAN_LOCATION}/ {
         proxy_pass ${PROXY_CKAN_PROXY_PASS}/;
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host $host;
+        #proxy_cache cache;
         proxy_cache_bypass $cookie_auth_tkt;
         proxy_no_cache $cookie_auth_tkt;
         proxy_cache_valid 30m;
         proxy_cache_key $host$scheme$proxy_host$request_uri;
     }
 
-    location ${PROXY_PYCSW_LOCATION} {
+    location = ${PROXY_CKAN_LOCATION} {
+        proxy_pass ${PROXY_CKAN_PROXY_PASS}/;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        #proxy_cache cache;
+        proxy_cache_bypass $cookie_auth_tkt;
+        proxy_no_cache $cookie_auth_tkt;
+        proxy_cache_valid 30m;
+        proxy_cache_key $host$scheme$proxy_host$request_uri;
+    }
+
+    # PYCSW location with and without the slash appended
+    location ${PROXY_PYCSW_LOCATION}/ {
         proxy_pass ${PROXY_PYCSW_PROXY_PASS}/;
         proxy_set_header X-Forwarded-For $remote_addr;
         proxy_set_header Host $host;
+        #proxy_cache cache;
+        proxy_cache_bypass $cookie_auth_tkt;
+        proxy_no_cache $cookie_auth_tkt;
+        proxy_cache_valid 30m;
+        proxy_cache_key $host$scheme$proxy_host$request_uri;
+    }
+
+    location = ${PROXY_PYCSW_LOCATION} {
+        proxy_pass ${PROXY_PYCSW_PROXY_PASS}/;
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header Host $host;
+        #proxy_cache cache;
         proxy_cache_bypass $cookie_auth_tkt;
         proxy_no_cache $cookie_auth_tkt;
         proxy_cache_valid 30m;
