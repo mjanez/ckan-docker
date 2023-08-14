@@ -19,6 +19,9 @@ services:
       options:
           max-size: "100m"
           max-file: "10"
+    networks:
+      - webnet
+      - ckannet
     depends_on:
       ckan:
         condition: service_healthy
@@ -31,6 +34,13 @@ services:
     build:
       context: ckan/
       dockerfile: Dockerfile
+      args:
+        - TZ=${TZ}
+    networks:
+      - ckannet
+      - dbnet
+      - solrnet
+      - redisnet
     env_file:
       - .env
     logging:
@@ -65,6 +75,9 @@ services:
       options:
           max-size: "100m"
           max-file: "10"
+    networks:
+      - webnet
+      - ckannet
     depends_on:
       ckan:
         condition: service_healthy
@@ -81,13 +94,18 @@ services:
     container_name: ${POSTGRESQL_CONTAINER_NAME}
     build:
       context: postgresql/
-      args:
-       - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
-       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    networks:
+       - dbnet
     environment:
-      - DATASTORE_READONLY_PASSWORD=${DATASTORE_READONLY_PASSWORD}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - PGDATA=/var/lib/postgresql/data/db
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB
+      - CKAN_DB_USER
+      - CKAN_DB_PASSWORD
+      - CKAN_DB
+      - DATASTORE_READONLY_USER
+      - DATASTORE_READONLY_PASSWORD
+      - DATASTORE_DB
     volumes:
       - pg_data:/var/lib/postgresql/data
     logging:
@@ -97,14 +115,15 @@ services:
           max-file: "10"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "ckan"]
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
      
   solr:
     container_name: ${SOLR_CONTAINER_NAME}
     build:
       context: solr/
       dockerfile: Dockerfile.spatial
-    image: ckan/ckan-solr:${SOLR_IMAGE_VERSION}
+    networks:
+      - solrnet
     env_file:
       - .env
     logging:
@@ -126,6 +145,18 @@ services:
       options:
           max-size: "100m"
           max-file: "10"
+    networks:
+      - redisnet
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
+
+networks:
+  webnet:
+  ckannet:
+  solrnet:
+    internal: true
+  dbnet:
+    internal: true
+  redisnet:
+    internal: true
