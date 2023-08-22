@@ -12,7 +12,8 @@
     <a href="#extending-the-base-images">Extending guide</a> •
     <a href="#applying-patches">Applying patches</a> •
     <a href="#ckan-docker-addons">Addons</a> •
-    <a href="#ckan-docker-tips">Info & Backups</a> •
+    <a href="#ckan-docker-tips">Info & Backups</a> • 
+    <a href="#ckan-api">API</a>
 </p>
 
 **Requirements**:
@@ -38,7 +39,7 @@ Available components:
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
-* Solr: CKAN's [pre-configured Solr image](https://github.com/ckan/ckan-solr). The index data is stored in a named volume and has a spatial schema. [^2]
+* Solr: [Custom image](/solr/Dockerfile.spatial) based on official CKAN [pre-configured Solr image](https://github.com/ckan/ckan-solr). The index data is stored in a named volume and has a custom spatial schema upgrades. [^2]
 * Redis: standard Redis image
 * NGINX: latest stable nginx image that includes SSL and Non-SSL endpoints.
 * ckan-pycsw: [Custom image](/ckan-pycsw/Dockerfile) based on [pycsw CKAN harvester ISO19139](https://github.com/mjanez/ckan-pycsw) for INSPIRE Metadata CSW Endpoint.
@@ -51,7 +52,7 @@ Optional HTTP Endpoint ([`docker-compose.apache.yml`](/docker-compose.apache.yml
 | --- | --- | --- | --- | --- | --- |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | CKAN 2.9.8 | custom image | [`mjanez/ckan-spatial:ckan-2.9.8`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr8-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr8-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr9-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr9-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Redis 7.0.10 | base image | [`redis/redis:7-alpine`](https://hub.docker.com/layers/library/redis/7-alpine/images/sha256-98f4ea44e912d0941d29015a4e2448151b94411109c896b5627d94d79306eea7?context=explore) | 11.82 MB |  - |
 | [`docker-compose.yml`](/docker-compose.yml) | Apache HTTP Server 2.4 | custom image | [`httpd/httpd:2.4`](https://hub.docker.com/layers/library/httpd/2.4/images/sha256-f34e8e25ee18da020633ef0b2bf7516d8cfdad5c5c4b0595d36e5cd78a098101?context=explore) | 54.47 MB |  Custom Dockerfile: [`apache/Dockerfile`](/apache/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml)| pycsw CKAN harvester ISO19139 | custom image | [`mjanez/ckan-pycsw:latest`](https://github.com/mjanez/ckan-pycsw/pkgs/container/ckan-pycsw) | 175 MB |  Custom Dockerfile: [`ckan-pycsw/Dockerfile`](/ckan-pycsw/Dockerfile) |
@@ -82,7 +83,7 @@ Information about extensions installed in the `main` image. More info described 
 | Extension   | [ckanext-resourcedictionary](https://github.com/OpenDataGIS/ckanext-resourcedictionary) | main        | Completed                    | ✔️      | ✔️      | Stable installation. This extension extends the default CKAN Data Dictionary functionality by adding possibility to create data dictionary before actual data is uploaded to datastore.                                                                                                                                                                                 |
 | Extension   | [ckanext-pages](https://github.com/ckan/ckanext-pages)                                  | 0.5.1       | Completed                    | ✔️      | ✔️      | Stable installation. This extension gives you an easy way to add simple pages to CKAN.                                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-pdfview](https://github.com/ckan/ckanext-pdfview)                              | 0.0.8       | Completed                    | ✔️      | ✔️      | Stable installation. This extension provides a view plugin for PDF files using an html object tag.                                                                                                                                                                                                                                                                      |
-| Extension    | [ckanext-scheming_dcat](https://github.com/OpenDataGIS/ckanext-scheming_dcat)                                    | 1.0.0        | Completed | ✔️      | ✔️       | Stable installation for 1.0.0 version, DCAT improved, facet and filter for custom [ckanext-scheming](https://github.com/mjanez/ckanext-scheming)                                                                                                                                                                         |
+| Extension    | [ckanext-scheming_dcat](https://github.com/mjanez/ckanext-scheming_dcat)                                    | 1.1.0        | Completed | ✔️      | ✔️       | Stable installation for 1.1.0 version,  provides functions and templates specifically designed to extend [ckanext-scheming](https://github.com/mjanez/ckanext-scheming) and includes DCAT enhancements to adapt CKAN Schema to GeoDCAT-AP.                                                                                                                                            |
 | Software    | [ckan-pycsw](https://github.com/mjanez/ckan-pycsw)                                    | latest        | Completed | ✔️      | ✔️       | Stable installation. PyCSW Endpoint of Open Data Portal with docker compose config. Harvest the CKAN catalogue in a CSW endpoint based on existing spatial datasets in the open data portal.                                                                                                                                                                            |
 
 
@@ -165,7 +166,7 @@ After this step, CKAN should be running at {`PROXY_SERVER_NAME`}{`PROXY_CKAN_LOC
 |0217537f717e|ckan-docker-nginx                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|80/tcp,0.0.0.0:80->80/tcp,0.0.0.0:8443->443/tcp | nginx  |
 |7b06ab2e060a|ckan-docker-ckan|/srv/app/start_ckan…|6      minutes ago   |Up   5    minutes (healthy)|0.0.0.0:5000->5000/tcp|ckan                 |       |
 |1b8d9789c29a|redis:7-alpine                           |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|6379/tcp              |redis                |       |
-|7f162741254d|ckan/ckan-solr:2.9-solr8-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8983/tcp              |solr                 |       |
+|7f162741254d|ckan/ckan-solr:2.9-solr9-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8983/tcp              |solr                 |       |
 |2cdd25cea0de|ckan-docker-db                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|5432/tcp              |db                   |       |
 |9cdj25dae6gr|ckan-docker-pycsw                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8000/tcp              |pycsw                   |       |
 
@@ -661,6 +662,216 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
     # Check the status
     sudo systemctl status ckan-docker-compose
     ```
+
+
+## CKAN API
+>**Note**<br>
+>`params`: Parameters to pass to the action function. The parameters are specific to each action function.
+>* `fl` (text): Fields of the dataset to return. The parameter controls which fields are returned in the solr query. `fl` can be `None` or a list of result fields, such as: `id,name,extras_custom_schema_field`. 
+>
+>   Example: All datasets with the fields `id`, `name`, `title` and a custom schema field `extras_inspire_id`: `{ckan-instance}/api/3/action/package_search?fl=id,name,title,extras_inspire_id`
+> * `fq` (text): Any filter queries to apply. Example: All datasets that have tag `economy`: http://demo.ckan.org/api/3/action/package_search?fq=tags:economy
+> * `rows` (int): The maximum number of matching rows (datasets) to return. (optional, default: `10`, upper limit: `1000` unless set in site’s configuration `ckan.search.rows_max`)
+>
+> More info: [CKAN API Documentation](https://docs.ckan.org/en/2.9/api/index.html) and [data.gov.uk](https://docs.publishing.service.gov.uk/manual/data-gov-uk-2nd-line.html#using-the-ckan-api)
+
+
+### List datasets by fields
+Request: `{ckan-instance}/api/3/action/package_search?fl=id,extras_publisher_name`
+
+Response:
+```json
+{
+  "help": "{ckan-instance}/api/3/action/help_show?name=package_search",
+  "success": true,
+  "result": {
+    "count": 32,
+    "facets": {},
+    "results": [
+      {
+        "id": "e4a607d0-0875-4043-b8c7-36f731ba5ca8",
+        "publisher_name": "Example publisher"
+      },
+      {
+        "id": "5319a6b3-f439-4f53-9732-71699b9f62c8",
+        "publisher_name": "Example publisher"
+      },
+      {
+        "id": "02a30269-7665-4f6a-a43d-c288003f5cbb",
+        "publisher_name": "Example publisher"
+      }
+    ],
+    "sort": "score desc, metadata_modified desc",
+    "search_facets": {}
+  }
+}
+```
+
+### All datasets in organization (with some fields)
+Request: `{ckan-instance}/api/3/action/package_search?fq=organization:iepnb&fl=id,name,extras_alternate_identifier&rows=100`
+
+Response:
+```json
+{
+  "help": "{ckan-instance}/api/3/action/help_show?name=package_search",
+  "success": true,
+  "result": {
+    "count": 56,
+    "facets": {},
+    "results": [
+      {
+        "id": "fe757d64-436c-482d-b65b-f24348139fd6",
+        "name": "example_dataset_1",
+        "alternate_identifier": "IDEXAMPLEDATASET1"
+      },
+      {
+        "id": "fc21c1a5-4c02-4157-9d2f-9a2cd200f908",
+        "name": "example_dataset_2",
+        "alternate_identifier": "IDEXAMPLEDATASET2"
+      },
+      {
+        "id": "fb326c11-18d4-4ee1-aa23-a40cb90cf8d8",
+        "name": "example_dataset_3",
+        "alternate_identifier": "IDEXAMPLEDATASET3"
+      }
+    ],
+    "sort": "score desc, metadata_modified desc",
+    "search_facets": {}
+  }
+}
+```
+
+### All info about a dataset by field
+Request: `{ckan-instance}/api/3/action/package_search?q=name:"spa_example_dataset_1_2023"`
+
+Response:
+```json
+{
+  "help": "https://demo.ckan.org/api/3/action/help_show?name=package_search",
+  "success": true,
+  "result": {
+    "count": 1,
+    "facets": {},
+    "results": [
+      {
+        "author": "Test Author",
+        "author_email": "test@email.com",
+        "creator_user_id": "47c7f1b1-0ef5-4d7b-b43c-811c51c9e349",
+        "id": "c322307a-b871-44fe-a602-32ee8437ff04",
+        "isopen": true,
+        "license_id": "cc-by",
+        "license_title": "Creative Commons Attribution",
+        "license_url": "http://www.opendefinition.org/licenses/cc-by",
+        "maintainer": "Test Maintainer",
+        "maintainer_email": "test@email.com",
+        "metadata_created": "2021-04-09T11:39:37.657233",
+        "metadata_modified": "2022-05-20T09:20:43.998956",
+        "name": "sample-dataset-1",
+        "notes": "A CKAN Dataset is a collection of data resources (such as files), together with a description and other information (what is known as metadata), at a fixed URL. \r\n\r\n",
+        "num_resources": 9,
+        "num_tags": 8,
+        "organization": {
+          "id": "1fa89238-ee96-4439-a885-22d15244d070",
+          "name": "sample-organization",
+          "title": "Sample Organization",
+          "type": "organization",
+          "description": "This is a sample organization.",
+          "image_url": "2022-05-20-084702.929838siurana.jpg",
+          "created": "2021-04-09T14:27:17.753798",
+          "is_organization": true,
+          "approval_status": "approved",
+          "state": "active"
+        },
+        "owner_org": "1fa89238-ee96-4439-a885-22d15244d070",
+        "private": false,
+        "state": "active",
+        "title": "Sample Dataset",
+        "type": "dataset",
+        "url": "",
+        "version": "1.0",
+        "groups": [
+          {
+            "description": "",
+            "display_name": "Test Group",
+            "id": "5d423f6b-137e-4d15-a156-868763fa7a64",
+            "image_display_url": "https://demo.ckan.org/uploads/group/2021-04-21-153504.571229064c7c.png",
+            "name": "test-group",
+            "title": "Test Group"
+          }
+        ],
+        "resources": [
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2021-04-09T14:31:09.032858",
+            "datastore_active": true,
+            "description": "This is a sample resource added via url.",
+            "format": "CSV",
+            "hash": "",
+            "id": "e687245d-7835-44b0-8ed3-0827de123895",
+            "last_modified": null,
+            "metadata_modified": "2021-04-09T14:31:09.021596",
+            "mimetype": "text/csv",
+            "mimetype_inner": null,
+            "name": "sample-linked.csv",
+            "package_id": "c322307a-b871-44fe-a602-32ee8437ff04",
+            "position": 0,
+            "resource_type": null,
+            "size": null,
+            "state": "active",
+            "url": "https://raw.githubusercontent.com/datopian/CKAN_Demo_Datasets/main/resources/org1_sample.csv",
+            "url_type": null
+          },
+          {
+            "cache_last_updated": null,
+            "cache_url": null,
+            "created": "2021-04-09T14:31:45.092631",
+            "datastore_active": true,
+            "description": "Sample csv (uploaded).",
+            "format": "CSV",
+            "hash": "",
+            "id": "b53c9e72-6b59-4cda-8c0c-7d6a51dad12a",
+            "last_modified": "2021-04-09T16:13:57.353205",
+            "metadata_modified": "2021-04-09T16:13:57.367140",
+            "mimetype": "application/csv",
+            "mimetype_inner": null,
+            "name": "sample.csv",
+            "package_id": "c322307a-b871-44fe-a602-32ee8437ff04",
+            "position": 1,
+            "resource_type": null,
+            "size": 6731,
+            "state": "active",
+            "url": "https://demo.ckan.org/dataset/c322307a-b871-44fe-a602-32ee8437ff04/resource/b53c9e72-6b59-4cda-8c0c-7d6a51dad12a/download/sample.csv",
+            "url_type": "upload"
+          }
+        ],
+        "tags": [
+          {
+            "display_name": "csv",
+            "id": "b5e651dd-8f42-445c-b9c4-2f09a3268427",
+            "name": "csv",
+            "state": "active",
+            "vocabulary_id": null
+          },
+          {
+            "display_name": "economy",
+            "id": "0c4f9ad5-a372-4bda-a59b-e560cf264b0f",
+            "name": "economy",
+            "state": "active",
+            "vocabulary_id": null
+          }
+        ],
+        "extras": [],
+        "relationships_as_subject": [],
+        "relationships_as_object": []
+      }
+    ],
+    "sort": "score desc, metadata_modified desc",
+    "search_facets": {}
+  }
+}
+
+```
 
 
 [^1]: Official CKAN repo: https://github.com/ckan/ckan-docker-base

@@ -17,7 +17,7 @@ COPY req_fixes ${APP_DIR}/req_fixes
 ### Resource dictionary - 1.0.1 ###
 ### Pages - v0.5.2 ###
 ### PDFView - 0.0.8 ###
-### Scheming DCAT - v1.0.0 (GeoDCAT-AP extended version) ###
+### Scheming DCAT - v1.1.0 (GeoDCAT-AP extended version) ###
 ### SPARQL Interface - 2.0.1 ###
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime ; fi && \
@@ -45,14 +45,14 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install -e git+https://github.com/ckan/ckanext-pages.git@v0.5.2#egg=ckanext-pages && \
     echo "ckan/ckanext-pdfview" && \
     pip3 install -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
-    echo "OpenDataGIS/ckanext-scheming_dcat" && \
-    pip3 install -e git+https://github.com/mjanez/ckanext-scheming_dcat.git@v1.0.0#egg=ckanext_scheming_dcat && \
-    pip3 install -r https://raw.githubusercontent.com/mjanez/ckanext-scheming_dcat/v1.0.0/requirements.txt
+    echo "mjanez/ckanext-scheming_dcat" && \
+    pip3 install -e git+https://github.com/mjanez/ckanext-scheming_dcat.git@v1.1.0#egg=ckanext_scheming_dcat && \
+    pip3 install -r https://raw.githubusercontent.com/mjanez/ckanext-scheming_dcat/v1.1.0/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
-# Update who.ini with APACHE_CKAN_LOCATION
+# Update who.ini with PROXY_CKAN_LOCATION
 COPY setup/who.ini ${APP_DIR}/
 
 # Apply any patches needed to CKAN core
