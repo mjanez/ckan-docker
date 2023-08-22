@@ -1,22 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CKAN Docker Apache landing page</title>
-    <style>
-        h1{
-            font-weight:lighter;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-    </style>
-</head>
-<body>
-    
-    <h2>
-        CKAN Docker Apache landing page
-    </h2>
-
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CKAN Docker Apache landing page</title>
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                text-align: center;
+            }
+            h2 {
+                font-weight: bold;
+                font-size:28px;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+            li {
+                display: inline-block;
+                margin: 0 10px;
+                width: 200px;
+                
+            }
+            li img {
+                display: block;
+                margin: 0 auto;
+                max-width: 200px;
+            }
+            li a {
+                display: block;
+                font-weight: bold;
+                text-decoration: none;
+                font-size:18px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>
+            CKAN Docker Apache landing page
+        </h2>
+        <ul>
+            <li>
+                <a href="/catalog">
+                    <img src="https://upload.wikimedia.org/wikipedia/en/e/e2/CKAN_Logo_full_color.png" alt="Open Data Catalog">
+                </a>
+                <a href="/catalog">Open Data portal</a>
+            </li>
+            <li>
+                <a href="/csw">
+                    <img src="https://www.ogc.org/wp-content/uploads/2023/03/OGC-1.svg" alt="CSW Endpoint">
+                </a>
+                <a href="/csw">CSW Endpoint</a>
+            </li>
+        </ul>
+    </body>
 </html>
