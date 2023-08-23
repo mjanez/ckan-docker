@@ -47,7 +47,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
     echo "mjanez/ckanext-scheming_dcat" && \
     pip3 install -e git+https://github.com/mjanez/ckanext-scheming_dcat.git@v1.1.0#egg=ckanext_scheming_dcat && \
-    pip3 install -r ${APP_DIR}/src/ckanext-scheming_dcat/requirements.txt
+    pip3 install -r https://raw.githubusercontent.com/mjanez/ckanext-scheming_dcat/v1.1.0/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
