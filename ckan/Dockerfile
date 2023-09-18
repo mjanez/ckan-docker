@@ -14,7 +14,7 @@ COPY req_fixes ${APP_DIR}/req_fixes
 ### Spatial - v2.0.0 ### fixed requirements.txt
 ### DCAT - v1.1.0-geodcatap (GeoDCAT-AP extended version) ###
 ### Scheming - release-3.0.0 ###
-### Resource dictionary - 1.0.1 ###
+### Resource dictionary - v1.0.1 ###
 ### Pages - v0.5.2 ###
 ### PDFView - 0.0.8 ###
 ### Scheming DCAT - v1.2.0 (GeoDCAT-AP extended version) ###
@@ -40,7 +40,7 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "ckan/ckanext-scheming" && \
     pip3 install -e git+https://github.com/ckan/ckanext-scheming.git@release-3.0.0#egg=ckanext-scheming && \
     echo "mjanez/ckanext-resourcedictionary" && \
-    pip3 install -e git+https://github.com/mjanez/ckanext-resourcedictionary.git@1.0.1#egg=ckanext-resourcedictionary && \
+    pip3 install -e git+https://github.com/mjanez/ckanext-resourcedictionary.git@v1.0.1#egg=ckanext-resourcedictionary && \
     echo "ckan/ckanext-pages" && \
     pip3 install -e git+https://github.com/ckan/ckanext-pages.git@v0.5.2#egg=ckanext-pages && \
     echo "ckan/ckanext-pdfview" && \
