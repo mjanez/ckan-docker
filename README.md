@@ -34,14 +34,14 @@ Available components:
 | CKAN Version | Type | Docker tag | Notes |
 | --- | --- | --- | --- |
 | 2.9.8 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.8 |
-| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.9 |
+| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.9` | Stable version with CKAN 2.9.9 |
 | 2.9.9 | latest custom image | `ghcr.io/mjanez/ckan-spatial:master` | Latest `ckan-spatial` image. |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
 * Solr: [Custom image](/solr/Dockerfile.spatial) based on official CKAN [pre-configured Solr image](https://github.com/ckan/ckan-solr). The index data is stored in a named volume and has a custom spatial schema upgrades. [^2]
-* Redis: standard Redis image
-* NGINX: latest stable nginx image that includes SSL and Non-SSL endpoints.
+* Redis: Standard Redis image
+* NGINX: Latest stable nginx image that includes SSL and Non-SSL endpoints.
 * ckan-pycsw: [Custom image](/ckan-pycsw/Dockerfile) based on [pycsw CKAN harvester ISO19139](https://github.com/mjanez/ckan-pycsw) for INSPIRE Metadata CSW Endpoint.
 
 Optional HTTP Endpoint ([`docker-compose.apache.yml`](/docker-compose.apache.yml)):
@@ -50,7 +50,7 @@ Optional HTTP Endpoint ([`docker-compose.apache.yml`](/docker-compose.apache.yml
 
 | Compose files | Repository | Type | Docker tag | Size | Notes |
 | --- | --- | --- | --- | --- | --- |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | CKAN 2.9.8 | custom image | [`mjanez/ckan-spatial:ckan-2.9.8`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | CKAN 2.9.9 | custom image | [`mjanez/ckan-spatial:ckan-2.9.9`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr9-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr9-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Redis 7.0.10 | base image | [`redis/redis:7-alpine`](https://hub.docker.com/layers/library/redis/7-alpine/images/sha256-98f4ea44e912d0941d29015a4e2448151b94411109c896b5627d94d79306eea7?context=explore) | 11.82 MB |  - |
@@ -71,20 +71,20 @@ Information about extensions installed in the `main` image. More info described 
 
 | **Element** | **Description**                                                                         | **version** | **Status**                   | **DEV**[^3] | **PRO**[^4]  | **Remarks**                                                                                                                                                                                                                                                                                                                                                             |
 |-------------|-----------------------------------------------------------------------------------------|-------------|------------------------------|---------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Core        | [CKAN](https://github.com/mjanez/ckan-docker)                                           | 2.9.8      | Completed                    | ✔️      | ✔️      | Stable installation for version 2.9.8 (Production & Dev images) via Docker Compose based on [official images](https://github.com/ckan/ckan-docker-base)). Initial configuration, basic customisation and operation guide.                                                                                                                                              |
-| Core +      | [Datastore](https://github.com/mjanez/ckan-docker)                                      | 2.9.8      | Completed                    | ✔️      | ✔️      | Stable installation (Production & Dev images) via Docker Compose.                                                                                                                                                                                                                                                                                                       |
+| Core        | [CKAN](https://github.com/mjanez/ckan-docker)                                           | 2.9.9      | Completed                    | ✔️      | ✔️      | Stable installation for version 2.9.9 (Production & Dev images) via Docker Compose based on [official images](https://github.com/ckan/ckan-docker-base)). Initial configuration, basic customisation and operation guide.                                                                                                                                              |
+| Core +      | [Datastore](https://github.com/mjanez/ckan-docker)                                      | 2.9.9      | Completed                    | ✔️      | ✔️      | Stable installation (Production & Dev images) via Docker Compose.                                                                                                                                                                                                                                                                                                       |
 | Core +      | [~~Datapusher~~](https://github.com/mjanez/ckan-docker)                                     | 0.0.19      | Deprecated                    | ❌      | ❌      | Updated to [xloader](https://github.com/ckan/ckanext-xloader), an express Loader - quickly load data into DataStore.                                                                                                                                |
-| Extension   | [ckanext-xloader](https://github.com/ckan/ckanext-xloader)                              | 0.12.2        | Completed                    | ✔️      | ✔️      | Stable installation, a replacement for DataPusher because it offers ten times the speed and more robustness                                                                                                                                                                                                                                                                  |
+| Extension   | [ckanext-xloader](https://github.com/ckan/ckanext-xloader)                              | 1.0.1        | Completed                    | ✔️      | ✔️      | Stable installation, a replacement for DataPusher because it offers ten times the speed and more robustness                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-harvest](https://github.com/ckan/ckanext-harvest)                              | 1.5.1       | Completed                    | ✔️      | ✔️      | Stable installation, necessary for the implementation of the Collector ([ogc_ckan](#recollector-ckan))                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-geoview](https://github.com/ckan/ckanext-geoview)                              | 0.0.20      | Completed                    | ✔️      | ✔️      | Stable installation.                                                                                                                                                                                                                                                                                                                                                    |
 | Extension   | [ckanext-spatial](https://github.com/ckan/ckanext-spatial)                              | 2.0.0       | Completed                    | ✔️      | ✔️      | Stable installation, necessary for the implementation of the Collector ([ogc_ckan](#recollector-ckan))                                                                                                                                                                                                                                                                  |
-| Extension   | [ckanext-dcat](https://github.com/mjanez/ckanext-dcat)                                  | 1.2.0       | Completed                    | ✔️      | ✔️      | Stable installation, include DCAT-AP 2.1 profile compatible with GeoDCAT-AP.                                                                                                                                                                                                                                                                                            |
+| Extension   | [ckanext-dcat](https://github.com/mjanez/ckanext-dcat)                                  | 1.1.0       | Completed                    | ✔️      | ✔️      | Stable installation, include DCAT-AP 2.1 profile compatible with GeoDCAT-AP.                                                                                                                                                                                                                                                                                            |
 | Extension   | [ckanext-scheming](https://github.com/mjanez/ckanext-scheming)                          | 3.0.0       | WIP                          | ✔️      | ✔️      | Stable installation. Customised ckanext schema[^5] based on the [Spanish Metadata Core](https://datos.gob.es/es/doc-tags/nti-risp) with the aim of completing the minimum metadata elements included in the current datasets in accordance with [GeoDCAT-AP](https://semiceu.github.io/GeoDCAT-AP/releases/) and [INSPIRE](https://inspire.ec.europa.eu/about-inspire). |
-| Extension   | [ckanext-resourcedictionary](https://github.com/OpenDataGIS/ckanext-resourcedictionary) | main        | Completed                    | ✔️      | ✔️      | Stable installation. This extension extends the default CKAN Data Dictionary functionality by adding possibility to create data dictionary before actual data is uploaded to datastore.                                                                                                                                                                                 |
-| Extension   | [ckanext-pages](https://github.com/ckan/ckanext-pages)                                  | 0.5.1       | Completed                    | ✔️      | ✔️      | Stable installation. This extension gives you an easy way to add simple pages to CKAN.                                                                                                                                                                                                                                                                                  |
+| Extension   | [ckanext-resourcedictionary](https://github.com/OpenDataGIS/ckanext-resourcedictionary) | v1.0.1        | Completed                    | ✔️      | ✔️      | Stable installation. This extension extends the default CKAN Data Dictionary functionality by adding possibility to create data dictionary before actual data is uploaded to datastore.                                                                                                                                                                                 |
+| Extension   | [ckanext-pages](https://github.com/ckan/ckanext-pages)                                  | 0.5.2       | Completed                    | ✔️      | ✔️      | Stable installation. This extension gives you an easy way to add simple pages to CKAN.                                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-pdfview](https://github.com/ckan/ckanext-pdfview)                              | 0.0.8       | Completed                    | ✔️      | ✔️      | Stable installation. This extension provides a view plugin for PDF files using an html object tag.                                                                                                                                                                                                                                                                      |
-| Extension    | [ckanext-scheming_dcat](https://github.com/mjanez/ckanext-scheming_dcat)                                    | 1.1.0        | Completed | ✔️      | ✔️       | Stable installation for 1.1.0 version,  provides functions and templates specifically designed to extend [ckanext-scheming](https://github.com/mjanez/ckanext-scheming) and includes DCAT enhancements to adapt CKAN Schema to GeoDCAT-AP.                                                                                                                                            |
-| Software    | [ckan-pycsw](https://github.com/mjanez/ckan-pycsw)                                    | latest        | Completed | ✔️      | ✔️       | Stable installation. PyCSW Endpoint of Open Data Portal with docker compose config. Harvest the CKAN catalogue in a CSW endpoint based on existing spatial datasets in the open data portal.                                                                                                                                                                            |
+| Extension    | [ckanext-scheming_dcat](https://github.com/mjanez/ckanext-scheming_dcat)                                    | 1.2.0        | Completed | ✔️      | ✔️       | Stable installation for 1.2.0 version,  provides functions and templates specifically designed to extend [ckanext-scheming](https://github.com/mjanez/ckanext-scheming) and includes DCAT enhancements to adapt CKAN Schema to GeoDCAT-AP.                                                                                                                                            |
+| Software    | [ckan-pycsw](https://github.com/mjanez/ckan-pycsw)                                    | main        | Completed | ✔️      | ✔️       | Stable installation. PyCSW Endpoint of Open Data Portal with docker compose config. Harvest the CKAN catalogue in a CSW endpoint based on existing spatial datasets in the open data portal.                                                                                                                                                                            |
 
 
 ## Environment: docker
@@ -215,8 +215,8 @@ The new extension files and directories are created in the `/srv/app/src_extensi
 
 The Docker image config files used to build your CKAN project are located in the `ckan/` folder. There are two Docker files:
 
-* `Dockerfile`: this is based on `ckan/ckan-base-spatial:<version>`, a base image located in the [Github Package Registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-base-spatial), that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
-* `Dockerfile.dev`:  this is based on `ckan/ckan-base-spatial:<version>-dev` also located located in the Github Package Registry, and extends `ckan/ckan-base-spatial:<version>` to include:
+* `Dockerfile`: this is based on `mjanez/ckan-base-spatial:<version>`, a base image located in the [Github Package Registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-base-spatial), that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
+* `Dockerfile.dev`:  this is based on `mjanez/ckan-base-spatial:<version>-dev` also located located in the Github Package Registry, and extends `mjanez/ckan-base-spatial:<version>` to include:
 
   * Any extension cloned on the `./src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
   * CKAN is started running this: `/usr/bin/ckan -c /srv/app/ckan.ini run -H 0.0.0.0`.
@@ -270,7 +270,7 @@ ckan -c /srv/app/ckan.ini validation init-db
 And then in our `Dockerfile.dev` file we install the extension and copy the initialization scripts:
 
 ```Dockerfile
-FROM ckan/ckan-base-spatial:2.9.8
+FROM ckan/ckan-base-spatial:2.9.9
 
 RUN pip install -e git+https://github.com/frictionlessdata/ckanext-validation.git#egg=ckanext-validation && \
     pip install -r https://raw.githubusercontent.com/frictionlessdata/ckanext-validation/master/requirements.txt
@@ -552,13 +552,15 @@ sudo systemctl disable docker
 #### Clear all Docker unused objects (images, containers, networks, local volumes)
 ```bash
 docker system prune # Clear all
+docker system prune -a # Clear all (includes unused and dangling containers)
+
+# By default, volumes are not removed to prevent important data from being deleted if there is currently no container using the volume. Use the `--volumes` flag when running the command to prune volumes: `docker system prune -a --volumes`
 
 docker image prune # Clear unused images
 docker container prune # Clear unused containers
 docker volume prune # Clear unused volumes
 docker network prune # Clear unused networks
 ```
-
 
 ### Docker Compose. Basic commands
 More info about Docker Compose commands at [docker compose reference](https://docs.docker.com/compose/reference/).
@@ -597,11 +599,17 @@ docker compose [-f <docker compose-file>] up
 ## Build & up all the containers.
 docker compose [-f <docker compose-file>] up -d --build
 
+## Build & up an specific container.
+docker compose [-f <docker compose-file>] up -d --build <container>
+
 ## To avoid using a cache of the previous build while creating a new image.
 docker compose [-f <docker compose-file>] build --no-cache
 
 ## Build a project with a specific Docker Compose prefix.
 docker compose [-f <docker compose-file>] -p <my_project> up -d --build
+
+## Log the build
+docker compose build --no-cache &> docker_build.log
 
 
 # Down
