@@ -1,5 +1,6 @@
 # Base image
 FROM ghcr.io/mjanez/ckan-pycsw:main AS base
+LABEL maintainer="mnl.janez@gmail.com"
 
 # ckan-pycsw envvars
 ENV APP_DIR=/app
@@ -18,7 +19,5 @@ WORKDIR ${APP_DIR}
 
 # Update files if needed
 COPY pycsw/conf/pycsw.conf.template docker-entrypoint.d/entrypoint.sh ./
-
-USER root
 
 ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
