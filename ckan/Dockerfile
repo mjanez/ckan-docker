@@ -12,7 +12,7 @@ COPY req_fixes ${APP_DIR}/req_fixes
 ### Harvester - v1.5.1 ###
 ### Geoview - v0.0.20 ###
 ### Spatial - v2.0.0 ### fixed requirements.txt
-### DCAT - v1.1.0-geodcatap (GeoDCAT-AP extended version) ###
+### DCAT - v1.2.0-geodcatap (GeoDCAT-AP extended version) ###
 ### Scheming - release-3.0.0 ###
 ### Resource dictionary - v1.0.1 ###
 ### Pages - v0.5.2 ###
@@ -35,7 +35,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install -e git+https://github.com/ckan/ckanext-spatial.git@v2.0.0#egg=ckanext-spatial && \
     pip3 install -r ${APP_DIR}/req_fixes/ckanext-spatial_requirements.txt && \
     echo "mjanez/ckanext-dcat (GeoDCAT-AP extended version)" && \
-    pip3 install -e git+https://github.com/mjanez/ckanext-dcat.git@v1.1.0-geodcatap#egg=ckanext-dcat && \
+    pip3 install -e git+https://github.com/mjanez/ckanext-dcat.git@v1.2.0-geodcatap#egg=ckanext-dcat && \
     pip3 install -r ${APP_DIR}/src/ckanext-dcat/requirements.txt && \
     echo "ckan/ckanext-scheming" && \
     pip3 install -e git+https://github.com/ckan/ckanext-scheming.git@release-3.0.0#egg=ckanext-scheming && \
