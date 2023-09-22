@@ -19,6 +19,6 @@ WORKDIR ${APP_DIR}
 # Update files if needed
 COPY pycsw/conf/pycsw.conf.template docker-entrypoint.d/entrypoint.sh ./
 
-USER $USERNAME
+USER root
 
 ENTRYPOINT ["/bin/bash", "./entrypoint.sh"]
