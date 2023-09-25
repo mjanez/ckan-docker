@@ -57,7 +57,7 @@ database=sqlite:///${PWD}/cite.db
 table=records
 #filter=type='http://purl.org/dc/dcmitype/Dataset'
 
-#[metadata:inspire]
+[metadata:inspire]
 enabled=true
 languages_supported=eng,spa
 default_language=eng
