@@ -1,3 +1,4 @@
+<center><img src="./doc/img/ckan-docker-logo.png" alt="ckan-spatial" style="height:100px"></center>
 <h1 align="center">CKAN Docker Compose - Open Data & GIS</h1>
 <p align="center">
 <a href="https://github.com/mjanez/ckan-docker"><img src="https://img.shields.io/badge/Docker%20CKAN-2.9.9-brightgreen" alt="ckan-spatial"></a>
