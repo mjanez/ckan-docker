@@ -86,7 +86,7 @@ jobs:
         id: docker-push
         with:
             push: false
-            tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH }}
+            tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test-build-only
             labels: ${{ steps.meta.outputs.labels }}
             context: ${{ env.CONTEXT }}
             file: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}
@@ -103,7 +103,7 @@ jobs:
       - name: Run Trivy container image vulnerability scanner
         uses: aquasecurity/trivy-action@0.12.0
         with:
-          image-ref:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH }}
+          image-ref:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test-build-only
           format: sarif
           output: trivy-results.sarif
   
