@@ -1,4 +1,5 @@
 FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.9
+LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
 ENV APP_DIR=/srv/app \
