@@ -14,7 +14,7 @@ env:
     CONTEXT: .
     BRANCH: ${{ github.head_ref }}
     DOCKERFILE_PATH: /ckan
-    DOCKERFILE: Dockerfile
+    DOCKERFILE: Dockerfile.ghcr
     HADOLINT_VERSION: 2.12.0
 
 jobs:
@@ -83,16 +83,16 @@ jobs:
         id: docker-push
         with:
             push: false
-            tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test-build-only
+            tags: ${{ steps.meta.outputs.tags }}
             labels: ${{ steps.meta.outputs.labels }}
             context: ./ckan
-            file: ./ckan/Dockerfile
+            file: ./ckan/Dockerfile.ghcr
 
       - name: Linting Dockerfile and annotate code inline in the github PR viewer
         id: hadolint
         uses: jbergstroem/hadolint-gh-action@v1.11.0
         with:
-          dockerfile: ./ckan/Dockerfile
+          dockerfile: ./ckan/Dockerfile.ghcr
           version: ${{ env.HADOLINT_VERSION }}
           annotate: true
           error_level: -1
@@ -100,7 +100,7 @@ jobs:
       - name: Run Trivy container image vulnerability scanner
         uses: aquasecurity/trivy-action@0.12.0
         with:
-          image-ref:  ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:test-build-only
+          image-ref:  ${{ steps.meta.outputs.tags }}
           format: sarif
           output: trivy-results.sarif
   
