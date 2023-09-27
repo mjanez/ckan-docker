@@ -6,6 +6,7 @@ on:
         - main
         - 'ckan-*.*.*'
         - '!dev/ckan-*.*.*'
+        - '!*/*'
 
 env:
     REGISTRY: ghcr.io
