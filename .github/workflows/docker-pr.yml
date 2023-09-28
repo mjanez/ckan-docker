@@ -87,3 +87,12 @@ jobs:
           version: ${{ env.HADOLINT_VERSION }}
           annotate: true
           error_level: -1
+
+      - name: Linting Dockerfile.ghcr and annotate code inline in the github PR viewer
+        id: hadolint_ghcr
+        uses: jbergstroem/hadolint-gh-action@v1.11.0
+        with:
+          dockerfile: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}.ghcr
+          version: ${{ env.HADOLINT_VERSION }}
+          annotate: true
+          error_level: -1
