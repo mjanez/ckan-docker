@@ -1,22 +1,23 @@
 diff --git a/ckanext/pages/plugin.py b/ckanext/pages/plugin.py
-index fbd1be0..bdb9a35 100644
+index fbd1be0..2882f97 100644
 --- a/ckanext/pages/plugin.py
 +++ b/ckanext/pages/plugin.py
-@@ -1,5 +1,6 @@
+@@ -8,6 +8,7 @@ from ckan.plugins import toolkit as tk
  
- import logging
-+import re
- from html import escape as html_escape
+ import ckan.plugins as p
+ from ckan.lib.helpers import build_nav_main as core_build_nav_main
++from ckan.lib.helpers import lang
  
- from six.moves.urllib.parse import quote
+ from ckanext.pages import actions, db
+ from ckanext.pages import auth
 @@ -25,6 +26,10 @@ def build_pages_nav_main(*args):
      about_menu = tk.asbool(tk.config.get('ckanext.pages.about_menu', True))
      group_menu = tk.asbool(tk.config.get('ckanext.pages.group_menu', True))
      org_menu = tk.asbool(tk.config.get('ckanext.pages.organization_menu', True))
 +    
-+    #FIXME: link needs root_path if exists
++    # get the root path from the config and use lang if needed
 +    root_path = tk.config.get('ckan.root_path', '')
-+    root_path = re.sub('/{{LANG}}', '', root_path)
++    root_path = root_path.replace('/{{LANG}}', '') if lang() == tk.config.get('ckan.locale_default') else root_path.replace('/{{LANG}}', '/{}'.format(lang()))
  
      new_args = []
      for arg in args:
