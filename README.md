@@ -5,7 +5,7 @@
 </p>
 <h1 align="center">CKAN Docker Compose - Open Data & GIS</h1>
 <p align="center">
-<a href="https://github.com/mjanez/ckan-docker"><img src="https://img.shields.io/badge/Docker%20CKAN-2.9.9-brightgreen" alt="ckan-spatial"></a>
+<a href="https://github.com/mjanez/ckan-docker"><img src="https://img.shields.io/badge/Docker%20CKAN-2.9.9-brightgreen" alt="ckan-docker"></a>
 
 <p align="center">
     <a href="#overview">Overview</a> •
@@ -38,8 +38,8 @@ Available components:
 | CKAN Version | Type | Docker tag | Notes |
 | --- | --- | --- | --- |
 | 2.9.8 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.8 |
-| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.9` | Stable version with CKAN 2.9.9 |
-| 2.9.9 | latest custom image | `ghcr.io/mjanez/ckan-spatial:master` | Latest `ckan-spatial` image. |
+| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.9` | Stable version with CKAN 2.9.9 |
+| 2.9.9 | latest custom image | `ghcr.io/mjanez/ckan-docker:master` | Latest `ckan-docker` image. |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
@@ -54,7 +54,7 @@ Optional HTTP Endpoint ([`docker-compose.apache.yml`](/docker-compose.apache.yml
 
 | Compose files | Repository | Type | Docker tag | Size | Notes |
 | --- | --- | --- | --- | --- | --- |
-| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | CKAN 2.9.9 | custom image | [`mjanez/ckan-spatial:ckan-2.9.9`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
+| [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | CKAN 2.9.9 | custom image | [`mjanez/ckan-docker:ckan-2.9.9`](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-docker) | 800 MB |   Custom Dockerfile: [`ckan/Dockerfile`](/ckan/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | PostgreSQL 15.2 | base image | [`postgres/postgres:15-alpine`](https://hub.docker.com/layers/library/postgres/15-alpine/images/sha256-53a02ecbe9d18ff6476e6651c34811da39f054424c725fc15d2b480fc3fab877?context=explore) | 89.74 MB |   Custom Dockerfile: [`postgresql/Dockerfile`](/postgresql/Dockerfile) |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Solr 8.11.1 | custom image | [`ckan/ckan-solr:2.9-solr9-spatial`](https://registry.hub.docker.com/layers/ckan/ckan-solr/2.9-solr9-spatial/images/sha256-b5ee4979891c7dd1f10d2ac2cbdd4d80ff656879edb0f0493616be7b4cf8bc3a?context=explore) | 331.1 MB |  CKAN's [pre-configured spatial Solr image](https://github.com/ckan/ckan-solr). |
 | [`docker-compose.yml`](/docker-compose.yml) / [`docker-compose.apache.yml`](/docker-compose.apache.yml) | Redis 7.0.10 | base image | [`redis/redis:7-alpine`](https://hub.docker.com/layers/library/redis/7-alpine/images/sha256-98f4ea44e912d0941d29015a4e2448151b94411109c896b5627d94d79306eea7?context=explore) | 11.82 MB |  - |
@@ -176,7 +176,7 @@ After this step, CKAN should be running at {`PROXY_SERVER_NAME`}{`PROXY_CKAN_LOC
 
 
 ### Quick mode
-If you just want to test the package and see the general functionality of the platform, you can use the `ckan-spatial` image from the [Github container registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-spatial):
+If you just want to test the package and see the general functionality of the platform, you can use the `ckan-docker` image from the [Github container registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-docker):
     
   ```bash
   cp .env.example .env
