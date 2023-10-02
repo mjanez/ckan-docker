@@ -9,7 +9,7 @@ ENV TZ=UTC
 WORKDIR ${APP_DIR}
 
 # requirements.txt files fixed until next releases
-COPY req_fixes ./req_fixes
+COPY req_fixes req_fixes
 
 # Extensions
 ### XLoader - 1.0.1 ###
@@ -60,14 +60,14 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 COPY setup/who.ini ./
 
 # Apply any patches needed to CKAN core
-COPY patches ./
+COPY patches patches
 
 RUN for d in $APP_DIR/patches/*; do \
     if [ -d $d ]; then \
-    for f in `ls $d/*.patch | sort -g`; do \
-    cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; patch -p1 < "$f" ; \
-    done ; \
-    fi ; \
+            for f in `ls $d/*.patch | sort -g`; do \
+                cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; patch -p1 < "$f" ; \
+            done ; \
+        fi ; \
     done
 
 CMD ["/bin/sh", "-c", "$APP_DIR/start_ckan.sh"]

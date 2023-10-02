@@ -57,12 +57,12 @@ COPY docker-entrypoint.d/* docker-entrypoint.d/
 COPY setup/who.ini ./
 
 # Override start_ckan.sh with DEV sh
-COPY setup/start_ckan_development.sh.override ./start_ckan_development.sh
+COPY setup/start_ckan_development.sh.override start_ckan_development.sh
 RUN chmod +x start_ckan_development.sh
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones!)
-COPY patches ./
+COPY patches patches
 
 RUN for d in $APP_DIR/patches/*; do \
     if [ -d $d ]; then \
