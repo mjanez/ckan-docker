@@ -14,7 +14,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ckan-spatial
-  TAG: ghcr.io/${{ github.repository }}:${{ github.head_ref }}
+  TAG: ghcr.io/ckan-spatial::${{ github.head_ref }}
   CONTEXT: .
   BRANCH: ${{ github.head_ref }}
   DOCKERFILE_PATH: /ckan
