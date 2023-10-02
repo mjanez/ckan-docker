@@ -21,7 +21,7 @@ COPY docker-entrypoint.d/* docker-entrypoint.d/
 COPY setup/who.ini ./
 
 # Apply any patches needed to CKAN core
-COPY patches patches
+COPY patches ./
 
 #  Updated version of the Dockerfile RUN command that skips applying a patch if a reversed or previously applied patch is detected
 RUN for d in $APP_DIR/patches/*; do \
