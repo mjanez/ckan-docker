@@ -55,7 +55,7 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}
-          failure-threshold: ignore
+          no-fail: true
 
       - name: Run Trivy container image vulnerability scanner
         uses: aquasecurity/trivy-action@0.12.0

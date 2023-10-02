@@ -19,7 +19,7 @@ COPY req_fixes req_fixes
 ### DCAT - v1.2.0-geodcatap (GeoDCAT-AP/NTI-RISP extended version) ###
 ### Scheming - release-3.0.0 ###
 ### Resource dictionary - v1.0.1 ###
-### Pages - v0.5.2 ###
+### Pages - v0.5.2-fixed ###
 ### PDFView - 0.0.8 ###
 ### Scheming DCAT - v2.0.0 (GeoDCAT-AP/NTI-RISP extended version) ###
 ### SPARQL Interface - 2.0.1 ###
@@ -45,8 +45,8 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-scheming.git@release-3.0.0#egg=ckanext-scheming && \
     echo "mjanez/ckanext-resourcedictionary" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-resourcedictionary.git@v1.0.1#egg=ckanext-resourcedictionary && \
-    echo "ckan/ckanext-pages" && \
-    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-pages.git@v0.5.2#egg=ckanext-pages && \
+    echo "mjanez/ckanext-pages" && \
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-pages.git@v0.5.2-fixed#egg=ckanext-pages && \
     echo "ckan/ckanext-pdfview" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
     echo "mjanez/ckanext-scheming_dcat" && \
