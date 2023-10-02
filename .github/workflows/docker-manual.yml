@@ -48,7 +48,7 @@ jobs:
           push: true
           tags: ${{ env.TAG }}
           labels: ${{ steps.meta.outputs.labels }}
-          context: ${{ env.CONTEXT }}
+          context: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}
           file: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}
 
       - name: Linting Dockerfile with hadolint in GH Actions
