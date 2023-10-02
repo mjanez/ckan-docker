@@ -4,8 +4,8 @@ on: workflow_dispatch
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ckan-spatial
-  TAG: ghcr.io/ckan-spatial:${{ github.ref_name }}
+  IMAGE_NAME: ${{ github.repository }}
+  TAG: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
   CONTEXT: .
   BRANCH: ${{ github.ref_name }}
   DOCKERFILE_PATH: /ckan
