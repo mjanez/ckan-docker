@@ -1,9 +1,13 @@
 FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.9-dev
+LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
-ENV APP_DIR=/srv/app \
-    TZ=UTC \
-    SRC_EXTENSIONS_DIR=/srv/app/src_extensions
+ENV APP_DIR=/srv/app
+ENV TZ=UTC
+ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
+
+# Set working directory
+WORKDIR ${APP_DIR}
 
 RUN echo ${TZ} > /etc/timezone && \
     set -ex && apk --no-cache add sudo && \
@@ -47,23 +51,29 @@ RUN echo ${TZ} > /etc/timezone && \
 # to get them mounted in this image at runtime
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
-COPY docker-entrypoint.d/* /docker-entrypoint.d/
+COPY docker-entrypoint.d/* docker-entrypoint.d/
 
 # Update who.ini with PROXY_CKAN_LOCATION
-COPY setup/who.ini ${APP_DIR}/
+COPY setup/who.ini ./
 
 # Override start_ckan.sh with DEV sh
-COPY setup/start_ckan_development.sh.override ${APP_DIR}/start_ckan_development.sh
-RUN chmod +x ${APP_DIR}/start_ckan_development.sh
+COPY setup/start_ckan_development.sh.override start_ckan_development.sh
+RUN chmod +x start_ckan_development.sh
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
-# runtime mounted ones)
-COPY patches ${APP_DIR}/patches
+# runtime mounted ones!)
+COPY patches patches
 
 RUN for d in $APP_DIR/patches/*; do \
     if [ -d $d ]; then \
-    for f in `ls $d/*.patch | sort -g`; do \
-    cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; patch -p1 < "$f" ; \
-    done ; \
+        for f in `ls $d/*.patch | sort -g`; do \
+            if [ -d $SRC_DIR/`basename "$d"` ]; then \
+                cd $SRC_DIR/`basename "$d"` && \
+                echo "$0: Applying patch $f to $SRC_DIR/`basename $d`" && \
+                patch -p1 < "$f" ; \
+            else \
+                echo "$0: Skipping patch $f because directory $SRC_DIR/`basename $d` does not exist. Built the extension: `basename $d`" ; \
+            fi \
+        done ; \
     fi ; \
-    done
+done
