@@ -1,13 +1,9 @@
 FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.9-dev
-LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
-ENV APP_DIR=/srv/app
-ENV TZ=UTC
-ENV SRC_EXTENSIONS_DIR=/srv/app/src_extensions
-
-# Set working directory
-WORKDIR ${APP_DIR}
+ENV APP_DIR=/srv/app \
+    TZ=UTC \
+    SRC_EXTENSIONS_DIR=/srv/app/src_extensions
 
 RUN echo ${TZ} > /etc/timezone && \
     set -ex && apk --no-cache add sudo && \
@@ -51,18 +47,18 @@ RUN echo ${TZ} > /etc/timezone && \
 # to get them mounted in this image at runtime
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
-COPY docker-entrypoint.d/* docker-entrypoint.d/
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
 # Update who.ini with PROXY_CKAN_LOCATION
-COPY setup/who.ini ./
+COPY setup/who.ini ${APP_DIR}/
 
 # Override start_ckan.sh with DEV sh
-COPY setup/start_ckan_development.sh.override start_ckan_development.sh
-RUN chmod +x start_ckan_development.sh
+COPY setup/start_ckan_development.sh.override ${APP_DIR}/start_ckan_development.sh
+RUN chmod +x ${APP_DIR}/start_ckan_development.sh
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
-# runtime mounted ones!)
-COPY patches patches
+# runtime mounted ones)
+COPY patches ${APP_DIR}/patches
 
 RUN for d in $APP_DIR/patches/*; do \
     if [ -d $d ]; then \
