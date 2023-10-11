@@ -21,6 +21,7 @@ COPY req_fixes req_fixes
 ### Resource dictionary - v1.0.1 ###
 ### Pages - v0.5.2 ###
 ### PDFView - 0.0.8 ###
+### Fluent - v1.0.1  (Forked stable version) ###
 ### Scheming DCAT - v2.0.0 (GeoDCAT-AP/NTI-RISP extended version) ###
 ### SPARQL Interface - 2.0.1 ###
 RUN echo ${TZ} > /etc/timezone && \
@@ -49,6 +50,8 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-pages.git@v0.5.2#egg=ckanext-pages && \
     echo "ckan/ckanext-pdfview" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-pdfview.git@0.0.8#egg=ckanext-pdfview && \
+    echo "mjanez/ckanext-fluent" && \
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-fluent.git@v1.0.1#egg=ckanext-fluent && \
     echo "mjanez/ckanext-scheming_dcat" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-scheming_dcat.git@v2.0.0#egg=ckanext_scheming_dcat && \
     pip3 install --no-cache-dir -r https://raw.githubusercontent.com/mjanez/ckanext-scheming_dcat/v2.0.0/requirements.txt
