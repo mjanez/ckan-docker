@@ -25,8 +25,8 @@ allowed_ips=127.0.0.1
 [metadata:main]
 identification_title=Sample Geospatial Catalogue
 identification_abstract=OGC CSW server powered by pycsw
-identification_keywords=catalogue,discovery,metadata
-#identification_keywords_type=theme
+identification_keywords=catalogue,discovery,metadata,spatial
+identification_keywords_type=theme
 identification_fees=None
 identification_accessconstraints=None
 provider_name=Sample
