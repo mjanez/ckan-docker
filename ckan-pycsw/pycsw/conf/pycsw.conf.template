@@ -9,7 +9,7 @@ maxrecords=10
 #logfile=/tmp/pycsw.log
 #ogc_schemas_base=http://foo
 #federatedcatalogues=http://catalog.data.gov/csw
-#pretty_print=true
+pretty_print=true
 # Disable gzip_compresslevel when use httpd
 #gzip_compresslevel=9
 #domainquerytype=range
