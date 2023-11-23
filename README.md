@@ -476,6 +476,7 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
 
     >**Warning**<br>
     > If you have changed the values of the PostgreSQL container, database or user, change them too.
+    > Check that `zip` package is installed: `sudo apt-get install zip`
 
 4. Save and close the file.
 
