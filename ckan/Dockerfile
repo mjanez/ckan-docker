@@ -15,7 +15,7 @@ COPY req_fixes req_fixes
 ### XLoader - 1.0.1 ###
 ### Harvester - v1.5.1 ###
 ### Geoview - v0.0.20 ###
-### Spatial - v2.0.0 ### fixed requirements.txt
+### Spatial - v2.1.1 ###
 ### DCAT - v1.2.0-geodcatap (GeoDCAT-AP/NTI-RISP extended version) ###
 ### Scheming - release-3.0.0 ###
 ### Resource dictionary - v1.0.1 ###
@@ -37,8 +37,8 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "ckan/ckanext-geoview" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.0.20#egg=ckanext-geoview && \
     echo "ckan/ckanext-spatial" && \
-    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.0.0#egg=ckanext-spatial && \
-    pip3 install --no-cache-dir -r ${APP_DIR}/req_fixes/ckanext-spatial_requirements.txt && \
+    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.1.1#egg=ckanext-spatial && \
+    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-spatial/requirements.txt && \
     echo "mjanez/ckanext-dcat (GeoDCAT-AP extended version)" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-dcat.git@v1.2.0-geodcatap#egg=ckanext-dcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-dcat/requirements.txt && \
