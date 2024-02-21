@@ -3,7 +3,7 @@
 #TODO: Correct views.
 
 # Add CKAN Resource views to the CKAN config file
-echo "Loading resource views in the CKAN config file"
+echo "[docker-entrypoint.04_setup_preview] Loading resource views in the CKAN config file"
 ckan config-tool $CKAN_INI \
     "ckan.views.default_views = $CKAN__VIEWS__DEFAULT_VIEWS" \
     "ckan.preview.json_formats = $CKAN__PREVIEW__JSON_FORMATS" \
@@ -12,7 +12,7 @@ ckan config-tool $CKAN_INI \
     "ckan.preview.loadable = $CKAN__PREVIEW__LOADABLE"
 
 # Add CKAN Resource geoviews to the CKAN config file
-echo "Loading geoviews in the CKAN config file"
+echo "[docker-entrypoint.04_setup_preview] Loading geoviews in the CKAN config file"
 ckan config-tool $CKAN_INI \
     "ckanext.geoview.ol_viewer.formats = $CKANEXT__GEOVIEW__OL_VIEWER__FORMATS" \
     "ckanext.geoview.shp_viewer.srid = $CKANEXT__GEOVIEW__SHP_VIEWER__SRID" \

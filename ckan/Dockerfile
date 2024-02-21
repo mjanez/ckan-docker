@@ -11,29 +11,30 @@ WORKDIR ${APP_DIR}
 # requirements.txt files fixed until next releases
 COPY req_fixes req_fixes
 
-# Extensions
-### XLoader - 1.0.1 ###
-### Harvester - v1.5.1 ###
-### Geoview - v0.0.20 ###
-### Spatial - v2.1.1 ###
-### DCAT - v1.2.0-geodcatap (GeoDCAT-AP/NTI-RISP extended version) ###
-### Scheming - release-3.0.0 ###
-### Resource dictionary - v1.0.1 ###
-### Pages - v0.5.2 ###
-### PDFView - 0.0.8 ###
-### Fluent - v1.0.1  (Forked stable version) ###
-### Scheming DCAT - v2.0.0 (GeoDCAT-AP/NTI-RISP extended version) ###
-### SPARQL Interface - 2.0.1 ###
+# CKAN configuration & extensions
+## XLoader - 1.0.1 ##
+## Harvest - v1.5.6 (Worker with supervisor) ##
+## Geoview - v0.0.20 ##
+## Spatial - v2.1.1 ##
+## DCAT - v1.2.0-geodcatap (GeoDCAT-AP/NTI-RISP extended version) ##
+## Scheming - release-3.0.0 ##
+## Resource dictionary - v1.0.1 ##
+## Pages - v0.5.2 ##
+## PDFView - 0.0.8 ##
+## Fluent - v1.0.1  (Forked stable version) ##
+## Scheming DCAT - v2.0.0 (GeoDCAT-AP/NTI-RISP extended version) ##
 RUN echo ${TZ} > /etc/timezone && \
-    if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime ; fi && \
+    if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
+    # Remove apk cache
+    rm -rf /var/cache/apk/* && \
     # Install CKAN extensions
     echo "ckan/ckanext-xloader" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-xloader.git@1.0.1#egg=ckanext-xloader && \ 
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-xloader/requirements.txt && \
     pip3 install --no-cache-dir -U requests[security] && \
     echo "ckan/ckanext-harvest" && \
-    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-harvest.git@v1.5.1#egg=ckanext-harvest && \
-    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-harvest/pip-requirements.txt && \
+    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-harvest.git@v1.5.6#egg=ckanext-harvest && \
+    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-harvest/requirements.txt && \
     echo "ckan/ckanext-geoview" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.0.20#egg=ckanext-geoview && \
     echo "ckan/ckanext-spatial" && \
@@ -66,11 +67,20 @@ COPY setup/who.ini ./
 COPY patches patches
 
 RUN for d in $APP_DIR/patches/*; do \
-    if [ -d $d ]; then \
+        if [ -d $d ]; then \
             for f in `ls $d/*.patch | sort -g`; do \
-                cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; patch -p1 < "$f" ; \
-            done ; \
-        fi ; \
+                cd $SRC_DIR/`basename "$d"` && echo "$0: Applying patch $f to $SRC_DIR/`basename $d`" && patch -p1 < "$f"; \
+            done; \
+        fi; \
     done
 
+# Workers
+## Update start_ckan.sh with custom workers
+COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh
+RUN chmod +x ${APP_DIR}/start_ckan.sh
+
+## Harvester
+COPY setup/workers/harvester.conf /etc/supervisord.d/harvester.conf
+
+# Start CKAN
 CMD ["/bin/sh", "-c", "$APP_DIR/start_ckan.sh"]

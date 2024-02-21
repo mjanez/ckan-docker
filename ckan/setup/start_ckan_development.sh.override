@@ -45,9 +45,6 @@ done
 echo "Enabling debug mode"
 ckan config-tool $CKAN_INI -s DEFAULT "debug = true"
 
-# Add ckan.datapusher.api_token to the CKAN config file (updated with corrected value later)
-ckan config-tool $CKAN_INI ckan.datapusher.api_token=xxx
-
 # Set up the Secret key used by Beaker and Flask
 # This can be overriden using a CKAN___BEAKER__SESSION__SECRET env var
 if grep -E "beaker.session.secret ?= ?$" ckan.ini
@@ -74,7 +71,7 @@ ckan config-tool $SRC_DIR/ckan/test-core.ini \
     "ckan.redis.url = $TEST_CKAN_REDIS_URL"
 
 # Run the prerun script to init CKAN and create the default admin user
-sudo -u ckan -EH python3 prerun.py
+python3 prerun.py
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
@@ -89,8 +86,24 @@ then
     done
 fi
 
+# Create Harvester logs directory and change its ownership
+mkdir -p $CKAN_LOGS_PATH/harvester
+chown -R ckan:ckan $CKAN_LOGS_PATH/harvester
+
+# Create xloader logs directory and change its ownership
+mkdir -p $CKAN_LOGS_PATH/xloader
+chown -R ckan:ckan $CKAN_LOGS_PATH/xloader
+
 # Start supervisord
 supervisord --configuration /etc/supervisord.conf &
 
-# Start the development server with automatic reload
-sudo -u ckan -EH ckan -c $CKAN_INI run -H 0.0.0.0
+# Workers
+## Start the Harvester worker
+echo "[prerun.workers] Starting the CKAN Harvester worker"
+ckan harvester run
+
+## Clean-up mechanism for the harvest log table
+ckan harvester clean-harvest-log
+
+# Start the development server as the ckan user with automatic reload
+su ckan -c "/usr/bin/ckan -c $CKAN_INI run -H 0.0.0.0"

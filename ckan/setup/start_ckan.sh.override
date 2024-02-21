@@ -1,8 +1,5 @@
 #!/bin/sh
 
-# Add ckan.datapusher.api_token to the CKAN config file (updated with corrected value later)
-ckan config-tool $CKAN_INI ckan.datapusher.api_token=xxx
-
 # Set up the Secret key used by Beaker and Flask
 # This can be overriden using a CKAN___BEAKER__SESSION__SECRET env var
 if grep -E "beaker.session.secret ?= ?$" ckan.ini
@@ -16,7 +13,7 @@ then
 fi
 
 # Run the prerun script to init CKAN and create the default admin user
-sudo -u ckan -EH python3 prerun.py
+python3 prerun.py
 
 # Run any startup scripts provided by images extending this one
 if [[ -d "/docker-entrypoint.d" ]]
@@ -30,6 +27,14 @@ then
         echo
     done
 fi
+
+# Create Harvester logs directory and change its ownership
+mkdir -p $CKAN_LOGS_PATH/harvester
+chown -R ckan:ckan $CKAN_LOGS_PATH/harvester
+
+# Create xloader logs directory and change its ownership
+mkdir -p $CKAN_LOGS_PATH/xloader
+chown -R ckan:ckan $CKAN_LOGS_PATH/xloader
 
 # Set the common uwsgi options
 UWSGI_OPTS="--plugins http,python \
@@ -48,7 +53,15 @@ then
     # Start supervisord
     supervisord --configuration /etc/supervisord.conf &
     # Start uwsgi
-    sudo -u ckan -EH uwsgi $UWSGI_OPTS
+    uwsgi $UWSGI_OPTS
 else
   echo "[prerun] failed...not starting CKAN."
 fi
+# Workers
+## Start the Harvester worker
+echo "[prerun.workers] Starting the CKAN Harvester worker"
+ckan harvester run
+## Add harvester to crontab
+crontab -l | { cat; echo "0 */2 * * * ckan harvester run"; } | crontab -
+## Clean-up mechanism for the harvest log table. 'ckan.harvest.log_timeframe'. The default time frame is 30 days
+crontab -l | { cat; echo "0 5 * * * ckan harvester clean-harvest-log"; } | crontab -

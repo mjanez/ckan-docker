@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Update ckanext-scheming and ckanext-scheming_dcat settings defined in the env var
-echo "Set up ckanext-scheming_dcat. Clear index"
+echo "[docker-entrypoint.02_setup_scheming] Clear index"
 ckan -c $CKAN_INI search-index clear
 
-echo "Loading ckanext-scheming and ckanext-scheming_dcat settings into ckan.ini"
+echo "[docker-entrypoint.02_setup_scheming] Loading ckanext-scheming and ckanext-scheming_dcat settings into ckan.ini"
 ckan config-tool $CKAN_INI \
     "scheming.dataset_schemas=$CKANEXT__SCHEMING_DCAT_DATASET_SCHEMA" \
     "scheming.group_schemas=$CKANEXT__SCHEMING_DCAT_GROUP_SCHEMAS" \
@@ -15,5 +15,5 @@ ckan config-tool $CKAN_INI \
     "scheming_dcat.group_custom_facets=$CKANEXT__SCHEMING_DCAT_GROUP_CUSTOM_FACETS" \
     "scheming_dcat.geometadata_base_uri=$CKANEXT__SCHEMING_DCAT_GEOMETADATA_BASE_URI"
 
-echo "ckanext-scheming_dcat. Rebuild index"
+echo "[docker-entrypoint.02_setup_scheming] Rebuild index"
 ckan -c $CKAN_INI search-index rebuild

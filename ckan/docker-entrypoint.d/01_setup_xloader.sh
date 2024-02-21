@@ -11,20 +11,20 @@ for TOKEN_ID in $TOKEN_IDS
 do
   ckan -c $CKAN_INI user token revoke $TOKEN_ID
   if [ $? -eq 0 ]; then
-    echo "API Token $TOKEN_ID has been revoked"
+    echo "[docker-entrypoint.01_setup_xloader] API Token $TOKEN_ID has been revoked"
   fi
 done
 
 # Add ckanext.xloader.api_token to the CKAN config file
-echo "Loading ckanext-xloader settings in the CKAN config file"
+echo "[docker-entrypoint.01_setup_xloader] Loading ckanext-xloader settings in the CKAN config file"
 ckan config-tool $CKAN_INI \
     "ckanext.xloader.api_token=xxx" \
     "ckanext.xloader.jobs_db.uri=$CKANEXT__XLOADER__JOBS__DB_URI"
 
 # Create ckanext-xloader API_TOKEN
-echo "Set up ckanext.xloader.api_token in the CKAN config file"
+echo "[docker-entrypoint.01_setup_xloader] Set up ckanext.xloader.api_token in the CKAN config file"
 ckan config-tool $CKAN_INI "ckanext.xloader.api_token=$(ckan -c $CKAN_INI user token add ckan_admin xloader | tail -n 1 | tr -d '\t')"
 
 #TODO: Setup worker background
-#echo "Set up CKAN jobs worker"
+#echo "[docker-entrypoint.01_setup_xloader] Set up CKAN jobs worker"
 #ckan -c $CKAN_INI jobs worker default

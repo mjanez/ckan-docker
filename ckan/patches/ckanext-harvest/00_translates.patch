@@ -1,0 +1,72 @@
+diff --git a/ckanext/harvest/templates/source/new.html b/ckanext/harvest/templates/source/new.html
+index b7feb3d..b773a44 100644
+--- a/ckanext/harvest/templates/source/new.html
++++ b/ckanext/harvest/templates/source/new.html
+@@ -24,12 +24,18 @@
+     <div class="module-content">
+       <p>
+         {% trans %}
+-        Harvest sources allow importing remote metadata into this catalog.
+-        Remote sources can be other catalogs such as other CKAN instances, CSW
+-        servers or Web Accessible Folders (WAF) (depending on the actual
+-        harvesters enabled for this instance).
++        Harvest sources allow importing remote metadata into this catalog.   Remote sources can be other catalogs such as other CKAN instances, CSW servers, XML metadata files, XLSX with metadata records or Web Accessible Folder (WAF).
+         {% endtrans %}
+       </p>
++      
++      <p>
++        {{ _('Depending on the actual harvesters enabled for this instance. eg: ') }}
++        <ul>
++          <li><a href="https://github.com/mjanez/ckanext-scheming_dcat?tab=readme-ov-file#harvesters" target="_blank">ckanext-scheming_dcat</a></li>
++          <li><a href="https://github.com/ckan/ckanext-dcat?tab=readme-ov-file#rdf-dcat-harvester" target="_blank">ckanext-dcat</a></li>
++          <li><a href="https://docs.ckan.org/projects/ckanext-spatial/en/latest/harvesters.html" target="_blank">ckanext-scheming_spatial</a></li>
++        </ul>
++      </p>
+     </div>
+   </section>
+ {% endblock %}
+diff --git a/ckanext/harvest/templates/source/new_source_form.html b/ckanext/harvest/templates/source/new_source_form.html
+index 324d012..8a500b9 100644
+--- a/ckanext/harvest/templates/source/new_source_form.html
++++ b/ckanext/harvest/templates/source/new_source_form.html
+@@ -26,7 +26,7 @@
+   {{ form.markdown('notes', id='field-notes', label=_('Description'), value=data.notes, error=errors.notes) }}
+ 
+   <div class="harvest-types form-group control-group">
+-    <label class="control-label">Source type</label>
++    <label class="control-label">{{ _('Source type') }}</label>
+     <div class="controls">
+       {% for harvester in h.harvesters_info() %}
+         {% set checked = False %}
+diff --git a/ckanext/harvest/templates/source/search.html b/ckanext/harvest/templates/source/search.html
+index a929943..06cb373 100644
+--- a/ckanext/harvest/templates/source/search.html
++++ b/ckanext/harvest/templates/source/search.html
+@@ -44,7 +44,26 @@
+ 
+ 
+ 
+-{% block secondary_content %}
++    {% block secondary_content %}
++    <section class="module module-narrow">
++      <h2 class="module-heading"><i class="fa fa-lg fa-info-circle icon-large icon-info-sign"></i> {{ _('Harvest sources') }}</h2>
++      <div class="module-content">
++        <p>
++          {% trans %}
++          Harvest sources allow importing remote metadata into this catalog.   Remote sources can be other catalogs such as other CKAN instances, CSW servers, XML metadata files, XLSX with metadata records or Web Accessible Folder (WAF).
++          {% endtrans %}
++        </p>
++        
++        <p>
++          {{ _('Depending on the actual harvesters enabled for this instance. eg: ') }}
++          <ul>
++            <li><a href="https://github.com/mjanez/ckanext-scheming_dcat?tab=readme-ov-file#harvesters" target="_blank">ckanext-scheming_dcat</a></li>
++            <li><a href="https://github.com/ckan/ckanext-dcat?tab=readme-ov-file#rdf-dcat-harvester" target="_blank">ckanext-dcat</a></li>
++            <li><a href="https://docs.ckan.org/projects/ckanext-spatial/en/latest/harvesters.html" target="_blank">ckanext-scheming_spatial</a></li>
++          </ul>
++        </p>
++      </div>
++    </section>
+   {% for facet in c.facet_titles %}
+       {{ h.snippet('snippets/facet_list.html', title=c.facet_titles[facet], name=facet, alternative_url=h.url_for('{0}.search'.format(c.dataset_type))) }}
+   {% endfor %}
