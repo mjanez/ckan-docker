@@ -9,7 +9,11 @@ TOKEN_IDS=$(ckan -c $CKAN_INI user token list ckan_admin | grep "$TOKEN_NAME" | 
 # Revoke each previous token of xloader
 for TOKEN_ID in $TOKEN_IDS
 do
-  ckan -c $CKAN_INI user token revoke $TOKEN_ID
+  if [ -z "$TOKEN_ID" ]; then
+    echo "[docker-entrypoint.01_setup_xloader] No API Token to revoke"
+    continue
+  fi
+  ckan -c $CKAN_INI user token revoke -- $TOKEN_ID
   if [ $? -eq 0 ]; then
     echo "[docker-entrypoint.01_setup_xloader] API Token $TOKEN_ID has been revoked"
   fi
