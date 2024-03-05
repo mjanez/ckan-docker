@@ -95,7 +95,7 @@ mkdir -p $CKAN_LOGS_PATH/xloader
 chown -R ckan:ckan $CKAN_LOGS_PATH/xloader
 
 # Start supervisord
-supervisord --configuration /etc/supervisord.conf &
+supervisord --configuration /etc/supervisord.conf
 
 # Workers
 ## Start the Harvester worker
