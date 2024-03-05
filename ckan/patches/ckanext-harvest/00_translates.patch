@@ -26,9 +26,18 @@ index b7feb3d..b773a44 100644
    </section>
  {% endblock %}
 diff --git a/ckanext/harvest/templates/source/new_source_form.html b/ckanext/harvest/templates/source/new_source_form.html
-index 324d012..8a500b9 100644
+index 324d012..37358fc 100644
 --- a/ckanext/harvest/templates/source/new_source_form.html
 +++ b/ckanext/harvest/templates/source/new_source_form.html
+@@ -8,7 +8,7 @@
+ 
+   {% call form.input('url', id='field-url', label=_('URL'), value=data.url, error=errors.url, classes=['control-full', 'control-large']) %}
+       <span class="info-block">
+-        {{ _('This should include the http:// part of the URL') }}
++        <i class="fa fa-exclamation-triangle"></i> {{ _('This should include the http:// part of the URL') }}
+       </span>
+   {% endcall %}
+ 
 @@ -26,7 +26,7 @@
    {{ form.markdown('notes', id='field-notes', label=_('Description'), value=data.notes, error=errors.notes) }}
  
@@ -38,8 +47,21 @@ index 324d012..8a500b9 100644
      <div class="controls">
        {% for harvester in h.harvesters_info() %}
          {% set checked = False %}
+@@ -46,7 +46,11 @@
+   {{ form.select('frequency', id='field-frequency', label=_('Update frequency'), options=h.harvest_frequencies(), selected=data.frequency, error=errors.frequency) }}
+ 
+   {% block extra_config %}
+-  {{ form.textarea('config', id='field-config', label=_('Configuration'), value=data.config, error=errors.config) }}
++    {% call form.textarea('config', id='field-config', label=_('Configuration'), value=data.config, error=errors.config) %}
++        <span class="info-block">
++          <i class="fa fa-info-circle"></i> {{ _('You can validate the JSON at: ') }} <a href="{{ h.url_for_static_or_external("https://jsonlint.com/") }}" target="_blank" rel="noreferrer">{{ _('JSONLint') }}</a>
++        </span>
++    {% endcall %}
+   {% endblock extra_config %}
+ 
+   {# if we have a default group then this wants remembering #}
 diff --git a/ckanext/harvest/templates/source/search.html b/ckanext/harvest/templates/source/search.html
-index a929943..06cb373 100644
+index d9ceeea..44d118b 100644
 --- a/ckanext/harvest/templates/source/search.html
 +++ b/ckanext/harvest/templates/source/search.html
 @@ -44,7 +44,26 @@
