@@ -536,27 +536,30 @@ If need to use a backup, restore it:
 
 ### CKAN. Manage new users
 
-1. Create a new user from the Docker host, for example to create a new user called 'admin'
+1. Create a new user from the Docker host, for example to create a new user called `user_example`
 
    ```bash
-   docker exec -it <container-id> ckan -c ckan.ini user add admin email=admin@localhost
+   docker exec -it <container-id> ckan -c ckan.ini user add user_example email=user_example@localhost
+
+   # Admin user
+   docker exec -it <container-id> ckan -c ckan.ini sysadmin add admin_example email=admin_example@localhost name=admin_example
     ```
 
-   To delete the 'admin' user
+   To delete the 'user_example' user
 
    ```bash
-   docker exec -it <container-id> ckan -c ckan.ini user remove admin`
+   docker exec -it <container-id> ckan -c ckan.ini user remove user_example`
     ```
 
 1. Create a new user from within the ckan container. You will need to get a session on the running container
 
    ```bash
-   ckan -c ckan.ini user add admin email=admin@localhost`
+   ckan -c ckan.ini user add user_example email=user_example@localhost`
     ```
 
-   To delete the 'admin' user
+   To delete the 'user_example' user
    ```bash
-   ckan -c ckan.ini user remove admin`
+   ckan -c ckan.ini user remove user_example`
     ```
 
     
