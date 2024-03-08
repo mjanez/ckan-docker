@@ -51,7 +51,6 @@ if grep -E "beaker.session.secret ?= ?$" ckan.ini
 then
     echo "Setting beaker.session.secret in ini file"
     ckan config-tool $CKAN_INI "beaker.session.secret=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
-    ckan config-tool $CKAN_INI "WTF_CSRF_SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
     JWT_SECRET=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')
     ckan config-tool $CKAN_INI "api_token.jwt.encode.secret=${JWT_SECRET}"
     ckan config-tool $CKAN_INI "api_token.jwt.decode.secret=${JWT_SECRET}"
@@ -95,15 +94,13 @@ mkdir -p $CKAN_LOGS_PATH/xloader
 chown -R ckan:ckan $CKAN_LOGS_PATH/xloader
 
 # Start supervisord
-supervisord --configuration /etc/supervisord.conf
-
-# Workers
-## Start the Harvester worker
-echo "[prerun.workers] Starting the CKAN Harvester worker"
-ckan harvester run
-
-## Clean-up mechanism for the harvest log table
-ckan harvester clean-harvest-log
+#supervisord --configuration /etc/supervisord.conf &
 
 # Start the development server as the ckan user with automatic reload
 su ckan -c "/usr/bin/ckan -c $CKAN_INI run -H 0.0.0.0"
+
+# Workers
+# To start the Harvester worker
+# ckan harvester run
+# Clean-up mechanism for the harvest log table
+# ckan harvester clean-harvest-log

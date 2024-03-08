@@ -6,7 +6,6 @@ if grep -E "beaker.session.secret ?= ?$" ckan.ini
 then
     echo "Setting beaker.session.secret in ini file"
     ckan config-tool $CKAN_INI "beaker.session.secret=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
-    ckan config-tool $CKAN_INI "WTF_CSRF_SECRET_KEY=$(python3 -c 'import secrets; print(secrets.token_urlsafe())')"
     JWT_SECRET=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')
     ckan config-tool $CKAN_INI "api_token.jwt.encode.secret=${JWT_SECRET}"
     ckan config-tool $CKAN_INI "api_token.jwt.decode.secret=${JWT_SECRET}"
@@ -51,17 +50,18 @@ UWSGI_OPTS="--plugins http,python \
 if [ $? -eq 0 ]
 then
     # Start supervisord
+    echo "[prerun.workers] Loading the CKAN workers with supervisord..."
     supervisord --configuration /etc/supervisord.conf &
+
+    # Workers
+    ## Add harvester background procces to crontab
+    echo "[prerun.workers] Add harvester background procceses to crontab"
+    crontab -l | { cat; echo "*/15 * * * * /usr/bin/supervisorctl start ckan_harvester_run"; } | crontab -
+    ## Clean-up mechanism for the harvest log table. 'ckan.harvest.log_timeframe'. The default time frame is 30 days
+    crontab -l | { cat; echo "0 5 */30 * * /usr/bin/supervisorctl start ckan_harvester_clean_log"; } | crontab -
+
     # Start uwsgi
     uwsgi $UWSGI_OPTS
 else
   echo "[prerun] failed...not starting CKAN."
 fi
-# Workers
-## Start the Harvester worker
-echo "[prerun.workers] Starting the CKAN Harvester worker"
-ckan harvester run
-## Add harvester to crontab
-crontab -l | { cat; echo "0 */2 * * * ckan harvester run"; } | crontab -
-## Clean-up mechanism for the harvest log table. 'ckan.harvest.log_timeframe'. The default time frame is 30 days
-crontab -l | { cat; echo "0 5 * * * ckan harvester clean-harvest-log"; } | crontab -

@@ -60,8 +60,8 @@ COPY setup/who.ini ./
 COPY setup/start_ckan_development.sh.override ./start_ckan_development.sh
 RUN chmod +x ./start_ckan_development.sh
 
-## Harvester
-COPY setup/workers/harvester.conf /etc/supervisord.d/harvester.conf
+## Load workers supervisor configuration
+COPY setup/workers/* /etc/supervisord.d/
 
 # Apply any patches needed to CKAN core or any of the built extensions (not the
 # runtime mounted ones)

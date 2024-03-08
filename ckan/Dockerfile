@@ -22,7 +22,7 @@ COPY req_fixes req_fixes
 ## Pages - v0.5.2 ##
 ## PDFView - 0.0.8 ##
 ## Fluent - v1.0.1  (Forked stable version) ##
-## Scheming DCAT - v2.0.0 (GeoDCAT-AP/NTI-RISP extended version) ##
+## Scheming DCAT - v2.1.0 (GeoDCAT-AP/NTI-RISP extended version) ##
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
     # Remove apk cache
@@ -54,8 +54,8 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "mjanez/ckanext-fluent" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-fluent.git@v1.0.1#egg=ckanext-fluent && \
     echo "mjanez/ckanext-scheming_dcat" && \
-    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-scheming_dcat.git@v2.0.0#egg=ckanext_scheming_dcat && \
-    pip3 install --no-cache-dir -r https://raw.githubusercontent.com/mjanez/ckanext-scheming_dcat/v2.0.0/requirements.txt
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-scheming_dcat.git@v2.1.0#egg=ckanext_scheming_dcat && \
+    pip3 install --no-cache-dir -r https://raw.githubusercontent.com/mjanez/ckanext-scheming_dcat/v2.1.0/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
@@ -79,8 +79,8 @@ RUN for d in $APP_DIR/patches/*; do \
 COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh
 RUN chmod +x ${APP_DIR}/start_ckan.sh
 
-## Harvester
-COPY setup/workers/harvester.conf /etc/supervisord.d/harvester.conf
+## Load workers supervisor configuration
+COPY setup/workers/* /etc/supervisord.d/
 
 # Start CKAN
 CMD ["/bin/sh", "-c", "$APP_DIR/start_ckan.sh"]
