@@ -38,4 +38,13 @@ RUN for d in $APP_DIR/patches/*; do \
     fi ; \
 done
 
+# Workers
+## Update start_ckan.sh with custom workers
+COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh
+RUN chmod +x ${APP_DIR}/start_ckan.sh
+
+## Load workers supervisor configuration
+COPY setup/workers/* /etc/supervisord.d/
+
+# Start CKAN
 CMD ["/bin/sh", "-c", "$APP_DIR/start_ckan.sh"]
