@@ -3,6 +3,7 @@ version: "3"
 
 volumes:
   ckan_storage:
+  ckan_logs:
   pg_data:
   solr_data:
 
@@ -57,6 +58,7 @@ services:
         condition: service_healthy
     volumes:
       - ckan_storage:/var/lib/ckan
+      - ckan_logs:/var/log
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
