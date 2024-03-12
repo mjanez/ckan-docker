@@ -1,4 +1,4 @@
-FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.9
+FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.10
 LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
