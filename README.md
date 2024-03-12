@@ -26,7 +26,7 @@
 ## Overview
 Contains Docker images for the different components of CKAN Cloud and a Docker compose environment (based on [ckan](https://github.com/ckan/ckan)) for development and testing Open Data portals.
 
->**Warning**:<br>
+> [!IMPORTANT]
 >This is a **custom installation of Docker Compose** with specific extensions for spatial data and [GeoDCAT-AP](https://github.com/SEMICeu/GeoDCAT-AP)/[INSPIRE](https://github.com/INSPIRE-MIF/technical-guidelines) metadata [profiles](https://en.wikipedia.org/wiki/Geospatial_metadata). For official installations, please have a look: [CKAN documentation: Installation](https://docs.ckan.org/en/latest/maintaining/installing/index.html).
 
 ![CKAN Docker Platform](/doc/img/ckan-docker-services.png)
@@ -69,7 +69,7 @@ The site is configured using environment variables that you can set in the `.env
 ### ckan-docker roadmap
 Information about extensions installed in the `main` image. More info described in the [Extending the base images](#extending-the-base-images)
 
->**Note**<br>
+> [!NOTE]
 > Switch branches to see the `roadmap` for other projects: [ckan-docker/branches](https://github.com/mjanez/ckan-docker/branches)
 
 
@@ -79,7 +79,7 @@ Information about extensions installed in the `main` image. More info described 
 | Core +      | [Datastore](https://github.com/mjanez/ckan-docker)                                      | 2.9.9      | Completed                    | ✔️      | ✔️      | Stable installation (Production & Dev images) via Docker Compose.                                                                                                                                                                                                                                                                                                       |
 | Core +      | [~~Datapusher~~](https://github.com/mjanez/ckan-docker)                                     | 0.0.19      | Deprecated                    | ❌      | ❌      | Updated to [xloader](https://github.com/ckan/ckanext-xloader), an express Loader - quickly load data into DataStore.                                                                                                                                |
 | Extension   | [ckanext-xloader](https://github.com/ckan/ckanext-xloader)                              | 1.0.1        | Completed                    | ✔️      | ✔️      | Stable installation, a replacement for DataPusher because it offers ten times the speed and more robustness                                                                                                                                                                                                                                                                  |
-| Extension   | [ckanext-harvest](https://github.com/ckan/ckanext-harvest)                              | 1.5.1       | Completed                    | ✔️      | ✔️      | Stable installation, necessary for the implementation of the Collector ([ogc_ckan](#recollector-ckan))                                                                                                                                                                                                                                                                  |
+| Extension   | [ckanext-harvest](https://github.com/ckan/ckanext-harvest)                              | v1.5.6       | Completed                    | ✔️      | ✔️      | Stable installation, necessary for the implementation of the Collector ([ogc_ckan](#recollector-ckan))                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-geoview](https://github.com/ckan/ckanext-geoview)                              | 0.0.20      | Completed                    | ✔️      | ✔️      | Stable installation.                                                                                                                                                                                                                                                                                                                                                    |
 | Extension   | [ckanext-spatial](https://github.com/ckan/ckanext-spatial)                              | 2.0.0       | Completed                    | ✔️      | ✔️      | Stable installation, necessary for the implementation of the Collector ([ogc_ckan](#recollector-ckan))                                                                                                                                                                                                                                                                  |
 | Extension   | [ckanext-dcat](https://github.com/mjanez/ckanext-dcat)                                  | 1.1.0       | Completed                    | ✔️      | ✔️      | Stable installation, include DCAT-AP 2.1 profile compatible with GeoDCAT-AP.                                                                                                                                                                                                                                                                                            |
@@ -103,7 +103,7 @@ To upgrade Docker Engine, first run sudo `apt-get update`, then follow the [inst
 To verify a successful Docker installation, run `docker run hello-world` and `docker version`. These commands should output 
 versions for client and server.
 
->**Note**<br>
+> [!NOTE]
 > Learn more about [Docker](#docker-basic-commands)/[Docker Compose](#docker-compose-basic-commands) basic commands.
 > 
 
@@ -128,10 +128,10 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
 
     - **Apache HTTP Server**: Replace the [`.env`](/.env) with the [`/samples/.env.apache.example`](/samples/.env.apache.example) and modify the variables as needed.
 
-    >**Note**:<br>
+    > [!NOTE]
     > Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
 
-    >**Warning**:<br>
+    > [!WARNING]
     > Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` (`ckan_admin` and `test1234` by default). All ennvars with `API_TOKEN` are automatically regenerated when CKAN is loaded, no editing is required.
     > 
     >**This should be obviously changed before running this setup as a public CKAN instance.**
@@ -141,7 +141,7 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
     docker compose build 
     ```
 
-    >**Note**<br>
+    > [!NOTE]
     > You can use a [deploy in 5 minutes](#quick-mode) if you just want to test the package. 
 
 4. Start the containers:
@@ -153,11 +153,11 @@ This will start up the containers in the current window. By default the containe
 using a different colour. You could also use the -d "detach mode" option ie: `docker compose up -d` if you wished to use the current 
 window for something else.
 
->**Note**<br>
+> [!NOTE]
 > * Or `docker compose up --build` to build & up the containers.
 > * Or `docker compose -f docker-compose.apache.yml up -d --build` to use the Apache HTTP Server version.
 
->**Note**<br>
+> [!NOTE]
 > Learn more about configuring this ckan docker: 
 > - [Backup the CKAN Database](#ckan-backups)
 > - [Configuring a docker compose service to start on boot](#docker-compose-configure-a-docker-compose-service-to-start-on-boot)
@@ -229,7 +229,7 @@ The Docker image config files used to build your CKAN project are located in the
 
 * Any custom changes to the scripts run during container start up can be made to scripts in the `setup/` directory. For instance if you wanted to change the port on which CKAN runs you would need to make changes to the Docker Compose yaml file, and the `start_ckan.sh.override` file. Then you would need to add the following line to the Dockerfile ie: `COPY setup/start_ckan.sh.override ${APP_DIR}/start_ckan.sh`. The `start_ckan.sh` file in the locally built image would override the `start_ckan.sh` file included in the base image
 
->**Note**<br>
+> [!TIP] 
 > If you get an error like ` doesn't have execute permissions`: 
 >
 >```log
@@ -309,7 +309,7 @@ ckan
 
 ```
 
->**Note**:<br>
+> [!NOTE]
 > Git diff is a command to output the changes between two sources inside the Git repository. The data sources can be two different branches, commits, files, etc.
 > * Show changes between working directory and staging area:
 >   `git diff > [file.patch]`
@@ -432,6 +432,12 @@ Available components:
 * **pycsw**: The pycsw app. An [OARec](https://ogcapi.ogc.org/records) and [OGC CSW](https://opengeospatial.org/standards/cat) server implementation written in Python.
 * **ckan2pycsw**: Software to achieve interoperability with the open data portals based on CKAN. To do this, ckan2pycsw reads data from an instance using the CKAN API, generates ISO-19115/ISO-19139 metadata using [pygeometa](https://geopython.github.io/pygeometa/), or a custom schema that is based on a customized CKAN schema, and populates a [pycsw](https://pycsw.org/) instance that exposes the metadata using CSW and OAI-PMH.
 
+### Harvester consumers on a deployed CKAN
+[ckanext-harvest supervisor](https://github.com/ckan/ckanext-harvest#setting-up-the-harvesters-on-a-production-server) allows you to harvest metadata from multiple sources on a production deployment. Here it is deployed [by a worker consumers in the `ckan` container](./ckan/setup/workers/harvester.conf), also the `ckanext-harvest` extension and other custom harvesters ([`ckanext-scheming_dcat`](https://github.com/mjanez/ckanext-scheming_dcat?tab=readme-ov-file#harvesters) or [`ckanext-dcat`](https://github.com/ckan/ckanext-dcat#rdf-dcat-harvester)) are included in the CKAN docker images.
+
+> ![TIP]
+> To enable harvesters you need to set up in the `.env` file the `CKAN__PLUGINS` variable with the `harvest` plugin: https://github.com/mjanez/ckan-docker/blob/a18e0c80d9f16b6d9b6471e3148d48fcb83712bd/.env.example#L126-L127
+
 
 ## ckan-docker tips
 ### CKAN. Backups
@@ -474,7 +480,7 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     - `your_postgres_password`: The password for the PostgreSQL user.
     - `/path/to/your/backup/directory`: The path to the directory where you want to store the backup files.
 
-    >**Warning**<br>
+    > [!WARNING]
     > If you have changed the values of the PostgreSQL container, database or user, change them too.
     > Check that `zip` package is installed: `sudo apt-get install zip`
 
@@ -498,14 +504,14 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     0 0 * * * /path/to/your/script/ckan_backup_custom.sh
     ```
 
-    >**Info**<br>
+    > [!NOTE]
     > Replace `/path/to/your/script` with the actual path to the `ckan_backup_custom.sh` script.
   
 8. Save and close the file.
 
 The cronjob is now set up and will backup your CKAN PostgreSQL database daily at midnight using the custom format. The backups will be stored in the specified directory with the timestamp in the filename.
 
->**Info**<br>
+> [!NOTE]
 > Sample scripts for backing up CKAN: [`doc/scripts`](doc/scripts)
 
 
@@ -530,27 +536,30 @@ If need to use a backup, restore it:
 
 ### CKAN. Manage new users
 
-1. Create a new user from the Docker host, for example to create a new user called 'admin'
+1. Create a new user from the Docker host, for example to create a new user called `user_example`
 
    ```bash
-   docker exec -it <container-id> ckan -c ckan.ini user add admin email=admin@localhost
+   docker exec -it <container-id> ckan -c ckan.ini user add user_example email=user_example@localhost
+
+   # Admin user
+   docker exec -it <container-id> ckan -c ckan.ini sysadmin add admin_example email=admin_example@localhost name=admin_example
     ```
 
-   To delete the 'admin' user
+   To delete the 'user_example' user
 
    ```bash
-   docker exec -it <container-id> ckan -c ckan.ini user remove admin`
+   docker exec -it <container-id> ckan -c ckan.ini user remove user_example`
     ```
 
 1. Create a new user from within the ckan container. You will need to get a session on the running container
 
    ```bash
-   ckan -c ckan.ini user add admin email=admin@localhost`
+   ckan -c ckan.ini user add user_example email=user_example@localhost`
     ```
 
-   To delete the 'admin' user
+   To delete the 'user_example' user
    ```bash
-   ckan -c ckan.ini user remove admin`
+   ckan -c ckan.ini user remove user_example`
     ```
 
     
@@ -691,7 +700,7 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
 
 
 ## CKAN API
->**Note**<br>
+> [!NOTE]
 >`params`: Parameters to pass to the action function. The parameters are specific to each action function.
 >* `fl` (text): Fields of the dataset to return. The parameter controls which fields are returned in the solr query. `fl` can be `None` or a list of result fields, such as: `id,name,extras_custom_schema_field`. 
 >
