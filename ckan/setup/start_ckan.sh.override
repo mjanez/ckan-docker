@@ -59,6 +59,9 @@ then
     crontab -l | { cat; echo "*/15 * * * * /usr/bin/supervisorctl start ckan_harvester_run"; } | crontab -
     ## Clean-up mechanism for the harvest log table. 'ckan.harvest.log_timeframe'. The default time frame is 30 days
     crontab -l | { cat; echo "0 5 */30 * * /usr/bin/supervisorctl start ckan_harvester_clean_log"; } | crontab -
+    ## Execute cron in the background
+    echo "[prerun.workers] Execute cron in the background"
+    crond -b -l 8
 
     # Start uwsgi
     uwsgi $UWSGI_OPTS
