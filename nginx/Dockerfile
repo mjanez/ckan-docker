@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine
+FROM nginx:1.24-alpine3.17
 
 ENV CKAN_PORT=5000
 ENV PYCSW_PORT=8000
