@@ -5,14 +5,13 @@ on:
     branches:
         - master
         - 'ckan-*.*.*'
-        - '!ckan-main'
         - '!dev/ckan-*.*.*'
         - '!feature/*'
         - '!fix/*'
 
 env:
     REGISTRY: ghcr.io
-    IMAGE_NAME: mjanez/ckan-docker
+    IMAGE_NAME: ckan-docker
     CONTEXT: .
     BRANCH: ${{ github.head_ref }}
     DOCKERFILE_PATH: /ckan
@@ -34,16 +33,45 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set DOCKERFILE_PATH
-        run: |
-          BRANCH_TRIMMED=$(echo ${{ env.BRANCH }} | sed -n -e 's/^ckan-\([0-9]*\.[0-9]*\).*$/\1/p')
-          if [[ "${{ env.BRANCH }}" == "master" ]]; then
-            echo "DOCKERFILE_PATH=/ckan-master/base" >> $GITHUB_ENV
-          elif [[ "${{ env.BRANCH }}" == *"-dev" ]]; then
-            echo "DOCKERFILE_PATH=/ckan-${BRANCH_TRIMMED}/dev" >> $GITHUB_ENV
-          else
-            echo "DOCKERFILE_PATH=/ckan-${BRANCH_TRIMMED}/base" >> $GITHUB_ENV
-          fi
+      -  name: NGINX build
+         uses: docker/build-push-action@v5
+         with:
+            context: ./nginx
+            file: ./nginx/Dockerfile
+            push: false
+            tags: mjanez/ckan-docker-nginx:test-build-only
+
+      -  name: Apache HTTP Server build
+         uses: docker/build-push-action@v5
+         with:
+            context: ./apache
+            file: ./apache/Dockerfile
+            push: false
+            tags: mjanez/ckan-docker-apache:test-build-only
+
+      -  name: PostgreSQL build
+         uses: docker/build-push-action@v5
+         with:
+              context: ./postgresql
+              file: ./postgresql/Dockerfile
+              push: false
+              tags: mjanez/ckan-docker-postgresql:test-build-only
+
+      -  name: Solr build
+         uses: docker/build-push-action@v5
+         with:
+              context: ./solr
+              file: ./solr/Dockerfile
+              push: false
+              tags: mjanez/ckan-docker-solr:test-build-only
+
+      -  name: ckan-pycsw build
+         uses: docker/build-push-action@v4
+         with:
+              context: ./ckan-pycsw
+              file: ./ckan-pycsw/Dockerfile
+              push: false
+              tags: mjanez/ckan-docker-pycsw:test-build-only
 
       - name: Extract Docker metadata
         id: meta
@@ -55,7 +83,7 @@ jobs:
         id: hadolint
         uses: jbergstroem/hadolint-gh-action@v1.12.2
         with:
-          dockerfile: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }} ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}
+          dockerfile: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }} ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}.ghcr
           version: ${{ env.HADOLINT_VERSION }}
           annotate: true
           error_level: -1

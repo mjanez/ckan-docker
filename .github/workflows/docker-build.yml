@@ -7,15 +7,14 @@ on:
     branches:
         - master
         - 'ckan-*.*.*'
-        - '!ckan-main'
         - '!dev/ckan-*.*.*'
         - '!feature/*'
         - '!fix/*'
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: mjanez/ckan-docker
-  TAG: ghcr.io/mjanez/ckan-docker:${{ github.head_ref }}
+  IMAGE_NAME: ${{ github.repository }}
+  TAG: ghcr.io/${{ github.repository }}:${{ github.head_ref }}
   CONTEXT: .
   BRANCH: ${{ github.head_ref }}
   DOCKERFILE_PATH: /ckan
@@ -36,17 +35,6 @@ jobs:
 
       - name: Check out code
         uses: actions/checkout@v4
-
-      - name: Set DOCKERFILE_PATH
-        run: |
-          BRANCH_TRIMMED=$(echo ${{ env.BRANCH }} | sed -n -e 's/^ckan-\([0-9]*\.[0-9]*\).*$/\1/p')
-          if [[ "${{ env.BRANCH }}" == "master" ]]; then
-            echo "DOCKERFILE_PATH=/ckan-master/base" >> $GITHUB_ENV
-          elif [[ "${{ env.BRANCH }}" == *"-dev" ]]; then
-            echo "DOCKERFILE_PATH=/ckan-${BRANCH_TRIMMED}/dev" >> $GITHUB_ENV
-          else
-            echo "DOCKERFILE_PATH=/ckan-${BRANCH_TRIMMED}/base" >> $GITHUB_ENV
-          fi
 
       - name: Login to registry
         uses: docker/login-action@v3
