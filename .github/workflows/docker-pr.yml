@@ -75,13 +75,13 @@ jobs:
 
       - name: Extract Docker metadata
         id: meta
-        uses: docker/metadata-action@v4
+        uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Linting Dockerfiles and annotate code inline in the github PR viewer
         id: hadolint
-        uses: jbergstroem/hadolint-gh-action@v1.11.0
+        uses: jbergstroem/hadolint-gh-action@v1.12.2
         with:
           dockerfile: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }} ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}.ghcr
           version: ${{ env.HADOLINT_VERSION }}
