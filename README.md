@@ -203,7 +203,6 @@ To start the containers:
 
 See [CKAN Images](#ckan-images) for more details of what happens when using development mode.
 
-
 #### Create an extension
 You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tutorial.html#creating-a-new-extension) instructions to create a CKAN extension, only executing the command inside the CKAN container and setting the mounted `src/` folder as output:
 
@@ -214,6 +213,17 @@ You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tuto
 
 The new extension files and directories are created in the `/srv/app/src_extensions/` folder in the running container. They will also exist in the local src/ directory as local `/src` directory is mounted as `/srv/app/src_extensions/` on the ckan container. You might need to change the owner of its folder to have the appropiate permissions.
 
+##### Running HTTPS on development mode
+
+Sometimes is useful to run your local development instance under HTTPS, for instance if you are using authentication extensions like [ckanext-saml2auth](https://github.com/keitaroinc/ckanext-saml2auth). To enable it, set the following in your `.env` file:
+
+  USE_HTTPS_FOR_DEV=true
+
+and update the site URL setting:
+
+  CKAN_SITE_URL=https://localhost:5000
+
+After recreating the `ckan-dev` container, you should be able to access CKAN at https://localhost:5000
 
 ## CKAN images
 ![CKAN Docker Platform](/doc/img/ckan-docker-images.png)
@@ -284,7 +294,6 @@ COPY docker-entrypoint.d/* /docker-entrypoint.d/
 ```
 
 NB: There are a number of extension examples commented out in the Dockerfile.dev file
-
 
 ### Applying patches
 When building your project specific CKAN images (the ones defined in the `ckan/` folder), you can apply patches 
