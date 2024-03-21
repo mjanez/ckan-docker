@@ -20,3 +20,5 @@ src/*
 .env
 .env.*
 !.env.example
+pycsw.conf.template.*
+index.html.*

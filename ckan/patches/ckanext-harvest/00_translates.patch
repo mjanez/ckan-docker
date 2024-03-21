@@ -17,7 +17,7 @@ index b7feb3d..b773a44 100644
 +      <p>
 +        {{ _('Depending on the actual harvesters enabled for this instance. eg: ') }}
 +        <ul>
-+          <li><a href="https://github.com/mjanez/ckanext-scheming_dcat?tab=readme-ov-file#harvesters" target="_blank">ckanext-scheming_dcat</a></li>
++          <li><a href="https://github.com/mjanez/ckanext-schemingdcat?tab=readme-ov-file#harvesters" target="_blank">ckanext-schemingdcat</a></li>
 +          <li><a href="https://github.com/ckan/ckanext-dcat?tab=readme-ov-file#rdf-dcat-harvester" target="_blank">ckanext-dcat</a></li>
 +          <li><a href="https://docs.ckan.org/projects/ckanext-spatial/en/latest/harvesters.html" target="_blank">ckanext-scheming_spatial</a></li>
 +        </ul>
@@ -82,7 +82,7 @@ index d9ceeea..44d118b 100644
 +        <p>
 +          {{ _('Depending on the actual harvesters enabled for this instance. eg: ') }}
 +          <ul>
-+            <li><a href="https://github.com/mjanez/ckanext-scheming_dcat?tab=readme-ov-file#harvesters" target="_blank">ckanext-scheming_dcat</a></li>
++            <li><a href="https://github.com/mjanez/ckanext-schemingdcat?tab=readme-ov-file#harvesters" target="_blank">ckanext-schemingdcat</a></li>
 +            <li><a href="https://github.com/ckan/ckanext-dcat?tab=readme-ov-file#rdf-dcat-harvester" target="_blank">ckanext-dcat</a></li>
 +            <li><a href="https://docs.ckan.org/projects/ckanext-spatial/en/latest/harvesters.html" target="_blank">ckanext-scheming_spatial</a></li>
 +          </ul>
