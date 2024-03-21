@@ -14,15 +14,15 @@ COPY req_fixes req_fixes
 # CKAN configuration & extensions
 ## XLoader - 1.0.1 ##
 ## Harvest - v1.5.6 (Worker with supervisor) ##
-## Geoview - v0.0.20 ##
+## Geoview - v0.1.0 ##
 ## Spatial - v2.1.1 ##
-## DCAT - v1.2.0-geodcatap (GeoDCAT-AP/NTI-RISP extended version) ##
+## DCAT - v1.6.0 (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
 ## Scheming - release-3.0.0 ##
-## Resource dictionary - v1.0.1 ##
+## Resource dictionary - v1.0.1 (mjanez/Fixed version) ##
 ## Pages - v0.5.2 ##
 ## PDFView - 0.0.8 ##
-## Fluent - v1.0.1  (Forked stable version) ##
-## Scheming DCAT - v2.1.0 (GeoDCAT-AP/NTI-RISP extended version) ##
+## Fluent - v1.0.1  (mjanez/Forked stable version) ##
+## Scheming DCAT - v3.0.0 (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
     # Remove apk cache
@@ -36,12 +36,12 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-harvest.git@v1.5.6#egg=ckanext-harvest && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-harvest/requirements.txt && \
     echo "ckan/ckanext-geoview" && \
-    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.0.20#egg=ckanext-geoview && \
+    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.1.0#egg=ckanext-geoview && \
     echo "ckan/ckanext-spatial" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.1.1#egg=ckanext-spatial && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-spatial/requirements.txt && \
     echo "mjanez/ckanext-dcat (GeoDCAT-AP extended version)" && \
-    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-dcat.git@v1.2.0-geodcatap#egg=ckanext-dcat && \
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-dcat.git@v1.6.0#egg=ckanext-dcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-dcat/requirements.txt && \
     echo "ckan/ckanext-scheming" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-scheming.git@release-3.0.0#egg=ckanext-scheming && \
@@ -54,8 +54,8 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "mjanez/ckanext-fluent" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-fluent.git@v1.0.1#egg=ckanext-fluent && \
     echo "mjanez/ckanext-schemingdcat" && \
-    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v2.1.0#egg=ckanext_schemingdcat && \
-    pip3 install --no-cache-dir -r https://raw.githubusercontent.com/mjanez/ckanext-schemingdcat/v2.1.0/requirements.txt
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v3.0.0#egg=ckanext_schemingdcat && \
+    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-dcat/requirements.txt
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
