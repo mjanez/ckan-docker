@@ -26,10 +26,12 @@ jobs:
 
       - name: Check out code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Get highest ckan branch excluding -dev
         id: getbranch
-        run: echo "::set-output name=VERSION::$(git branch | grep '^ckan-[0-9]*\.[0-9]*\.[0-9]*[^-dev]$' | sort -V | tail -n 1)"
+        run: echo "VERSION=$(git branch -r | grep -o 'ckan-[0-9]*\.[0-9]*\.[0-9]*[^-dev]$' | sort -V | tail -n 1)" >> $GITHUB_ENV
 
       - name: Login to registry
         uses: docker/login-action@v3
@@ -45,13 +47,13 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           labels: |
             org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/blob/master/README.md
-            org.opencontainers.image.version=${{ steps.getbranch.outputs.VERSION }}
+            org.opencontainers.image.version=${{ env.VERSION }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.getbranch.outputs.VERSION }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
           context: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}
           file: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}
@@ -65,7 +67,7 @@ jobs:
       - name: Run Trivy container image vulnerability scanner
         uses: aquasecurity/trivy-action@0.18.0
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ steps.getbranch.outputs.VERSION }}
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           format: sarif
           output: trivy-results.sarif
   
