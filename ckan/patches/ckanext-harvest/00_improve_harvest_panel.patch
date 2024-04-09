@@ -1,5 +1,30 @@
+diff --git a/ckanext/harvest/logic/action/update.py b/ckanext/harvest/logic/action/update.py
+index 7dce1f5..ac4db4f 100644
+--- a/ckanext/harvest/logic/action/update.py
++++ b/ckanext/harvest/logic/action/update.py
+@@ -706,7 +706,7 @@ def harvest_jobs_run(context, data_dict):
+                     notify_all = toolkit.asbool(config.get('ckan.harvest.status_mail.all'))
+                     notify_errors = toolkit.asbool(config.get('ckan.harvest.status_mail.errored'))
+                     last_job_errors = status['last_job']['stats'].get('errored', 0)
+-                    log.debug('Notifications: All:{} On error:{} Errors:{}'.format(notify_all, notify_errors, last_job_errors))
++                    log.debug('Notifications: All:{} On error:{} Errors:{} Errordict:{}'.format(notify_all, notify_errors, last_job_errors, status['last_job']['stats']))
+ 
+                     if last_job_errors > 0 and (notify_all or notify_errors):
+                         send_error_email(context, job_obj.source.id, status)
+diff --git a/ckanext/harvest/templates/snippets/source_item.html b/ckanext/harvest/templates/snippets/source_item.html
+index a8ba26f..3f50bdb 100644
+--- a/ckanext/harvest/templates/snippets/source_item.html
++++ b/ckanext/harvest/templates/snippets/source_item.html
+@@ -48,6 +48,7 @@ Example:
+       {% endif %}
+       {% if not within_organization and source.organization %}
+       &mdash; {{ _('Organization') }}: {{ h.link_to(source.organization.title or source.organization.name, h.url_for('organization.read', id=source.organization.name)) }}</a>
++      &mdash; {{ _('Datasets') }}: {{ h.link_to(h.schemingdcat_package_count_for_source(source.id), url) }}</a>
+       {% endif %}
+     </p>
+ 
 diff --git a/ckanext/harvest/templates/source/new.html b/ckanext/harvest/templates/source/new.html
-index b7feb3d..b773a44 100644
+index b7feb3d..b1fe472 100644
 --- a/ckanext/harvest/templates/source/new.html
 +++ b/ckanext/harvest/templates/source/new.html
 @@ -24,12 +24,18 @@
@@ -60,8 +85,33 @@ index 324d012..37358fc 100644
    {% endblock extra_config %}
  
    {# if we have a default group then this wants remembering #}
+diff --git a/ckanext/harvest/templates/source/read.html b/ckanext/harvest/templates/source/read.html
+index e016e55..e60a18c 100644
+--- a/ckanext/harvest/templates/source/read.html
++++ b/ckanext/harvest/templates/source/read.html
+@@ -3,6 +3,6 @@
+ {% block primary_content_inner %}
+   <section class="module-content">
+     <h1 class="hide-heading">{{ _('Datasets') }}</h1>
+-    {{ h.package_list_for_source(harvest_source.id)  }}
++    {{ h.schemingdcat_package_list_for_source(harvest_source.id)  }}
+   </section>
+ {% endblock %}
+diff --git a/ckanext/harvest/templates/source/read_base.html b/ckanext/harvest/templates/source/read_base.html
+index 5126e25..3191c38 100644
+--- a/ckanext/harvest/templates/source/read_base.html
++++ b/ckanext/harvest/templates/source/read_base.html
+@@ -15,7 +15,7 @@
+       <div class="nums">
+         <dl>
+             <dt>{{ _('Datasets') }}</dt>
+-            <dd>{{ h.package_count_for_source(harvest_source.id) }}</dd>
++            <dd>{{ h.schemingdcat_package_count_for_source(harvest_source.id) }}</dd>
+         </dl>
+       </div>
+     </section>
 diff --git a/ckanext/harvest/templates/source/search.html b/ckanext/harvest/templates/source/search.html
-index d9ceeea..44d118b 100644
+index d9ceeea..f44a0cb 100644
 --- a/ckanext/harvest/templates/source/search.html
 +++ b/ckanext/harvest/templates/source/search.html
 @@ -44,7 +44,26 @@
