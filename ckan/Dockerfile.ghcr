@@ -32,6 +32,7 @@ RUN for d in $APP_DIR/patches/*; do \
                 echo "$0: Patch $f has already been applied or reversed, skipping..."; \
             else \
                 echo "$0: Applying patch $f to $SRC_DIR/`basename $d`"; \
+                sed -i 's/\r$//' "$f" && \
                 patch -p1 < "$f" ; \
             fi \
         done ; \
