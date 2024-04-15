@@ -28,7 +28,3 @@ ckan config-tool $CKAN_INI \
 # Create ckanext-xloader API_TOKEN
 echo "[docker-entrypoint.01_setup_xloader] Set up ckanext.xloader.api_token in the CKAN config file"
 ckan config-tool $CKAN_INI "ckanext.xloader.api_token=$(ckan -c $CKAN_INI user token add ckan_admin xloader | tail -n 1 | tr -d '\t')"
-
-#TODO: Setup worker background
-#echo "[docker-entrypoint.01_setup_xloader] Set up CKAN jobs worker"
-#ckan -c $CKAN_INI jobs worker default
