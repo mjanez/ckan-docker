@@ -1,8 +1,8 @@
 version: "3"
 
-
 volumes:
   ckan_storage:
+  ckan_logs:
   pg_data:
   solr_data:
 
@@ -23,8 +23,7 @@ services:
       - webnet
       - ckannet
     depends_on:
-      ckan:
-        condition: service_healthy
+      - ckan
     ports:
       - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
@@ -49,14 +48,12 @@ services:
           max-size: "100m"
           max-file: "10"
     depends_on:
-      db:
-        condition: service_healthy
-      solr:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - db
+      - solr
+      - redis
     volumes:
       - ckan_storage:/var/lib/ckan
+      - ckan_logs:/var/log
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
@@ -77,8 +74,7 @@ services:
       - webnet
       - ckannet
     depends_on:
-      ckan:
-        condition: service_healthy
+      - ckan
     ports:
       - "0.0.0.0:${PYCSW_PORT_HOST}:${PYCSW_PORT}"
     volumes:
