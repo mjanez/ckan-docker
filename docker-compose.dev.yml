@@ -15,7 +15,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - ckan
+      - ckan-dev
     ports:
       - "0.0.0.0:${APACHE_PORT_HOST}:${APACHE_PORT}"
     restart: on-failure:3
@@ -56,7 +56,7 @@ services:
     env_file:
       - .env
     depends_on:
-      - ckan
+      - ckan-dev
     ports:
       - "0.0.0.0:${PYCSW_PORT_HOST}:${PYCSW_PORT}"
     volumes:
