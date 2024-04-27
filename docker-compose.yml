@@ -54,14 +54,7 @@ services:
       - /usr/lib/python3.9/site-packages
     restart: unless-stopped
     healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "-qO",
-          "/dev/null",
-          "http://localhost:${CKAN_PORT}"
-        ]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
 
   pycsw:
     build:
@@ -76,14 +69,7 @@ services:
         max-file: "10"
     restart: unless-stopped
     healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "-qO",
-          "/dev/null",
-          "http://localhost:5000"
-        ]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
 
   db:
     build:
@@ -109,15 +95,7 @@ services:
         max-file: "10"
     restart: unless-stopped
     healthcheck:
-      test:
-        [
-          "CMD",
-          "pg_isready",
-          "-U",
-          "${POSTGRES_USER}",
-          "-d",
-          "${POSTGRES_DB}"
-        ]
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
 
   solr:
     build:
@@ -136,14 +114,7 @@ services:
       - solr_data:/var/solr
     restart: unless-stopped
     healthcheck:
-      test:
-        [
-          "CMD",
-          "wget",
-          "-qO",
-          "/dev/null",
-          "http://localhost:${SOLR_PORT}/solr/"
-        ]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
 
   redis:
     image: redis:${REDIS_VERSION}
