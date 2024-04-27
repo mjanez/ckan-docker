@@ -4,6 +4,7 @@ volumes:
   pg_data:
   solr_data:
 
+
 services:
   nginx:
     build:
@@ -14,8 +15,8 @@ services:
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     networks:
       - webnet
       - ckannet
@@ -24,7 +25,7 @@ services:
     ports:
       - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
-    
+
   ckan:
     build:
       context: ckan/
@@ -41,8 +42,8 @@ services:
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     depends_on:
       - db
       - solr
@@ -53,7 +54,14 @@ services:
       - /usr/lib/python3.9/site-packages
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "-qO",
+          "/dev/null",
+          "http://localhost:${CKAN_PORT}"
+        ]
 
   pycsw:
     build:
@@ -64,12 +72,19 @@ services:
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
-    
+      test:
+        [
+          "CMD",
+          "wget",
+          "-qO",
+          "/dev/null",
+          "http://localhost:5000"
+        ]
+
   db:
     build:
       context: postgresql/
@@ -90,12 +105,20 @@ services:
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
-     
+      test:
+        [
+          "CMD",
+          "pg_isready",
+          "-U",
+          "${POSTGRES_USER}",
+          "-d",
+          "${POSTGRES_DB}"
+        ]
+
   solr:
     build:
       context: solr/
@@ -107,27 +130,34 @@ services:
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     volumes:
       - solr_data:/var/solr
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${SOLR_PORT}/solr/"]
+      test:
+        [
+          "CMD",
+          "wget",
+          "-qO",
+          "/dev/null",
+          "http://localhost:${SOLR_PORT}/solr/"
+        ]
 
   redis:
     image: redis:${REDIS_VERSION}
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     networks:
       - redisnet
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "redis-cli", "-e", "QUIT"]
-    
+      test: [ "CMD", "redis-cli", "-e", "QUIT" ]
+
 networks:
   webnet:
   ckannet:
