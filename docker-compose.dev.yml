@@ -1,5 +1,3 @@
-version: "3"
-
 volumes:
   ckan_storage:
   ckan_logs:
@@ -8,7 +6,6 @@ volumes:
 
 services:
   apache:
-    container_name: ${APACHE_CONTAINER_NAME}
     build:
       context: apache/
       dockerfile: Dockerfile
@@ -21,7 +18,6 @@ services:
     restart: on-failure:3
   
   ckan-dev:
-    container_name: ${CKAN_CONTAINER_NAME}
     build:
       context: ckan/
       dockerfile: Dockerfile.dev
@@ -44,12 +40,13 @@ services:
       - ckan_storage:/var/lib/ckan
       - ckan_logs:/var/log
       - ./src:/srv/app/src_extensions
+      - /usr/lib/python3.9/site-packages
+      - /root/.vscode-server
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
 
   pycsw:
-    container_name: ${PYCSW_CONTAINER_NAME}
     build:
       context: ckan-pycsw/
       dockerfile: Dockerfile
@@ -67,7 +64,6 @@ services:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${PYCSW_PORT}"]
     
   db:
-    container_name: ${POSTGRESQL_CONTAINER_NAME}
     build:
       context: postgresql/
     environment:
@@ -87,7 +83,6 @@ services:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]
      
   solr:
-    container_name: ${SOLR_CONTAINER_NAME}
     build:
       context: solr/
       dockerfile: Dockerfile.spatial
@@ -105,7 +100,6 @@ services:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${SOLR_PORT}/solr/"]
 
   redis:
-    container_name: ${REDIS_CONTAINER_NAME}
     image: redis:${REDIS_VERSION}
     logging:
       driver: "json-file"

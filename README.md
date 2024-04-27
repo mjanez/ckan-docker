@@ -203,7 +203,7 @@ To start the containers:
 
 	docker compose -f docker-compose.dev.yml up
 
-See [CKAN Images](#ckan-images) for more details of what happens when using development mode.
+See [CKAN images](#5-ckan-images) for more details of what happens when using development mode.
 
 #### Create an extension
 You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tutorial.html#creating-a-new-extension) instructions to create a CKAN extension, only executing the command inside the CKAN container and setting the mounted `src/` folder as output:
@@ -215,15 +215,19 @@ You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tuto
 
 The new extension files and directories are created in the `/srv/app/src_extensions/` folder in the running container. They will also exist in the local src/ directory as local `/src` directory is mounted as `/srv/app/src_extensions/` on the ckan container. You might need to change the owner of its folder to have the appropiate permissions.
 
-##### Running HTTPS on development mode
+#### Running HTTPS on development mode
 
 Sometimes is useful to run your local development instance under HTTPS, for instance if you are using authentication extensions like [ckanext-saml2auth](https://github.com/keitaroinc/ckanext-saml2auth). To enable it, set the following in your `.env` file:
 
+```
   USE_HTTPS_FOR_DEV=true
+```
 
 and update the site URL setting:
 
+```
   CKAN_SITE_URL=https://localhost:5000
+```
 
 After recreating the `ckan-dev` container, you should be able to access CKAN at https://localhost:5000
 
@@ -330,30 +334,52 @@ ckan
 
 ## ckan-docker addons
 ### Debugging
-#### VSCode dev containers
+#### Debugging CKAN Development Instance with VSCode Dev Containers and debugpy
+
 The [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) extension is a powerful tool that enables developers to use a container as a complete development environment. With this extension, developers can open any folder inside a container and take advantage of the full range of features provided by Visual Studio Code. To do this, developers create a `devcontainer.json `file in their project that specifies how to access or create a development container with a predefined tool and runtime stack. This allows developers to work in an isolated environment, ensuring that the development environment is consistent across team members and that project dependencies are easy to manage.
 
 ![Developing inside a Container](https://code.visualstudio.com/assets/docs/devcontainers/containers/architecture-containers.png)
 
+To set this up:
+
 1. Install [VSCode](https://code.visualstudio.com/).
 
-1. Install the[ Remote Development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) for VSCode. 
+2. Install the [Remote Development extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack) for VSCode.
 
-3. In your project directory, create a file named `devcontainer.json.` This file will contain the configuration for your `dev container`.
+3. In your project directory, create a `devcontainer.json` file. This file will contain the configuration for your development container.
 
-4. In the `devcontainer.json` file, specify the Docker image that you want to use for your `dev container`. 
+4. In the `devcontainer.json` file, specify the Docker image for your development container and any additional configuration settings, such as environment variables, ports to expose, and startup commands.
 
-5. Specify any additional configuration settings for your `dev container`, such as environment variables, ports to expose, and startup commands.
+5. Enable `debugpy` for your development instance in your `.env` file:
 
-6. Open your project in a `dev container` by using the Remote Development extension in VSCode. You can do this by clicking the `Open Folder in Container` button in the command palette or by opening the folder using the `Remote-Containers: Open Folder in Container` command. Also you can attach to an active container `Attach to Running Container`.
+  ```ini
+  USE_DEBUGPY_FOR_DEV=true
+  ```
 
-7. VSCode will start a new container based on the configuration settings in your `devcontainer.json` file. Once the container is started, you can work on your project just like you would on your local machine.
+6. Start the containers in [development mode](#development-mode) and launch VS Code.
 
+7. Install the "Dev Container" extension: press `CTRL+SHIFT+X`, type "dev container", click "install".
+
+8. Click the `Open a Remote Window` button in the bottom-left of the VS Code window.
+
+9. Click `Attach to Running Container...` and select your ckan-dev container, e.g. `ckan-docker-ckan-dev-1`.
+
+10. Click the `Run and Debug` icon on the left panel then `create a launch.json`, select `Python Debugger`, `Remote Attach`, host `localhost` and port `5678`.
+
+11. Press `F5` or click the `Run` menu and `Start Debugging`.
+
+You can now set breakpoints and remote debug your CKAN development instance using VSCode Dev Containers and debugpy.
 
 #### pdb
 Add these lines to the `ckan-dev` service in the docker compose.dev.yml file
 
-![pdb](https://user-images.githubusercontent.com/54408245/179964232-9e98a451-5fe9-4842-ba9b-751bcc627730.png)
+```yaml
+ports:
+  - "0.0.0.0:${CKAN_PORT}:5000"
+
+stdin_open: true
+tty: true
+```
 
 Debug with pdb (example) - Interact with `docker attach $(docker container ls -qf name=ckan)`
 
