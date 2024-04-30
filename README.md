@@ -334,7 +334,6 @@ ckan
 ├── setup
 ├── Dockerfile
 └── Dockerfile.dev
-
 ```
 
 > [!NOTE]
@@ -344,6 +343,36 @@ ckan
 > * Shows any changes between the staging area and the repository:
 >   `git diff --staged [file]`
 
+#### Applying patches in dev mode
+To apply patches in development mode, you would need to follow these steps:
+
+1. Ensure that your patches are placed in the [`ckan/patches`](/ckan/patches/) directory. The patches should be organized into subdirectories named after the package they are intended to patch (e.g., `ckan` or `ckanext-??`). Each patch file should end with the .patch extension.
+
+    For example, your directory structure might look like this:
+
+    ```bash
+    ckan
+    ├── patches
+    │   ├── ckan
+    │   │   ├── 01_datasets_per_page.patch
+    │   │   ├── 02_groups_per_page.patch
+    │   │   ├── 03_or_filters.patch
+    │   └── ckanext-harvest
+    │       └── 01_resubmit_objects.patch
+    ├── setup
+    ├── Dockerfile
+    └── Dockerfile.dev
+    ```
+
+2. Navigate to the [`/src`](/src/) directory.
+
+3. Apply the patches using the patch command:
+
+    ```bash
+    find /path/to/ckan/patches -name '*.patch' -exec patch -p1 < {} \;
+    ```
+
+    This command will recursively search the `/path/to/ckan/patches` directory for files ending with `.patch` and apply them using the patch command. Replace `/path/to/ckan/patches` with the actual path to your `ckan/patches` directory.
 
 ## ckan-docker addons
 ### Debugging
