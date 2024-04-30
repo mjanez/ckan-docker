@@ -3,6 +3,9 @@ volumes:
   ckan_logs:
   pg_data:
   solr_data:
+  pip_cache:
+  site_packages:
+  vscode_server:
 
 services:
   apache:
@@ -30,7 +33,7 @@ services:
       options:
           max-size: "100m"
           max-file: "10"
-    depends_on:
+    links:
       - db
       - solr
       - redis
@@ -40,8 +43,9 @@ services:
       - ckan_storage:/var/lib/ckan
       - ckan_logs:/var/log
       - ./src:/srv/app/src_extensions
-      - /usr/lib/python3.9/site-packages
-      - /root/.vscode-server
+      - pip_cache:/root/.cache/pip
+      - site_packages:/usr/lib/python3.9/site-packages
+      - vscode_server:/root/.vscode-server
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
@@ -52,6 +56,14 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    logging:
+      driver: "json-file"
+      options:
+          max-size: "100m"
+          max-file: "10"
+    networks:
+      - webnet
+      - ckannet
     depends_on:
       - ckan-dev
     ports:
@@ -59,7 +71,7 @@ services:
     volumes:
         - ./log:${APP_DIR}/log
         - ./metadata:${APP_DIR}/metadata
-    restart: unless-stopped
+    restart: on-failure:3
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${PYCSW_PORT}"]
     
@@ -78,6 +90,11 @@ services:
       - DATASTORE_DB
     volumes:
       - pg_data:/var/lib/postgresql/data
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}"]

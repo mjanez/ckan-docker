@@ -3,7 +3,8 @@ volumes:
   ckan_logs:
   pg_data:
   solr_data:
-
+  pip_cache:
+  site_packages:
 
 services:
   nginx:
@@ -25,6 +26,7 @@ services:
     ports:
       - "0.0.0.0:${NGINX_PORT_HOST}:${NGINX_PORT}"
       - "0.0.0.0:${NGINX_SSLPORT_HOST}:${NGINX_SSLPORT}"
+    restart: on-failure:3
 
   ckan:
     build:
@@ -51,7 +53,8 @@ services:
     volumes:
       - ckan_storage:/var/lib/ckan
       - ckan_logs:/var/log
-      - /usr/lib/python3.9/site-packages
+      - pip_cache:/root/.cache/pip
+      - site_packages:/usr/lib/python3.9/site-packages
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
@@ -65,11 +68,19 @@ services:
     logging:
       driver: "json-file"
       options:
-        max-size: "100m"
-        max-file: "10"
-    restart: unless-stopped
+          max-size: "100m"
+          max-file: "10"
+    networks:
+      - webnet
+      - ckannet
+    depends_on:
+      - ckan
+    volumes:
+        - ./log:${APP_DIR}/log
+        - ./metadata:${APP_DIR}/metadata
+    restart: on-failure:3
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${PYCSW_PORT}"]
 
   db:
     build:
@@ -114,7 +125,7 @@ services:
       - solr_data:/var/solr
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:8983/solr/"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${SOLR_PORT}/solr/"]
 
   redis:
     image: redis:${REDIS_VERSION}
@@ -127,7 +138,7 @@ services:
       - redisnet
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD", "redis-cli", "-e", "QUIT" ]
+      test: ["CMD", "redis-cli", "-e", "QUIT"]
 
 networks:
   webnet:
