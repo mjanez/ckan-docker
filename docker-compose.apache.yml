@@ -3,6 +3,9 @@ volumes:
   ckan_logs:
   pg_data:
   solr_data:
+  pip_cache:
+  site_packages:
+
 
 services:
   apache:
@@ -47,12 +50,11 @@ services:
       - db
       - solr
       - redis
-    ports:
-      - "0.0.0.0:${CKAN_PORT_HOST}:${CKAN_PORT}" 
     volumes:
       - ckan_storage:/var/lib/ckan
       - ckan_logs:/var/log
-      - /usr/lib/python3.9/site-packages
+      - pip_cache:/root/.cache/pip
+      - site_packages:/usr/lib/python3.9/site-packages
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
@@ -73,8 +75,6 @@ services:
       - ckannet
     depends_on:
       - ckan
-    ports:
-      - "0.0.0.0:${PYCSW_PORT_HOST}:${PYCSW_PORT}"
     volumes:
         - ./log:${APP_DIR}/log
         - ./metadata:${APP_DIR}/metadata
