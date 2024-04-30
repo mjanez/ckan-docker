@@ -61,9 +61,6 @@ services:
       options:
           max-size: "100m"
           max-file: "10"
-    networks:
-      - webnet
-      - ckannet
     depends_on:
       - ckan-dev
     ports:
