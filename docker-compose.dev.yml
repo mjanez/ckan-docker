@@ -14,8 +14,11 @@ services:
       dockerfile: Dockerfile
     env_file:
       - .env
+    environment:
+      - CKAN_COMPOSE_SERVICE=${CKAN_DEV_COMPOSE_SERVICE}
+      - PROXY_CKAN_PROXY_PASS=http://${CKAN_DEV_COMPOSE_SERVICE}:${CKAN_PORT}
     depends_on:
-      - ckan-dev
+      - ${CKAN_DEV_COMPOSE_SERVICE}
     ports:
       - "0.0.0.0:${APACHE_PORT_HOST}:${APACHE_PORT}"
     restart: on-failure:3
