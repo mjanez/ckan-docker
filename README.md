@@ -26,11 +26,16 @@
 ## Overview
 Contains Docker images for the different components of CKAN Cloud and a Docker compose environment (based on [ckan](https://github.com/ckan/ckan)) for development and testing Open Data portals.
 
+
+> [!TIP]
+>* Use the **[deploy in 5 minutes](#quick-mode)** to see `ckan-docker` in **5 minutes ⏱**!
+>* Or use [Codespaces](https://github.com/features/codespaces) to test `ckan-docker` in your browser:
+> <center><a href='https://codespaces.new/mjanez/ckan-docker'><img src='https://github.com/codespaces/badge.svg' alt='GitHub Codespaces' style={{maxWidth: '100%'}}/></a></center>
+
 > [!IMPORTANT]
 >This is a **custom installation of Docker Compose** with specific extensions for spatial data and [GeoDCAT-AP](https://github.com/SEMICeu/GeoDCAT-AP)/[INSPIRE](https://github.com/INSPIRE-MIF/technical-guidelines) metadata [profiles](https://en.wikipedia.org/wiki/Geospatial_metadata). For official installations, please have a look: [CKAN documentation: Installation](https://docs.ckan.org/en/latest/maintaining/installing/index.html).
 
 ![CKAN Docker Platform](/doc/img/ckan-docker-services.png)
-
 
 Available components:
 * CKAN custom multi-stage build with spatial capabilities from [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1], an image used as a base and built from the official CKAN repo. The following versions of CKAN are available:
@@ -99,25 +104,24 @@ Information about extensions installed in the `main` image. More info described 
 All Docker Compose commands in this README will use the V2 version of Compose ie: `docker compose`. The older version (V1) used the `docker-compose` command. Please see [Docker Compose](https://docs.docker.com/compose/compose-v2/) for
 more information.
 
-### Upgrade docker-engine
-To upgrade Docker Engine, first run sudo `apt-get update`, then follow the [installation instructions](https://docs.docker.com/engine/install/debian/#install-using-the-repository), choosing the new version you want to install.
+### Install docker-engine
+Follow the [installation instructions](https://docs.docker.com/get-docker/) for your environment to install Docker Engine.
 
 To verify a successful Docker installation, run `docker run hello-world` and `docker version`. These commands should output 
 versions for client and server.
 
 > [!NOTE]
 > Learn more about [Docker/Docker Compose](#docker-basic-commands) basic commands.
-> 
 
 
 ## Install (build and run) CKAN plus dependencies
-### Base mode
-Use this if you are a maintainer and will not be making code changes to CKAN or to CKAN extensions.
+### Clone and configure
+Before starting the deployment, you'll need to set up a `.env` file. This file is crucial as it contains environment variables that the application needs to run properly. These variables include site urls, credentials, API keys, and other configuration details that should not be hard-coded into the application's source code for security reasons.
 
 1. Clone project
     ```shell
     cd /path/to/my/project
-    git clone https://github.com/mjanez/ckan-docker.git
+    git clone https://github.com/mjanez/ckan-docker.git & cd ckan-docker
     ```
 
 2. Copy the `.env.example` template (or use another from [`/samples/`](/samples/)) and modify the resulting `.env` to suit your needs.
@@ -126,19 +130,26 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
     cp .env.example .env
     ```
 
-    - **NGINX & CKAN/ckan-pycsw endpoints**: Modifiy the variables about the site URL or locations (`CKAN_SITE_URL` `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `PROXY_SERVER_NAME`, `PROXY_CKAN_LOCATION`, `PROXY_PYCSW_LOCATION`, etc.).
+    - **NGINX**: Host ports: (`NGINX_PORT_HOST` and `NGINX_SSLPORT_HOST`)
+    - **Apache HTTP Server**: Host ports: (`APACHE_PORT_HOST`)
 
-    - **Apache HTTP Server**: Replace the [`.env`](/.env) with the [`/samples/.env.apache.example`](/samples/.env.apache.example) and modify the variables as needed.
+    Then modify the variables about the site URL or locations (`CKAN_SITE_URL`, `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `PROXY_SERVER_NAME`, `PROXY_CKAN_LOCATION`, `PROXY_PYCSW_LOCATION`, etc.) using the port hosts above.
 
     > [!NOTE]
     > Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
+    > For more information about the `.env' file, see [.env docs](./doc/info_envfile.md)
 
     > [!WARNING]
-    > Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` (`ckan_admin` and `test1234` by default). All ennvars with `API_TOKEN` are automatically regenerated when CKAN is loaded, no editing is required.
+    > Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` (`ckan_admin` and `test1234` by default). All envvars with `API_TOKEN` are automatically regenerated when CKAN is loaded, no editing is required.
     > 
     >**This should be obviously changed before running this setup as a public CKAN instance.**
 
-3. Build the images:
+You are now ready to proceed with deployment.
+
+### Base mode
+Use this if you are a maintainer and will not be making code changes to CKAN or to CKAN extensions.
+
+1. Build the images:
     ```bash
     docker compose build 
     ```
@@ -146,7 +157,7 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
     > [!NOTE]
     > You can use a [deploy in 5 minutes](#quick-mode) if you just want to test the package. 
 
-4. Start the containers:
+2. Start the containers:
     ```bash
     docker compose up
     ```
@@ -164,30 +175,30 @@ window for something else.
 > - [Backup the CKAN Database](#ckan-backups)
 > - [Configuring a docker compose service to start on boot](#docker-compose-configure-a-docker-compose-service-to-start-on-boot)
 
-At the end of the container start sequence there should be 6 containers running (or 5 if use NGINX Docker Compose file)
+At the end of the container start sequence there should be 6 containers running.
 
-After this step, CKAN should be running at {`PROXY_SERVER_NAME`}{`PROXY_CKAN_LOCATION`} and ckan-pycsw at {`PROXY_SERVER_NAME`}{`PROXY_PYCSW_LOCATION`}, i.e: http://localhost/catalog or http://localhost/csw
+After this step, CKAN should be running at `http://{PROXY_SERVER_NAME}/{PROXY_CKAN_LOCATION}` and ckan-pycsw at `http://{PROXY_SERVER_NAME}/{PROXY_PYCSW_LOCATION}`, i.e: http://localhost/catalog or http://localhost/csw
 
-|CONTAINER   ID                                |IMAGE               |COMMAND|CREATED|STATUS|PORTS|NAMES|
-|------------|----------------------------------|--------------------|-------|-------|------|-----|
-|0217537f717e|ckan-docker-nginx                 |/docker-entrypoint.…|6      minutes ago   |Up   4    minutes|80/tcp,0.0.0.0:80->80/tcp,0.0.0.0:8443->443/tcp | nginx  |
-|7b06ab2e060a|ckan-docker-ckan|/srv/app/start_ckan…|6      minutes ago   |Up   5    minutes (healthy)|0.0.0.0:5000->5000/tcp|ckan                 |       |
-|1b8d9789c29a|redis:7-alpine                           |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|6379/tcp              |redis                |       |
-|7f162741254d|ckan/ckan-solr:2.9-solr9-spatial  |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8983/tcp              |solr                 |       |
-|2cdd25cea0de|ckan-docker-db                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|5432/tcp              |db                   |       |
-|9cdj25dae6gr|ckan-docker-pycsw                    |docker-entrypoint.s…|6      minutes ago   |Up   4    minutes (healthy)|8000/tcp              |pycsw                   |       |
+| CONTAINER   ID | IMAGE                                | COMMAND              | CREATED            | STATUS                      | PORTS                                           | NAMES                                    |
+|----------------|--------------------------------------|----------------------|--------------------|-----------------------------|-------------------------------------------------|------------------------------------------|
+| 0217537f717e   | ckan-docker-nginx/ckan-docker-apache | /docker-entrypoint.… | 6      minutes ago | Up   4    minutes           | 80/tcp,0.0.0.0:80->80/tcp,0.0.0.0:8443->443/tcp | ckan-docker-nginx-1/ckan-docker-apache-1 |
+| 7b06ab2e060a   | ckan-docker-ckan                     | /srv/app/start_ckan… | 6      minutes ago | Up   5    minutes (healthy) | 0.0.0.0:5000->5000/tcp                          | ckan-docker-ckan-1                       |
+| 1b8d9789c29a   | redis:7-alpine                       | docker-entrypoint.s… | 6      minutes ago | Up   4    minutes (healthy) | 6379/tcp                                        | ckan-docker-redis-1                      |
+| 7f162741254d   | ckan/ckan-solr:2.9-solr9-spatial     | docker-entrypoint.s… | 6      minutes ago | Up   4    minutes (healthy) | 8983/tcp                                        | ckan-docker-solr-1                       |
+| 2cdd25cea0de   | ckan-docker-db                       | docker-entrypoint.s… | 6      minutes ago | Up   4    minutes (healthy) | 5432/tcp                                        | ckan-docker-db-1                         |
+| 9cdj25dae6gr   | ckan-docker-pycsw                    | docker-entrypoint.s… | 6      minutes ago | Up   4    minutes (healthy) | 8000/tcp                                        | ckan-docker-pycsw-1                      |
 
 
 ### Quick mode
 If you just want to test the package and see the general functionality of the platform, you can use the `ckan-docker` image from the [Github container registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-docker):
     
   ```bash
-  cp .env.example .env
   # Edit the envvars in the .env as you like and start the containers.
   docker compose -f docker-compose.ghcr.yml up -d --build 
   ```
 
-It will download the pre-built image and deploy all the containers. Remember to use your own domain by changing `localhost` in the `.env` file.
+> [!NOTE]
+>It will download the pre-built image and deploy all the containers. Remember to use your own domain by changing `localhost` in the `.env` file.
 
 
 ### Development mode
@@ -196,15 +207,17 @@ Use this mode if you are making code changes to CKAN and either creating new ext
 To develop local extensions use the `docker compose.dev.yml` file:
 
 To build the images:
-
+    ```bash
 	docker compose -f docker-compose.dev.yml build
+    ```
 
 To start the containers:
-
+    ```bash
 	docker compose -f docker-compose.dev.yml up
+    ```
 
 See [CKAN images](#5-ckan-images) for more details of what happens when using development mode.
-See [CKAN images](#5-ckan-images) for more details of what happens when using development mode.
+
 
 #### Create an extension
 You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tutorial.html#creating-a-new-extension) instructions to create a CKAN extension, only executing the command inside the CKAN container and setting the mounted `src/` folder as output:
@@ -311,8 +324,8 @@ RUN pip install -e git+https://github.com/frictionlessdata/ckanext-validation.gi
 
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 ```
-
-NB: There are a number of extension examples commented out in the Dockerfile.dev file
+> [!TIP]
+>There are a number of extension examples commented out in the [`Dockerfile.dev`](https://github.com/mjanez/ckan-docker/blob/master/ckan/Dockerfile.dev) file
 
 ### Applying patches
 When building your project specific CKAN images (the ones defined in the `ckan/` folder), you can apply patches 
@@ -495,13 +508,17 @@ These parameters can be added to the `.env` file
 
 For more information please see [ckanext-envvars](https://github.com/okfn/ckanext-envvars)
 
+> [!WARNING]
+> When deploying under a proxy, such as in a corporate environment, to avoid errors when resolving urls with container_names/hostnames associated with the container on internal networks, use the `no_proxy' variable, in lower case, with the names of the services/containers, the IP of the Docker network, etc.
+> e.g: `no_proxy="127.0.0.1,192.168.192.0/23,172.0.0.0/0,redis,solr,${DB_CONTAINER_NAME}"`
 
-### Datastore
+
+## Datastore
 The Datastore database and user is created as part of the entrypoint scripts for the db container.
 
 
-### xloader
-To replacing DataPusher with XLoader check out the wiki page for this: https://github.com/ckan/ckan-docker/wiki/Replacing-DataPusher-with-XLoader
+## xloader
+This deployment replaces DataPusher with XLoader using Supervisor, more info about other alternatives on the wiki page for this: https://github.com/ckan/ckan-docker/wiki/Replacing-DataPusher-with-XLoader
 
 
 ### ckan-pycsw
@@ -615,7 +632,6 @@ If need to use a backup, restore it:
 
 
 ### CKAN. Manage new users
-
 1. Create a new user from the Docker host, for example to create a new user called `user_example`
 
    ```bash
@@ -641,6 +657,7 @@ If need to use a backup, restore it:
    ```bash
    ckan -c ckan.ini user remove user_example`
     ```
+
 ### Docker. Basic commands
 For more information about Docker and Docker Compose's basic commands and post-installation procedures, see [Docker/Docker Compose Info](./doc/info_docker.md)
 
