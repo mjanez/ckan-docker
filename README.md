@@ -135,14 +135,14 @@ Before starting the deployment, you'll need to set up a `.env` file. This file i
 
     Then modify the variables about the site URL or locations (`CKAN_SITE_URL`, `CKAN_URL`, `PYCSW_URL`, `CKANEXT__DCAT__BASE_URI`, `PROXY_SERVER_NAME`, `PROXY_CKAN_LOCATION`, `PROXY_PYCSW_LOCATION`, etc.) using the port hosts above.
 
-    > [!NOTE]
-    > Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
-    > For more information about the `.env' file, see [.env docs](./doc/info_envfile.md)
+> [!NOTE]
+> Please note that when accessing CKAN directly (via a browser) ie: not going through Apache/NGINX you will need to make sure you have "ckan" set up to be an alias to localhost in the local hosts file. Either that or you will need to change the `.env` entry for `CKAN_SITE_URL`
+> For more information about the `.env' file, see [.env docs](./doc/info_envfile.md)
 
-    > [!WARNING]
-    > Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` (`ckan_admin` and `test1234` by default). All envvars with `API_TOKEN` are automatically regenerated when CKAN is loaded, no editing is required.
-    > 
-    >**This should be obviously changed before running this setup as a public CKAN instance.**
+> [!WARNING]
+> Using the default values on the `.env` file will get you a working CKAN instance. There is a sysadmin user created by default with the values defined in `CKAN_SYSADMIN_NAME` and `CKAN_SYSADMIN_PASSWORD` (`ckan_admin` and `test1234` by default). All envvars with `API_TOKEN` are automatically regenerated when CKAN is loaded, no editing is required.
+> 
+>**This should be obviously changed before running this setup as a public CKAN instance.**
 
 You are now ready to proceed with deployment.
 
@@ -154,8 +154,8 @@ Use this if you are a maintainer and will not be making code changes to CKAN or 
     docker compose build 
     ```
 
-    > [!NOTE]
-    > You can use a [deploy in 5 minutes](#quick-mode) if you just want to test the package. 
+> [!NOTE]
+> You can use a [deploy in 5 minutes](#quick-mode) if you just want to test the package. 
 
 2. Start the containers:
     ```bash
@@ -600,8 +600,8 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     0 0 * * * /path/to/your/script/ckan_backup_custom.sh
     ```
 
-  > [!NOTE]
-  > Replace `/path/to/your/script` with the actual path to the `ckan_backup_custom.sh` script.
+> [!NOTE]
+> Replace `/path/to/your/script` with the actual path to the `ckan_backup_custom.sh` script.
   
 8. Save and close the file.
 
