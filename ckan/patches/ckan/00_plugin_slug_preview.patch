@@ -1,0 +1,16 @@
+diff --git a/ckan/public/base/javascript/plugins/jquery.slug-preview.js b/ckan/public/base/javascript/plugins/jquery.slug-preview.js
+index 4a4f78fe25..8c03e816d2 100644
+--- a/ckan/public/base/javascript/plugins/jquery.slug-preview.js
++++ b/ckan/public/base/javascript/plugins/jquery.slug-preview.js
+@@ -33,6 +33,11 @@
+       var value = preview.find('.slug-preview-value');
+       var required = $('<div>').append($('.control-required', element).clone()).html();
+ 
++      // Check if slugPreview already exists in the parent container
++      if (element.parent().find('.slug-preview').length > 0) {
++        return;
++      }
++
+       function setValue() {
+         var val = escape(field.val()) || options.placeholder;
+         value.text(val);

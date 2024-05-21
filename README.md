@@ -216,8 +216,14 @@ To start the containers:
 	docker compose -f docker-compose.dev.yml up
     ```
 
-See [CKAN images](#5-ckan-images) for more details of what happens when using development mode.
+See [CKAN images](#ckan-images) for more details of what happens when using development mode.
 
+> [!TIP]
+> To enable the [Flask tool console](https://flask.palletsprojects.com/en/2.3.x/debugging/#debugging-application-errors), you need to enable tool debugging mode. This is done by setting the tool logging level to `DEBUG` in the CKAN configuration file, `ckan.ini`. Here is the code snippet you need to add to your `ckan.ini` file:
+> ```ini
+> [logger_werkzeug]
+> level = DEBUG
+>```
 
 #### Create an extension
 You can use the ckan [extension](https://docs.ckan.org/en/latest/extensions/tutorial.html#creating-a-new-extension) instructions to create a CKAN extension, only executing the command inside the CKAN container and setting the mounted `src/` folder as output:
