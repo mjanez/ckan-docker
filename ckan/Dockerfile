@@ -39,7 +39,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.1.0#egg=ckanext-geoview && \
     echo "ckan/ckanext-spatial" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.1.1#egg=ckanext-spatial && \
-    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-spatial/requirements.txt && \
+    pip3 install --no-cache-dir -r ${APP_DIR}/req_fixes/ckanext-spatial/requirements.txt && \
     echo "mjanez/ckanext-dcat (GeoDCAT-AP extended version)" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-dcat.git@v1.8.0-alpha#egg=ckanext-dcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-dcat/requirements.txt && \
