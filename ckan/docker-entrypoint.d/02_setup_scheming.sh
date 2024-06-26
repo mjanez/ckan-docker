@@ -16,7 +16,8 @@ ckan config-tool $CKAN_INI \
     "schemingdcat.geometadata_base_uri=$CKANEXT__SCHEMINGDCAT_GEOMETADATA_BASE_URI" \
     "schemingdcat.default_package_item_icon=$CKANEXT__SCHEMINGDCAT_DEFAULT_PACKAGE_ITEM_ICON" \
     "schemingdcat.default_package_item_show_spatial=$CKANEXT__SCHEMINGDCAT_DEFAULT_PACKAGE_ITEM_SHOW_SPATIAL" \
-    "schemingdcat.show_metadata_templates_toolbar=$CKANEXT__SCHEMINGDCAT_SHOW_METADATA_TEMPLATES_TOOLBAR"
+    "schemingdcat.show_metadata_templates_toolbar=$CKANEXT__SCHEMINGDCAT_SHOW_METADATA_TEMPLATES_TOOLBAR" \
+    "schemingdcat.metadata_templates_search_identifier=$CKANEXT__METADATA_TEMPLATES_SEARCH_IDENTIFIER"
 
 echo "[docker-entrypoint.02_setup_scheming] Rebuild index"
 ckan -c $CKAN_INI search-index rebuild
