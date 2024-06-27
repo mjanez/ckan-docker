@@ -59,7 +59,7 @@ ENV SOLR_BBOX_FIELDS '<field name="bbox_area" type="float" indexed="true" stored
     <field name="resource_relation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="metadata_profile" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>' \
     '<field name="dcat_type" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>' \
-    '<field name="dataset_scope" type="boolean" indexed="true" stored="true"/>'
+    '<field name="dataset_scope" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>' 
 
 RUN sed -i "/<fields>/a $SOLR_BBOX_FIELDS" $SOLR_SCHEMA_FILE
 
