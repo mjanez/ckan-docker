@@ -271,7 +271,7 @@ The Docker image config files used to build your CKAN project are located in the
 * `Dockerfile`: this is based on `mjanez/ckan-base-spatial:<version>`, a base image located in the [Github Package Registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-base-spatial), that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
 * `Dockerfile.dev`:  this is based on `mjanez/ckan-base-spatial:<version>-dev` also located located in the Github Package Registry, and extends `mjanez/ckan-base-spatial:<version>` to include:
 
-  * Any extension cloned on the `./src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
+  * Any extension cloned on the `./src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose -f docker-compose.dev.yml up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`. You can clone all the extensions explained in [`src/README`](/src/README.md) with their tag, reqs and autocrlf using a bash script.
   * CKAN is started running this: `/usr/bin/ckan -c /srv/app/ckan.ini run -H 0.0.0.0`.
   * Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
 
