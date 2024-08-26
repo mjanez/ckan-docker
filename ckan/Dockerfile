@@ -16,7 +16,7 @@ COPY req_fixes req_fixes
 ## Harvest - v1.5.6 (Worker with supervisor) ##
 ## Geoview - v0.1.0 ##
 ## Spatial - v2.1.1 ##
-## DCAT - v1.8.0-alpha (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
+## DCAT - v1.8.0 (Latest stable version of ckanext-dcat with minor fixes) ##
 ## Scheming - release-3.0.0 ##
 ## Resource dictionary - v1.0.1 (mjanez/Fixed version) ##
 ## Pages - v0.5.2 ##
@@ -41,7 +41,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.1.1#egg=ckanext-spatial && \
     pip3 install --no-cache-dir -r ${APP_DIR}/req_fixes/ckanext-spatial/requirements.txt && \
     echo "mjanez/ckanext-dcat (GeoDCAT-AP extended version)" && \
-    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-dcat.git@v1.8.0-alpha#egg=ckanext-dcat && \
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-dcat.git@v1.8.0#egg=ckanext-dcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-dcat/requirements.txt && \
     echo "ckan/ckanext-scheming" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-scheming.git@release-3.0.0#egg=ckanext-scheming && \
