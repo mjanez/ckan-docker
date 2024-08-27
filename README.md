@@ -44,7 +44,7 @@ Available components:
 | --- | --- | --- | --- | --- |
 | 2.9.x  | custom spatial image | `alpine:3.15` | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`, `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`,  `ghcr.io/mjanez/ckan-docker:ckan-2.9.9`, `ghcr.io/mjanez/ckan-docker:ckan-2.9.10`, `ghcr.io/mjanez/ckan-docker:ckan-2.9.11`, `ghcr.io/mjanez/ckan-docker:2.9.12` | Stable official versions of CKAN `2.9.8`, `2.9.10` and `2.9.11`, including a security backport: `2.9.12`. As of `2.9.12`, repo images are aligned with the [`ckan-docker-spatial`](https://github.com/mjanez/ckan-docker-spatial#pre-configured-ckan-docker-images) and [`ckan-docker-base](https://github.com/ckan/ckan-docker-base#pre-configured-ckan-docker-images)` tags. |
 | 2.10.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.10.5` | From `2.10` images only [Debian-based official Python images](https://hub.docker.com/_/python) rather than Alpine-based images will be provided. |
-| 2.11.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.11.0` | Latest CKAN version. |
+| 2.11.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.11.0` | CKAN's latest official version. Only [Debian-based official Python images](https://hub.docker.com/_/python). |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
