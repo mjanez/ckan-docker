@@ -101,7 +101,6 @@ This section contains configurations related to the core CKAN application. It in
 - `CKAN_SITE_ID`: The site ID for CKAN.
 - `CKAN_SITE_URL`: The URL of the CKAN site.
 - `CKAN__ROOT_PATH`: The root path for CKAN.
-- `CKAN_PORT`: The port on which CKAN is running.
 - `CKAN__FAVICON`: The path to the favicon for CKAN.
 - `CKAN__SITE_LOGO`: The path to the logo for CKAN.
 - `CKAN___BEAKER__SESSION__SECRET`: The secret for the Beaker session.

@@ -58,7 +58,7 @@ services:
       - site_packages:/usr/lib/python3.9/site-packages
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
 
   pycsw:
     build:

@@ -435,9 +435,6 @@ You can now set breakpoints and remote debug your CKAN development instance usin
 Add these lines to the `ckan-dev` service in the docker compose.dev.yml file
 
 ```yaml
-ports:
-  - "0.0.0.0:${CKAN_PORT}:5000"
-
 stdin_open: true
 tty: true
 ```
