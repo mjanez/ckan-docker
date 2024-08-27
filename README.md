@@ -40,13 +40,11 @@ Contains Docker images for the different components of CKAN Cloud and a Docker c
 Available components:
 * CKAN custom multi-stage build with spatial capabilities from [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1], an image used as a base and built from the official CKAN repo. The following versions of CKAN are available:
 
-| CKAN Version | Type | Docker tag | Notes |
-| --- | --- | --- | --- |
-| 2.9.8 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.8 |
-| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.9` | Stable version with CKAN 2.9.9 |
-| 2.9.10 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.10` | Stable version with CKAN 2.9.10 |
-| 2.9.11 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.11` | Stable version with CKAN 2.9.11 |
-| 2.9.11 | latest custom image | `ghcr.io/mjanez/ckan-docker:master` | Latest `ckan-docker` image. |
+| CKAN Version | Type |  Base image | Docker tag | Notes |
+| --- | --- | --- | --- | --- |
+| 2.9.x  | custom spatial image | `alpine:3.15` | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`, `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`,  `ghcr.io/mjanez/ckan-docker:ckan-2.9.9`, `ghcr.io/mjanez/ckan-docker:ckan-2.9.10`, `ghcr.io/mjanez/ckan-docker:ckan-2.9.11`, `ghcr.io/mjanez/ckan-docker:2.9.12` | Stable official versions of CKAN `2.9.8`, `2.9.10` and `2.9.11`, including a security backport: `2.9.12`. As of `2.9.12`, repo images are aligned with the [`ckan-docker-spatial`](https://github.com/mjanez/ckan-docker-spatial#pre-configured-ckan-docker-images) and [`ckan-docker-base](https://github.com/ckan/ckan-docker-base#pre-configured-ckan-docker-images)` tags. |
+| 2.10.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.10.5` | From `2.10` images only [Debian-based official Python images](https://hub.docker.com/_/python) rather than Alpine-based images will be provided. |
+| 2.11.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.11.0` | CKAN's latest official version. Only [Debian-based official Python images](https://hub.docker.com/_/python). |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
@@ -271,7 +269,7 @@ The Docker image config files used to build your CKAN project are located in the
 * `Dockerfile`: this is based on `mjanez/ckan-base-spatial:<version>`, a base image located in the [Github Package Registry](https://github.com/mjanez/ckan-docker/pkgs/container/ckan-base-spatial), that has CKAN installed along with all its dependencies, properly configured and running on [uWSGI](https://uwsgi-docs.readthedocs.io/en/latest/) (production setup)
 * `Dockerfile.dev`:  this is based on `mjanez/ckan-base-spatial:<version>-dev` also located located in the Github Package Registry, and extends `mjanez/ckan-base-spatial:<version>` to include:
 
-  * Any extension cloned on the `./src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`.
+  * Any extension cloned on the `./src` folder will be installed in the CKAN container when booting up Docker Compose (`docker compose -f docker-compose.dev.yml up`). This includes installing any requirements listed in a `requirements.txt` (or `pip-requirements.txt`) file and running `python setup.py develop`. You can clone all the extensions explained in [`src/README`](/src/README.md) with their tag, reqs and autocrlf using a bash script.
   * CKAN is started running this: `/usr/bin/ckan -c /srv/app/ckan.ini run -H 0.0.0.0`.
   * Make sure to add the local plugins to the `CKAN__PLUGINS` env var in the `.env` file.
 
@@ -435,9 +433,6 @@ You can now set breakpoints and remote debug your CKAN development instance usin
 Add these lines to the `ckan-dev` service in the docker compose.dev.yml file
 
 ```yaml
-ports:
-  - "0.0.0.0:${CKAN_PORT}:5000"
-
 stdin_open: true
 tty: true
 ```

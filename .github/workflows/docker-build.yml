@@ -14,9 +14,9 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-  TAG: ghcr.io/${{ github.repository }}:${{ github.head_ref }}
   CONTEXT: .
   BRANCH: ${{ github.head_ref }}
+  VERSION: ${{ github.head_ref }}
   DOCKERFILE_PATH: /ckan
   DOCKERFILE: Dockerfile
 
@@ -43,6 +43,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Extract tag version from branch name
+        id: extract_tag_version
+        run: echo "VERSION=$(echo ${{ github.head_ref }} | sed 's/^ckan-//')" >> $GITHUB_ENV
+
       - name: Extract Docker metadata
         id: meta
         uses: docker/metadata-action@v5
@@ -50,14 +54,18 @@ jobs:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           labels: |
             org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/blob/${{ env.BRANCH }}/README.md
-            org.opencontainers.image.version=${{ env.BRANCH }}
+            org.opencontainers.image.version=${{ env.VERSION }}
+          annotations: |
+            org.opencontainers.image.description=This image contains CKAN based on a Docker Compose deployment. The container includes CKAN along with its dependencies and configurations for spatial data support.
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ env.TAG }}
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
+          annotations: ${{ steps.meta.outputs.annotations }}
           context: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}
           file: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}/${{ env.DOCKERFILE }}
 
@@ -68,14 +76,14 @@ jobs:
           no-fail: true
 
       - name: Run Trivy container image vulnerability scanner
-        uses: aquasecurity/trivy-action@0.18.0
+        uses: aquasecurity/trivy-action@0.24.0
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.BRANCH }}
+          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           format: sarif
           output: trivy-results.sarif
   
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         if: always()
         with:
           sarif_file: trivy-results.sarif

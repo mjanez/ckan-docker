@@ -19,6 +19,11 @@ src/*
 # environment
 .env
 .env.*
-!.env.example
 pycsw.conf.template.*
 index.html.*
+
+# environment allowlist
+!.env.example
+!.env.es.example
+!.env.localhost
+samples/api/*

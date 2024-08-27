@@ -133,7 +133,7 @@ scheming.presets = ckanext.scheming:presets.json
 
 ## ckanext-dcat
 ckanext.dcat.base_uri =  http://localhost:5000
-ckanext.dcat.rdf.profiles = euro_dcat_ap_2 euro_dcat_ap
+ckanext.dcat.rdf.profiles = eu_dcat_ap_2 eu_dcat_ap
 
 ## ckanext-spatial
 ckanext.spatial.search_backend = solr-bbox

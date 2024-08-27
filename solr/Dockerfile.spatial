@@ -9,6 +9,7 @@ ARG CKAN_BRANCH="dev-v2.10"
 ENV SOLR_INSTALL="/opt/solr"
 ENV SOLR_CONFIG_DIR="$SOLR_INSTALL/server/solr/configsets"
 ENV SOLR_SCHEMA_FILE="$SOLR_CONFIG_DIR/ckan/conf/managed-schema"
+ENV SOLR_CKAN_DATABASE=ckan
 
 ARG JTS_VERSION="1.19.0"
 ARG JTS_JAR_FILE="$SOLR_INSTALL/server/solr-webapp/webapp/WEB-INF/lib/jts-core-$JTS_VERSION.jar"
@@ -16,7 +17,7 @@ ARG JTS_JAR_FILE="$SOLR_INSTALL/server/solr-webapp/webapp/WEB-INF/lib/jts-core-$
 USER root
 
 # Create a CKAN configset by copying the default one
-RUN cp -R $SOLR_CONFIG_DIR/_default $SOLR_CONFIG_DIR/ckan
+RUN cp -R $SOLR_CONFIG_DIR/_default $SOLR_CONFIG_DIR/$SOLR_CKAN_DATABASE
 
 # Update the schema
 ADD https://raw.githubusercontent.com/ckan/ckan/$CKAN_BRANCH/ckan/config/solr/schema.xml $SOLR_SCHEMA_FILE
@@ -50,13 +51,16 @@ ENV SOLR_BBOX_FIELDS '<field name="bbox_area" type="float" indexed="true" stored
     <field name="miny" type="float" indexed="true" stored="true" /> \
     <field name="tag_uri" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="conforms_to" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="applicable_legislation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="lineage_source" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="lineage_process_steps" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="reference" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="is_referenced_by" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="theme" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="theme_es" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="theme_eu" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="resource_relation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="documentation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="metadata_profile" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>' \
     '<field name="dcat_type" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>' \
     '<field name="dataset_scope" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/>' 
@@ -68,4 +72,4 @@ RUN chmod 644 $SOLR_SCHEMA_FILE
 
 USER solr
 
-CMD ["sh", "-c", "solr-precreate ckan $SOLR_CONFIG_DIR/ckan"]
+CMD ["sh", "-c", "solr-precreate $SOLR_CKAN_DATABASE $SOLR_CONFIG_DIR/$SOLR_CKAN_DATABASE"]

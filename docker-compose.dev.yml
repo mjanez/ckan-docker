@@ -17,7 +17,7 @@ services:
       - .env
     environment:
       - CKAN_COMPOSE_SERVICE=${CKAN_DEV_COMPOSE_SERVICE}
-      - PROXY_CKAN_PROXY_PASS=http://${CKAN_DEV_COMPOSE_SERVICE}:${CKAN_PORT}
+      - PROXY_CKAN_PROXY_PASS=http://${CKAN_DEV_COMPOSE_SERVICE}:5000
     depends_on:
       - ${CKAN_DEV_COMPOSE_SERVICE}
     ports:
@@ -42,7 +42,7 @@ services:
       - solr
       - redis
     ports:
-      - "0.0.0.0:${CKAN_PORT_HOST}:${CKAN_PORT}"
+      - "0.0.0.0:${CKAN_PORT_HOST}:5000"
     volumes:
       - ckan_storage:/var/lib/ckan
       - ckan_logs:/var/log
@@ -52,7 +52,7 @@ services:
       - vscode_server:/root/.vscode-server
     restart: unless-stopped
     healthcheck:
-      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:${CKAN_PORT}"]
+      test: ["CMD", "wget", "-qO", "/dev/null", "http://localhost:5000"]
 
   pycsw:
     build:
