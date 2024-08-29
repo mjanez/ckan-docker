@@ -40,13 +40,11 @@ Contains Docker images for the different components of CKAN Cloud and a Docker c
 Available components:
 * CKAN custom multi-stage build with spatial capabilities from [ckan-docker-spatial](https://github.com/mjanez/ckan-docker-spatial)[^1], an image used as a base and built from the official CKAN repo. The following versions of CKAN are available:
 
-| CKAN Version | Type | Docker tag | Notes |
-| --- | --- | --- | --- |
-| 2.9.8 | custom image | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8` | Stable version with CKAN 2.9.8 |
-| 2.9.9 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.9` | Stable version with CKAN 2.9.9 |
-| 2.9.10 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.10` | Stable version with CKAN 2.9.10 |
-| 2.9.11 | custom image | `ghcr.io/mjanez/ckan-docker:ckan-2.9.11` | Stable version with CKAN 2.9.11 |
-| 2.9.11 | latest custom image | `ghcr.io/mjanez/ckan-docker:master` | Latest `ckan-docker` image. |
+| CKAN Version | Type |  Base image | Docker tag | Notes |
+| --- | --- | --- | --- | --- |
+| 2.9.x  | custom spatial image | `alpine:3.15` | `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`, `ghcr.io/mjanez/ckan-spatial:ckan-2.9.8`,  `ghcr.io/mjanez/ckan-docker:ckan-2.9.9`, `ghcr.io/mjanez/ckan-docker:ckan-2.9.10`, `ghcr.io/mjanez/ckan-docker:ckan-2.9.11` | Stable official versions of CKAN `2.9.8`, `2.9.10` and `2.9.11` |
+| 2.10.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.10.5` | From `2.10` images only [Debian-based official Python images](https://hub.docker.com/_/python) rather than Alpine-based images will be provided. |
+| 2.11.x  | custom spatial image | `python:3.10-slim-bookworm` | `ghcr.io/mjanez/ckan-docker:2.11.0` | CKAN's latest official version. Only [Debian-based official Python images](https://hub.docker.com/_/python). |
 
 The non-CKAN images are as follows:
 * PostgreSQL: [Custom image](/postgresql/Dockerfile) based on official PostgreSQL image. Database files are stored in a named volume.
