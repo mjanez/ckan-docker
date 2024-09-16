@@ -4,6 +4,12 @@
 echo "[docker-entrypoint.01_setup_ckanext_config] Clear index"
 ckan -c $CKAN_INI search-index clear
 
+# ckan: Update core settings
+echo "[docker-entrypoint.01_setup_ckanext_config] Loading CKAN core settings in the CKAN config file"
+ckan config-tool $CKAN_INI \
+    "search.facets.default = $SEARCH__FACETS__DEFAULT"
+
+# ckanext-schemingdcat: Update settings
 echo "[docker-entrypoint.01_setup_ckanext_config] Loading ckanext-scheming and ckanext-schemingdcat settings into ckan.ini"
 ckan config-tool $CKAN_INI \
     "scheming.dataset_schemas=$CKANEXT__SCHEMINGDCAT_DATASET_SCHEMA" \
@@ -18,7 +24,7 @@ ckan config-tool $CKAN_INI \
     "schemingdcat.default_package_item_show_spatial=$CKANEXT__SCHEMINGDCAT_DEFAULT_PACKAGE_ITEM_SHOW_SPATIAL" \
     "schemingdcat.show_metadata_templates_toolbar=$CKANEXT__SCHEMINGDCAT_SHOW_METADATA_TEMPLATES_TOOLBAR" \
     "schemingdcat.metadata_templates_search_identifier=$CKANEXT__METADATA_TEMPLATES_SEARCH_IDENTIFIER" \
-    "schemingdcat.endpoints_yaml=$CKANEXT__SCHEMINGDCAT_ENDPOINTS_YAML" \
+    "schemingdcat.endpoints_yaml=$CKANEXT__SCHEMINGDCAT_ENDPOINTS_YAML"
 
 # ckanext-dcat: Add settings to the CKAN config file
 echo "[docker-entrypoint.01_setup_ckanext_config] Loading ckanext-dcat settings in the CKAN config file"

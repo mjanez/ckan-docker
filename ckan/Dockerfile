@@ -1,4 +1,4 @@
-FROM ghcr.io/mjanez/ckan-spatial-base:2.9.12
+FROM ghcr.io/mjanez/ckan-spatial-base:2.10.5-py3.10
 LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
@@ -25,8 +25,9 @@ COPY req_fixes req_fixes
 ## Scheming DCAT - v3.2.2 (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
-    # Remove apk cache
-    rm -rf /var/cache/apk/* && \
+    # Install patch utility
+    apt-get update && \
+    apt-get install -y patch && \
     # Install CKAN extensions
     echo "ckan/ckanext-xloader" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-xloader.git@1.0.1#egg=ckanext-xloader && \ 
@@ -55,7 +56,10 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-fluent.git@v1.0.1#egg=ckanext-fluent && \
     echo "mjanez/ckanext-schemingdcat" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v3.2.2#egg=ckanext_schemingdcat && \
-    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-schemingdcat/requirements.txt
+    pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-schemingdcat/requirements.txt && \
+    # Remove system cache
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
