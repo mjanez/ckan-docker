@@ -18,9 +18,9 @@ fi
 
 # Define repositories and tags
 declare -A repos=(
-    ["ckan/ckanext-xloader"]="1.0.1"
+    ["mjanez/ckanext-xloader"]="1.0.1-stable"
     ["ckan/ckanext-harvest"]="v1.5.6"
-    ["ckan/ckanext-geoview"]="v0.1.0"
+    ["ckan/ckanext-geoview"]="v0.2.0"
     ["ckan/ckanext-spatial"]="v2.1.1"
     ["mjanez/ckanext-dcat"]="v1.8.0"
     ["ckan/ckanext-scheming"]="release-3.0.0"

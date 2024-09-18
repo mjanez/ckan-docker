@@ -156,7 +156,6 @@ This is a CKAN extension that allows users to harvest dataset metadata from mult
 ### ckanext-xloader
 This is a CKAN extension that allows users to load data into CKAN's data store for faster and more efficient processing.
 
-- `CKANEXT__XLOADER__API_TOKEN`: The API token for the XLoader extension.
 - `CKANEXT__XLOADER__JOBS__DB_URI`: The database URI for the XLoader jobs.
 
 ### ckanext-dcat
