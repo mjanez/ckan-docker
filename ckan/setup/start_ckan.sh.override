@@ -13,8 +13,8 @@ then
 fi
 
 # Github Codespaces workaround. Check if WTF_CSRF_ENABLED is explicitly set to False and update CKAN_INI
-if grep -qE "^WTF_CSRF_ENABLED ?= ?False$" $CKAN_INI; then
-    echo "WTF_CSRF_ENABLED is explicitly set to False. Updating CKAN_INI."
+if [ "$WTF_CSRF_ENABLED" = "False" ]; then
+    echo "WTF_CSRF_ENABLED is set to False. Updating CKAN_INI."
     ckan config-tool $CKAN_INI "WTF_CSRF_ENABLED=False"
 fi
 
