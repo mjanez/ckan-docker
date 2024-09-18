@@ -10,11 +10,18 @@ then
     JWT_SECRET=$(python3 -c 'import secrets; print("string:" + secrets.token_urlsafe())')
     ckan config-tool $CKAN_INI "api_token.jwt.encode.secret=${JWT_SECRET}"
     ckan config-tool $CKAN_INI "api_token.jwt.decode.secret=${JWT_SECRET}"
+fi
 
+# Github Codespaces workaround. Check if WTF_CSRF_ENABLED is explicitly set to False and update CKAN_INI
+if grep -qE "^WTF_CSRF_ENABLED ?= ?False$" $CKAN_INI; then
+    echo "WTF_CSRF_ENABLED is explicitly set to False. Updating CKAN_INI."
+    ckan config-tool $CKAN_INI "WTF_CSRF_ENABLED=False"
+fi
+
+# Update local (file://) licenses
+if [ -n "$CKAN___LICENSES_GROUP_URL" ]; then
+    ckan config-tool $CKAN_INI "licenses_group_url=${CKAN___LICENSES_GROUP_URL}"
     echo "Update licenses in CKAN"
-    if [ -n "$CKAN___LICENSES_GROUP_URL" ]; then
-        ckan config-tool $CKAN_INI "licenses_group_url=${CKAN___LICENSES_GROUP_URL}"
-    fi
 fi
 
 # Run the prerun script to init CKAN and create the default admin user
