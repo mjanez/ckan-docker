@@ -28,3 +28,6 @@ index.html.*
 !.env.es.example
 !.env.localhost
 samples/api/*
+
+# docker compose files
+docker-compose.local-*.yml
