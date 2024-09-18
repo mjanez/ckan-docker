@@ -57,9 +57,6 @@ RUN echo ${TZ} > /etc/timezone && \
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
 
-# Update who.ini with PROXY_CKAN_LOCATION
-COPY setup/who.ini ./
-
 # Override start_ckan.sh with DEV sh
 COPY setup/start_ckan_development.sh.override ./start_ckan_development.sh
 RUN chmod +x ./start_ckan_development.sh
