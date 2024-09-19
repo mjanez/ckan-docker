@@ -7,7 +7,8 @@ ckan -c $CKAN_INI search-index clear
 # ckan: Update core settings
 echo "[docker-entrypoint.01_setup_ckanext_config] Loading CKAN core settings in the CKAN config file"
 ckan config-tool $CKAN_INI \
-    "search.facets.default = $SEARCH__FACETS__DEFAULT"
+    "search.facets.default = $SEARCH__FACETS__DEFAULT" \
+    "ckan.datastore.sqlsearch.enabled = $CKAN__DATASTORE__SQLSEARCH__ENABLED"
 
 # ckanext-schemingdcat: Update settings
 echo "[docker-entrypoint.01_setup_ckanext_config] Loading ckanext-scheming and ckanext-schemingdcat settings into ckan.ini"
