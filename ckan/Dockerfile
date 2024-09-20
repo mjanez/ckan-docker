@@ -22,7 +22,7 @@ COPY req_fixes req_fixes
 ## Pages - v0.5.2 ##
 ## PDFView - 0.0.8 ##
 ## Fluent - v1.0.1  (mjanez/Forked stable version) ##
-## Scheming DCAT - v4.0.0-alpha (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
+## Scheming DCAT - v4.0.0 (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
     # Install patch utility
@@ -55,7 +55,7 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "mjanez/ckanext-fluent" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-fluent.git@v1.0.1#egg=ckanext-fluent && \
     echo "mjanez/ckanext-schemingdcat" && \
-    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v4.0.0-alpha#egg=ckanext_schemingdcat && \
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v4.0.0#egg=ckanext_schemingdcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-schemingdcat/requirements.txt && \
     # Remove system cache
     apt-get clean && \
