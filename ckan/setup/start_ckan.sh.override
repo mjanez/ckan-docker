@@ -48,8 +48,11 @@ chown -R ckan:ckan $CKAN_LOGS_PATH/harvester
 mkdir -p $CKAN_LOGS_PATH/xloader
 chown -R ckan:ckan $CKAN_LOGS_PATH/xloader
 
-# Set the common uwsgi options
-UWSGI_OPTS="--plugins http,python \
+# Set the common uwsgi options. 
+## Add thunder-lock to prevent multiple workers from running the same job and buffer-size to prevent large headers
+UWSGI_OPTS="--thunder-lock \
+            --buffer-size=65535 \
+            --ignore-sigpipe \
             --socket /tmp/uwsgi.sock \
             --wsgi-file /srv/app/wsgi.py \
             --module wsgi:application \
