@@ -24,6 +24,12 @@ if [ -n "$CKAN___LICENSES_GROUP_URL" ]; then
     echo "Update licenses in CKAN"
 fi
 
+# Comment out smtp.* settings if CKAN__SMTP_ENABLED is not True
+if [ "$CKAN__SMTP_ENABLED" != "True" ]; then
+    echo "Commenting out smtp.* settings in ini file"
+    sed -i 's/^\(smtp\..*\)$/#\1/' $CKAN_INI
+fi
+
 # Run the prerun script to init CKAN and create the default admin user
 python3 prerun.py
 
@@ -70,14 +76,27 @@ then
     supervisord --configuration /etc/supervisord.conf &
 
     # Workers
-    ## Add harvester background procces to crontab
+    ## Add the harvester background processes to crontab if they do not already exist
     echo "[prerun.workers] Add harvester background procceses to crontab"
-    crontab -l | { cat; echo "*/15 * * * * /usr/bin/supervisorctl start ckan_harvester_run"; } | crontab -
+    if ! crontab -l | grep -q "/usr/bin/supervisorctl start ckan_harvester_run"; then
+        { crontab -l; echo "*/15 * * * * /usr/bin/supervisorctl start ckan_harvester_run"; } | crontab -
+    fi
     ## Clean-up mechanism for the harvest log table. 'ckan.harvest.log_timeframe'. The default time frame is 30 days
-    crontab -l | { cat; echo "0 5 */30 * * /usr/bin/supervisorctl start ckan_harvester_clean_log"; } | crontab -
+    if ! crontab -l | grep -q "/usr/bin/supervisorctl start ckan_harvester_clean_log"; then
+        { crontab -l; echo "0 5 */30 * * /usr/bin/supervisorctl start ckan_harvester_clean_log"; } | crontab -
+    fi
+
+    ## Add SMTP notification process to crontab if CKAN__SMTP_ENABLED is True
+    if [ "$CKAN__SMTP_ENABLED" = "True" ]; then
+        echo "[prerun.workers] Add SMTP notification process to crontab"
+        if ! crontab -l | grep -q "ckan -c $CKAN_INI notify send_emails"; then
+            { crontab -l; echo "@hourly echo '{}' | ckan -c $CKAN_INI notify send_emails > /dev/null"; } | crontab -
+        fi
+    fi
+
     ## Execute cron in the background
     echo "[prerun.workers] Execute cron in the background"
-    crond -b -l 8
+    cron -f &
 
     # Start uwsgi
     uwsgi $UWSGI_OPTS
