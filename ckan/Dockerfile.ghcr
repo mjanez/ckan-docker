@@ -1,4 +1,4 @@
-FROM ghcr.io/mjanez/ckan-docker:ckan-2.9.11
+FROM ghcr.io/mjanez/ckan-docker:ckan-2.10.5
 LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
@@ -16,9 +16,6 @@ RUN echo ${TZ} > /etc/timezone && \
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* docker-entrypoint.d/
-
-# Update who.ini with PROXY_CKAN_LOCATION
-COPY setup/who.ini ./
 
 # Apply any patches needed to CKAN core
 COPY patches patches

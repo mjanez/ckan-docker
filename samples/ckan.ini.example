@@ -116,7 +116,7 @@ ckan.site_id = default
 #       Add ``datapusher`` to enable DataPusher
 #		Add ``resource_proxy`` to enable resorce proxying and get around the
 #		same origin policy
-ckan.plugins = stats text_view image_view recline_view resourcedictionary datastore datapusher harvest ckan_harvester spatial_metadata spatial_query spatial_harvest_metadata_api csw_harvester waf_harvester doc_harvester resource_proxy geo_view geojson_view wmts_view shp_view dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface scheming_datasets scheming_groups scheming_organizations pdf_view pages
+ckan.plugins = stats text_view image_view recline_view resourcedictionary datastore datapusher harvest ckan_harvester spatial_metadata spatial_query spatial_harvest_metadata_api csw_harvester waf_harvester doc_harvester resource_proxy geo_view geojson_view wmts_view shp_view dcat dcat_rdf_harvester dcat_json_harvester dcat_json_interface schemingdcat_datasets schemingdcat_groups schemingdcat_organizations pdf_view pages
 
 
 ## ckanext-scheming

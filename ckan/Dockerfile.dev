@@ -1,4 +1,4 @@
-FROM ghcr.io/mjanez/ckan-base-spatial:ckan-2.9.11-dev
+FROM ghcr.io/mjanez/ckan-spatial-dev:2.10.5-py3.10
 LABEL maintainer="mnl.janez@gmail.com"
 
 # Set up environment variables
@@ -10,9 +10,12 @@ ENV APP_DIR=/srv/app \
 WORKDIR ${APP_DIR}
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
-    apk --no-cache add sudo && \
-    # Remove apk cache
-    rm -rf /var/cache/apk/*
+    # Install patch utility
+    apt-get update && \
+    apt-get install -y patch && \
+    # Remove system cache
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Install any extensions needed by your CKAN instance
 # - Make sure to add the plugins to CKAN__PLUGINS in the .env file
@@ -53,9 +56,6 @@ RUN echo ${TZ} > /etc/timezone && \
 
 # Used to configure the container environment by setting environment variables, creating users, running initialization scripts, .etc
 COPY docker-entrypoint.d/* /docker-entrypoint.d/
-
-# Update who.ini with PROXY_CKAN_LOCATION
-COPY setup/who.ini ./
 
 # Override start_ckan.sh with DEV sh
 COPY setup/start_ckan_development.sh.override ./start_ckan_development.sh

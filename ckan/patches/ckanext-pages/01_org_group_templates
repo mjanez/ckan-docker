@@ -1,0 +1,30 @@
+diff --git a/ckanext/pages/theme/templates_group/group/read_base.html b/ckanext/pages/theme/templates_group/group/read_base.html
+index bbdae8f..6bf00fa 100644
+--- a/ckanext/pages/theme/templates_group/group/read_base.html
++++ b/ckanext/pages/theme/templates_group/group/read_base.html
+@@ -3,8 +3,8 @@
+ {% block content_primary_nav %}
+   {{ super() }}
+   {% if h.ckan_version().split('.')[1] | int >= 9 %}
+-    {{ h.build_nav_icon('pages.group_pages_index', _('Pages'), id=c.group_dict.name, icon='file') }}
++    {{ h.build_nav_icon('pages.group_pages_index', _('Pages'), id=group_dict.name, icon='file') }}
+   {% else %}
+-    {{ h.build_nav_icon('group_pages_index', _('Pages'), id=c.group_dict.name, icon='file') }}
++    {{ h.build_nav_icon('group_pages_index', _('Pages'), id=group_dict.name, icon='file') }}
+   {% endif %}
+ {% endblock %}
+diff --git a/ckanext/pages/theme/templates_organization/organization/read_base.html b/ckanext/pages/theme/templates_organization/organization/read_base.html
+index e5f3b47..eb2f39b 100644
+--- a/ckanext/pages/theme/templates_organization/organization/read_base.html
++++ b/ckanext/pages/theme/templates_organization/organization/read_base.html
+@@ -3,8 +3,8 @@
+ {% block content_primary_nav %}
+   {{ super() }}
+   {% if h.ckan_version().split('.')[1] | int >= 9 %}
+-    {{ h.build_nav_icon('pages.organization_pages_index', _('Pages'), id=c.group_dict.name, icon='file') }}
++    {{ h.build_nav_icon('pages.organization_pages_index', _('Pages'), id=group_dict.name, icon='file') }}
+   {% else %}
+-    {{ h.build_nav_icon('organization_pages_index', _('Pages'), id=c.group_dict.name, icon='file') }}
++    {{ h.build_nav_icon('organization_pages_index', _('Pages'), id=group_dict.name, icon='file') }}
+   {% endif %}
+ {% endblock %}

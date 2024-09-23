@@ -24,6 +24,10 @@ index.html.*
 
 # environment allowlist
 !.env.example
+!.env.codespaces
 !.env.es.example
 !.env.localhost
 samples/api/*
+
+# docker compose files
+docker-compose.local-*.yml
