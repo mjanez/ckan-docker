@@ -3,13 +3,13 @@ name: Build and push ckan-docker image from PR Merge
 on:
   pull_request:
     types:
-        - closed
+      - closed
     branches:
-        - master
-        - 'ckan-*.*.*'
-        - '!dev/ckan-*.*.*'
-        - '!feature/*'
-        - '!fix/*'
+      - master
+      - 'ckan-*.*.*'
+      - '!dev/ckan-*.*.*'
+      - '!feature/*'
+      - '!fix/*'
 
 env:
   REGISTRY: ghcr.io
@@ -45,7 +45,12 @@ jobs:
 
       - name: Extract tag version from branch name
         id: extract_tag_version
-        run: echo "VERSION=$(echo ${{ github.head_ref }} | sed 's/^ckan-//')" >> $GITHUB_ENV
+        run: |
+          if [ "${{ github.head_ref }}" = "master" ]; then
+            echo "VERSION=master" >> $GITHUB_ENV
+          else
+            echo "VERSION=$(echo ${{ github.head_ref }} | sed 's/^ckan-//')" >> $GITHUB_ENV
+          fi
 
       - name: Extract Docker metadata
         id: meta
@@ -81,7 +86,7 @@ jobs:
           image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           format: sarif
           output: trivy-results.sarif
-  
+
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
         if: always()
