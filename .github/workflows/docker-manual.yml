@@ -35,7 +35,12 @@ jobs:
 
       - name: Extract tag version from branch name
         id: extract_tag_version
-        run: echo "VERSION=$(echo ${{ github.head_ref }} | sed 's/^ckan-//')" >> $GITHUB_ENV
+        run: |
+          if [ "${{ github.head_ref }}" = "master" ]; then
+            echo "VERSION=master" >> $GITHUB_ENV
+          else
+            echo "VERSION=$(echo ${{ github.head_ref }} | sed 's/^ckan-//')" >> $GITHUB_ENV
+          fi
 
       - name: Extract Docker metadata
         id: meta
