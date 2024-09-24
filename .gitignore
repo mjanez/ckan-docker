@@ -26,7 +26,7 @@ index.html.*
 !.env.example
 !.env.codespaces
 !.env.es.example
-!.env.localhost
+!.env.dev.example
 samples/api/*
 
 # docker compose files
