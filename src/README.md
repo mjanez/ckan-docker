@@ -28,8 +28,7 @@ declare -A repos=(
     ["ckan/ckanext-pages"]="v0.5.2"
     ["ckan/ckanext-pdfview"]="0.0.8"
     ["mjanez/ckanext-fluent"]="v1.0.1"
-    ["mjanez/ckanext-schemingdcat"]="develop"
-    ["mjanez/ckanext-mqa"]="develop"
+    ["mjanez/ckanext-schemingdcat"]="v4.0.0"
 )
 
 # Detect if the script is running on Windows
