@@ -71,12 +71,12 @@ COPY patches patches
 RUN for d in $APP_DIR/patches/*; do \
         if [ -d $d ]; then \
             for f in `ls $d/*.patch | sort -g`; do \
-                if [ -d $SRC_DIR/`basename "$d"` ]; then \
-                    cd $SRC_DIR/`basename "$d"` && \
-                    echo "$0: Applying patch $f to $SRC_DIR/`basename $d`" && \
+                if [ -d $SRC_EXTENSIONS_DIR/`basename "$d"` ]; then \
+                    cd $SRC_EXTENSIONS_DIR/`basename "$d"` && \
+                    echo "$0: Applying patch $f to $SRC_EXTENSIONS_DIR/`basename $d`" && \
                     patch -p1 < "$f" ; \
                 else \
-                    echo "$0: Skipping patch $f because directory $SRC_DIR/`basename $d` does not exist. Built the extension: `basename $d`" ; \
+                    echo "$0: Skipping patch $f because directory $SRC_EXTENSIONS_DIR/`basename $d` does not exist. Built the extension: `basename $d`" ; \
                 fi \
             done ; \
         fi ; \
