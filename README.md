@@ -643,7 +643,11 @@ If need to use a backup, restore it:
 
 
 ### CKAN. Manage new users
-1. Create a new user from the Docker host, for example to create a new user called `user_example`
+1. Create a new user directly by a sysadmin in the `{ckan_site_url}/user/register` endpoint
+
+2. Create new user accounts via the API [`user_create`](https://docs.ckan.org/en/2.10/api/#ckan.logic.action.create.user_create)
+
+3. Create a new user from the Docker host, for example to create a new user called `user_example`
 
    ```bash
    docker exec -it <container-id> ckan -c ckan.ini user add user_example email=user_example@localhost
@@ -658,7 +662,7 @@ If need to use a backup, restore it:
    docker exec -it <container-id> ckan -c ckan.ini user remove user_example`
     ```
 
-1. Create a new user from within the ckan container. You will need to get a session on the running container
+4. Create a new user from within the ckan container. You will need to get a session on the running container
 
    ```bash
    ckan -c ckan.ini user add user_example email=user_example@localhost`
