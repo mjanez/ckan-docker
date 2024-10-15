@@ -729,6 +729,60 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
     sudo systemctl status ckan-docker-compose
     ```
 
+### `robots.txt`
+### Configuring `robots.txt` to Mitigate Bot and Crawler Overload
+To prevent bots and crawlers from overloading your CKAN API and causing service disruptions, it is essential to properly configure the `robots.txt` file in the root directory of your server. This file provides instructions to web crawlers about which parts of your site they are allowed to access and crawl.
+
+#### Steps to Configure `robots.txt`
+
+1. **Create or Edit [`nginx/setup/robots.txt`](./nginx/setup/robots.txt) in the Root Directory**:
+   Ensure that the `robots.txt` file is located in the root directory of your server. This is crucial because bots typically look for this file at the root level.
+
+2. **Disallow Specific Bots**:
+   To prevent specific bots, such as the SEMrushBot, from crawling certain parts of your site, add the following lines to your `robots.txt` file:
+
+   ```txt
+   User-agent: SemrushBot
+   Disallow: /catalogo
+   ```
+
+3. **Set Crawl Delay**:
+   To reduce the load on your server, you can set a crawl delay for bots. This instructs the bot to wait a specified number of seconds between requests. For example, to set a 10-second delay for SEMrushBot, add:
+
+   ```txt
+   User-agent: SemrushBot
+   Crawl-delay: 10
+   ```
+
+4. **General Disallow Rules**:
+   You can also add general rules to disallow all bots from accessing specific directories or files. For example:
+
+   ```txt
+   User-agent: *
+   Disallow: /catalog/
+   Disallow: /csw/
+   ```
+
+5. **Example `robots.txt` File**:
+   Here is an example of a complete `robots.txt` file that includes the above configurations:
+
+   ```txt
+   # Disallow SEMrushBot from accessing the /catalogo directory
+   User-agent: SemrushBot
+   Disallow: /catalogo
+   Crawl-delay: 10
+
+   # General disallow rules for all bots
+   User-agent: *
+   Disallow: /private/
+   Disallow: /tmp/
+   ```
+
+6. **Verify `robots.txt` Configuration**:
+   After updating the `robots.txt` file, verify that it is correctly configured by accessing it via your browser. For example, navigate to `https://{ckan_site_url}/robots.txt` and ensure that the rules are as expected.
+
+7. **Monitor Bot Activity**:
+   Continuously monitor your server logs to ensure that bots are adhering to the rules specified in the `robots.txt` file. If you notice any bots ignoring the rules, you may need to take additional measures, such as blocking their IP addresses.
 
 ## CKAN API
 > [!NOTE]
