@@ -587,9 +587,9 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     - `your_postgres_password`: The password for the PostgreSQL user.
     - `/path/to/your/backup/directory`: The path to the directory where you want to store the backup files.
 
-    > [!WARNING]
-    > If you have changed the values of the PostgreSQL container, database or user, change them too.
-    > Check that `zip` package is installed: `sudo apt-get install zip`
+> [!WARNING]
+> If you have changed the values of the PostgreSQL container, database or user, change them too.
+> Check that `zip` package is installed: `sudo apt-get install zip`
 
 4. Save and close the file.
 
@@ -641,6 +641,38 @@ If need to use a backup, restore it:
     ```
 3. Restart the `ckan` container.
 
+
+### Solr backups
+To perform a backup, follow these steps:
+
+1. **Replicate the `ckan` core**
+
+   ```sh
+   docker exec -it <container_id> bash -c "curl http://localhost:8983/solr/ckan/replication?command=backup&wt=json"
+   ```
+
+   Replace `<container_id>` with the id of your `solr-1` container.
+
+2. **In the container, navigate to the Solr data directory:**
+
+  ```sh
+  docker exec -it <container_id> bash
+
+  solr@12d91jdkas:/opt/solr-9.7.0$ cd /var/solr/data/ckan/
+
+  # Backup data (e.g. snapshot.20241015102836306)
+  solr@12d91jdkas:/var/solr/data/ckan$ tar -czvf /tmp/snapshots_backup.tgz data/snapshot.20241015102836306
+  
+  # Backup conf
+  tar -czvf /tmp/conf_backup.tgz conf
+  ```
+
+3. **Export it to the host**
+
+  ```sh
+  docker cp <container_id>:/tmp/snapshots_backup.tgz ./snapshots_backup.tgz
+  docker cp <container_id>:/tmp/conf_backup.tgz ./conf_backup.tgz
+  ```
 
 ### CKAN. Manage new users
 1. Create a new user directly by a sysadmin in the `{ckan_site_url}/user/register` endpoint
