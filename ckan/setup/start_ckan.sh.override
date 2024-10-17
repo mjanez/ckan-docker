@@ -54,6 +54,9 @@ chown -R ckan:ckan $CKAN_LOGS_PATH/harvester
 mkdir -p $CKAN_LOGS_PATH/xloader
 chown -R ckan:ckan $CKAN_LOGS_PATH/xloader
 
+# Ensure CKAN has the correct permissions. Uncomment to avoid i18n/*js errors: https://github.com/ckan/ckanext-pages/issues/91
+#chmod -R 777 /srv/app/src/ckan/ckan/public/base/i18n
+
 # Set the common uwsgi options. 
 ## Add thunder-lock to prevent multiple workers from running the same job and buffer-size to prevent large headers
 ## To increase performance, you can adjust the number of processes (-p) (More info: https://uwsgi-docs.readthedocs.io/en/latest/Options.html & https://www.bloomberg.com/company/stories/configuring-uwsgi-production-deployment/)
