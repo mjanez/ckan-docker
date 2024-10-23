@@ -59,6 +59,7 @@ ENV SOLR_BBOX_FIELDS '<field name="bbox_area" type="float" indexed="true" stored
     <field name="theme" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="theme_es" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="theme_eu" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="hvd_category" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="language" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="resource_relation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="documentation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \

@@ -249,7 +249,7 @@ This is a CKAN extension that allows users to harvest dataset metadata from mult
 ### ckanext-xloader
 This is a CKAN extension that allows users to load data into CKAN's data store for faster and more efficient processing.
 
-- `CKANEXT__XLOADER__JOBS__DB_URI`: The database URI for the XLoader jobs.
+- `CKANEXT__XLOADER__JOBS_DB__URI`: The database URI for the XLoader jobs.
 
 ### ckanext-dcat
 This is a CKAN extension that provides support for the DCAT standard, allowing CKAN to expose and consume metadata in this format.
@@ -283,7 +283,7 @@ This extension provides a way to configure and customize CKAN's dataset, resourc
 - `CKANEXT__SCHEMINGDCAT_GROUP_SCHEMAS`: This is the path to the group schema file.
 - `CKANEXT__SCHEMINGDCAT_ORGANIZATION_SCHEMAS`: This is the path to the organization schema file.
 - `CKANEXT__SCHEMINGDCAT_PRESETS`: This is the path to the presets file.
-- `CKANEXT__SCHEMINGDCAT_FACET_LIST`: This is a list of facets for the dataset.
+- `CKANEXT__SCHEMINGDCAT__FACET_LIST`: This is a list of facets for the dataset.
 - `CKANEXT__SCHEMINGDCAT_ORGANIZATION_CUSTOM_FACETS`: This is a boolean value to enable or disable custom facets for organizations.
 - `CKANEXT__SCHEMINGDCAT_GROUP_CUSTOM_FACETS`: This is a boolean value to enable or disable custom facets for groups.
 - `CKANEXT__SCHEMINGDCAT_DEFAULT_PACKAGE_ITEM_ICON`: The default icon for package items.

@@ -22,8 +22,7 @@ done
 # Add ckanext.xloader.api_token to the CKAN config file
 echo "[docker-entrypoint.01_setup_xloader] Loading ckanext-xloader settings in the CKAN config file"
 ckan config-tool $CKAN_INI \
-    "ckanext.xloader.api_token=xxx" \
-    "ckanext.xloader.jobs_db.uri=$CKANEXT__XLOADER__JOBS__DB_URI"
+    "ckanext.xloader.api_token=xxx"
 
 # Create ckanext-xloader API_TOKEN
 echo "[docker-entrypoint.01_setup_xloader] Set up ckanext.xloader.api_token in the CKAN config file"
