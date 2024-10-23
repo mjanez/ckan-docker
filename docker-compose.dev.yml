@@ -135,3 +135,10 @@ services:
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "redis-cli", "-e", "QUIT"]
+
+  #mailserver:
+  #  image: rnwood/smtp4dev
+  #  ports: 
+  #    - "1080:80"
+  #  restart: unless-stopped
+  
