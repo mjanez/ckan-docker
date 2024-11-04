@@ -31,3 +31,11 @@ samples/api/*
 
 # docker compose files
 docker-compose.local-*.yml
+
+# CKANAPI scripts
+doc/scripts/ckanapi/*_ckanapi.py
+!doc/scripts/ckanapi/*sample_ckan_api.py
+doc/scripts/ckanapi/sites.yml
+sites.yml
+venv
+env

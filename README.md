@@ -587,9 +587,9 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     - `your_postgres_password`: The password for the PostgreSQL user.
     - `/path/to/your/backup/directory`: The path to the directory where you want to store the backup files.
 
-    > [!WARNING]
-    > If you have changed the values of the PostgreSQL container, database or user, change them too.
-    > Check that `zip` package is installed: `sudo apt-get install zip`
+> [!WARNING]
+> If you have changed the values of the PostgreSQL container, database or user, change them too.
+> Check that `zip` package is installed: `sudo apt-get install zip`
 
 4. Save and close the file.
 
@@ -642,8 +642,44 @@ If need to use a backup, restore it:
 3. Restart the `ckan` container.
 
 
+### Solr backups
+To perform a backup, follow these steps:
+
+1. **Replicate the `ckan` core**
+
+   ```sh
+   docker exec -it <container_id> bash -c "curl http://localhost:8983/solr/ckan/replication?command=backup&wt=json"
+   ```
+
+   Replace `<container_id>` with the id of your `solr-1` container.
+
+2. **In the container, navigate to the Solr data directory:**
+
+  ```sh
+  docker exec -it <container_id> bash
+
+  solr@12d91jdkas:/opt/solr-9.7.0$ cd /var/solr/data/ckan/
+
+  # Backup data (e.g. snapshot.20241015102836306)
+  solr@12d91jdkas:/var/solr/data/ckan$ tar -czvf /tmp/snapshots_backup.tgz data/snapshot.20241015102836306
+  
+  # Backup conf
+  tar -czvf /tmp/conf_backup.tgz conf
+  ```
+
+3. **Export it to the host**
+
+  ```sh
+  docker cp <container_id>:/tmp/snapshots_backup.tgz ./snapshots_backup.tgz
+  docker cp <container_id>:/tmp/conf_backup.tgz ./conf_backup.tgz
+  ```
+
 ### CKAN. Manage new users
-1. Create a new user from the Docker host, for example to create a new user called `user_example`
+1. Create a new user directly by a sysadmin in the `{ckan_site_url}/user/register` endpoint
+
+2. Create new user accounts via the API [`user_create`](https://docs.ckan.org/en/2.10/api/#ckan.logic.action.create.user_create)
+
+3. Create a new user from the Docker host, for example to create a new user called `user_example`
 
    ```bash
    docker exec -it <container-id> ckan -c ckan.ini user add user_example email=user_example@localhost
@@ -658,7 +694,7 @@ If need to use a backup, restore it:
    docker exec -it <container-id> ckan -c ckan.ini user remove user_example`
     ```
 
-1. Create a new user from within the ckan container. You will need to get a session on the running container
+4. Create a new user from within the ckan container. You will need to get a session on the running container
 
    ```bash
    ckan -c ckan.ini user add user_example email=user_example@localhost`
@@ -725,6 +761,60 @@ To have Docker Compose run automatically when you reboot a machine, you can foll
     sudo systemctl status ckan-docker-compose
     ```
 
+### `robots.txt`
+### Configuring `robots.txt` to Mitigate Bot and Crawler Overload
+To prevent bots and crawlers from overloading your CKAN API and causing service disruptions, it is essential to properly configure the `robots.txt` file in the root directory of your server. This file provides instructions to web crawlers about which parts of your site they are allowed to access and crawl.
+
+#### Steps to Configure `robots.txt`
+
+1. **Create or Edit [`nginx/setup/robots.txt`](./nginx/setup/robots.txt) in the Root Directory**:
+   Ensure that the `robots.txt` file is located in the root directory of your server. This is crucial because bots typically look for this file at the root level.
+
+2. **Disallow Specific Bots**:
+   To prevent specific bots, such as the SEMrushBot, from crawling certain parts of your site, add the following lines to your `robots.txt` file:
+
+   ```txt
+   User-agent: SemrushBot
+   Disallow: /catalogo
+   ```
+
+3. **Set Crawl Delay**:
+   To reduce the load on your server, you can set a crawl delay for bots. This instructs the bot to wait a specified number of seconds between requests. For example, to set a 10-second delay for SEMrushBot, add:
+
+   ```txt
+   User-agent: SemrushBot
+   Crawl-delay: 10
+   ```
+
+4. **General Disallow Rules**:
+   You can also add general rules to disallow all bots from accessing specific directories or files. For example:
+
+   ```txt
+   User-agent: *
+   Disallow: /catalog/
+   Disallow: /csw/
+   ```
+
+5. **Example `robots.txt` File**:
+   Here is an example of a complete `robots.txt` file that includes the above configurations:
+
+   ```txt
+   # Disallow SEMrushBot from accessing the /catalogo directory
+   User-agent: SemrushBot
+   Disallow: /catalogo
+   Crawl-delay: 10
+
+   # General disallow rules for all bots
+   User-agent: *
+   Disallow: /private/
+   Disallow: /tmp/
+   ```
+
+6. **Verify `robots.txt` Configuration**:
+   After updating the `robots.txt` file, verify that it is correctly configured by accessing it via your browser. For example, navigate to `https://{ckan_site_url}/robots.txt` and ensure that the rules are as expected.
+
+7. **Monitor Bot Activity**:
+   Continuously monitor your server logs to ensure that bots are adhering to the rules specified in the `robots.txt` file. If you notice any bots ignoring the rules, you may need to take additional measures, such as blocking their IP addresses.
 
 ## CKAN API
 > [!NOTE]

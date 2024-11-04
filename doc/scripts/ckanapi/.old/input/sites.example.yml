@@ -1,0 +1,51 @@
+# ./input/sites.yml
+
+default:
+  ckan_site_url: 'https://demo.ckan.dcat-ap-3.es'
+  api_token: 'your_api_token'
+  actions:
+    - update_packages
+    - export_groups
+    - export_organizations
+  override:
+    theme_es: "http://datos.gob.es/kos/sector-publico/sector/medio-ambiente"
+  target_values:
+    publisher_name:
+      condition: "Sample Company"
+      override:
+        publisher_type: "http://purl.org/adms/publishertype/Company"
+
+site_1:
+  ckan_site_url: 'https://site1.ckan.instance'
+  api_token: 'site1_api_token'
+  actions:
+    - update_packages
+    - export_groups
+    - export_organizations
+  override:
+    theme_es: "http://site1.theme.url"
+  target_values:
+    publisher_name:
+      condition: "Site 1 Company"
+      override:
+        publisher_type: "http://site1.publisher.type"
+
+site_2:
+  ckan_site_url: 'https://site2.ckan.instance'
+  api_token: null
+  actions:
+    - export_groups
+    - export_organizations
+
+site_3:
+  ckan_site_url: 'https://site2.ckan.instance'
+  api_token: 'site2_api_token'
+  actions:
+    - export_groups
+    - export_organizations
+    - create_organizations
+    - create_groups
+    - create_users
+  organizations: './input/site_3/organizations.json'
+  groups: './input/site_3/groups.json'
+  users: './input/site_3/users.json'
