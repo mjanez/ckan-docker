@@ -31,7 +31,7 @@ def apply_target_values(package, target_values):
             package = apply_overrides(package, overrides)
     return package
 
-def update_package(rc, package_id, overrides, target_values):
+def update_package(rc, package_id, overrides, deletes, target_values=None):
     """
     Update a package given its ID.
 
@@ -39,8 +39,15 @@ def update_package(rc, package_id, overrides, target_values):
         rc (RemoteCKAN): The CKAN instance connection.
         package_id (str): The ID of the package.
         overrides (dict): The dictionary of fields to override.
-        target_values (dict): The dictionary of conditions and overrides.
+        deletes (list): The list of keys to delete.
+        target_values (dict, optional): The dictionary of conditions and overrides. Defaults to {}.
+
+    Returns:
+        None
     """
+    if target_values is None:
+        target_values = {}
+    
     package = rc.action.package_show(id=package_id)
     
     # Apply overrides

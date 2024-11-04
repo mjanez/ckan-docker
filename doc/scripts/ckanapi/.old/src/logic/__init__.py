@@ -39,12 +39,10 @@ def execute_action(action_name, rc, config, output_dir):
 
             # Iterate over each package and update it
             for package_id in package_list:
-                actions[action_name](rc, package_id, config.override, config.target_values)
+                actions[action_name](rc, package_id, config.override, config.delete, config.target_values)
         elif action_name == 'create_organizations':
             actions[action_name](rc, config.organizations)
         elif action_name == 'create_groups':
             actions[action_name](rc, config.groups)
         elif action_name == 'create_users':
             actions[action_name](rc, config.users)
-        else:
-            actions[action_name](rc, output_dir)

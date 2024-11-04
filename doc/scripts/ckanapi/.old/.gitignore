@@ -1,0 +1,6 @@
+venv
+env
+sites.yml
+sites.*.yml
+output/*
+!sites.example.yml

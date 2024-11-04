@@ -17,6 +17,7 @@ class SampleConfig:
         groups (str): Path to the JSON file containing group data.
         users (str): Path to the JSON file containing user data.
         override (dict): Dictionary of override values.
+        delete (list): List of keys to delete.
         target_values (dict): Dictionary of target values.
     """
     def __init__(self, config):
@@ -27,7 +28,14 @@ class SampleConfig:
         self.groups = config.get('groups')
         self.users = config.get('users')
         self.override = config.get('override', {})
+        self.delete = config.get('delete', [])
         self.target_values = config.get('target_values', {})
+        target_site_config = config.get('target_site', {})
+        self.target_ckan_site_url = target_site_config.get('ckan_site_url')
+        self.target_api_token = target_site_config.get('api_token')
+        self.target_organization_id = target_site_config.get('target_organization_id')
+        self.delete_all_before_copy = target_site_config.get('delete_all_before_copy', False)  # Nueva opción
+
 
 def load_config(config_file, site='default'):
     """
@@ -72,6 +80,9 @@ if __name__ == "__main__":
     print(f"Actions: {config.actions}")
     if config.override:
         print(f"Override: {config.override}")
+    #FIXME: Not working, duplicate datasets.
+    # if config.delete:
+    #     print(f"Delete fields: {config.delete}")
     if config.target_values:
         print(f"Target Values: {config.target_values}")
     if config.organizations:

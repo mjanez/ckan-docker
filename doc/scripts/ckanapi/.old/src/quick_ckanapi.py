@@ -18,15 +18,15 @@ def connect_to_ckan(ckan_site_url, api_token):
 
 def is_modifying_action(action_name):
     """
-    Determine if an action modifies data based on its name.
+    Determina si una acción modifica datos basándose en su nombre.
 
     Args:
-        action_name (str): The name of the action.
+        action_name (str): El nombre de la acción.
 
     Returns:
-        bool: True if the action modifies data, False otherwise.
+        bool: True si la acción modifica datos, False de lo contrario.
     """
-    modifying_prefixes = ('update_', 'create_', 'delete_')
+    modifying_prefixes = ('update_', 'create_', 'delete_', 'copy_')
     return action_name.startswith(modifying_prefixes)
 
 def main(config):
@@ -36,9 +36,6 @@ def main(config):
     Args:
         config (SampleConfig): The configuration object.
     """
-    # Connect to the CKAN instance
-    rc = connect_to_ckan(config.ckan_site_url, config.api_token)
-
     # Create output directories if they don't exist
     output_dir = os.path.join('output', config.site)
     os.makedirs(output_dir, exist_ok=True)
@@ -51,7 +48,13 @@ def main(config):
 
     # Execute actions based on the configuration
     for action in config.actions:
-        execute_action(action, rc, config, output_dir)
+        if action == "copy_datasets":
+            # For copy_datasets, connections are handled within the function
+            execute_action(action, None, config, output_dir)
+        else:
+            # Connect to the CKAN instance
+            rc = connect_to_ckan(config.ckan_site_url, config.api_token)
+            execute_action(action, rc, config, output_dir)
 
     print("Actions completed.")
 
