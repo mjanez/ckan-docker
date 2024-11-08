@@ -12,13 +12,16 @@ services:
     build:
       context: nginx/
       dockerfile: Dockerfile
+      args:
+          PROXY_CKAN_LOCATION: ${PROXY_CKAN_LOCATION}
+          PROXY_PYCSW_LOCATION: ${PROXY_PYCSW_LOCATION}
     env_file:
       - .env
     logging:
       driver: "json-file"
       options:
-          max-size: "100m"
-          max-file: "10"
+        max-size: "100m"
+        max-file: "10"
     networks:
       - webnet
       - ckannet
