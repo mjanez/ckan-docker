@@ -554,14 +554,14 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
 #### Backup service for db container
 1. Create a new file called `ckan_backup_custom.sh` and open it in your preferred text editor.
 
-2. Add the following code to the script, replacing the placeholders with your actual values:
+2. Add the following code to the script, replacing the placeholders with your [`.env`](.env.example) values:
 
     ```bash
     #!/bin/bash
 
     # Set the necessary variables
-    CONTAINER_NAME="db"
-    DATABASE_NAME="ckandb"
+    DB_CONTAINER_NAME="ckan-docker-db-1"
+    CKAN_DB="ckandb"
     POSTGRES_USER="postgres"
     POSTGRES_PASSWORD="your_postgres_password"
     BACKUP_DIRECTORY="/path/to/your/backup/directory"
@@ -573,7 +573,7 @@ PostgreSQL offers the command line tools [`pg_dump`](https://www.postgresql.org/
     mkdir -p "$BACKUP_DIRECTORY/monthly/$YEAR-$MONTH"
 
     # Run the backup command
-    docker exec -e PGPASSWORD=$POSTGRES_PASSWORD $CONTAINER_NAME pg_dump -U $POSTGRES_USER -Fc $DATABASE_NAME > "$BACKUP_DIRECTORY/monthly/$YEAR-$MONTH/ckan_backup_$DATE.dump"
+    docker exec -e PGPASSWORD=$POSTGRES_PASSWORD $DB_CONTAINER_NAME pg_dump -U $POSTGRES_USER -Fc $CKAN_DB > "$BACKUP_DIRECTORY/monthly/$YEAR-$MONTH/ckan_backup_$DATE.dump"
 
     # Compress the dump files into a zip archive
     cd "$BACKUP_DIRECTORY/monthly/$YEAR-$MONTH" || exit
@@ -637,7 +637,7 @@ If need to use a backup, restore it:
 2. After cleaning the database you must do either [initialize it](https://docs.ckan.org/en/2.9/maintaining/database-management.html#initialization) or import a previously created dump.
 
     ```bash
-    docker exec -i -e PGPASSWORD=$POSTGRES_PASSWORD $POSTGRESQL_CONTAINER_NAME pg_restore -U $POSTGRES_USER --clean --if-exists -d $DATABASE_NAME < /path/to/your/backup/directory/ckan.dump
+    docker exec -i -e PGPASSWORD=$POSTGRES_PASSWORD $DB_CONTAINER_NAME pg_restore -U $POSTGRES_USER --clean --if-exists -d $CKAN_DB < /path/to/your/backup/directory/ckan.dump
     ```
 3. Restart the `ckan` container.
 
