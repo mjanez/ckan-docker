@@ -1,12 +1,13 @@
 FROM nginx:stable-alpine
 
+ARG PROXY_CKAN_LOCATION=/catalog
+ARG PROXY_PYCSW_LOCATION=/csw
+
 ENV CKAN_PORT=5000
 ENV PYCSW_PORT=8000
 ENV PYCSW_COMPOSE_SERVICE=pycsw
 ENV CKAN_COMPOSE_SERVICE=ckan
 ENV PROXY_SERVER_NAME=localhost
-ENV PROXY_CKAN_LOCATION=/catalog
-ENV PROXY_PYCSW_LOCATION=/csw
 ENV PROXY_PYCSW_PROXY_PASS=http://${PYCSW_COMPOSE_SERVICE}:${PYCSW_PORT}
 ENV PROXY_CKAN_PROXY_PASS=http://${CKAN_COMPOSE_SERVICE}:${CKAN_PORT}
 
@@ -25,6 +26,6 @@ COPY setup/ckan-local.* ${NGINX_DIR}/certs/
 COPY setup/html/index.html setup/html/robots.txt ${NGINX_SHARE_HTML_DIR}/
 
 # Replace $PROXY_CKAN_LOCATION and $PROXY_PYCSW_LOCATION in index.html
-RUN sed -i "s|/catalog|${PROXY_CKAN_LOCATION}|g; s|/csw|${PROXY_PYCSW_LOCATION}|g" ${NGINX_SHARE_HTML_DIR}/index.html
+RUN sed -i "s|<a href=\"/catalog\">|<a href=\"${PROXY_CKAN_LOCATION}\">|g; s|<a href=\"/csw\">|<a href=\"${PROXY_PYCSW_LOCATION}\">|g" ${NGINX_SHARE_HTML_DIR}/index.html
 
 EXPOSE ${NGINX_PORT}
