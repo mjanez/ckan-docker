@@ -14,7 +14,7 @@ COPY req_fixes req_fixes
 # CKAN configuration & extensions
 ## XLoader - 1.0.1-stable (mjanez/Forked fixed version) ##
 ## Harvest - v1.5.6 (mjanez Enhanced Privacy and Security for Remote Harvesting) ##
-## Geoview - v0.2.0 ##
+## Geoview - v0.2.2 ##
 ## Spatial - v2.1.1 ##
 ## DCAT - v1.8.0 (Latest stable version of ckanext-dcat with minor fixes) ##
 ## Scheming - release-3.0.0 ##
@@ -40,7 +40,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-harvest.git@v1.5.6#egg=ckanext-harvest && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-harvest/requirements.txt && \
     echo "ckan/ckanext-geoview" && \
-    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.2.0#egg=ckanext-geoview && \
+    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-geoview.git@v0.2.2#egg=ckanext-geoview && \
     echo "ckan/ckanext-spatial" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.1.1#egg=ckanext-spatial && \
     pip3 install --no-cache-dir -r ${APP_DIR}/req_fixes/ckanext-spatial/requirements.txt && \
