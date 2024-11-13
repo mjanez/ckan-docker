@@ -52,6 +52,8 @@ ENV SOLR_BBOX_FIELDS '<field name="bbox_area" type="float" indexed="true" stored
     <field name="tag_uri" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="conforms_to" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="applicable_legislation" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="endpoint_url" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
+    <field name="serves_dataset" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="lineage_source" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="lineage_process_steps" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
     <field name="reference" type="string" uninvertible="false" docValues="true" indexed="true" stored="true" multiValued="true"/> \
