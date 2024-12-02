@@ -39,3 +39,10 @@ doc/scripts/ckanapi/sites.yml
 sites.yml
 venv
 env
+
+# Solr $ CKAN custom Dockerfiles
+!solr/Dockerfile.spatial
+solr/Dockerfile.*
+!ckan/Dockerfile.dev
+!ckan/Dockerfile.ghcr
+ckan/Dockerfile.*
