@@ -33,6 +33,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Convert repo name to lowercase
+        id: github_repo_lowercase
+        run: INPUT=${{ env.IMAGE_NAME }}; echo "IMAGE_LOWERCASE=${INPUT,,}">>${GITHUB_OUTPUT}
+
       - name: Extract tag version from branch name
         id: extract_tag_version
         run: |
@@ -46,7 +50,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ steps.github_repo_lowercase.outputs.IMAGE_LOWERCASE }}
           labels: |
             org.opencontainers.image.documentation=https://github.com/${{ github.repository }}/blob/${{ env.BRANCH }}/README.md
             org.opencontainers.image.version=${{ env.VERSION }}
@@ -58,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          tags: ${{ env.REGISTRY }}/${{ steps.github_repo_lowercase.outputs.IMAGE_LOWERCASE }}:${{ env.VERSION }}
           labels: ${{ steps.meta.outputs.labels }}
           annotations: ${{ steps.meta.outputs.annotations }}
           context: ${{ env.CONTEXT }}${{ env.DOCKERFILE_PATH }}
@@ -76,7 +80,7 @@ jobs:
           TRIVY_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-db,public.ecr.aws/aquasecurity/trivy-db
           TRIVY_JAVA_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-java-db,public.ecr.aws/aquasecurity/trivy-java-db
         with:
-          image-ref: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          image-ref: ${{ env.REGISTRY }}/${{ steps.github_repo_lowercase.outputs.IMAGE_LOWERCASE }}:${{ env.VERSION }}
           format: sarif
           output: trivy-results.sarif
   
