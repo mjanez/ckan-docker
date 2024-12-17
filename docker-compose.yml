@@ -15,6 +15,7 @@ services:
       args:
           PROXY_CKAN_LOCATION: ${PROXY_CKAN_LOCATION}
           PROXY_PYCSW_LOCATION: ${PROXY_PYCSW_LOCATION}
+          CKAN__MAX_RESOURCE_SIZE: ${CKAN__MAX_RESOURCE_SIZE}
     env_file:
       - .env
     logging:
