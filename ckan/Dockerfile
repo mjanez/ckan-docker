@@ -16,14 +16,14 @@ COPY req_fixes req_fixes
 ## Harvest - v1.5.6 (mjanez Enhanced Privacy and Security for Remote Harvesting) ##
 ## Geoview - v0.2.2 ##
 ## Spatial - v2.2.0 ##
-## DCAT - v2.1.0 ##
+## DCAT - v2.3.0 ##
 ## Scheming - release-3.0.0 ##
 ## Resource dictionary - v1.0.2 (mjanez/Fixed version) ##
 ## Pages - v0.5.2 ##
 ## PDFView - 0.0.8 ##
 ## Fluent - v1.0.1  (mjanez/Forked stable version) ##
 ## OpenAPI - v1.0.0 (mjanez stable version) ##
-## Scheming DCAT - v4.5.0 (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
+## Scheming DCAT - v4.5.3 (mjanez/GeoDCAT-AP/NTI-RISP extended version) ##
 RUN echo ${TZ} > /etc/timezone && \
     if ! [ /usr/share/zoneinfo/${TZ} -ef /etc/localtime ]; then cp /usr/share/zoneinfo/${TZ} /etc/localtime; fi && \
     # Install patch utility
@@ -45,7 +45,7 @@ RUN echo ${TZ} > /etc/timezone && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-spatial.git@v2.2.0#egg=ckanext-spatial && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-spatial/requirements.txt && \
     echo "ckan/ckanext-dcat" && \
-    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-dcat.git@v2.1.0#egg=ckanext-dcat && \
+    pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-dcat.git@v2.3.0#egg=ckanext-dcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-dcat/requirements.txt && \
     echo "ckan/ckanext-scheming" && \
     pip3 install --no-cache-dir -e git+https://github.com/ckan/ckanext-scheming.git@release-3.0.0#egg=ckanext-scheming && \
@@ -60,7 +60,7 @@ RUN echo ${TZ} > /etc/timezone && \
     echo "mjanez/ckanext-openapi" && \
     pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-openapi.git@v1.0.0#egg=ckanext-openapi && \
     echo "mjanez/ckanext-schemingdcat" && \
-    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v4.5.0#egg=ckanext_schemingdcat && \
+    pip3 install --no-cache-dir -e git+https://github.com/mjanez/ckanext-schemingdcat.git@v4.5.3#egg=ckanext_schemingdcat && \
     pip3 install --no-cache-dir -r ${APP_DIR}/src/ckanext-schemingdcat/requirements.txt && \
     # Remove system cache
     apt-get clean && \
